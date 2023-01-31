@@ -1,0 +1,9 @@
+apiVersion: projectcalico.org/v3
+kind: BGPPeer
+metadata:
+  name: vm12-tor2
+spec:
+  peerIP: 10.142.2.254
+  node: vm12
+  asNumber: 65002
+  sourceAddress: None

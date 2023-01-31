@@ -1,0 +1,8 @@
+apiVersion: projectcalico.org/v3
+kind: Node
+metadata:
+  name: vm12
+spec:
+  bgp:
+    asNumber: 65112
+    ipv4Address: 10.99.0.22

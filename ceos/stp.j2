@@ -1,0 +1,18 @@
+{###########################################
+
+Purpose:
+Generating Spanning Tree Configuration
+############################################}
+{% if stp is defined and stp %}
+spanning-tree mode {{ stp.mode }}
+{% if stp.priority is defined and stp.priority %}
+spanning-tree priority {{ stp.priority }}
+{% endif %}
+{% if stp.vlan is defined and stp.vlan %}
+{% for vlan in stp.vlan %}
+spanning-tree vlan {{ vlan.id }} priority {{ vlan.priority }}
+{% endfor %}
+{% endif %}
+!
+{% endif %}
+

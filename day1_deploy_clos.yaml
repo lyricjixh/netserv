@@ -1,0 +1,348 @@
+---
+- hosts: dc1
+  gather_facts: false
+  collections:
+  - arista.eos
+
+  tasks:
+  - name: Enable Network Services
+    vars:
+      ansible_command_timeout: 60
+    block:
+    - name: Enable IP Routing
+      eos_config:
+        lines: 
+        - ip routing
+        - ipv6 unicast-routing
+        - ip routing vrf MGMT
+      tags:
+        - routing
+
+    - name: Enable Domain/DNS Server
+      eos_config:
+        src: ceos/domain.j2
+        # diff_against: validate_config
+        # intended_config: "/home/xji/devops/cfggen/{{hostname}}.conf.part"
+      tags:
+        - domain
+
+    - name: Enable Banner Motd
+      eos_banner:
+        banner: motd
+        text: "{{ lookup('file', 'files/banner_motd') }}"
+        state: present
+      tags:
+        - banner
+
+    - name: Enable Banner Login
+      eos_banner:
+        banner: login
+        text: "{{ lookup('file', 'files/banner_login') }}"
+        state: present
+      tags:
+        - banner
+
+    - name: Setup the local user accounts
+      block:
+      - name: Enable all local users
+        eos_config:
+          src: ceos/user.j2
+
+      - name: Add SSHKEY for Ansible user
+        arista.eos.eos_user:
+          name: ansible
+          sshkey: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+          state: present
+
+      # - name: remove all users except admin
+      #   arista.eos.eos_user:
+      #     purge: yes
+      tags:
+        - users
+
+    - name: Enable NTP
+      eos_config:
+          src: ceos/ntp.j2
+      # when: (features.netserv.ntp is defined and features.netserv.ntp|lower == "yes")
+      tags:
+        - ntp
+
+    - name: Enable Syslog
+      eos_config:
+          src: ceos/syslog.j2
+      # when: (features.netserv.syslog is defined and features.netserv.syslog|lower == "yes")
+      tags:
+      - syslog
+
+    - name: Enable SNMP
+      eos_config:
+          src: ceos/snmp.j2
+      when: (features.netserv.snmp is defined and features.netserv.snmp|lower == "yes")
+      tags:
+      - snmp
+
+    - name: Enable Group & AAA
+      block:
+      - name: Enable Tacacs
+        eos_config:
+            src: ceos/tacacs.j2
+        # when: (features.netserv.tacacs is defined and features.netserv.tacacs|lower == "yes")
+      - name: Enable Radius
+        eos_config:
+            src: ceos/radius.j2
+        # when: (features.netserv.radius is defined and features.netserv.radius|lower == "yes")
+      - name: Enable AAA
+        eos_config:
+            src: ceos/aaa.j2
+        # when: (features.netserv.aaa is defined and features.netserv.aaa|lower == "yes")
+      tags:
+        - aaa
+    tags:
+      - netserv
+
+  - name: Enable loopback Interface
+    eos_config:
+        src: ceos/intf_lpbk.j2
+    tags:
+    - loopback
+
+  # - name: Delete Old PTP Interface
+  #   arista.eos.eos_l3_interfaces:
+  #     config:
+  #     - name: eth31
+  #     - name: eth32
+  #     state: deleted
+  #   tags:
+  #   - ptp
+
+  - name: Enable Leaf/Spine PTP Interface
+    eos_config:
+        src: ceos/intf_ptp.j2
+    tags:
+    - ptp
+
+  - name: Enable Leaf Layer2/MLAG/VLAN
+    block:
+    # - name: Enable Vlan Interface and STP
+    #   block:
+    #   - name: Enable Vlan
+    #     eos_config:
+    #         src: ceos/intf_vlan.j2
+    #   - name: Enable Spanning Tree
+    #     eos_config:
+    #         src: ceos/stp.j2
+    #     # when: (features.interface.stp is defined and features.interface.stp|lower == "yes")
+    #   tags:
+    #     - vlan
+    #     - interface
+
+    - name: Enable Southbound L2/MLAG/Trunk Interface
+      # vars:
+      #   ansible_timeout: 120
+      #   ansible_command_timeout: 60
+      #   ansible_connect_timeout: 60
+      block:
+      # - name: Breakout Port
+      #   eos_config:
+      #       src: ceos/breakout.j2
+
+      # - name: "Wait 45 secs for Breakout Finishing"
+      #   pause:
+      #     seconds: 45
+      #   delegate_to: localhost
+      #   when: ( features.interface.breakout is defined and features.interface.breakout|lower == "yes")
+
+      # - name: Enable Breakout Port Trunking
+      #   eos_config:
+      #       src: ceos/intf_southbound.j2
+      #   when: "'cleaf' in inventory_hostname"
+
+      - name: Enable Layer2 Port
+        eos_config:
+            src: ceos/intf_l2.j2
+        # when: (features.interface.l2port is defined and features.interface.l2port|lower == "yes")
+        tags:
+          - l2port
+
+      - name: Enable MLAG Domain
+        eos_config:
+            src: ceos/mlag.j2
+        when: (features.interface.mlag is defined and features.interface.mlag|lower == "yes")
+        tags:
+          - mlag
+      - name: Enable Bond and Trunking
+        eos_config:
+            src: ceos/intf_bond.j2
+        when: (features.interface.bond is defined and features.interface.bond|lower == "yes")
+        ignore_errors: yes
+        tags:
+          - bond
+      
+  #   - name: Enable Uplink Failure Detection (UFD) if defined
+  #     eos_config:
+  #         src: ceos/ufd.j2
+  #     when: (features.interface.ufd is defined and features.interface.ufd|lower == "yes")
+  #     tags:
+  #       - ufd
+  #       - interface
+      when: "'leaf' in inventory_hostname"
+      tags:
+        - southbound
+
+  - name: Enable BGP Underlay
+    vars:
+      ansible_command_timeout: 60
+    block:
+    - name: Enable Routing Policy
+      eos_config:
+          src: ceos/route_pol.j2
+      tags:
+        - rpol
+
+    - name: Enable Underlay BGP on Leaf
+      eos_config:
+          src: ceos/bgp_unnumbered_leaf.j2
+      when: "'leaf' in inventory_hostname"
+      tags:
+        - unnumber
+
+    - name: Enable Underlay BGP on Spine
+      eos_config:
+          src: ceos/bgp_unnumbered_spine.j2
+      when: "'spine' in inventory_hostname"
+      tags:
+        - unnumber
+
+    - name: Enable BGP FlowSpec
+      eos_config:
+          src: ceos/bgp_flowspec.j2
+      when: (features.routing.flowspec|lower == "yes")
+      tags:
+        - flow_spec
+
+    - name: Enable Unified BGP Overlay on both Leaf/Spine if by design
+      eos_config:
+          src: ceos/bgp_overlay_unified.j2
+      tags:
+        - bgp_over
+      when: ( features.overlay.uni_bgp|lower == "yes")
+    tags:
+      - bgp_under
+
+- hosts: poc_leaf
+  gather_facts: false
+  vars:
+    ansible_command_timeout: 90
+  collections:
+  - arista.eos
+
+  tasks:
+  - name: Enable EVPN on Leaves
+    block:
+    - name: Enable VRF Instance
+      eos_config:
+          src: ceos/vrf_intf.j2
+      tags:
+        - vrf_intf
+    - name: Enable Vxlan Tunneling
+      eos_config:
+          src: ceos/vxlan.j2
+      tags:
+        - vxlan
+
+    - name: Enable iBGP Overlay if by design
+      eos_config:
+          src: ceos/bgp_overlay_ibgp.j2
+      tags:
+        - bgp_over
+      when: ( features.overlay.ibgp|lower == "yes")
+
+    - name: Enable EVPN Routing
+      eos_config:
+          src: ceos/vrf_routing.j2
+      tags:
+        - vrf_routing
+
+    - name: Disable EVPN ARP Suppression 
+      eos_config:
+          src: ceos/arp_suppression.j2
+      tags:
+        - evpn_arp
+    tags:
+      - overlay
+
+  - name: Enable Security
+    vars:
+      # ansible_timeout: 120
+      ansible_command_timeout: 120
+      # ansible_connect_timeout: 120
+    block:
+    - name: Enable Access List
+      eos_config:
+          src: files/copp_acl.eacl
+      when: (features.security.acl is defined and features.security.acl|lower == "yes")
+      tags:
+        - acl
+
+#     - name: Enable CoPP
+#       eos_config:
+#         src: ceos/copp.j2
+#         # lines:
+#         #   # - no ip access-group acl_test_v4 in
+#         #   # - no ipv6 access-group acl_test_v6 in
+#         #   - ip access-group {{ copp.v4.name }} in
+#         #   - ipv6 access-group {{ copp.v6.name }} in
+#         # parents: ['line vty']
+#         # match: strict
+#         # ### replace: block doesn't work!
+#         replace: line
+#       when: (features.security.copp is defined and features.security.copp|lower == "yes")
+#       tags:
+#         - copp
+
+#     - name: Enable Interface ACL
+#       eos_config:
+#         src: ceos/intf_acl.j2
+#         # ### replace: block doesn't work!
+#         replace: line
+#       ignore_errors: yes
+#       when: (features.security.intf is defined and features.security.intf|lower == "yes")
+#       tags:
+#         - intf_acl
+#     tags:
+#       - security
+
+  - name: Enable Monitoring
+    vars:
+      # ansible_timeout: 120
+      # ansible_command_timeout: 120
+      # ansible_connect_timeout: 120
+    block:
+    - name: Enable Sflow
+      eos_config:
+          src: ceos/sflow.j2
+      when: (features.netserv.sflow is defined and features.netserv.sflow|lower == "yes")
+      tags:
+        - sflow
+
+    - name: Enable SPAN
+      eos_config:
+        src: ceos/span.j2
+        replace: line
+      when: (features.netserv.span is defined and features.netserv.span|lower == "yes")
+      tags:
+        - span
+
+    - name: Enable Telemetry
+      eos_config:
+        src: ceos/telemetry.j2
+        # ### replace: block doesn't work!
+        replace: line
+      ignore_errors: yes
+      when: (features.netserv.telemetry is defined and features.netserv.telemetry|lower == "yes")
+      tags:
+        - telemetry
+    tags:
+      - monitor
+
+

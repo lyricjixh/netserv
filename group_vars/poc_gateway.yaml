@@ -1,0 +1,94 @@
+---
+
+loopback_intf0: Loopback0
+
+edge_link_ct: 2
+edge_offset: "{{ hostvars['dc-gw01'].seq }}"
+edge_links_seq:
+    - "{{ (seq-edge_offset|int)+edge_link_ct*0 }}"
+    - "{{ (seq-edge_offset|int)+edge_link_ct*1 }}"
+
+edge_links:
+   -
+    port: "1"
+    desc: "Gateway downlink_To_BLEAF01"
+    netv4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_links_seq[0]) }}"
+    netv6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_links_seq[0]) }}"
+    vrf: RED
+   -
+    port: "2"
+    desc: "Gateway uplink_To_BLEAF02"
+    netv4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_links_seq[1]) }}"
+    netv6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_links_seq[1]) }}"
+    vrf: RED
+
+# edge_vlans:
+#     - 
+#         desc: "To BLEAF01"
+#         id: "1991"
+#         netv4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_links_seq[0]) }}"
+#         netv6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_links_seq[0]) }}"
+#         port: 27
+#         vrf: RED
+#     - 
+#         desc: "To BLEAF02"
+#         id: "1992"
+#         netv4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_links_seq[1]) }}"
+#         netv6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_links_seq[1]) }}"
+#         port: 28
+#         vrf: RED
+
+interfaces:
+- 
+    name: "loopback0"
+    desc: "Loopback Interface"
+    addr_v4: "10.10.201.{{ seq }}/32"
+    addr_v6: "2001:ffff:ffff::{{ '%0x' % seq }}/128"
+-
+    name: "eth1"
+    desc: "Gateway downlink_to_BLEAF01"
+    addr_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_links_seq[0])|ansible.utils.ipaddr(-2) }}"
+    addr_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_links_seq[0])|ansible.utils.ipaddr(-2) }}"
+-
+    name: "eth2"
+    desc: "Gateway downlink_to_BLEAF02"
+    addr_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_links_seq[1])|ansible.utils.ipaddr(-2) }}"
+    addr_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_links_seq[1])|ansible.utils.ipaddr(-2) }}"
+afi: 
+  ipv4:
+  -
+      proto: "connected"
+      r_map: "LPBK_ONLY"
+  ipv6:
+  -
+      proto: "connected"
+      r_map: "LPBK_ONLY"
+
+proto:
+    bgp:
+        local_asn: "{{ 65000 + seq }}"
+        gw_peer_v4:
+            - 
+                addr: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_links_seq[0]) | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address') }}"
+                remote_asn: "{{ rack03_asn }}"
+            - 
+                addr: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_links_seq[1]) | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address') }}"
+                remote_asn: "{{ rack03_asn }}"
+        gw_peer_v6:
+            - 
+                addr: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_links_seq[0]) | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address') }}"
+                remote_asn: "{{ rack03_asn }}"
+            - 
+                addr: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_links_seq[1]) | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address') }}"
+                remote_asn: "{{ rack03_asn }}"
+
+policy:
+    route_map:
+        -
+            name: "LPBK_ONLY"
+            step: 10
+            match:
+                -
+                    type: "interface"
+                    object: "loopback0"
+                    action:

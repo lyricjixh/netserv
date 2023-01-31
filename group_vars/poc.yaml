@@ -1,0 +1,343 @@
+---
+# Location:
+country: "USA"
+state: "CA"
+city: "Santa Clara"
+site-id: "Lab01"
+
+#Services
+domain:
+    name: "poc.arista.com"
+    vrf: "MGMT"
+    server:
+        - "8.8.8.8"
+        - "8.8.4.4"
+
+ntp:
+    src_intf: "mgmt1/1/1" 
+    vrf: "MGMT"
+    authenticate: "yes"
+    auth_key:
+      - seq: 2
+        type: "sha1"
+        text: "{{ vault_ntp_auth_key1 }}"
+      - seq: 23
+        type: "md5"
+        text: "{{ vault_ntp_auth_key2 }}"
+    trusted_key: 23
+    server:
+        - addr: "10.10.60.81"
+          prefer: "yes"
+          state: "present"
+        - addr: "10.10.60.82"
+          prefer: "no"
+          state: "present"
+        - addr: "10.10.60.83"
+          prefer: "no"
+          state: "present"
+
+log:
+    src_intf: "management0" 
+    vrf: "MGMT"
+    server:
+        - addr: "172.100.100.81"
+          port: "514"
+          protocol: "tcp"
+        - addr: "172.100.100.249"
+          port: "514"
+          protocol: "tcp"
+    trap: "critical"
+    sync: "yes"
+aaa:
+    authentication:
+      login: 
+      - local
+      - group tac_group1
+      - group radius_group1
+      enable:
+      # - local
+      # - group tac_group1
+      # - group radius_group1
+    authorization: 
+      commands:         ##for shell commands
+      - local
+      config-commands:  ##for config commands
+      exec:             ##for starting shell
+      - local
+      - group tac_group1
+      - group radius_group1
+    accounting:
+      commands:         ##for shell commands
+      # - group tac_group1
+      exec:             ##for starting shell
+      # - group tac_group1
+      system:           ##for starting shell
+      # - group tac_group1
+
+aaa_tac:
+    timeout: "15" 
+    vrf: "MGMT"
+    group:
+      - name: "tac_group1"
+        server:
+            - addr: "1.1.1.1"
+              key: "{{ vault_tac_key }}"
+            - addr: "1.1.1.2"
+              key: "{{ vault_tac_key }}"
+      - name: "tac_group2"
+        server:
+            - addr: "2.1.1.1"
+              key: "{{ vault_tac_key }}"
+            - addr: "2.1.1.2"
+              key: "{{ vault_tac_key }}"
+
+aaa_radius:
+    timeout: "15" 
+    vrf: "MGMT"
+    group:
+      - name: "radius_group1"
+        server:
+            - addr: "1.1.1.1"
+              key: "{{ vault_radius_key }}"
+            - addr: "1.1.1.2"
+              key: "{{ vault_radius_key }}"
+      - name: "radius_group2"
+        server:
+            - addr: "2.1.1.1"
+              key: "{{ vault_radius_key }}"
+            - addr: "2.1.1.2"
+              key: "{{ vault_radius_key }}"
+
+snmp:
+    vrf: "MGMT"
+    contact: "labadmin@poc.arista.com"
+    proto_port: "1161"    ## leave blank for default 161
+    location: "Container PoC Lab"
+    view:
+      - name: "globalView"
+        oid: "1.3.6.1"
+        action: "include"
+      - name: "view_01"
+        oid: "1.3.6.1.2"
+        action: "include"
+      - name: "view_02"
+        oid: "1.3.6.1.2"
+        action: "include"
+    group:
+      - name: "admin01"
+        version: "2c"
+        views:
+        - "read globalview"
+        - "write view_01"
+        - "notify view_02"
+      - name: "admin02"
+        version: "3"
+        auth: "auth"    ##[auth|noauth|priv]
+        views:
+        - "read globalview"
+        - "write view_01"
+        - "notify view_02"
+    user:
+      - name: "netops"
+        group: "admin01"
+        version: "3"
+        password: "{{ vault_snmp_labadmin_auth }}"
+        auth: "sha"
+        encry: "aes"
+      - name: "tac"
+        version: "3"
+        group: "admin02"
+        password: "{{ vault_snmp_labadmin_auth }}"
+        auth: "md5"
+        encry: "aes"
+    traps:
+      - category: "bgp"
+        type:
+        - established
+        - backward-transition
+      - category: "capacity"
+        type:
+        - arista-hardware-utilization-alert
+      - category: "external-alarm"
+        type:
+    host:
+        - addr: "172.100.100.249"
+          version: "2c"
+          community: "community_01"
+          vrf: "MGMT"
+        - addr: "99.99.99.99"
+          version: "3"
+          user: "netops"
+          auth: "auth"
+          vrf: "MGMT"
+    community:
+        - name: "community_ro"
+          string: "{{ vault_snmp_comm_ro }}"
+          priv: "ro"
+          acl: "SNMP-HOSTS"
+          group: "admin01"
+        - name: "community_rw"
+          string: "{{ vault_snmp_comm_rw }}"
+          priv: "rw"
+          acl: "SNMP-HOSTS"
+          group: "admin02"
+
+stp:
+    mode: "rapid-pvst"
+    priority: "8192"
+    vlan:
+        - id: "3939"
+          priority: "8192"
+
+sflow:
+  sflow_enable: "true"
+  vrf: 
+  src_intf: "loopback0"
+  collector:
+    - collector_ip: "172.100.100.249"
+      udp_port: 6343
+      state: present
+    - collector_ip: "172.100.99.99"
+      udp_port: 6343
+      state: present
+  polling_interval: 30
+  sample_rate: 1024
+  bgp: 'Enabled'
+  port: "{{ sflow_port_sku }}"
+
+span: "{{ span_sku }}"
+
+telemetry:
+  transport:
+    -
+      type: "grpc"
+      name: "cust_def"
+      port: "8080"
+      vrf: "MGMT"
+  eapi: 
+    - 
+      type: "http-commands"
+      proto: "http"
+  auth:
+    - password
+    - jwt
+    - cert
+    - none
+
+vrli_vip: 10.60.97.44
+no_helper: null
+helper_ip: 10.60.97.254
+
+users:
+# no including ansible user
+  - name: "lab" 
+    passwd: "{{ vault_lab_password }}"
+    role: "sysadmin"
+    priv: 10
+
+  - name: "ansible"
+    passwd: "{{ vault_ansible_password }}"
+    role: "sysadmin"
+    priv: 15
+
+  - name: "netops" 
+    passwd: "{{ vault_netops_password }}"
+    role: "network-admin"
+    priv: 15
+
+oob_ipv4_mask: 24
+oob_netv4: 172.100.100.0/24
+oob_netv4_gw: 172.100.100.1
+
+lpbk0_netv4: "10.0.0.0/24"
+lpbk0_netv6: "2001::/64"
+
+lpbk1_netv4: "10.10.0.0/24"
+lpbk1_netv6: "2001:a::/64"
+
+compute_lpbk0_netv4: "10.99.0.0/24"
+compute_lpbk0_netv6: "2001:99::/64"
+
+fabric_ptp_netmaskv4: 31
+fabric_ptp_netmaskv6: 127
+fabric_ptp_netv4: "10.0.1.0/24"
+fabric_ptp_netv6: "2001:0:1::/64"
+
+evpn_anycast_vmac: 00:00:00:ff:ff:ff
+
+tor_pair_netmaskv4: 31
+tor_pair_netv4: "10.10.{{rack_no}}.0/24"
+tor_pair_netv6: "2001:a:{{rack_no}}::/64"
+#vlt_mac: 00:00:00:{{rack_no}}{{rack_no}}:{{rack_no}}{{rack_no}}:{{rack_no}}{{rack_no}}
+tor_pair_vmac: 00:00:00:{{rack_no}}{{rack_no}}:{{rack_no}}{{rack_no}}:{{rack_no}}{{rack_no}}
+
+v101_netv4: "10.100.1.0/27"
+v101_netv6: "2001:100:1::/120"
+
+v104_netv4: "10.104.1.0/27"
+v104_netv6: "2001:104:1::/120"
+
+v121_netv4: "10.121.1.0/27"
+v121_netv6: "2001:121:1::/120"
+
+v124_netv4: "10.124.1.0/27"
+v124_netv6: "2001:124:1::/120"
+
+v141_netv4: "10.141.{{ rack_no }}.0/24"
+v141_netv6: "2001:2001:141:{{ rack_no }}::/64"
+
+v142_netv4: "10.142.{{ rack_no }}.0/24"
+v142_netv6: "2001:2001:142:{{ rack_no }}::/64"
+
+v201_netv4: "10.100.2.0/27"
+v201_netv6: "2001:100:2::/120"
+
+v204_netv4: "10.104.2.0/27"
+v204_netv6: "2001:104:2::/120"
+
+v301_netv4: "10.100.3.0/27"
+v301_netv6: "2001:100:3::/120"
+
+v304_netv4: "10.104.3.0/27"
+v304_netv6: "2001:104:3::/120"
+
+v401_netv4: "99.99.41.0/24"
+v401_netv6: "2001:99:41::/64"
+
+v402_netv4: "10.100.42.0/24"
+v402_netv6: "2001:100:42::/64"
+
+v403_netv4: "10.100.43.0/24"
+v403_netv6: "2001:100:43::/64"
+# gw_ptp_netmaskv4: 27
+# gw_ptp_netmaskv6: 80
+# gw_ptp_netv4: "10.99.1.0/24"
+# gw_ptp_netv6: "2001:2001:99::/64"
+edge_netmaskv4: 30
+edge_netmaskv6: 126
+edge_netv4: "10.99.1.0/24"
+edge_netv6: "2001:2001:99:1::/64"
+
+# edge01_netv4: "10.99.1.0/24"
+# edge01_netv6: "2001:2001:99:1::/64"
+
+# edge02_netv4: "10.99.2.0/24"
+# edge02_netv6: "2001:2001:99:2::/64"
+
+k8s_tor_netmaskv4: 24
+k8s_tor_netmaskv6: 64
+k8s_tor1_netv4: "{{ v141_netv4 }}"
+k8s_tor1_netv6: "{{ v141_netv6 }}"
+k8s_tor2_netv4: "{{ v142_netv4 }}"
+k8s_tor2_netv6: "{{ v142_netv6 }}"
+
+#BGP
+spine_asn: "65000"
+spine_g1_asn: "65000"
+spine_g2_asn: "65000"
+rack_tor_asn: "{{ 65000+rack_no }}"
+rack01_asn: "65001"
+rack02_asn: "65002"
+rack03_asn: "65003"
+rack04_asn: "65004"
+calico_asn: "{{ 65110+rack_no }}"

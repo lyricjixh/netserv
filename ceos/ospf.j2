@@ -1,0 +1,24 @@
+{##################################################
+
+Purpose:
+Generating OSPF Underlay Configuration
+###################################################}
+router ospf
+ log-adjacency-changes
+{% for redis in ospf.redis %}
+{% if redis.r_map %}
+ redistribute {{ redis.proto }} route-map {{ redis.r_map }}
+{% else %}
+ redistribute {{ redis.proto }}
+{% endif %}
+{% endfor %}
+{% for auth in ospf.authenticate %}
+ area {{ auth.area }} authentication
+{% endfor %}
+{% for aggr in ospf.aggregate %}
+ area {{ aggr.area }} range {{ aggr.supernet }}
+{% endfor %}
+{% for network in ospf.network %}
+ network {{ network.id }} area {{ network.area }}
+{% endfor %}
+exit

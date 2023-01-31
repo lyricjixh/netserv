@@ -1,0 +1,28 @@
+{###########################################
+
+Purpose:
+Generating Syslog Configuration
+############################################}
+{% if telemetry is defined and telemetry %}
+management api gnmi
+{% for trans in telemetry.transport %}
+    transport {{ trans.type }} {{ trans.name }}
+{% if trans.port %}
+        port {{ trans.port }}
+{% endif %}
+{% if trans.vrf %}
+        vrf {{ trans.vrf }}
+{% endif %}
+    !
+{% endfor %}
+    provider eos-native
+!
+{% if telemetry.eapi %}
+{% for eapi in telemetry.eapi %}
+management api {{ eapi.type }}
+   protocol {{ eapi.proto }}
+   no shutdown
+!
+{% endfor %}
+{% endif %}
+{% endif %}

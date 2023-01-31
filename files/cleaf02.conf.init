@@ -1,0 +1,12 @@
+hostname cleaf02.poc.arista.com
+!
+vrf instance MGMT
+ rd 100:100
+!
+interface management 0
+ description OOB Managment Port
+ vrf forwarding MGMT 
+ ip address 172.100.100.3/24
+!
+ip route vrf MGMT 0.0.0.0/0 172.100.100.1
+!

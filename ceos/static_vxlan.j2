@@ -1,0 +1,39 @@
+{###########################################
+
+Purpose:
+Generating ceos Vxlan Configuration
+############################################}
+ip anycast-address enable
+ip anycast-mac-address {{ tor_pair_vmac }}
+!
+interface vxlan vtep100
+  source-ip {{ lpbk1.addr_v4 }}
+  !
+{% for vni in vxlans %}
+  map vni {{ vni.id }} vlan {{ vni.vlan }}
+{% endfor %}
+{% for vrfi in evpn.vrf %}
+  map vni {{ vrfi.l3_vni }} vlan {{ vrfi.l3_vni_vlan }}
+  map vni {{ vrfi.l3_vni }} vrf Vrf_{{ vrfi.name }}
+{% endfor %}
+  !
+!
+{% for vni in vxlans %}
+interface Vlan {{ vni.vlan }}
+  description "{{ vni.desc }}"
+  ip vrf forwarding Vrf_{{ vni.vrf }}
+{% if vni.netv4 is defined and vni.netv4 %}
+  ip anycast-address {{ vni.netv4 | ipaddr('1') }}
+{% endif %}
+{% if vni.netv6 is defined and vni.netv6 %}
+  ipv6 anycast-address {{ vni.netv6 | ipaddr('1') }}
+{% endif %}
+{% if vni.helper_addrv4 is defined and vni.helper_addrv4 %}
+{% for addr in vni.helper_addrv4 %}
+  ip helper-address {{ addr }}
+{% endfor %}
+{% endif %}
+  mtu {{ vxlan_mtu }}
+  neigh-suppress
+!
+{% endfor %}

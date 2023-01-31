@@ -1,0 +1,24 @@
+{###########################################
+
+Purpose:
+Generating Loopback Interface Configuration
+############################################}
+interface loopback0
+ description "{{ lpbk0.desc }}"
+ ip address {{ lpbk0.addr_v4 }}/32
+{% if lpbk0.addr_v6 is defined and lpbk0.addr_v6 %}
+ ipv6 address {{ lpbk0.addr_v6 }}/128
+{% endif %}
+ exit
+!
+{% if lpbk1 is defined and lpbk1 %}
+interface loopback1
+ description "{{ lpbk1.desc }}"
+{% if lpbk1.addr_v4 is defined and lpbk1.addr_v4 %}
+ ip address {{ lpbk1.addr_v4 }}/32
+{% endif %}
+{% if lpbk1.addr_v6 is defined and lpbk1.addr_v6 %}
+ ipv6 address {{ lpbk1.addr_v6 }}/128
+{% endif %}
+!
+{% endif %}

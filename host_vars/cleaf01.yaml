@@ -1,0 +1,24 @@
+## BGP parameter in the host var file for 1st fabric link handling
+##
+bgp:
+  local_as: "{{ 65000+rack_no }}"
+  remote_as: "{{ spine_asn }}"
+  sas_as: "64999"
+  fabric_peer_v4:
+    - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr('network') }}"
+    - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[1]) | ansible.utils.ipaddr('address') }}"
+  fabric_peer_v6:
+    - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr('network') }}"
+    - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[1]) | ansible.utils.ipaddr('address') }}"
+  afi: 
+    ipv4:
+    -
+        r_map: "LOCAL_CONNECTED_V4"
+        proto: connected
+    ipv6:
+    -
+        r_map: "LOCAL_CONNECTED_V6"
+        proto: connected
+  flowspec: 
+    ipv4: "enable"
+    ipv6: "enable"

@@ -1,0 +1,45 @@
+{###########################################
+
+Purpose:
+Generating ceos Vxlan Configuration
+############################################}
+
+ip virtual-router mac-address {{ tor_pair_vmac }}
+!
+{% for vni in vxlans %}
+vlan {{ vni.vlan }}
+  name VLAN-AWARE-BUNDLE-VLAN{{ vni.vlan }}
+!
+{% endfor %}
+!
+interface vxlan1
+  vxlan virtual-router encapsulation mac-address mlag-system-id
+  vxlan source-interface loopback1
+  vxlan udp-port 4789
+{% for vni in vxlans %}
+  vxlan vlan {{ vni.vlan }} vni {{ vni.id }}
+{% endfor %}
+{% for vrfi in evpn.vrf %}
+{% if vrfi.name|lower != "default" %}
+  vxlan vrf {{ vrfi.name }} vni {{ vrfi.l3_vni.id }}
+{% endif %}
+{% endfor %}
+!
+{% for vni in vxlans %}
+interface Vlan {{ vni.vlan }}
+  description "{{ vni.desc }}"
+  vrf {{ vni.vrf }}
+{% if vni.netv4 is defined and vni.netv4 %}
+  ip address {{ vni.netv4 | ansible.utils.ipaddr('1') }}
+{% endif %}
+{% if vni.netv6 is defined and vni.netv6 %}
+  ipv6 address {{ vni.netv6 | ansible.utils.ipaddr('1') }}
+{% endif %}
+{% if vni.helper_addrv4 is defined and vni.helper_addrv4 %}
+{% for addr in vni.helper_addrv4 %}
+  ip helper-address {{ addr }}
+{% endfor %}
+{% endif %}
+  mtu {{ vxlan_mtu }}
+!
+{% endfor %}

@@ -1,0 +1,119 @@
+---
+ansible_ssh_user: lab
+ansible_ssh_pass: "{{vault_lab_password}}"
+ansible_sudo_pass: "{{vault_lab_password}}"
+ansible_linux_os: ubuntu
+vendor: "VMWare ESXi"
+
+ansible_python_interpreter: /usr/bin/python3
+
+docker_dependencies:
+   - ca-certificates
+   - gnupg
+   - gnupg-agent
+   - software-properties-common
+   - apt-transport-https
+   - curl
+   - lsb-release
+docker_packages:
+   - docker-ce
+   - docker-ce-cli
+   # - docker-ce=5:18.09.6~3-0~debian-stretch
+   # - docker-ce-cli=5:18.09.6~3-0~debian-stretch
+   - containerd.io 
+docker_url_apt_key: "https://download.docker.com/linux/ubuntu/gpg"
+docker_repository: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+
+k8s_dependencies:
+   - kubernetes-cni 
+   - kubelet
+   # - kubernetes-cni=0.6.0-00 
+   # - kubelet=1.13.1-00
+k8s_packages:
+   - kubeadm
+   - kubectl 
+   # - kubeadm=1.13.1-00 
+   # - kubectl=1.13.1-00 
+k8s_url_apt_key: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+k8s_repository: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+
+k8s_master:
+   - "vm11"
+k8s_worker:
+   - "vm12"
+   - "vm13"
+   - "vm14"
+k8s_pod_network: "192.168.192.0/18"
+k8s_user: "lab"
+k8s_user_home: "/home/{{ k8s_user }}"
+k8s_token_file: "join-k8s-command"
+k8s_admin_config: "/etc/kubernetes/admin.conf"
+k8s_dashboard_adminuser_config: "dashboard-adminuser.yaml"
+k8s_kubelet_config: "/etc/kubernetes/kubelet.conf"
+k8s_dashboard_port: "6443"
+k8s_dashboard_url: "https://{{ ansible_default_ipv4.address }}:{{ k8s_dashboard_port }}/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#!/login"
+# k8s_dashboard_url: "https://{{ ansible_default_ipv4.address }}:{{ k8s_dashboard_port }}/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login"
+
+# calico_rbac_url: "https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml"
+# calico_rbac_config: "rbac-kdd.yaml"
+calico_net_url: "https://docs.projectcalico.org/manifests/calico.yaml"
+# calico_net_url: "https://docs.projectcalico.org/v3.3/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml"
+calico_net_config: "calico.yaml"
+dashboard_url: "https://raw.githubusercontent.com/kubernetes/dashboard/v2.3.1/aio/deploy/recommended.yaml"
+# dashboard_url: "https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml"
+dashboard_config: "kubernetes-dashboard.yml"
+
+# fabric_link_seq:
+#     - "{{ 2*uplink_ct*(seq-1) }}"
+#     - "{{ 2*uplink_ct*(seq-1)+2 }}"
+
+calico_ctrl: "https://github.com/projectcalico/calicoctl/releases/download/v3.20.2/calicoctl"
+cali_ports:
+   -  
+      name: "ens160"
+      desc: "Mgmt Port"
+      addr_v4: "{{ ansible_host }}"
+      mask_v4: "{{ oob_ipv4_mask }}"
+      gw_v4: "{{ oob_netv4_gw }}"
+      dns_v4: "{{ domain.server }}"
+      domain_name: "{{ domain.name }}"
+
+   -  
+      name: "ens192"
+      desc: "k8s node uplink01"
+      addr_v4: "{{ k8s_tor1_netv4 | ipaddr(seq-120) | ipaddr('address') }}"
+      mask_v4: "{{ k8s_tor_netmaskv4 }}"
+      addr_v6: "{{ k8s_tor1_netv6 | ipaddr(seq-120) | ipaddr('address') }}"
+      mask_v6: "{{ k8s_tor_netmaskv6 }}"
+
+   -  
+      name: "ens224"
+      desc: "k8s node uplink02"
+      addr_v4: "{{ k8s_tor2_netv4 | ipaddr(seq-120) | ipaddr('address') }}"
+      mask_v4: "{{ k8s_tor_netmaskv4 }}"
+      addr_v6: "{{ k8s_tor2_netv6 | ipaddr(seq-120) | ipaddr('address') }}"
+      mask_v6: "{{ k8s_tor_netmaskv6 }}"
+
+   -  
+      name: "lo"
+      desc: "Loopback"
+      addr_v4: "{{ compute_lpbk0_netv4 | ipaddr(seq-100) | ipaddr('address') }}"
+      mask_v4: "32"
+      addr_v6: "{{ compute_lpbk0_netv6 | ipaddr(seq-100) | ipaddr('address') }}"
+      mask_v6: "128"
+
+calico:
+   local_asn: "{{ calico_asn }}"
+   node_name: "{{ ansible_hostname }}"
+   cfg_dir: "{{ k8s_user_home }}/calicfg"
+   peers:
+      - 
+         name: "{{ ansible_hostname }}-tor1"
+         remote_asn: "{{ rack_tor_asn }}"
+         peer_addrv4: "{{ k8s_tor1_netv4 | ipaddr(-2) | ipaddr('address') }}"
+         peer_addrv6: "{{ k8s_tor1_netv6 | ipaddr(-2) | ipaddr('address') }}"
+      - 
+         name: "{{ ansible_hostname }}-tor2"
+         remote_asn: "{{ rack_tor_asn }}"
+         peer_addrv4: "{{ k8s_tor2_netv4 | ipaddr(-2) | ipaddr('address') }}"
+         peer_addrv6: "{{ k8s_tor2_netv6 | ipaddr(-2) | ipaddr('address') }}"

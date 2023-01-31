@@ -1,0 +1,276 @@
+---
+
+vendor: "Arista"
+
+#Vxlan
+lpbk1:
+    desc: "Overlay vTEP Endpoint"
+    addr_v4: "{{ lpbk1_netv4 | ansible.utils.ipaddr(rack_no) | ansible.utils.ipaddr('address') }}"
+
+vlan_port: 
+#   - 
+#    desc: "layer2 native vlan port"
+#    id: 401
+#    port_range: 
+#    port_indiv: 
+
+vlan_ranges:
+# Specify vlan ranges
+   - 
+    desc: "vlan desc here"
+    start: 
+    end: 
+
+## for underlay vlan input
+vlans:
+    app_vlans:
+        - 
+            desc: "vMgmt_Mgmt"
+            id: "101"
+            netv4: "{{ v101_netv4 }}"
+            netv6: "{{ v101_netv6 }}"
+
+        - 
+            desc: "vSAN_Mgmt"
+            id: "201"
+            netv4: "{{ v201_netv4 }}"
+            netv6: "{{ v201_netv6 }}"
+        - 
+            desc: "vTEP_Mgmt"
+            id: "301"
+            netv4: "{{ v301_netv4 }}"
+            netv6: "{{ v301_netv6 }}"
+    pair_vlan:
+        desc: "ToR_Pair_iBGP"
+        id: "1001"
+        netv4: "{{ tor_pair_netv4 }}"
+        netv6: "{{ tor_pair_netv6 }}"
+    vxrail_vlan:
+        desc: "VxRail_Mgmt"
+        id: "3939"
+    cali_vlans:
+        - 
+            desc: "Calio uplink01"
+            id: 141
+            netv4: "{{ v141_netv4 }}"
+            netv6: "{{ v141_netv6 }}"
+
+        - 
+            desc: "Calio uplink02"
+            id: 142
+            netv4: "{{ v142_netv4 }}"
+            netv6: "{{ v142_netv6 }}"
+    native_vlan:
+        desc: "Native Vlan if not default 1"
+        id: "1"
+
+bfd:
+    interval: 100
+    min_rx: 300
+    multip: 5
+    role: "active"
+    
+oob_mgmt:
+    addr_v4: "{{ ansible_host }}/{{ oob_ipv4_mask }}"
+    gw_v4: "{{ oob_ipv4_gateway }}"
+
+# Leave/spine fabric uplinks 
+uplink_ct: 2
+fabric_link_seq:
+    - "{{ 2*uplink_ct*(seq-1) }}"
+    - "{{ 2*uplink_ct*(seq-1)+2 }}"
+
+fabric_links:
+   -
+    # 1st fabirc port
+    name: "{{ ports.fabric[0]}}"
+    desc: "Fabric Uplink01_To_Spine01"
+    addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[0]|int+1) | ansible.utils.ipaddr('address') }}"
+    addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[0]|int+1) | ansible.utils.ipaddr('address') }}"
+   -
+    # 2nd fabirc port
+    name: "{{ ports.fabric[1]}}"
+    desc: "Fabric Uplink02_To_Spine02"
+    addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[1]|int+1) | ansible.utils.ipaddr('address') }}"
+    addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[1]|int+1) | ansible.utils.ipaddr('address') }}"
+
+# BGP Parameters
+bgp:
+  local_as: "{{ 65000+rack_no }}"
+  remote_as: "{{ spine_asn }}"
+  sas_as: "64999"
+  fabric_peer_v4:
+    - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[0]) | ansible.utils.ipaddr('address') }}"
+    - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[1]) | ansible.utils.ipaddr('address') }}"
+  fabric_peer_v6:
+    - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[0]) | ansible.utils.ipaddr('address') }}"
+    - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[1]) | ansible.utils.ipaddr('address') }}"
+  afi: 
+    ipv4:
+    -
+        r_map: "LOCAL_CONNECTED_V4"
+        proto: connected
+    ipv6:
+    -
+        r_map: "LOCAL_CONNECTED_V6"
+        proto: connected
+  flowspec: 
+    ipv4: "enable"
+    ipv6: "enable"
+
+# ospf Parameters
+ospf:
+  authenticate:
+    - key: "{{ vault_ospf_auth}}"
+      area: "0.0.0.0"
+  network:
+    - id: "172.100.100.0/24"
+      area: "0.0.0.0"
+    - id: "172.17.70.0/24"
+      area: "0.0.0.0"
+  aggregate:
+    - area: "0.0.0.0"
+      supernet: "172.17.0.0/16"
+  redis: 
+    - r_map: "LOCAL_CONNECTED_V4"
+      proto: connected
+    - r_map: "static_to_ospf"
+      proto: static
+
+vrrp:
+  version: 3
+  delay_reload: 3
+  group:
+    - id: 1
+      intf: "1/2"
+      type: "ipv4"
+      vrf_instance: "RED"
+      track_intf:
+        - 1/45
+      addr_v4: 10.101.1.253/24
+      vip: 10.101.1.1/24
+      vmac: "{{ tor_pair_vmac }}"
+
+cluster_acl:
+  - type: ipv4
+    name: test01
+    description: ipv4acl
+    extended: true
+    remark:
+      - number: 5
+        description: "ipv4remark"
+    entries:
+      - number: 10
+        permit: true
+        protocol: tcp
+        source: 172.100.100.0/24
+        destination: 10.10.10.10/32
+        dest_condition: eq 22
+        state: present
+      - number: 20
+        permit: true
+        protocol: tcp
+        source: 172.17.70.0/24
+        destination: 10.10.10.10/32
+        dest_condition: eq 443
+        state: present
+    stage_ingress:
+        - name: 
+          state: absent
+    stage_egress:
+        - name: vlan 104
+          state: present
+        - name: vlan 204
+          state: absent
+    state: present
+  - type: ipv6
+    name: test01_v6
+    description: ipv6acl
+    extended: true
+    remark:
+      - number: 5
+        description: "ipv6_acl_remark"
+    entries:
+      - number: 10
+        permit: true
+        protocol: tcp
+        source: 2001:1:1:1::/64
+        destination: 2001:a:a:a::a/128
+        dest_condition: eq 22
+        state: present
+      - number: 20
+        permit: true
+        protocol: tcp
+        source: 2001:2:2:2::/64
+        destination:  2001:a:a:a::a/128
+        dest_condition: eq 443
+        state: present
+    stage_ingress:
+        - name: 
+          state: absent
+    stage_egress:
+        - name: vlan 104
+          state: absent
+        - name: vlan 204
+          state: absent
+    state: present
+
+evpn:
+    arp_suppression:
+        pfx_list: "ARP_NO_PROXY"
+    vrf:
+    - 
+        name: "RED"
+        desc: "RED_VRF"
+        rd_pfx: "{{ lpbk1.addr_v4 }}"
+        rt_pfx: "1001"
+        l3_vni: 
+          id: "9001"
+          vlan: "901"
+        interfaces:
+        - 
+            name: "loopback901"
+            desc: "Loopback Interface"
+            addr_v4: "10.200.200.{{ seq }}/32"
+            addr_v6: "2001:ffff:ffff::{{ '%0x' % seq }}/128"
+        type5:
+        - 
+            afi: ipv4
+            proto: connected
+            r_map: 
+        - 
+            afi: ipv4
+            r_map: 
+            proto: static
+        # - 
+        #     afi: ipv4
+        #     r_map: 
+        #     proto: bgp
+
+
+## EVPN iBGP Overlay
+## Bleaves pair as iBGP RRS, Rest VTEP leaf as RRC.
+evpn_ibgp:
+  local_asn: "64999"
+  rrs_v4:
+    peer_group: "evpn_rrs_v4"
+    remote_as:
+      - "{{ rack03_asn }}"
+      - "{{ rack03_asn }}"
+    addr:
+      - "{{ hostvars['bleaf01']['lpbk0']['addr_v4'] }}"
+      - "{{ hostvars['bleaf02']['lpbk0']['addr_v4'] }}"
+  rrc_v4:
+    peer_group: "evpn_rrc_v4"
+    remote_as:
+      - "{{ rack01_asn }}"
+      - "{{ rack01_asn }}"
+      - "{{ rack02_asn }}"
+      - "{{ rack02_asn }}"
+    addr:
+      - "{{ hostvars['cleaf01']['lpbk0']['addr_v4'] }}"
+      - "{{ hostvars['cleaf02']['lpbk0']['addr_v4'] }}"
+      - "{{ hostvars['cleaf03']['lpbk0']['addr_v4'] }}"
+      - "{{ hostvars['cleaf04']['lpbk0']['addr_v4'] }}"
+  peer_v4:
+    peer_group: "evpn_rrp_v4"
