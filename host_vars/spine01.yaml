@@ -1,3 +1,5 @@
+name_orig: "smd501"
+
 ## spine01's fabirc link defined in its own host file due to ipaddr not handling 0.
 fabric_links:
   - 

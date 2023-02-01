@@ -5,6 +5,14 @@
   - arista.eos
 
   tasks:
+  - name: Change Hostname
+    arista.eos.eos_hostname:
+      config:
+        hostname: "{{ inventory_hostname }}"
+      state: merged
+    tags:
+      - hostname
+
   - name: Enable Network Services
     vars:
       ansible_command_timeout: 60
