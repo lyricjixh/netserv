@@ -5,23 +5,23 @@
 	ixs342
 
 ## devices (ssh with u: admin, no password)
-2x 7280SR "ISP" switches
-	hs423
-	hs424
+    2x 7280SR "ISP" switches
+        hs423
+        hs424
 
-2x 7280CR3 spines
-	smd501
-	smd505
+    2x 7280CR3 spines
+        smd501
+        smd505
 
-2x 7050X3 leaf switches
-	cal383
-	cal384
-	cal385
-	cal388
+    2x 7050X3 leaf switches
+        cal383
+        cal384
+        cal385
+        cal388
 
-2x harness (sits between MLAG / EVPN-AA pairs and ixia)
-	do420
-	do421
+    2x harness (sits between MLAG / EVPN-AA pairs and ixia)
+        do420
+        do421
 
 ## connections
 ### 400G:
