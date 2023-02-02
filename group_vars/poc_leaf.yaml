@@ -42,24 +42,9 @@ vlans:
             netv6: "{{ v301_netv6 }}"
     pair_vlan:
         desc: "ToR_Pair_iBGP"
-        id: "1001"
+        id: "4093"
         netv4: "{{ tor_pair_netv4 }}"
         netv6: "{{ tor_pair_netv6 }}"
-    vxrail_vlan:
-        desc: "VxRail_Mgmt"
-        id: "3939"
-    cali_vlans:
-        - 
-            desc: "Calio uplink01"
-            id: 141
-            netv4: "{{ v141_netv4 }}"
-            netv6: "{{ v141_netv6 }}"
-
-        - 
-            desc: "Calio uplink02"
-            id: 142
-            netv4: "{{ v142_netv4 }}"
-            netv6: "{{ v142_netv6 }}"
     native_vlan:
         desc: "Native Vlan if not default 1"
         id: "1"
@@ -108,15 +93,18 @@ bgp:
   afi: 
     ipv4:
     -
-        r_map: "LOCAL_CONNECTED_V4"
-        proto: connected
+        proto: "connected"
+        r_map: "REDIST-CONNECTED"
+    -
+        proto: "static"
+        r_map: 
     ipv6:
     -
-        r_map: "LOCAL_CONNECTED_V6"
         proto: connected
+        r_map: "LOCAL_CONNECTED_V6"
   flowspec: 
-    ipv4: "enable"
-    ipv6: "enable"
+    ipv4: "disable"
+    ipv6: "disable"
 
 # ospf Parameters
 ospf:

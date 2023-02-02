@@ -18,14 +18,14 @@ router bgp {{ bgp.local_as }}
   neighbor fabric_peer_v4 allowas-in
   neighbor fabric_peer_v4 send-community standard extended
   !
-  neighbor sas_peer_v4 peer group
-{# neighbor sas_peer_v4 advertisement-interval 5 #}
-  neighbor sas_peer_v4 timers 3 9
-{# neighbor sas_peer_v4 capability extended-nexthop #}
-  neighbor sas_peer_v4 bfd
-  neighbor sas_peer_v4 allowas-in
-  neighbor sas_peer_v4 remote-as {{ bgp.sas_as }}
-  neighbor sas_peer_v4 send-community standard extended
+  neighbor dc_gw_v4 peer group
+{# neighbor dc_gw_v4 advertisement-interval 5 #}
+  neighbor dc_gw_v4 timers 3 9
+{# neighbor dc_gw_v4 capability extended-nexthop #}
+  neighbor dc_gw_v4 bfd
+  neighbor dc_gw_v4 allowas-in
+  neighbor dc_gw_v4 remote-as {{ bgp.sas_as }}
+  neighbor dc_gw_v4 send-community standard extended
   !
   neighbor fabric_peer_v6 peer group
 {# neighbor fabric_peer_v6 advertisement-interval 5 #}
@@ -34,13 +34,13 @@ router bgp {{ bgp.local_as }}
   neighbor fabric_peer_v6 bfd
   neighbor fabric_peer_v6 allowas-in
   !
-  neighbor sas_peer_v6 peer group
-{# neighbor sas_peer_v6 advertisement-interval 5 #}
-  neighbor sas_peer_v6 timers 3 9
-{# neighbor sas_peer_v6 capability extended-nexthop #}
-  neighbor sas_peer_v6 bfd
-  neighbor sas_peer_v6 allowas-in
-  neighbor sas_peer_v6 remote-as {{ bgp.sas_as }}
+  neighbor dc_gw_v6 peer group
+{# neighbor dc_gw_v6 advertisement-interval 5 #}
+  neighbor dc_gw_v6 timers 3 9
+{# neighbor dc_gw_v6 capability extended-nexthop #}
+  neighbor dc_gw_v6 bfd
+  neighbor dc_gw_v6 allowas-in
+  neighbor dc_gw_v6 remote-as {{ bgp.sas_as }}
   !
 {% for peer in bgp.fabric_peer_v4 %}
   neighbor {{ peer }} description "leaf peer"
@@ -67,7 +67,7 @@ router bgp {{ bgp.local_as }}
 {% endfor %}
 {% endif %}
     neighbor fabric_peer_v4 activate
-    neighbor sas_peer_v4 activate
+    neighbor dc_gw_v4 activate
   !
   address-family ipv6
 {% if bgp.afi.ipv6 is defined and bgp.afi.ipv6 %}
@@ -80,18 +80,18 @@ router bgp {{ bgp.local_as }}
 {% endfor %}
 {% endif %}
     neighbor fabric_peer_v6 activate
-    neighbor sas_peer_v6 activate
+    neighbor dc_gw_v6 activate
   !
 {% if bgp.flowspec.ipv4 is defined and bgp.flowspec.ipv4|lower == "enable" %}
   address-family flow-spec ipv4
     neighbor fabric_peer_v4 activate
-    neighbor sas_peer_v4 activate
+    neighbor dc_gw_v4 activate
   !
 {% endif %}
 {% if bgp.flowspec.ipv6 is defined and bgp.flowspec.ipv6|lower == "enable" %}
   address-family flow-spec ipv6
     neighbor fabric_peer_v6 activate
-    neighbor sas_peer_v6 activate
+    neighbor dc_gw_v6 activate
   !
 {% endif %}
 !

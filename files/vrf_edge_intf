@@ -1,0 +1,39 @@
+interface port-channel 50.60	
+	description SPINE1>CORE2
+	encapsulation dot1q vlan 60
+	vrf SPINE
+    ip address 131.153.60.8/31
+    ipv6 enable
+    ipv6 address 2000:1000:60::15/126
+!
+interface port-channel 50.61
+	description CORE1>SPINE2
+	encapsulation dot1q vlan 61
+	vrf SPINE
+    ip address 131.153.60.10/31
+    ipv6 enable
+    ipv6 address 2000:1000:60::a/126	
+!
+interface Ethernet53/1  
+   description SPINE<>CORE link same device
+   vrf SPINE
+   ip address 131.153.60.7/31
+   ipv6 enable
+   ipv6 address 2000:1000:60::7/126
+!
+interface Ethernet54/2
+	description SPINE<>LEAF1.1
+	vrf SPINE
+	ip address 10.216.197.0/31
+	ipv6 enable
+	ipv6 address 2000:1000:1::1/126
+!
+interface loopback 20
+	description SPINE-VRF-ROUTER-ID
+	vrf SPINE
+	ip address 131.153.20.5/32
+interface loopback 30
+	description SPINE-VRF-EVPN
+	vrf SPINE
+	ip address 10.216.199.1/32
+!

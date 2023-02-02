@@ -105,125 +105,89 @@
     tags:
       - netserv
 
-#   - name: Enable loopback Interface
-#     eos_config:
-#         src: intf_lpbk.j2
-#     tags:
-#     - loopback
+- hosts: poc_leaf,poc_spine
+  gather_facts: false
+  collections:
+  - arista.eos
 
-#   # - name: Delete Old PTP Interface
-#   #   arista.eos.eos_l3_interfaces:
-#   #     config:
-#   #     - name: eth31
-#   #     - name: eth32
-#   #     state: deleted
-#   #   tags:
-#   #   - ptp
+  tasks:
+  - name: Enable loopback Interface
+    eos_config:
+        src: intf_lpbk.j2
+    tags:
+    - loopback
 
-#   - name: Enable Leaf/Spine PTP Interface
-#     eos_config:
-#         src: intf_ptp.j2
-#     tags:
-#     - ptp
+  - name: Enable Leaf/Spine PTP Interface
+    eos_config:
+        src: intf_ptp.j2
+    tags:
+    - ptp
 
-#   - name: Enable Leaf Layer2/MLAG/VLAN
-#     block:
-#     # - name: Enable Vlan Interface and STP
-#     #   block:
-#     #   - name: Enable Vlan
-#     #     eos_config:
-#     #         src: intf_vlan.j2
-#     #   - name: Enable Spanning Tree
-#     #     eos_config:
-#     #         src: stp.j2
-#     #     # when: (features.interface.stp is defined and features.interface.stp|lower == "yes")
-#     #   tags:
-#     #     - vlan
-#     #     - interface
+  - name: Enable Southbound L2/MLAG/Trunk Interface
+    block:
+    - name: Enable Layer2 Port
+      eos_config:
+          src: intf_l2.j2
+      when: (features.interface.l2port is defined and features.interface.l2port|lower == "yes")
 
-#     - name: Enable Southbound L2/MLAG/Trunk Interface
-#       # vars:
-#       #   ansible_timeout: 120
-#       #   ansible_command_timeout: 60
-#       #   ansible_connect_timeout: 60
-#       block:
-#       # - name: Breakout Port
-#       #   eos_config:
-#       #       src: breakout.j2
+    - name: Enable MLAG Domain
+      eos_config:
+          src: mlag.j2
+      when: (features.interface.mlag is defined and features.interface.mlag|lower == "yes")
+      tags:
+        - mlag
+    - name: Enable Bond and Trunking
+      eos_config:
+          src: intf_bond.j2
+      when: (features.interface.bond is defined and features.interface.bond|lower == "yes")
+      ignore_errors: yes
+    when: "'leaf' in inventory_hostname"
+    tags:
+      - l2port
 
-#       # - name: "Wait 45 secs for Breakout Finishing"
-#       #   pause:
-#       #     seconds: 45
-#       #   delegate_to: localhost
-#       #   when: ( features.interface.breakout is defined and features.interface.breakout|lower == "yes")
+  - name: Enable Routing Policy on LEAF
+    eos_config:
+        src: route_pol.j2
+    when: "'leaf' in inventory_hostname"
+    tags:
+      - rpol
 
-#       # - name: Enable Breakout Port Trunking
-#       #   eos_config:
-#       #       src: intf_southbound.j2
-#       #   when: "'cleaf' in inventory_hostname"
+  - name: Enable Routing Policy on SPINE
+    eos_config:
+        src: files/rpol_spine
+    when: "'spine' in inventory_hostname"
+    tags:
+      - rpol
 
-#       - name: Enable Layer2 Port
-#         eos_config:
-#             src: intf_l2.j2
-#         # when: (features.interface.l2port is defined and features.interface.l2port|lower == "yes")
-#         tags:
-#           - l2port
+  - name: Enable Standard Underlay BGP
+    block:
+    - name: Enable Standard BGP on Leaf
+      eos_config:
+          src: bgp_underlay_leaf.j2
+      when: "'leaf' in inventory_hostname"
 
-#       - name: Enable MLAG Domain
-#         eos_config:
-#             src: mlag.j2
-#         when: (features.interface.mlag is defined and features.interface.mlag|lower == "yes")
-#         tags:
-#           - mlag
-#       - name: Enable Bond and Trunking
-#         eos_config:
-#             src: intf_bond.j2
-#         when: (features.interface.bond is defined and features.interface.bond|lower == "yes")
-#         ignore_errors: yes
-#         tags:
-#           - bond
-      
-#   #   - name: Enable Uplink Failure Detection (UFD) if defined
-#   #     eos_config:
-#   #         src: ufd.j2
-#   #     when: (features.interface.ufd is defined and features.interface.ufd|lower == "yes")
-#   #     tags:
-#   #       - ufd
-#   #       - interface
-#       when: "'leaf' in inventory_hostname"
-#       tags:
-#         - southbound
+    - name: Enable Standard BGP on Spine
+      eos_config:
+          src: bgp_underlay_spine.j2
+      when: "'spine' in inventory_hostname"
+    when: (features.routing.bgp_stan|lower == "yes")
+    tags:
+    - standard
 
-#   - name: Enable BGP Underlay
-#     vars:
-#       ansible_command_timeout: 60
-#     block:
-#     - name: Enable Routing Policy
-#       eos_config:
-#           src: route_pol.j2
-#       tags:
-#         - rpol
+  - name: Enable Unnumbered Underlay BGP
+    block:
+    - name: Enable Unnumbered BGP on Leaf
+      eos_config:
+          src: bgp_unnumbered_leaf.j2
+      when: ("'leaf' in inventory_hostname")
 
-#     - name: Enable Underlay BGP on Leaf
-#       eos_config:
-#           src: bgp_unnumbered_leaf.j2
-#       when: "'leaf' in inventory_hostname"
-#       tags:
-#         - unnumber
-
-#     - name: Enable Underlay BGP on Spine
-#       eos_config:
-#           src: bgp_unnumbered_spine.j2
-#       when: "'spine' in inventory_hostname"
-#       tags:
-#         - unnumber
-
-#     - name: Enable BGP FlowSpec
-#       eos_config:
-#           src: bgp_flowspec.j2
-#       when: (features.routing.flowspec|lower == "yes")
-#       tags:
-#         - flow_spec
+    - name: Enable Unnumbered BGP on Spine
+      eos_config:
+          src: bgp_unnumbered_spine.j2
+      when: ("'spine' in inventory_hostname")
+    when: (features.routing.bgp_unno|lower == "yes")
+    tags:
+    - unnumber
 
 #     - name: Enable Unified BGP Overlay on both Leaf/Spine if by design
 #       eos_config:

@@ -16,45 +16,48 @@ breakout:
    #    end: 9
 
 trunk_port: 
-   desc: "trunk memeber port"
-   vlan_list: "{{ vxlans | json_query('[?state==`present`].vlan') }}"
-   range:
+   # desc: "trunk memeber port"
+   # vlan_list: "{{ vxlans | json_query('[?state==`present`].vlan') }}"
+   # range:
    # -
    #    desc: "25G Compute Port Group1"
    #    start: 1
    #    end: 2
    #    state: "present"
    # port-range in same trunk
-   port_indiv:
-   -  desc: "trunk port to compute"
-      id: "1"
-      state: "present"
-   -  desc: "trunk port to compute"
-      id: "2"
-      state: "present"
+   # port_indiv:
+   # -  desc: "trunk port to compute"
+   #    id: "1"
+   #    state: "present"
+   # -  desc: "trunk port to compute"
+   #    id: "2"
+   #    state: "present"
 
 ports:
    fabric:
-   - 31
-   - 32
+   - 49/1
+   - 50/1
    mlag_ctl:
-   - 27
-   - 28
+   - 51/1
+   - 52/1
    compute:
    - 1
-   - 2
 
 #MLAG
 mlag_bond: 
    domain_id: "1"
    desc: "MLAG Control link Port-Channel"
-   vlan: "{{ vlans.pair_vlan.id }}"
+   vlan: 
+      desc: "MLAG_CTL_VLAN"
+      id: "4094"
+      netv4: "{{ mlag_ctl_netv4 }}"
+      netv6: "{{ mlag_ctl_netv6 }}"
    group: "mlagpeer"
    bond_id: "100"
    bmem_range:
    bmem_indiv:
-     - "27"
-     - "28"
+     - "51/1"
+     - "52/1"
 
 trunk_bond:
     - bond_id: 101
@@ -64,13 +67,13 @@ trunk_bond:
       bmem_range:
       bmem_indiv:
          - "1"
-    - bond_id: 102 
-      mlag_id: 102
-      desc: "compute bond"
-      vlan_list: "{{ vxlans | json_query('[?state==`present`].vlan') }}"
-      bmem_range:
-      bmem_indiv:
-         - "2"
+   #  - bond_id: 102 
+   #    mlag_id: 102
+   #    desc: "compute bond"
+   #    vlan_list: "{{ vxlans | json_query('[?state==`present`].vlan') }}"
+   #    bmem_range:
+   #    bmem_indiv:
+   #       - "2"
 
 ## Sflow per SKU
 sflow_port_sku:

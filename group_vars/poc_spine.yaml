@@ -32,14 +32,17 @@ loopback_intf0: Loopback0
 # overrided by host_var if inconsistent
 ports:
    fabric:
-   - 1
-   - 2
-   - 3
-   - 4
-   - 5
-   - 6
-   - 7
-   - 8
+   - 7/1
+   - 8/1
+   - 9/1
+   - 10/1
+   inter_link:
+   - 3/1
+   - 4/1
+   - 5/1
+   - 6/1
+   gw_link:
+   - 1/1
 
 # Fabric Link Addr Parameters
 fabric_link_seq:
@@ -47,21 +50,10 @@ fabric_link_seq:
     - "{{ 2*(seq-101)+4 }}"
     - "{{ 2*(seq-101)+8 }}"
     - "{{ 2*(seq-101)+12 }}"
-    - "{{ 2*(seq-101)+16 }}"
-    - "{{ 2*(seq-101)+20 }}"
-    - "{{ 2*(seq-101)+24 }}"
-    - "{{ 2*(seq-101)+28 }}"
-
-## obsoleted 
-# link_peer_addr_seq:
-#     - "{{ 2*(seq-101)+1 }}"
-#     - "{{ 2*(seq-101)+5 }}"
-#     - "{{ 2*(seq-101)+9 }}"
-#     - "{{ 2*(seq-101)+13 }}"
-#     - "{{ 2*(seq-101)+17 }}"
-#     - "{{ 2*(seq-101)+21 }}"
-#     - "{{ 2*(seq-101)+25 }}"
-#     - "{{ 2*(seq-101)+29 }}"
+    # - "{{ 2*(seq-101)+16 }}"
+    # - "{{ 2*(seq-101)+20 }}"
+    # - "{{ 2*(seq-101)+24 }}"
+    # - "{{ 2*(seq-101)+28 }}"
 
 ## spine01's fabirc link defined in its own host file due to ipaddr not handling 0.
 fabric_links:
@@ -93,34 +85,34 @@ fabric_links:
     admin_state: "up"
     addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[3]) | ansible.utils.ipaddr('address') }}"
     addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[3]) | ansible.utils.ipaddr('address') }}"
-  - 
-    name: "{{ ports.fabric[4] }}"
-    state: "present"
-    desc: "Fabric Port To LEAF05"
-    admin_state: "up"
-    addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[4]) | ansible.utils.ipaddr('address') }}"
-    addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[4]) | ansible.utils.ipaddr('address') }}"
-  - 
-    name: "{{ ports.fabric[5] }}"
-    state: "present"    
-    desc: "Fabric Port To LEAF06"
-    admin_state: "up"
-    addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[5]) | ansible.utils.ipaddr('address') }}"
-    addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[5]) | ansible.utils.ipaddr('address') }}"
-  - 
-    name: "{{ ports.fabric[6] }}"
-    state: "present"
-    desc: "Fabric Port To LEAF07"
-    admin_state: "up"
-    addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[6]) | ansible.utils.ipaddr('address') }}"
-    addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[6]) | ansible.utils.ipaddr('address') }}"
-  - 
-    name: "{{ ports.fabric[7] }}"
-    state: "present"    
-    desc: "Fabric Port To LEAF08"
-    admin_state: "up"
-    addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[7]) | ansible.utils.ipaddr('address') }}"
-    addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[7]) | ansible.utils.ipaddr('address') }}"
+  # - 
+  #   name: "{{ ports.fabric[4] }}"
+  #   state: "present"
+  #   desc: "Fabric Port To LEAF05"
+  #   admin_state: "up"
+  #   addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[4]) | ansible.utils.ipaddr('address') }}"
+  #   addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[4]) | ansible.utils.ipaddr('address') }}"
+  # - 
+  #   name: "{{ ports.fabric[5] }}"
+  #   state: "present"    
+  #   desc: "Fabric Port To LEAF06"
+  #   admin_state: "up"
+  #   addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[5]) | ansible.utils.ipaddr('address') }}"
+  #   addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[5]) | ansible.utils.ipaddr('address') }}"
+  # - 
+  #   name: "{{ ports.fabric[6] }}"
+  #   state: "present"
+  #   desc: "Fabric Port To LEAF07"
+  #   admin_state: "up"
+  #   addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[6]) | ansible.utils.ipaddr('address') }}"
+  #   addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[6]) | ansible.utils.ipaddr('address') }}"
+  # - 
+  #   name: "{{ ports.fabric[7] }}"
+  #   state: "present"    
+  #   desc: "Fabric Port To LEAF08"
+  #   admin_state: "up"
+  #   addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[7]) | ansible.utils.ipaddr('address') }}"
+  #   addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[7]) | ansible.utils.ipaddr('address') }}"
 
 bgp:
   local_as: "{{ spine_asn }}"
@@ -139,19 +131,19 @@ bgp:
     - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[1]|int+1) | ansible.utils.ipaddr('address') }}"
     - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[2]|int+1) | ansible.utils.ipaddr('address') }}"
     - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[3]|int+1) | ansible.utils.ipaddr('address') }}"
-    - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[4]|int+1) | ansible.utils.ipaddr('address') }}"
-    - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[5]|int+1) | ansible.utils.ipaddr('address') }}"
-    - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[6]|int+1) | ansible.utils.ipaddr('address') }}"
-    - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[7]|int+1) | ansible.utils.ipaddr('address') }}"
+    # - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[4]|int+1) | ansible.utils.ipaddr('address') }}"
+    # - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[5]|int+1) | ansible.utils.ipaddr('address') }}"
+    # - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[6]|int+1) | ansible.utils.ipaddr('address') }}"
+    # - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[7]|int+1) | ansible.utils.ipaddr('address') }}"
   fabric_peer_v6:
     - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[0]|int+1) | ansible.utils.ipaddr('address') }}"
     - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[1]|int+1) | ansible.utils.ipaddr('address') }}"
     - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[2]|int+1) | ansible.utils.ipaddr('address') }}"
     - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[3]|int+1) | ansible.utils.ipaddr('address') }}"
-    - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[4]|int+1) | ansible.utils.ipaddr('address') }}"
-    - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[5]|int+1) | ansible.utils.ipaddr('address') }}"
-    - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[6]|int+1) | ansible.utils.ipaddr('address') }}"
-    - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[7]|int+1) | ansible.utils.ipaddr('address') }}"
+    # - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[4]|int+1) | ansible.utils.ipaddr('address') }}"
+    # - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[5]|int+1) | ansible.utils.ipaddr('address') }}"
+    # - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[6]|int+1) | ansible.utils.ipaddr('address') }}"
+    # - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[7]|int+1) | ansible.utils.ipaddr('address') }}"
   afi: 
     ipv4:
     -
@@ -162,109 +154,6 @@ bgp:
         r_map: "LOCAL_CONNECTED_V6"
         proto: connected
   flowspec: 
-    ipv4: "enable"
-    ipv6: "enable"
+    ipv4: "disable"
+    ipv6: "disable"
 
-### oboselted BGP structure
-# bgp:
-#   local_as: "{{ spine_asn }}"
-#   address_family:
-#       - afi: ipv4
-#         safi: unicast
-#         redistribute:
-#           - protocol: connected
-#       - afi: ipv6
-#         safi: unicast
-#         redistribute:
-#           - protocol: connected
-#   peer_template:
-#     - name: fabric_v4
-#       desc: "Fabric Peer Group V4"
-#       remote_as:
-#         peer_type: external
-#       advertisement_interval: 5
-#       timers:
-#         keepalive: 3
-#         holdtime: 9
-#       bfd: true
-#       capability:
-#         # - extended_nexthop
-#       afi: ipv4
-#       peers:
-#         -
-#           remote_as: "{{ rack01_asn }}"
-#           desc: "Fabric Peer V4 with Leaf01"
-#           peer_addr: "{{ fabric_peer_v4[0] }}"
-#         -
-#           remote_as: "{{ rack01_asn }}"
-#           desc: "Fabric Peer V4 with Leaf02"
-#           peer_addr: "{{ fabric_peer_v4[1] }}"
-#         -
-#           remote_as: "{{ rack02_asn }}"
-#           desc: "Fabric Peer V4 with Leaf03"
-#           peer_addr: "{{ fabric_peer_v4[2] }}"
-#         -
-#           remote_as: "{{ rack02_asn }}"
-#           desc: "Fabric Peer V4 with Leaf04"
-#           peer_addr: "{{ fabric_peer_v4[3] }}"
-#         -
-#           remote_as: "{{ rack03_asn }}"
-#           desc: "Fabric Peer V4 with Leaf05"
-#           peer_addr: "{{ fabric_peer_v4[4] }}"
-#         -
-#           remote_as: "{{ rack03_asn }}"
-#           desc: "Fabric Peer V4 with Leaf06"
-#           peer_addr: "{{ fabric_peer_v4[5] }}"
-#         -
-#           remote_as: "{{ rack04_asn }}"
-#           desc: "Fabric Peer V4 with Leaf05"
-#           peer_addr: "{{ fabric_peer_v4[6] }}"
-#         -
-#           remote_as: "{{ rack04_asn }}"
-#           desc: "Fabric Peer V4 with Leaf06"
-#           peer_addr: "{{ fabric_peer_v4[7] }}"
-#     - name: fabric_v6
-#       desc: "Fabric Peer Group V6"
-#       remote_as:
-#         peer_type: external
-#       advertisement_interval: 5
-#       timers:
-#         keepalive: 3
-#         holdtime: 9
-#       bfd: true
-#       capability:
-#         - extended_nexthop
-#       afi: ipv6
-#       peers:
-#         -
-#           remote_as: "{{ rack01_asn }}"
-#           desc: "Fabric Peer V6 with Leaf01"
-#           peer_addr: "{{ fabric_peer_v6[0] }}"
-#         -
-#           remote_as: "{{ rack01_asn }}"
-#           desc: "Fabric Peer V6 with Leaf02"
-#           peer_addr: "{{ fabric_peer_v6[1] }}"
-#         -
-#           remote_as: "{{ rack02_asn }}"
-#           desc: "Fabric Peer V6 with Leaf03"
-#           peer_addr: "{{ fabric_peer_v6[2] }}"
-#         -
-#           remote_as: "{{ rack02_asn }}"
-#           desc: "Fabric Peer V6 with Leaf04"
-#           peer_addr: "{{ fabric_peer_v6[3] }}"
-#         -
-#           remote_as: "{{ rack03_asn }}"
-#           desc: "Fabric Peer V6 with Leaf05"
-#           peer_addr: "{{ fabric_peer_v6[4] }}"
-#         -
-#           remote_as: "{{ rack03_asn }}"
-#           desc: "Fabric Peer V6 with Leaf06"
-#           peer_addr: "{{ fabric_peer_v6[5] }}"
-#         -
-#           remote_as: "{{ rack04_asn }}"
-#           desc: "Fabric Peer V6 with Leaf05"
-#           peer_addr: "{{ fabric_peer_v6[6] }}"
-#         -
-#           remote_as: "{{ rack04_asn }}"
-#           desc: "Fabric Peer V6 with Leaf06"
-#           peer_addr: "{{ fabric_peer_v6[7] }}"

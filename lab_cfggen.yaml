@@ -1,0 +1,29 @@
+---
+- hosts: ceos
+  gather_facts: false
+  vars:
+      temp_file: "bgp_underlay_spine.j2"
+  collections:
+  - arista.eos
+
+  tasks:
+  - name: Generate the templated config
+    template:
+      src: "{{ temp_file }}"
+      dest: "{{ build_dir }}/{{hostname}}.conf.part"
+    delegate_to: localhost
+    tags:
+    - cfggen
+
+  - name: Display the generated config
+    debug: var=item
+    with_file:
+    - "{{ build_dir }}/{{hostname}}.conf.part"
+    tags:
+    - cfggen
+
+  # - name: Generate the templated config
+  #   eos_config:
+  #     src: bgp_overlay_ibgp.j2
+  #   tags:
+  #   - cfgpush

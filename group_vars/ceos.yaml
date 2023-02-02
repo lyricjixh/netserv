@@ -52,15 +52,15 @@ features:
         vlan: "yes"
         stp: "yes"
         mlag: "yes"
-        l2port: "yes"
+        l2port: "no"
         bond: "yes"
         vrrp: "yes"
         ufd: "yes"
     routing:
         policy: "yes"
-        bgp_standard: "yes"
-        bgp_unno: "yes"
-        flowspec: "yes"
+        bgp_stan: "yes"
+        bgp_unno: "no"
+        flowspec: "no"
         ospf: "no"
     overlay:
         evpn: "yes"
@@ -95,7 +95,15 @@ policy:
             deny:
     as_path:
         -
-            name: "traverse_cluster"
+            name: "400"
+            path:
+                - "^$"
+        -
+            name: "local"
+            path:
+                - "^$"
+        -
+            name: "traverse"
             path:
                 - "_{{ spine_asn }}_"
                 - "_{{ rack01_asn }}_"
@@ -264,27 +272,101 @@ policy:
                 -
                     action: "permit"
                     range: "0.0.0.0/0 le 32"
+        -
+            name: "00000_1a2b-smallerprefixes"
+            afi: "ipv4"
+            step: 10
+            prefix:
+                -
+                    action: "permit"
+                    range: "{{ v101_netv4 }} le 32"
+        -
+            name: "BOGON"
+            afi: "ipv4"
+            step: 10
+            prefix:
+                -
+                    action: "permit"
+                    range: "10.0.0.0/8 le 32"
+                -
+                    action: "permit"
+                    range: "127.0.0.0/8 le 32"
+                -
+                    action: "permit"
+                    range: "169.254.0.0/16 le 32"
+                -
+                    action: "permit"
+                    range: "172.16.0.0/12 le 32"
+                -
+                    action: "permit"
+                    range: "192.0.0.0/24 le 32"
+                -
+                    action: "permit"
+                    range: "192.0.2.0/24 le 32"
+        -
+            name: "DEFAULT-ONLY"
+            afi: "ipv4"
+            step: 10
+            prefix:
+                -
+                    action: "permit"
+                    range: "0.0.0.0/0"
+        -
+            name: "LP_INCREASE"
+            afi: "ipv4"
+            step: 10
+            prefix:
+                -
+                    action: "permit"
+                    range: "{{ v101_netv4 }} le 32"
+        -
+            name: "SDDC-tenant"
+            afi: "ipv4"
+            step: 10
+            prefix:
+                -
+                    action: "permit"
+                    range: "{{ v101_netv4 }} le 32"
+        -
+            name: "deny-connected"
+            afi: "ipv4"
+            step: 10
+            prefix:
+                -
+                    action: "permit"
+                    range: "{{ fabric_ptp_netv4 }} le 32"
+        -
+            name: "loopback"
+            afi: "ipv4"
+            step: 10
+            prefix:
+                -
+                    action: "permit"
+                    range: "{{ lpbk0_netv4 }} le 32"
 
     route_map:
         -
             name: "LOCAL_CONNECTED_V4"
             step: 10
-            match:
+            rule:
                 -
+                    allow: "permit"
                     type: "ip address prefix-list"
                     object: "PFX_V4_CONNECTED"
                     action:
                         type: "community community-list"
                         object: "COMM_LOCAL_ROUTE"
                 -
+                    allow: "permit"
                     type: "community"
                     object: "COMM_EVPN_PE"
                     action:
         -
             name: "LOCAL_CONNECTED_V6"
             step: 10
-            match:
+            rule:
                 -
+                    allow: "permit"
                     type: "ipv6 address prefix-list"
                     object: "PFX_V6_CONNECTED"
                     action:
@@ -293,8 +375,9 @@ policy:
         -
             name: "drain_ingress_tfk"
             step: 10
-            match:
+            rule:
                 -
+                    allow: "permit"
                     type:
                     object: 
                     action:
@@ -303,8 +386,9 @@ policy:
         -
             name: "drain_egress_tfk"
             step: 10
-            match:
+            rule:
                 -
+                    allow: "permit"
                     type: 
                     object: 
                     action:
@@ -313,16 +397,18 @@ policy:
         -
             name: "EVPN_EXPORT"
             step: 10
-            match:
+            rule:
                 -
+                    allow: "permit"
                     type: "as-path"
                     object: "local_orig"
                     action:
         -
             name: "SET_NH_V6"
             step: 10
-            match:
+            rule:
                 -
+                    allow: "permit"
                     type: 
                     object:
                     action:
@@ -331,20 +417,111 @@ policy:
         -
             name: "BGP-VRF-LEAK-OUT-DEFAULT"
             step: 10
-            match:
+            rule:
                 -
+                    allow: "permit"
                     type: "ip address prefix-list"
                     object: "PFX_LEAK_ROUTE_DEFAULT"
                     action:
         -
             name: "BGP-VRF-LEAK-OUT-RED"
             step: 10
-            match:
+            rule:
                 -
+                    allow: "permit"
                     type: "ip address prefix-list"
                     object: "PFX_LEAK_ROUTE_RED"
                     action:
-
+        -
+            name: "DEFAULT-ONLY-CUSTOMERS-OUT"
+            step: 10
+            rule:
+                -
+                    allow: "deny"
+                    type: "ip address prefix-list"
+                    object: "BOGON"
+                    action:
+                -
+                    allow: "permit"
+                    type: "ip address prefix-list"
+                    object: "DEFAULT-ONLY"
+                    action:
+        -
+            name: "NO-SEND-CUSTOMERS-OUT"
+            step: 10
+            rule:
+                -
+                    allow: "deny"
+                    type: 
+                    object:
+                    action:
+        -
+            name: "REDIST-CONNECTED"
+            step: 10
+            rule:
+                -
+                    allow: "permit"
+                    type: "ip address prefix-list"
+                    object: "loopbacks"
+                    action:
+                -
+                    allow: "deny"
+                    type: "ip address prefix-list"
+                    object: "deny-connected"
+                    action:
+                -
+                    allow: "permit"
+                    type:
+                    object:
+                    action:
+        -
+            name: "SDDC-IGP"
+            step: 10
+            rule:
+                -
+                    allow: "permit"
+                    type: "as-path"
+                    object: "local"
+                    action:
+                        type: "community"
+                        object: "no-export"
+        -
+            name: "SDDC-TENANT"
+            step: 10
+            rule:
+                -
+                    allow: "permit"
+                    type: "ip address prefix-list"
+                    object: "SDDC-tenant"
+                    action:
+        -
+            name: "SEND-COMMUNITY"
+            step: 10
+            rule:
+                -
+                    allow: "permit"
+                    type: "ip address prefix-list"
+                    object: "LP_INCREASE"
+                    action:
+                        type: "community"
+                        object: "65534:10"
+                -
+                    allow: "permit"
+                    type: 
+                    object:
+                    action:
+        -
+            name: "VCF-IGP-OUT"
+            step: 10
+            rule:
+                -
+                    allow: "permit"
+                    type: "as-path"
+                    object: "400"
+                    action:
+                        type: "community"
+                        object: "no-export"
+        
     peer_filter:
         -
             name: "compute_asn_range"

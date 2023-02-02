@@ -265,9 +265,12 @@ fabric_ptp_netv6: "2001:0:1::/64"
 
 evpn_anycast_vmac: 00:00:00:ff:ff:ff
 
+mlag_ctl_netv4: "10.253.{{rack_no}}.0/30"
+mlag_ctl_netv6: "2001:fd:{{rack_no}}::/126"
+
 tor_pair_netmaskv4: 31
-tor_pair_netv4: "10.10.{{rack_no}}.0/24"
-tor_pair_netv6: "2001:a:{{rack_no}}::/64"
+tor_pair_netv4: "10.10.{{rack_no}}.0/30"
+tor_pair_netv6: "2001:a:{{rack_no}}::/126"
 #vlt_mac: 00:00:00:{{rack_no}}{{rack_no}}:{{rack_no}}{{rack_no}}:{{rack_no}}{{rack_no}}
 tor_pair_vmac: 00:00:00:{{rack_no}}{{rack_no}}:{{rack_no}}{{rack_no}}:{{rack_no}}{{rack_no}}
 

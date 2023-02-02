@@ -14,12 +14,15 @@ bgp:
   afi: 
     ipv4:
     -
-        r_map: "LOCAL_CONNECTED_V4"
-        proto: connected
+        proto: "connected"
+        r_map: "REDIST-CONNECTED"
+    -
+        proto: "static"
+        r_map: 
     ipv6:
     -
-        r_map: "LOCAL_CONNECTED_V6"
         proto: connected
+        r_map: "LOCAL_CONNECTED_V6"
   flowspec: 
-    ipv4: "enable"
-    ipv6: "enable"
+    ipv4: "disable"
+    ipv6: "disable"

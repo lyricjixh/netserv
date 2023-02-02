@@ -9,7 +9,6 @@ interface loopback0
 {% if lpbk0.addr_v6 is defined and lpbk0.addr_v6 %}
  ipv6 address {{ lpbk0.addr_v6 }}/128
 {% endif %}
- exit
 !
 {% if lpbk1 is defined and lpbk1 %}
 interface loopback1

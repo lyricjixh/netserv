@@ -1,0 +1,343 @@
+router bgp 12189
+   update wait-install
+   neighbor ISP-PEER-GROUP peer group
+   neighbor ISP-PEER-GROUP shutdown
+   neighbor ISP-PEER-GROUP remove-private-as
+   neighbor ISP-PEER-GROUP description GENERIC-ISP-PG
+   neighbor ISP-PEER-GROUP ebgp-multihop 2
+   neighbor ISP-PEER-GROUP route-map ISP-GENERIC-IN in
+   neighbor ISP-PEER-GROUP route-map ISP-GENERIC-OUT out
+   neighbor ISP-PEER-GROUP password 
+   neighbor ISP-PEER-GROUP send-community
+   neighbor ISP-PEER-GROUP maximum-routes 0
+   neighbor PNAP-CORE-PEER-GROUP peer group
+   neighbor PNAP-CORE-PEER-GROUP remote-as 46385
+   neighbor PNAP-CORE-PEER-GROUP remove-private-as
+   neighbor PNAP-CORE-PEER-GROUP update-source Loopback1
+   neighbor PNAP-CORE-PEER-GROUP ebgp-multihop 2
+   neighbor PNAP-CORE-PEER-GROUP route-map PNAP-CORE-BGP-IN in
+   neighbor PNAP-CORE-PEER-GROUP route-map PNAP-CORE-BGP-OUT out
+   neighbor PNAP-CORE-PEER-GROUP password 
+   neighbor PNAP-CORE-PEER-GROUP default-originate
+   neighbor PNAP-CORE-PEER-GROUP send-community
+   neighbor PNAP-CORE-PEER-GROUP maximum-routes 12000
+   neighbor PNAP-EDGE-PEER-GROUP peer group
+   neighbor PNAP-EDGE-PEER-GROUP remote-as 12189
+   neighbor PNAP-EDGE-PEER-GROUP remove-private-as
+   neighbor PNAP-EDGE-PEER-GROUP update-source Loopback101
+   neighbor PNAP-EDGE-PEER-GROUP ebgp-multihop 2
+   neighbor PNAP-EDGE-PEER-GROUP route-map PNAP-EDGE-BGP-IN in
+   neighbor PNAP-EDGE-PEER-GROUP route-map PNAP-EDGE-BGP-OUT out
+   neighbor PNAP-EDGE-PEER-GROUP password 
+   neighbor PNAP-EDGE-PEER-GROUP send-community
+   neighbor PNAP-EDGE-PEER-GROUP maximum-routes 0
+   neighbor SPN-BMC peer group
+   neighbor SPN-BMC remote-as 4200000000
+   neighbor SPN-BMC bfd
+   neighbor SPN-BMC description eBGP:BMC-CHI0
+   neighbor SPN-BMC ebgp-multihop 2
+   neighbor SPN-BMC route-map SPN-BMC-OUT out
+   neighbor SPN-BMC password 
+   neighbor SPN-BMC default-originate always
+   neighbor SPN-BMC send-community standard extended
+   neighbor SPN-BMC maximum-routes 12000
+   neighbor 10.110.0.1 maximum-routes 0
+   neighbor 10.110.14.0 maximum-routes 0
+   neighbor 38.101.160.38 update-source Loopback2
+   neighbor 205.171.3.146 shutdown
+   neighbor 205.171.3.146 maximum-routes 12000
+   neighbor 2607:6000:900:1::2 maximum-routes 12000
+   !
+   address-family ipv6
+      no neighbor 2607:6000:900:1::2 activate
+   !
+   vrf PNAP-CORE
+      local-as 46385
+      router-id 131.153.60.3
+      update wait-install
+      distance bgp 20 200 1
+      maximum-paths 8
+      neighbor 131.153.60.7 peer group SPN-BMC
+      neighbor 131.153.60.11 peer group SPN-BMC
+      no neighbor 131.153.60.7 shutdown
+      no neighbor 131.153.60.11 shutdown
+	  
+      neighbor 2000:1000:60::7 peer group SPN-BMC
+      no neighbor 2000:1000:60::7 shutdown	  
+      neighbor 2000:1000:60::a1 peer group SPN-BMC
+      no neighbor 2000:1000:60::a1 shutdown	  
+	  	  
+      neighbor 10.118.245.1 description eBGP:AR1-A.BMC.0103.SEA0-E101
+      neighbor 131.153.60.1 peer group PNAP-EDGE-PEER-GROUP
+      neighbor 131.153.60.1 remote-as 12189
+      no neighbor 131.153.60.1 shutdown
+      neighbor 131.153.60.1 description eBGP:BB1-PNAP-EDGE-VRF
+      neighbor 131.153.60.1 password 
+      neighbor 131.153.60.4 remote-as 46385
+      neighbor 131.153.60.4 remove-private-as
+      neighbor 131.153.60.4 update-source Loopback101
+      neighbor 131.153.60.4 description iBGP:BB2.PNAP.SEA0-CORE-VRF
+      neighbor 131.153.60.4 password 
+      neighbor 131.153.60.4 send-community
+      neighbor 131.153.60.4 maximum-routes 12000
+      neighbor 172.31.203.83 remote-as 64900
+      neighbor 172.31.203.83 description eBGP:AR1.INJECT-NETWORK.SEA0
+      neighbor 172.31.203.83 route-map SS-INJECT-IN in
+      neighbor 172.31.203.83 route-map SS-INJECT-OUT out
+      neighbor 172.31.203.83 maximum-routes 12000
+      neighbor 172.31.203.84 remote-as 64900
+      neighbor 172.31.203.84 description eBGP:AR2.INJECT-NETWORK.SEA0
+      neighbor 172.31.203.84 route-map SS-INJECT-IN in
+      neighbor 172.31.203.84 route-map SS-INJECT-OUT out
+      neighbor 172.31.203.84 maximum-routes 12000
+      neighbor 2607:6000:900:1::1 peer group PNAP-EDGE-PEER-GROUP
+      neighbor 2607:6000:900:1::1 remote-as 12189
+      no neighbor 2607:6000:900:1::1 shutdown
+      neighbor 2607:6000:900:1::1 description eBGP:BB1.PNAP.SEA0.EDGE
+      neighbor 2607:6000:900:1::1 password 
+      neighbor 2607:6000:900:66::211 remote-as 64900
+      neighbor 2607:6000:900:66::211 description eBGP:AR1.INJECT-NETWORK.0101.SEA0
+      neighbor 2607:6000:900:66::211 route-map SS-INJECT-IN in
+      neighbor 2607:6000:900:66::211 route-map SS-INJECT-OUT out
+      neighbor 2607:6000:900:66::211 maximum-routes 12000
+      neighbor 2607:6000:900:66::212 remote-as 64900
+      neighbor 2607:6000:900:66::212 description eBGP:AR2.INJECT-NETWORK.0101.SEA0
+      neighbor 2607:6000:900:66::212 route-map SS-INJECT-IN in
+      neighbor 2607:6000:900:66::212 route-map SS-INJECT-OUT out
+      neighbor 2607:6000:900:66::212 maximum-routes 12000
+      neighbor 2607:ff00:901:1::2 remote-as 46385
+      neighbor 2607:ff00:901:1::2 update-source Loopback101
+      neighbor 2607:ff00:901:1::2 description iBGP:BB2.PNAP.0101.SEA0-CORE
+      neighbor 2607:ff00:901:1::2 password 
+      neighbor 2607:ff00:901:1::2 maximum-routes 12000
+      neighbor 2620:129:1:2::1 maximum-routes 12000
+      !
+      address-family ipv4
+         neighbor 10.118.0.129 prefix-list DEFAULT-ONLY out
+         network 131.153.61.0/24
+         network 131.153.84.0/24 route-map US-NO-EXPORT
+         network 131.153.165.0/24
+		 neighbor SPN-BMC activate
+      !
+      address-family ipv6
+         neighbor 2607:6000:900:1::1 activate
+         neighbor 2607:6000:900:66::211 activate
+         neighbor 2607:6000:900:66::212 activate
+         neighbor 2607:ff00:901:1::2 activate
+         neighbor 2607:ff00:901:3::12 activate
+         neighbor 2607:ff00:901:3::12 prefix-list IPv6-DEFAULT-ONLY out
+         no neighbor 2620:129:1:2::1 activate
+         network 2607:6003:2309::/48
+         network 2607:ff00:900::/40
+		 neighbor SPN-BMC activate
+    !
+    vrf PNAP-EDGE
+      router-id 131.153.60.1
+      update wait-install
+      distance bgp 20 200 1
+      graceful-restart restart-time 300
+      graceful-restart
+      maximum-paths 8
+      neighbor 4.69.248.73 remote-as 3356
+      neighbor 4.69.248.73 remove-private-as
+      neighbor 4.69.248.73 update-source Loopback4
+      neighbor 4.69.248.73 description EBGP:EBGP:CENTURYLINK3356:LO4
+      neighbor 4.69.248.73 ebgp-multihop 2
+      neighbor 4.69.248.73 route-map CENTURYLINK-BGP-PEER-IN in
+      neighbor 4.69.248.73 route-map CENTURYLINK-BGP-PEER-OUT out
+      neighbor 4.69.248.73 password 
+      neighbor 4.69.248.73 send-community
+      neighbor 4.69.248.73 maximum-routes 0
+      neighbor 10.110.0.1 remote-as 12189
+      neighbor 10.110.0.1 shutdown
+      neighbor 10.110.0.1 bfd
+      neighbor 10.110.0.1 description iBGP-EU-RR
+      neighbor 10.110.0.1 route-map US-RR-IN in
+      neighbor 10.110.0.1 route-map US-RR-OUT out
+      neighbor 10.110.0.1 password 
+      neighbor 10.110.0.1 send-community standard extended
+      neighbor 10.110.0.1 maximum-routes 0
+      neighbor 10.110.14.0 remote-as 12189
+      neighbor 10.110.14.0 description iBGP-US-TPT
+      neighbor 10.110.14.0 route-reflector-client
+      neighbor 10.110.14.0 route-map US-TRANSPORT-OUT out
+      neighbor 10.110.14.0 password
+      neighbor 10.110.14.0 send-community standard extended
+      neighbor 10.110.14.0 maximum-routes 0
+      neighbor 38.101.160.38 peer group ISP-PEER-GROUP
+      neighbor 38.101.160.38 remote-as 174
+      no neighbor 38.101.160.38 shutdown
+      neighbor 38.101.160.38 update-source Loopback2
+      neighbor 38.101.160.38 description eBGP:COGENT:
+      neighbor 38.101.160.38 ebgp-multihop 2
+      neighbor 38.101.160.38 route-map COGENT-BGP-PEER-IN in
+      neighbor 38.101.160.38 route-map COGENT-BGP-PEER-OUT out
+      neighbor 38.101.160.38 password
+      neighbor 38.101.160.38 maximum-routes 0
+      neighbor 62.115.56.68 remote-as 1299
+      neighbor 62.115.56.68 remove-private-as
+      neighbor 62.115.56.68 description EBGP:TELIA1299:
+      neighbor 62.115.56.68 route-map TELIA-BGP-PEER-IN in
+      neighbor 62.115.56.68 route-map TELIA-BGP-PEER-OUT out
+      neighbor 62.115.56.68 password
+      neighbor 62.115.56.68 send-community
+      neighbor 62.115.56.68 maximum-routes 0
+      neighbor 65.122.235.201 shutdown
+      neighbor 65.122.235.201 maximum-routes 12000
+      neighbor 66.28.8.2 remote-as 174
+      neighbor 66.28.8.2 remove-private-as
+      neighbor 66.28.8.2 update-source Loopback2
+      neighbor 66.28.8.2 description EBGP:COGENT:BLACHOLE-SERVER:
+      neighbor 66.28.8.2 ebgp-multihop 15
+      neighbor 66.28.8.2 route-map COGENT-BGP-BLACKHOLE-IN in
+      neighbor 66.28.8.2 route-map COGENT-BGP-BLACKHOLE-OUT out
+      neighbor 66.28.8.2 password
+      neighbor 66.28.8.2 maximum-routes 12000
+      neighbor 131.153.60.2 remote-as 12189
+      neighbor 131.153.60.2 update-source Loopback1
+      neighbor 131.153.60.2 description iBGP:BB2.PNAP.SEA0-EDGE
+      neighbor 131.153.60.2 send-community
+      neighbor 131.153.60.2 maximum-routes 0
+      neighbor 131.153.60.3 peer group PNAP-CORE-PEER-GROUP
+      neighbor 131.153.60.3 remote-as 46385
+      no neighbor 131.153.60.3 shutdown
+      neighbor 131.153.60.3 description eBGP:PNAP-CORE-VRF:
+      neighbor 131.153.60.3 password
+      neighbor 199.201.106.52 remote-as 12189
+      neighbor 199.201.106.52 update-source Loopback2
+      neighbor 199.201.106.52 description BGP:WANGUARD-GLOBAL_SENSOR
+      neighbor 199.201.106.52 route-map BGP-WANGUARD-FILTER-SERVER-IN in
+      neighbor 199.201.106.52 maximum-routes 50
+      neighbor 208.76.14.223 remote-as 12189
+      neighbor 208.76.14.223 update-source Loopback1
+      neighbor 208.76.14.223 description Kentik_Detect
+      neighbor 208.76.14.223 route-reflector-client
+      neighbor 208.76.14.223 timers 30 720
+      neighbor 208.76.14.223 route-map BGP-WANGUARD-FILTER-SERVER-IN in
+      neighbor 208.76.14.223 password
+      neighbor 208.76.14.223 send-community
+      neighbor 208.76.14.223 maximum-routes 100
+      neighbor 2001:550:2:23::20 peer group ISP-PEER-GROUP
+      neighbor 2001:550:2:23::20 remote-as 174
+      no neighbor 2001:550:2:23::20 shutdown
+      neighbor 2001:550:2:23::20 update-source Loopback2
+      neighbor 2001:550:2:23::20 description eBGP:COGENT:
+      neighbor 2001:550:2:23::20 ebgp-multihop 2
+      neighbor 2001:550:2:23::20 route-map COGENT-BGP-PEER-IN in
+      neighbor 2001:550:2:23::20 route-map COGENT-BGP-PEER-OUT out
+      neighbor 2001:550:2:23::20 password
+      neighbor 2001:550:2:23::20 maximum-routes 0
+      neighbor 2001:1900::5:37 maximum-routes 12000
+      neighbor 2001:1900::5:60 remote-as 3356
+      neighbor 2001:1900::5:60 remove-private-as
+      neighbor 2001:1900::5:60 update-source Loopback4
+      neighbor 2001:1900::5:60 description EBGP:EBGP:CENTURYLINK3356:LO4
+      neighbor 2001:1900::5:60 ebgp-multihop 2
+      neighbor 2001:1900::5:60 route-map CENTURYLINK-BGP-PEER-IN in
+      neighbor 2001:1900::5:60 route-map CENTURYLINK-BGP-PEER-OUT out
+      neighbor 2001:1900::5:60 password
+      neighbor 2001:1900::5:60 send-community
+      neighbor 2001:1900::5:60 maximum-routes 0
+      neighbor 2001:2035:0:260c::1 remote-as 1299
+      neighbor 2001:2035:0:260c::1 remove-private-as
+      neighbor 2001:2035:0:260c::1 description EBGP:TELIA:
+      neighbor 2001:2035:0:260c::1 route-map TELIA-BGP-PEER-IN in
+      neighbor 2001:2035:0:260c::1 route-map TELIA-BGP-PEER-OUT out
+      neighbor 2001:2035:0:260c::1 password
+      neighbor 2001:2035:0:260c::1 send-community
+      neighbor 2001:2035:0:260c::1 maximum-routes 0
+      neighbor 2607:6000:900:1::2 remote-as 12189
+      neighbor 2607:6000:900:1::2 update-source Loopback1
+      neighbor 2607:6000:900:1::2 description iBGP:BB2.PNAP.0101.SEA0-EDGE
+      neighbor 2607:6000:900:1::2 ebgp-multihop 2
+      neighbor 2607:6000:900:1::2 password
+      neighbor 2607:6000:900:1::2 send-community
+      neighbor 2607:6000:900:1::2 maximum-routes 0
+      neighbor 2607:ff00:901:1::1 peer group PNAP-CORE-PEER-GROUP
+      neighbor 2607:ff00:901:1::1 remote-as 46385
+      no neighbor 2607:ff00:901:1::1 shutdown
+      neighbor 2607:ff00:901:1::1 description eBGP:BB1.PNAP.SEA0.CORE
+      neighbor 2607:ff00:901:1::1 password
+      neighbor 2607:ff00:901:1::1 default-originate
+      neighbor 2620:129:1:2::1 remote-as 12189
+      neighbor 2620:129:1:2::1 update-source Loopback1
+      neighbor 2620:129:1:2::1 description Kentik_Detect
+      neighbor 2620:129:1:2::1 route-reflector-client
+      neighbor 2620:129:1:2::1 timers 30 720
+      neighbor 2620:129:1:2::1 route-map BGP-WANGUARD-FILTER-SERVER-IN in
+      neighbor 2620:129:1:2::1 password
+      neighbor 2620:129:1:2::1 send-community standard extended
+      neighbor 2620:129:1:2::1 maximum-routes 100
+      redistribute static route-map BGP-REDISTR-STATIC
+      !
+      address-family ipv4
+         network 131.153.60.0/22
+      !
+      address-family ipv6
+         neighbor 2001:550:2:23::20 activate
+         no neighbor 2001:1900::5:37 activate
+         neighbor 2001:1900::5:60 activate
+         neighbor 2001:2035:0:260c::1 activate
+         neighbor 2607:6000:900:1::2 activate
+         neighbor 2607:ff00:901:1::1 activate
+         neighbor 2620:129:1:2::1 activate
+         neighbor 2620:129:1:2::1 prefix-list kentik-noreceive in
+         network 2607:6000:900::/40
+		 
+	vrf SPINE
+      router-id 131.153.60.5
+	  local-as 4200000000
+      router-id 
+      update wait-install
+      distance bgp 20 200 1
+      maximum-paths 8
+	  bgp listen range 10.216.199.0/24 peer-group BMC-EVPN peer-filter BMC-TOR-PEER-FILTER
+      bgp listen range 10.216.197.0/24 peer-group BMC-LEAF-TOR peer-filter BMC-TOR-PEER-FILTER
+      bgp listen range 10.216.198.0/24 peer-group BMC-LEAF-TOR peer-filter BMC-TOR-PEER-FILTER
+	  bgp listen range 2000:1000::/64 peer-group BMC-LEAF-TORv6 peer-filter BMC-TOR-PEER-FILTER
+
+!this section goes under general bgp config, is only here for ease of legibility
+	  neighbor BMC-EVPN peer group
+	  neighbor BMC-EVPN update-source Loopback3
+	  neighbor BMC-EVPN bfd
+	  neighbor BMC-EVPN description EVPN-Peers
+	  neighbor BMC-EVPN ebgp-multihop 2
+	  neighbor BMC-EVPN password 7 
+	  neighbor BMC-EVPN send-community standard extended
+	  neighbor BMC-EVPN maximum-routes 12000
+	  neighbor BMC-LEAF-TOR peer group
+	  neighbor BMC-LEAF-TOR description EBGP-BMC-TORS
+	  neighbor BMC-LEAF-TOR password 7 
+	  neighbor BMC-LEAF-TOR send-community standard extended
+	  neighbor BMC-LEAF-TORv6 maximum-routes 12000
+	  neighbor BMC-LEAF-TORv6 peer group
+	  neighbor BMC-LEAF-TORv6 description EBGP-BMC-TORS
+	  neighbor BMC-LEAF-TORv6 password 7 
+	  neighbor BMC-LEAF-TORv6 send-community standard extended
+	  neighbor BMC-LEAF-TORv6 maximum-routes 12000
+	  neighbor CORE-SPINE peer group
+	  neighbor CORE-SPINEv6 peer group
+!end of section
+      neighbor 131.153.60.6 remote-as 46385
+      no neighbor 131.153.60.6 shutdown
+      neighbor 131.153.60.9 remote-as 46385
+      no neighbor 131.153.60.9 shutdown
+	  !
+      neighbor 2000:1000:60::6 remote-as 46385
+      no neighbor 2000:1000:60::6 shutdown	 	
+      neighbor 2000:1000:60::9 remote-as 46385
+      no neighbor 2000:1000:60::9 shutdown	  
+	  !
+	  address-family evpn
+      bgp next-hop-unchanged
+      neighbor BMC-EVPN activate
+	  !
+      address-family ipv4
+      no neighbor BMC-EVPN activate
+	  neighbor CORE-SPINE activate
+	  !
+      address-family ipv6
+      no neighbor BMC-EVPN activate
+	  neighbor BMC-LEAF-TORv6 activate
+	  neighbor CORE-SPINEv6 activate
+!

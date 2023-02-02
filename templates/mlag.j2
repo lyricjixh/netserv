@@ -3,14 +3,21 @@
 Purpose:
 Generating MLAG Domain Configuration
 ############################################}
-vlan {{ mlag_bond.vlan }}
+vlan {{ mlag_bond.vlan.id }}
+ name {{ mlag_bond.vlan.desc }}
  trunk group {{ mlag_bond.group }}
 !
-no spanning-tree vlan {{ mlag_bond.vlan }}
+no spanning-tree vlan {{ mlag_bond.vlan.id }}
 !
+{% if vlans.pair_vlan is defined and vlans.pair_vlan %}
+vlan {{ vlans.pair_vlan.id }}
+ name {{ vlans.pair_vlan.desc }}
+!
+{% endif %}
 {% if mlag_bond is defined and mlag_bond %}
 interface Port-Channel{{ mlag_bond.bond_id }}
- description "MLAG Inter-SW CTRL Bond"
+ description "MLAG Inter-SW CTRL PortChannel"
+ switchport
  mtu {{ phy_mtu }}
  switchport mode trunk 
  switchport trunk group {{ mlag_bond.group }}
@@ -23,7 +30,7 @@ interface Eth {{ member }}
  mtu {{ phy_mtu }}
  channel-group {{ mlag_bond.bond_id }} mode active
  no shutdown
-exit
+!
 {% endif %}
 {% if mlag_bond.bmem_indiv is defined and mlag_bond.bmem_indiv %}
 {% for member in mlag_bond.bmem_indiv %}
@@ -35,7 +42,25 @@ interface eth{{ member }}
 !
 {% endfor %}
 {% endif %}
-interface vlan{{ mlag_bond.vlan }}
+interface vlan{{ mlag_bond.vlan.id }}
+ description {{ mlag_bond.vlan.desc }}
+ mtu {{ phy_mtu }}
+ no autostate
+ {% if seq is odd %} 
+ ip address {{ mlag_bond.vlan.netv4 | ansible.utils.ipaddr(1) }}
+{% else %} 
+ ip address {{ mlag_bond.vlan.netv4 | ansible.utils.ipaddr(2) }}
+{% endif %}
+{% if mlag_bond.vlan.netv6 is defined and mlag_bond.vlan.netv6 %}
+{% if seq is odd %} 
+ ipv6 address {{ mlag_bond.vlan.netv6 | ansible.utils.ipaddr(1) }}
+{% else %} 
+ ipv6 address {{ mlag_bond.vlan.netv6 | ansible.utils.ipaddr(2) }}
+{% endif %}
+{% endif %}
+!
+{% if vlans.pair_vlan is defined and vlans.pair_vlan %}
+interface vlan{{ vlans.pair_vlan.id }}
  description {{ vlans.pair_vlan.desc }}
  mtu {{ phy_mtu }}
  no autostate
@@ -52,9 +77,11 @@ interface vlan{{ mlag_bond.vlan }}
 {% endif %}
 {% endif %}
 !
+{% endif %}
 mlag
  domain-id {{ mlag_bond.domain_id }}
- local-interface vlan{{ mlag_bond.vlan }}
+ heartbeat-interval 1200
+ local-interface vlan{{ mlag_bond.vlan.id }}
 {% if seq is odd %}
  peer-address {{ tor_pair_netv4 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}
 {% else %}
