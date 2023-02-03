@@ -1,0 +1,491 @@
+spanning-tree mode mstp
+!
+vlan 43
+   name 22961:NCV_NIMBLE_STORAGE
+!
+vlan 201
+   name TRANSPORT-EDGE-TPT1/BB1
+!
+vrf instance PNAP-CORE
+   rd 2:2
+!
+vrf instance PNAP-EDGE
+   rd 1:1
+!
+bfd interval 500 min_rx 500 multiplier 6 default
+!
+interface Port-Channel3
+   description BB1.vrf-core.po4
+   no switchport
+   vrf PNAP-EDGE
+   ip address 10.118.0.5/30
+   ipv6 address 2607:6000:900:3::5/126
+   ipv6 address fe80::7483:efff:fe0b:ac34/64 link-local
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
+   ipv6 ospf network point-to-point
+   sflow enable
+!
+interface Port-Channel4
+   description BB1.vrf-edge.po3
+   no switchport
+   vrf PNAP-CORE
+   ip address 10.118.0.6/30
+   ipv6 address 2607:6000:900:3::6/126
+   ipv6 address fe80::7483:efff:fe0b:ac36/64 link-local
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
+   ipv6 ospf network point-to-point
+   no sflow enable
+!
+interface Port-Channel11
+   description TPT1.PNAP.SEA0
+   switchport trunk allowed vlan 201
+   switchport mode trunk
+!
+interface Ethernet1
+   shutdown
+   load-interval 30
+   speed forced 10000full
+   no switchport
+   vrf PNAP-EDGE
+   no lldp transmit
+   no lldp receive
+   ip ospf area 0.0.0.0
+!
+interface Ethernet2
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet3
+   description ISP:SEA0:COGENT:AS174:CID:300200613
+   load-interval 30
+   speed forced 10000full
+   no switchport
+   vrf PNAP-EDGE
+   ip address 38.142.190.98/29
+   ipv6 address 2001:550:2:61::2c8:2/112
+   no lldp transmit
+   no lldp receive
+   ip ospf area 0.0.0.0
+   ipv6 ospf 1 area 0.0.0.0
+   sflow enable
+!
+interface Ethernet4
+   description ISP:SEA0:COGENT:AS174:CID:300200614
+   load-interval 30
+   speed forced 10000full
+   no switchport
+   vrf PNAP-EDGE
+   ip address 38.142.49.74/29
+   ipv6 address 2001:550:2:13::93:2/112
+   no lldp transmit
+   no lldp receive
+   ip ospf area 0.0.0.0
+   ipv6 ospf 1 area 0.0.0.0
+   sflow enable
+!
+interface Ethernet5
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet6
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet7
+   description ISP:SEA0:CENTURYLINK:AS3356:SID:441250415
+   load-interval 30
+   speed forced 10000full
+   no switchport
+   vrf PNAP-EDGE
+   ip address 4.59.234.114/30
+   ipv6 address 2001:1900:2100::521e/126
+   no lldp transmit
+   no lldp receive
+   ip ospf area 0.0.0.0
+   ipv6 ospf 1 area 0.0.0.0
+   sflow enable
+!
+interface Ethernet8
+   description ISP:SEA0:CENTURYLINK:AS3356:SID:441071353
+   load-interval 30
+   speed forced 10000full
+   no switchport
+   vrf PNAP-EDGE
+   ip address 4.16.224.150/30
+   ipv6 address 2001:1900:2100::4fae/126
+   no lldp transmit
+   no lldp receive
+   ip ospf area 0.0.0.0
+   ipv6 ospf 1 area 0.0.0.0
+   sflow enable
+!
+interface Ethernet9
+   description BB2.vrf-edge.Eth9-12
+   no switchport
+   channel-group 1 mode active
+!
+interface Ethernet10
+   description BB2.vrf-edge.Eth9-12
+   no switchport
+   channel-group 1 mode active
+!
+interface Ethernet11
+   description BB2.vrf-edge.Eth9-12
+   no switchport
+   channel-group 1 mode active
+!
+interface Ethernet12
+   description BB2.vrf-edge.Eth9-12
+   no switchport
+   channel-group 1 mode active
+!
+interface Ethernet13
+   description CUST:25539:REPAY
+   speed auto
+   no switchport
+   vrf PNAP-CORE
+   ip address 131.153.61.193/29
+   ip ospf area 0.0.0.0
+!
+interface Ethernet14
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet15
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet16
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet17
+   description BB1.vrf-core.Eth33-36
+   speed forced 25gfull
+   no switchport
+   channel-group 3 mode on
+!
+interface Ethernet18
+   description BB1.vrf-core.Eth33-36
+   speed forced 25gfull
+   no switchport
+   channel-group 3 mode on
+!
+interface Ethernet19
+   description BB1.vrf-core.Eth33-36
+   speed forced 25gfull
+   no switchport
+   channel-group 3 mode on
+!
+interface Ethernet20
+   description BB1.vrf-core.Eth33-36
+   speed forced 25gfull
+   no switchport
+   channel-group 3 mode on
+!
+interface Ethernet21
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet22
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet23
+   description XCONN:TPT1.PNAP.SEA0:Eth21
+   speed forced 10000full
+   channel-group 11 mode active
+   sflow enable
+!
+interface Ethernet24
+   description XCONN:AR1.DDOS.0101.SEA0:Eth49:B4ACL
+   speed forced 10000full
+   no switchport
+   vrf PNAP-EDGE
+   ip address 172.31.204.153/30
+   ipv6 address 2607:6000:900:43::185/126
+   ip ospf area 0.0.0.0
+   ipv6 ospf 1 area 0.0.0.0
+   no sflow enable
+!
+interface Ethernet25
+   description XCONN:TPT1.PNAP.SEA0:Eth25
+   speed forced 10000full
+   channel-group 11 mode active
+   sflow enable
+!
+interface Ethernet26
+   description XCONN:TPT1.PNAP.SEA0:Eth26
+   speed forced 10000full
+   channel-group 11 mode active
+   sflow enable
+!
+interface Ethernet27
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet28
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet29
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet30
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet31
+   description XCONN:AR1.INJECT-NETWORK.0101.SEA0:Eth24
+   speed forced 10000full
+   no switchport
+   vrf PNAP-CORE
+   ip address 172.31.203.81/29
+   ipv6 address 2607:6000:900:66::209/112
+   ip ospf area 0.0.0.0
+   ipv6 ospf 100 area 0.0.0.0
+   no sflow enable
+!
+interface Ethernet32
+   description XCONN:SW1.SS-HQ.0101.SEA0:ETH49
+   speed forced 10000full
+   no switchport
+   vrf PNAP-CORE
+   ip address 10.118.0.13/30
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
+   no sflow enable
+!
+interface Ethernet33
+   description BB1.vrf-edge.Eth17-20
+   speed forced 25gfull
+   no switchport
+   channel-group 4 mode on
+!
+interface Ethernet34
+   description BB1.vrf-edge.Eth17-20
+   speed forced 25gfull
+   no switchport
+   channel-group 4 mode on
+!
+interface Ethernet35
+   description BB1.vrf-edge.Eth17-20
+   speed forced 25gfull
+   no switchport
+   channel-group 4 mode on
+!
+interface Ethernet36
+   description BB1.vrf-edge.Eth17-20
+   speed forced 25gfull
+   no switchport
+   channel-group 4 mode on
+!
+interface Ethernet37
+   description BB2.vrf-core.Eth37-40
+   no switchport
+   channel-group 2 mode active
+!
+interface Ethernet38
+   description BB2.vrf-core.Eth37-40
+   no switchport
+   channel-group 2 mode active
+!
+interface Ethernet39
+   description BB2.vrf-core.Eth37-40
+   no switchport
+   channel-group 2 mode active
+!
+interface Ethernet40
+   description BB2.vrf-core.Eth37-40
+   no switchport
+   channel-group 2 mode active
+!
+interface Ethernet41
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet42
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet43
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet44
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet45
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet46
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet47
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet48
+   shutdown
+   speed forced 10000full
+   no switchport
+!
+interface Ethernet49/1
+   description ISP:SEA0:TELIA:AS1299:IC-375956
+   load-interval 30
+   mtu 9214
+   speed forced 100gfull
+   no switchport
+   vrf PNAP-EDGE
+   ip address 62.115.56.69/31
+   ipv6 address 2001:2035:0:260c::2/126
+   ip ospf area 0.0.0.0
+   ipv6 ospf 1 area 0.0.0.0
+   sflow enable
+!
+!
+!POC relevant config addition over and above base config
+interface Ethernet51/1
+ channel-group 50 mode on 
+!
+interface Ethernet50/1
+ channel-group 50 mode on
+
+interface port-channel 50
+   description CORE<>CORE cross link for spine cross link
+!
+interface port-channel 50.10
+   description EDGE<>EDGE
+   encapsulation dot1q vlan 10
+   vrf PNAP-EDGE
+   ip address 10.118.0.1/30
+   ipv6 address 2607:6000:900:3::1/126
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
+   ipv6 ospf network point-to-point
+   ipv6 ospf 1 area 0.0.0.0
+   sflow enable
+!
+interface port-channel 50.20
+	description CORE<>CORE
+	encapsulation dot1q vlan 20
+	vrf PNAP-CORE
+	ip address 10.118.0.9/30
+    ipv6 address 2607:ff00:901:3::1/126
+    ip ospf network point-to-point
+    ip ospf area 0.0.0.0
+    ipv6 ospf network point-to-point
+    ipv6 ospf 100 area 0.0.0.0
+!
+interface port-channel 50.60	
+	description SPINE1>CORE2
+	encapsulation dot1q vlan 60
+	vrf SPINE
+    ip address 131.153.60.8/31
+    ipv6 enable
+    ipv6 address 2000:1000:60::15/126
+!
+interface port-channel 50.61
+	description CORE1>SPINE2
+	encapsulation dot1q vlan 61
+	vrf SPINE
+    ip address 131.153.60.10/31
+    ipv6 enable
+    ipv6 address 2000:1000:60::a/126	
+!  
+interface Ethernet52/1
+   description CORE<>SPINE link same device
+   vrf PNAP-CORE
+   ip address 131.153.60.6/31
+   ipv6 enable
+   ipv6 address 2000:1000:60::6/126
+!
+interface Ethernet53/1  
+   description SPINE<>CORE link same device
+   vrf SPINE
+   ip address 131.153.60.7/31
+   ipv6 enable
+   ipv6 address 2000:1000:60::7/126
+!
+interface Ethernet54/2
+	description SPINE<>LEAF1.1
+	vrf SPINE
+	ip address 10.216.197.0/31
+	ipv6 enable
+	ipv6 address 2000:1000:1::1/126
+!
+interface loopback 20
+	description SPINE-VRF-ROUTER-ID
+	vrf SPINE
+	ip address 131.153.20.5/32
+interface loopback 30
+	description SPINE-VRF-EVPN
+	vrf SPINE
+	ip address 10.216.199.1/32
+!
+!POC relevant config addition over and above base config
+interface Loopback1
+   description iBGP-LOOPBACK-PNAP-EDGE
+   vrf PNAP-EDGE
+   ip address 131.153.60.1/32
+   ipv6 address 2607:6000:900:1::1/128
+   ip ospf area 0.0.0.0
+   ipv6 ospf 1 area 0.0.0.0
+!
+interface Loopback2
+   description BGP-COGENT-LOOPBACK
+   vrf PNAP-EDGE
+   ip address 131.153.60.129/32
+   ipv6 address 2607:6000:900:1::3/128
+   ip ospf area 0.0.0.0
+   ipv6 ospf 1 area 0.0.0.0
+!
+interface Loopback4
+   description BGP-CENTURY_LINK-LOOPBACK
+   vrf PNAP-EDGE
+   ip address 131.153.60.133/32
+   ipv6 address 2607:6000:900:1::6/128
+   ip ospf area 0.0.0.0
+   ipv6 ospf 1 area 0.0.0.0
+!
+interface Loopback101
+   description IGP-LOOPBACK-PNAP-CORE
+   vrf PNAP-CORE
+   ip address 131.153.60.3/32
+   ipv6 address 2607:ff00:901:1::1/128
+   ipv6 ospf 100 area 0.0.0.0
+!
+interface Management1
+   ip address 10.118.2.2/25
+!
+interface Vlan201
+   description TRANSPORT-EDGE-TPT1/BB1
+   vrf PNAP-EDGE
+   ip address 10.110.14.1/31
+   ntp serve
+!
