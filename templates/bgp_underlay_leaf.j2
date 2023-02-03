@@ -128,6 +128,14 @@ router bgp {{ bgp.local_as }}
 {% endif %}
   !
 {% endif %}
+{% if vxlan is defined and vxlan %}
+{% for vni in vxlans %}
+  vlan {{ vni.vlan }}
+    rd {{ lpbk1.addr_v4 }}:{{ vni.id }}
+    route-target both {{ vni.id }}:{{ vni.id }}
+  !
+{% endfor %}
+{% endif %}
   address-family ipv4
 {% if bgp.afi.ipv4 is defined and bgp.afi.ipv4 %}
 {% for redis in bgp.afi.ipv4 %}
@@ -154,6 +162,10 @@ router bgp {{ bgp.local_as }}
     neighbor fabric_peer_v6 activate
     neighbor tor_peer_v6 activate
   !
+  address-family evpn
+    neighbor fabric_peer_v4 activate
+    neighbor tor_peer_v4 activate
+  !
 {% if bgp.flowspec.ipv4 is defined and bgp.flowspec.ipv4|lower == "enable" %}
   address-family flow-spec ipv4
     neighbor fabric_peer_v4 activate
@@ -167,5 +179,3 @@ router bgp {{ bgp.local_as }}
   !
 {% endif %}
 !
-
-

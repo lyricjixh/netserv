@@ -14,8 +14,8 @@ ansible_ssh_common_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev
 # Loopback Interface, leaf/spine Globally
 lpbk0:
     desc: "Underlay Loopback"
-    addr_v4: "{{ lpbk0_netv4 | ansible.utils.ipaddr(seq) | ansible.utils.ipaddr('address') }}"
-    addr_v6: "{{ lpbk0_netv6 | ansible.utils.ipaddr(seq) | ansible.utils.ipaddr('address') }}"
+    addr_v4: "{{ lpbk_underlay_netv4 | ansible.utils.ipaddr(seq) | ansible.utils.ipaddr('address') }}"
+    addr_v6: "{{ lpbk_underlay_netv6 | ansible.utils.ipaddr(seq) | ansible.utils.ipaddr('address') }}"
 
 phy_mtu: 9214
 vxlan_mtu: "9100"
@@ -122,10 +122,10 @@ policy:
             prefix:
                 -
                     action: "permit"
-                    range: "{{ lpbk0_netv4 }} le 32"
+                    range: "{{ lpbk_underlay_netv4 }} le 32"
                 -
                     action: "permit"
-                    range: "{{ lpbk1_netv4 }} le 32"
+                    range: "{{ lpbk_overlay_netv4 }} le 32"
                 -
                     action: "permit"
                     range: "{{ fabric_ptp_netv4 }} le 32"
@@ -169,10 +169,10 @@ policy:
             prefix:
                 -
                     action: "permit"
-                    range: "{{ lpbk0_netv6 }} le 128"
+                    range: "{{ lpbk_underlay_netv6 }} le 128"
                 -
                     action: "permit"
-                    range: "{{ lpbk1_netv6 }} le 128"
+                    range: "{{ lpbk_overlay_netv6 }} le 128"
                 -
                     action: "permit"
                     range: "{{ edge_netv6 }} le 128"
@@ -254,7 +254,7 @@ policy:
             prefix:
                 -
                     action: "permit"
-                    range: "{{ lpbk0_netv4 }} le 32"
+                    range: "{{ lpbk_underlay_netv4 }} le 32"
                 -
                     action: "permit"
                     range: "{{ fabric_ptp_netv4 }} le 32"
@@ -342,7 +342,7 @@ policy:
             prefix:
                 -
                     action: "permit"
-                    range: "{{ lpbk0_netv4 }} le 32"
+                    range: "{{ lpbk_underlay_netv4 }} le 32"
 
     route_map:
         -
@@ -538,7 +538,7 @@ policy:
             step: 10
             match:
                 - 
-                    range: "65000"
+                    range: "12189"
                     result: "accept"
         -
             name: "leaf_asn_range"

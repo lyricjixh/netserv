@@ -20,7 +20,7 @@ vxlans:
         id: "10101"
         netv4: "{{ v101_netv4 }}"
         netv6: "{{ v101_netv6 }}"
-        vrf: "RED"
+        vrf: "SDDC"
         helper_addrv4:
             - 11.11.11.11
             - 12.12.12.12
@@ -31,7 +31,7 @@ vxlans:
         id: "10201"
         # netv4: "{{ v201_netv4 }}"
         # netv6: "{{ v201_netv6 }}"
-        vrf: "RED"
+        vrf: "SDDC"
         helper_addrv4:
             - 11.11.11.11
             - 12.12.12.12
@@ -42,7 +42,7 @@ vxlans:
         id: "10301"
         netv4: "{{ v301_netv4 }}"
         netv6: "{{ v301_netv6 }}"
-        vrf: "RED"
+        vrf: "SDDC"
         helper_addrv4:
             - 11.11.11.11
             - 12.12.12.12
@@ -53,7 +53,7 @@ vxlans:
         id: "10401"
         # netv4: "{{ v401_netv4 }}"
         # netv6: "{{ v401_netv6 }}"
-        vrf: "RED"
+        vrf: "SDDC"
         helper_addrv4:
             - 11.11.11.11
             - 12.12.12.12
@@ -64,7 +64,7 @@ vxlans:
         id: "10402"
         # netv4: "{{ v402_netv4 }}"
         # netv6: "{{ v402_netv6 }}"
-        vrf: "RED"
+        vrf: "SDDC"
         helper_addrv4:
             - 11.11.11.11
             - 12.12.12.12
@@ -75,7 +75,7 @@ vxlans:
         id: "10403"
         # netv4: "{{ v403_netv4 }}"
         # netv6: "{{ v403_netv6 }}"
-        vrf: "RED"
+        vrf: "SDDC"
         helper_addrv4:
             - 11.11.11.11
             - 12.12.12.12

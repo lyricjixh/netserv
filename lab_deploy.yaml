@@ -105,7 +105,7 @@
     tags:
       - netserv
 
-- hosts: poc_leaf,poc_spine
+- hosts: poc_leaf
   gather_facts: false
   collections:
   - arista.eos
@@ -152,166 +152,40 @@
     tags:
       - rpol
 
-  - name: Enable Routing Policy on SPINE
+  - name: Enable Standard BGP on Leaf
     eos_config:
-        src: files/rpol_spine
-    when: "'spine' in inventory_hostname"
-    tags:
-      - rpol
-
-  - name: Enable Standard Underlay BGP
-    block:
-    - name: Enable Standard BGP on Leaf
-      eos_config:
-          src: bgp_underlay_leaf.j2
-      when: "'leaf' in inventory_hostname"
-
-    - name: Enable Standard BGP on Spine
-      eos_config:
-          src: bgp_underlay_spine.j2
-      when: "'spine' in inventory_hostname"
-    when: (features.routing.bgp_stan|lower == "yes")
+        src: bgp_underlay_leaf.j2
+    when: "'leaf' in inventory_hostname"
     tags:
     - standard
 
-  - name: Enable Unnumbered Underlay BGP
-    block:
-    - name: Enable Unnumbered BGP on Leaf
-      eos_config:
-          src: bgp_unnumbered_leaf.j2
-      when: ("'leaf' in inventory_hostname")
-
-    - name: Enable Unnumbered BGP on Spine
-      eos_config:
-          src: bgp_unnumbered_spine.j2
-      when: ("'spine' in inventory_hostname")
-    when: (features.routing.bgp_unno|lower == "yes")
+  - name: Enable Vxlan Tunneling
+    eos_config:
+        src: vxlan.j2
     tags:
-    - unnumber
+      - vxlan
 
-#     - name: Enable Unified BGP Overlay on both Leaf/Spine if by design
-#       eos_config:
-#           src: bgp_overlay_unified.j2
-#       tags:
-#         - bgp_over
-#       when: ( features.overlay.uni_bgp|lower == "yes")
-#     tags:
-#       - bgp_under
+  - name: Enable EVPN Routing
+    eos_config:
+        src: vrf_routing.j2
+    tags:
+      - vrf_routing
 
-# - hosts: poc_leaf
-#   gather_facts: false
-#   vars:
-#     ansible_command_timeout: 90
-#   collections:
-#   - arista.eos
+- hosts: poc_spine
+  gather_facts: false
+  collections:
+  - arista.eos
 
-#   tasks:
-#   - name: Enable EVPN on Leaves
-#     block:
-#     - name: Enable VRF Instance
-#       eos_config:
-#           src: vrf_intf.j2
-#       tags:
-#         - vrf_intf
-#     - name: Enable Vxlan Tunneling
-#       eos_config:
-#           src: vxlan.j2
-#       tags:
-#         - vxlan
+  tasks:
+  - name: Enable Leaf/Spine PTP Interface
+    eos_config:
+        src: intf_ptp_spine.j2
+    tags:
+    - ptp
 
-#     - name: Enable iBGP Overlay if by design
-#       eos_config:
-#           src: bgp_overlay_ibgp.j2
-#       tags:
-#         - bgp_over
-#       when: ( features.overlay.ibgp|lower == "yes")
-
-#     - name: Enable EVPN Routing
-#       eos_config:
-#           src: vrf_routing.j2
-#       tags:
-#         - vrf_routing
-
-#     - name: Disable EVPN ARP Suppression 
-#       eos_config:
-#           src: arp_suppression.j2
-#       tags:
-#         - evpn_arp
-#     tags:
-#       - overlay
-
-#   - name: Enable Security
-#     vars:
-#       # ansible_timeout: 120
-#       ansible_command_timeout: 120
-#       # ansible_connect_timeout: 120
-#     block:
-#     - name: Enable Access List
-#       eos_config:
-#           src: files/copp_acl.eacl
-#       when: (features.security.acl is defined and features.security.acl|lower == "yes")
-#       tags:
-#         - acl
-
-# #     - name: Enable CoPP
-# #       eos_config:
-# #         src: copp.j2
-# #         # lines:
-# #         #   # - no ip access-group acl_test_v4 in
-# #         #   # - no ipv6 access-group acl_test_v6 in
-# #         #   - ip access-group {{ copp.v4.name }} in
-# #         #   - ipv6 access-group {{ copp.v6.name }} in
-# #         # parents: ['line vty']
-# #         # match: strict
-# #         # ### replace: block doesn't work!
-# #         replace: line
-# #       when: (features.security.copp is defined and features.security.copp|lower == "yes")
-# #       tags:
-# #         - copp
-
-# #     - name: Enable Interface ACL
-# #       eos_config:
-# #         src: intf_acl.j2
-# #         # ### replace: block doesn't work!
-# #         replace: line
-# #       ignore_errors: yes
-# #       when: (features.security.intf is defined and features.security.intf|lower == "yes")
-# #       tags:
-# #         - intf_acl
-# #     tags:
-# #       - security
-
-#   - name: Enable Monitoring
-#     vars:
-#       # ansible_timeout: 120
-#       # ansible_command_timeout: 120
-#       # ansible_connect_timeout: 120
-#     block:
-#     - name: Enable Sflow
-#       eos_config:
-#           src: sflow.j2
-#       when: (features.netserv.sflow is defined and features.netserv.sflow|lower == "yes")
-#       tags:
-#         - sflow
-
-#     - name: Enable SPAN
-#       eos_config:
-#         src: span.j2
-#         replace: line
-#       when: (features.netserv.span is defined and features.netserv.span|lower == "yes")
-#       tags:
-#         - span
-
-#     - name: Enable Telemetry
-#       eos_config:
-#         src: telemetry.j2
-#         # ### replace: block doesn't work!
-#         replace: line
-#       ignore_errors: yes
-#       when: (features.netserv.telemetry is defined and features.netserv.telemetry|lower == "yes")
-#       tags:
-#         - telemetry
-#     tags:
-#       - monitor
-
-
+  - name: Enable Standard BGP on Spine
+    eos_config:
+        src: bgp_underlay_spine.j2
+    when: (features.routing.bgp_stan|lower == "yes")
+    tags:
+    - standard

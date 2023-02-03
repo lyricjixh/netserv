@@ -5,7 +5,7 @@ vendor: "Arista"
 #Vxlan
 lpbk1:
     desc: "Overlay vTEP Endpoint"
-    addr_v4: "{{ lpbk1_netv4 | ansible.utils.ipaddr(rack_no) | ansible.utils.ipaddr('address') }}"
+    addr_v4: "{{ lpbk_overlay_netv4 | ansible.utils.ipaddr(rack_no) | ansible.utils.ipaddr('address') }}"
 
 vlan_port: 
 #   - 
@@ -81,7 +81,7 @@ fabric_links:
 
 # BGP Parameters
 bgp:
-  local_as: "{{ 65000+rack_no }}"
+  local_as: "{{ 64516+rack_no }}"
   remote_as: "{{ spine_asn }}"
   sas_as: "64999"
   fabric_peer_v4:
@@ -208,19 +208,73 @@ evpn:
         pfx_list: "ARP_NO_PROXY"
     vrf:
     - 
-        name: "RED"
-        desc: "RED_VRF"
+        name: "SDDC"
+        desc: "SDDC VRF"
         rd_pfx: "{{ lpbk1.addr_v4 }}"
         rt_pfx: "1001"
         l3_vni: 
-          id: "9001"
+          id: "500050"
           vlan: "901"
         interfaces:
         - 
             name: "loopback901"
             desc: "Loopback Interface"
-            addr_v4: "10.200.200.{{ seq }}/32"
-            addr_v6: "2001:ffff:ffff::{{ '%0x' % seq }}/128"
+            addr_v4: "10.201.201.{{ seq }}/32"
+            addr_v6: "2001:fff1:fff1::{{ '%0x' % seq }}/128"
+        type5:
+        - 
+            afi: ipv4
+            proto: connected
+            r_map: 
+        - 
+            afi: ipv4
+            r_map: 
+            proto: static
+        # - 
+        #     afi: ipv4
+        #     r_map: 
+        #     proto: bgp
+    - 
+        name: "SDDC2"
+        desc: "SDDC VRF2"
+        rd_pfx: "{{ lpbk1.addr_v4 }}"
+        rt_pfx: "1001"
+        l3_vni: 
+          id: "500054"
+          vlan: "902"
+        interfaces:
+        - 
+            name: "loopback901"
+            desc: "Loopback Interface"
+            addr_v4: "10.202.202.{{ seq }}/32"
+            addr_v6: "2001:fff2:fff2::{{ '%0x' % seq }}/128"
+        type5:
+        - 
+            afi: ipv4
+            proto: connected
+            r_map: 
+        - 
+            afi: ipv4
+            r_map: 
+            proto: static
+        # - 
+        #     afi: ipv4
+        #     r_map: 
+        #     proto: bgp
+    - 
+        name: "SDDC3"
+        desc: "SDDC VRF3"
+        rd_pfx: "{{ lpbk1.addr_v4 }}"
+        rt_pfx: "1002"
+        l3_vni: 
+          id: "500055"
+          vlan: "903"
+        interfaces:
+        - 
+            name: "loopback901"
+            desc: "Loopback Interface"
+            addr_v4: "10.203.203.{{ seq }}/32"
+            addr_v6: "2001:fff3:fff3::{{ '%0x' % seq }}/128"
         type5:
         - 
             afi: ipv4

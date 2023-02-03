@@ -1,57 +1,6 @@
-BB1.PNAP.0101.SEA0#show run
-! Command: show running-config
-! device: BB1.PNAP.0101.SEA0 (DCS-7280SR2-48YC6-M, EOS-4.26.4M)
-!
-! boot system flash:/EOS64-4.26.4M.swi
-!
-no aaa root
-!
-!
 hardware access-list mechanism tcam
 !
-terminal length 25
-terminal width 500
-alias pp ping vrf PNAP-EDGE %1 repeat 10 source %2
-!
-schedule tech-support interval 720 timeout 30 max-log-files 20 command show tech-support
-!
-errdisable recovery cause link-flap
-errdisable recovery interval 900
-!
-no hardware access-list resource sharing vlan ipv4 out
-!
-transceiver qsfp default-mode 4x10G
-!
-service routing protocols model multi-agent
-!
-errdisable flap-setting cause link-flap max-flaps 2 time 300
-!
-logging buffered 5000
-logging host 172.20.22.75 514
-logging host 192.168.7.106 514
-logging format hostname fqdn
-logging source-interface Management1
-!
 hostname BB1.PNAP.0101.SEA0
-!
-track ETH20 interface Ethernet20 line-protocol
-!
-sflow sample 1024
-sflow vrf PNAP-EDGE destination 208.76.14.240 20013
-sflow vrf PNAP-EDGE destination 199.201.106.52 6356
-sflow vrf PNAP-EDGE source-interface Loopback1
-sflow run
-!
-snmp-server engineID local f5717f7483ef0bac3500
-snmp-server location SEA0
-snmp-server local-interface Management1
-snmp-server vrf PNAP-EDGE local-interface Loopback1
-snmp-server community
-snmp-server group SNMPV3 v3 priv
-snmp-server user 
-snmp-server vrf PNAP-EDGE
-!
-spanning-tree mode mstp
 !
 clock timezone US/Arizona
 !
@@ -61,6 +10,9 @@ vlan 43
 vlan 201
    name TRANSPORT-EDGE-TPT1/BB1
 !
+vrf instance SPINE
+   rd 3:3
+!
 vrf instance PNAP-CORE
    rd 2:2
 !
@@ -68,19 +20,6 @@ vrf instance PNAP-EDGE
    rd 1:1
 !
 bfd interval 500 min_rx 500 multiplier 6 default
-!
-banner motd
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+                       BB1.PNAP.SEA0                            +
-+                                                                +
-+ WARNING:  Entry into this machine is restricted to             +
-+           CWIE/CAVECREEK/ECS administrators only!              +
-+           Unauthorized users will be PROSECUTED to the full    +
-+           extent of State, Federal or International law.       +
-+                                                                +
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-EOF
-!
 !
 interface Port-Channel3
    description BB1.vrf-core.po4
@@ -112,19 +51,15 @@ interface Port-Channel11
    switchport mode trunk
 !
 interface Ethernet1
-   shutdown
-   load-interval 30
+   description XCONN:AR1.DDOS.0101.SEA0:Eth49:B4ACL
    speed forced 10000full
    no switchport
    vrf PNAP-EDGE
-   no lldp transmit
-   no lldp receive
+   ip address 172.31.204.153/30
+   ipv6 address 2607:6000:900:43::185/126
    ip ospf area 0.0.0.0
-!
-interface Ethernet2
-   shutdown
-   speed forced 10000full
-   no switchport
+   ipv6 ospf 1 area 0.0.0.0
+   no sflow enable
 !
 interface Ethernet3
    description ISP:SEA0:COGENT:AS174:CID:300200613
@@ -154,138 +89,6 @@ interface Ethernet4
    ipv6 ospf 1 area 0.0.0.0
    sflow enable
 !
-interface Ethernet5
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet6
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet7
-   description ISP:SEA0:CENTURYLINK:AS3356:SID:441250415
-   load-interval 30
-   speed forced 10000full
-   no switchport
-   vrf PNAP-EDGE
-   ip address 4.59.234.114/30
-   ipv6 address 2001:1900:2100::521e/126
-   no lldp transmit
-   no lldp receive
-   ip ospf area 0.0.0.0
-   ipv6 ospf 1 area 0.0.0.0
-   sflow enable
-!
-interface Ethernet8
-   description ISP:SEA0:CENTURYLINK:AS3356:SID:441071353
-   load-interval 30
-   speed forced 10000full
-   no switchport
-   vrf PNAP-EDGE
-   ip address 4.16.224.150/30
-   ipv6 address 2001:1900:2100::4fae/126
-   no lldp transmit
-   no lldp receive
-   ip ospf area 0.0.0.0
-   ipv6 ospf 1 area 0.0.0.0
-   sflow enable
-!
-interface Ethernet9
-   description BB2.vrf-edge.Eth9-12
-   no switchport
-   channel-group 1 mode active
-!
-interface Ethernet10
-   description BB2.vrf-edge.Eth9-12
-   no switchport
-   channel-group 1 mode active
-!
-interface Ethernet11
-   description BB2.vrf-edge.Eth9-12
-   no switchport
-   channel-group 1 mode active
-!
-interface Ethernet12
-   description BB2.vrf-edge.Eth9-12
-   no switchport
-   channel-group 1 mode active
-!
-interface Ethernet13
-   description CUST:25539:REPAY
-   speed auto
-   no switchport
-   vrf PNAP-CORE
-   ip address 131.153.61.193/29
-   ip ospf area 0.0.0.0
-!
-interface Ethernet14
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet15
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet16
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet17
-   description BB1.vrf-core.Eth33-36
-   speed forced 25gfull
-   no switchport
-   channel-group 3 mode on
-!
-interface Ethernet18
-   description BB1.vrf-core.Eth33-36
-   speed forced 25gfull
-   no switchport
-   channel-group 3 mode on
-!
-interface Ethernet19
-   description BB1.vrf-core.Eth33-36
-   speed forced 25gfull
-   no switchport
-   channel-group 3 mode on
-!
-interface Ethernet20
-   description BB1.vrf-core.Eth33-36
-   speed forced 25gfull
-   no switchport
-   channel-group 3 mode on
-!
-interface Ethernet21
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet22
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet23
-   description XCONN:TPT1.PNAP.SEA0:Eth21
-   speed forced 10000full
-   channel-group 11 mode active
-   sflow enable
-!
-interface Ethernet24
-   description XCONN:AR1.DDOS.0101.SEA0:Eth49:B4ACL
-   speed forced 10000full
-   no switchport
-   vrf PNAP-EDGE
-   ip address 172.31.204.153/30
-   ipv6 address 2607:6000:900:43::185/126
-   ip ospf area 0.0.0.0
-   ipv6 ospf 1 area 0.0.0.0
-   no sflow enable
-!
 interface Ethernet25
    description XCONN:TPT1.PNAP.SEA0:Eth25
    speed forced 10000full
@@ -298,55 +101,14 @@ interface Ethernet26
    channel-group 11 mode active
    sflow enable
 !
-interface Ethernet27
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet28
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet29
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet30
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet31
-   description XCONN:AR1.INJECT-NETWORK.0101.SEA0:Eth24
-   speed forced 10000full
-   no switchport
-   vrf PNAP-CORE
-   ip address 172.31.203.81/29
-   ipv6 address 2607:6000:900:66::209/112
-   ip ospf area 0.0.0.0
-   ipv6 ospf 100 area 0.0.0.0
-   no sflow enable
-!
-interface Ethernet32
-   description XCONN:SW1.SS-HQ.0101.SEA0:ETH49
-   speed forced 10000full
-   no switchport
-   vrf PNAP-CORE
-   ip address 10.118.0.13/30
-   ip ospf network point-to-point
-   ip ospf area 0.0.0.0
-   no sflow enable
-!
 interface Ethernet33
-   description BB1.vrf-edge.Eth17-20
+   description BB1.vrf-core.Eth34
    speed forced 25gfull
    no switchport
-   channel-group 4 mode on
+   channel-group 3 mode on
 !
 interface Ethernet34
-   description BB1.vrf-edge.Eth17-20
+   description BB1.vrf-edge.Eth33
    speed forced 25gfull
    no switchport
    channel-group 4 mode on
@@ -363,87 +125,13 @@ interface Ethernet36
    no switchport
    channel-group 4 mode on
 !
-interface Ethernet37
-   description BB2.vrf-core.Eth37-40
-   no switchport
-   channel-group 2 mode active
-!
-interface Ethernet38
-   description BB2.vrf-core.Eth37-40
-   no switchport
-   channel-group 2 mode active
-!
-interface Ethernet39
-   description BB2.vrf-core.Eth37-40
-   no switchport
-   channel-group 2 mode active
-!
-interface Ethernet40
-   description BB2.vrf-core.Eth37-40
-   no switchport
-   channel-group 2 mode active
-!
-interface Ethernet41
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet42
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet43
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet44
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet45
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet46
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet47
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet48
-   shutdown
-   speed forced 10000full
-   no switchport
-!
-interface Ethernet49/1
-   description ISP:SEA0:TELIA:AS1299:IC-375956
-   load-interval 30
-   mtu 9214
-   speed forced 100gfull
-   no switchport
-   vrf PNAP-EDGE
-   ip address 62.115.56.69/31
-   ipv6 address 2001:2035:0:260c::2/126
-   ip ospf area 0.0.0.0
-   ipv6 ospf 1 area 0.0.0.0
-   sflow enable
-!
-!
 !POC relevant config addition over and above base config
-interface Ethernet51/1
+interface range Ethernet5-6
  channel-group 50 mode on 
 !
 interface Ethernet50/1
  channel-group 50 mode on
-
+!
 interface port-channel 50
    description CORE<>CORE cross link for spine cross link
 !
@@ -486,38 +174,40 @@ interface port-channel 50.61
     ipv6 enable
     ipv6 address 2000:1000:60::a/126	
 !  
-interface Ethernet52/1
+interface Ethernet35
+ channel-group 5 mode on
+!
+interface port-channel 5
    description CORE<>SPINE link same device
    vrf PNAP-CORE
    ip address 131.153.60.6/31
    ipv6 enable
    ipv6 address 2000:1000:60::6/126
 !
-interface Ethernet53/1  
+interface Ethernet36
+ channel-group 6 mode on
+!
+interface port-channel 6
    description SPINE<>CORE link same device
    vrf SPINE
    ip address 131.153.60.7/31
    ipv6 enable
    ipv6 address 2000:1000:60::7/126
 !
-interface Ethernet54/2
-	description SPINE<>LEAF1.1
+interface Ethernet7-10
 	vrf SPINE
-	ip address 10.216.197.0/31
-	ipv6 enable
-	ipv6 address 2000:1000:1::1/126
 !
 interface loopback 20
 	description SPINE-VRF-ROUTER-ID
 	vrf SPINE
-	ip address 131.153.20.5/32
+	ip address 131.153.60.5/32
 interface loopback 30
 	description SPINE-VRF-EVPN
 	vrf SPINE
 	ip address 10.216.199.1/32
 !
 !POC relevant config addition over and above base config
-interface Loopback1
+interface loopback11
    description iBGP-LOOPBACK-PNAP-EDGE
    vrf PNAP-EDGE
    ip address 131.153.60.1/32
@@ -525,7 +215,7 @@ interface Loopback1
    ip ospf area 0.0.0.0
    ipv6 ospf 1 area 0.0.0.0
 !
-interface Loopback2
+interface loopback12
    description BGP-COGENT-LOOPBACK
    vrf PNAP-EDGE
    ip address 131.153.60.129/32
@@ -533,7 +223,7 @@ interface Loopback2
    ip ospf area 0.0.0.0
    ipv6 ospf 1 area 0.0.0.0
 !
-interface Loopback4
+interface loopback14
    description BGP-CENTURY_LINK-LOOPBACK
    vrf PNAP-EDGE
    ip address 131.153.60.133/32
@@ -904,7 +594,7 @@ ip route 171.245.123.224/32 Null0
 ip route 172.20.22.0/24 10.118.2.1
 ip route 192.168.7.106/32 10.118.2.1
 ip route 192.168.206.0/24 10.118.2.1
-ip route vrf PNAP-CORE 131.153.60.1/32 10.118.0.5 name TO-LOOPBACK1-EDGE
+ip route vrf PNAP-CORE 131.153.60.1/32 10.118.0.5 name TO-loopback11-EDGE
 ip route vrf PNAP-CORE 131.153.60.4/32 10.118.0.10 name TO-BB2-PNAP-LOOPBACK101
 ip route vrf PNAP-CORE 131.153.61.0/24 Null0 name HOLDDOWN
 ip route vrf PNAP-CORE 131.153.165.0/24 Null0 name HOLDDOWN_BMC
@@ -930,8 +620,8 @@ ipv6 route vrf PNAP-EDGE 2607:6000:100:41::155/128 Ethernet24 2607:6000:900:43::
 ipv6 route vrf PNAP-EDGE 2607:6000:900::/40 Null0 name HOLDDOWN
 ipv6 route vrf PNAP-EDGE 2607:ff00:901:1::1/128 2607:6000:900:3::6
 !
-ntp server vrf PNAP-EDGE 98.143.32.107 version 4 source Loopback1
-ntp server vrf PNAP-EDGE 131.153.128.49 prefer version 4 source Loopback1
+ntp server vrf PNAP-EDGE 98.143.32.107 version 4 source loopback11
+ntp server vrf PNAP-EDGE 131.153.128.49 prefer version 4 source loopback11
 !
 route-map BGP-IPv6-GENERIC-GROUP-IN deny 10
    match ipv6 address prefix-list IPv6-BOGON
@@ -1352,17 +1042,15 @@ router bgp 12189
    neighbor ISP-PEER-GROUP ebgp-multihop 2
    neighbor ISP-PEER-GROUP route-map ISP-GENERIC-IN in
    neighbor ISP-PEER-GROUP route-map ISP-GENERIC-OUT out
-   neighbor ISP-PEER-GROUP password 
    neighbor ISP-PEER-GROUP send-community
    neighbor ISP-PEER-GROUP maximum-routes 0
    neighbor PNAP-CORE-PEER-GROUP peer group
    neighbor PNAP-CORE-PEER-GROUP remote-as 46385
    neighbor PNAP-CORE-PEER-GROUP remove-private-as
-   neighbor PNAP-CORE-PEER-GROUP update-source Loopback1
+   neighbor PNAP-CORE-PEER-GROUP update-source loopback11
    neighbor PNAP-CORE-PEER-GROUP ebgp-multihop 2
    neighbor PNAP-CORE-PEER-GROUP route-map PNAP-CORE-BGP-IN in
    neighbor PNAP-CORE-PEER-GROUP route-map PNAP-CORE-BGP-OUT out
-   neighbor PNAP-CORE-PEER-GROUP password 
    neighbor PNAP-CORE-PEER-GROUP default-originate
    neighbor PNAP-CORE-PEER-GROUP send-community
    neighbor PNAP-CORE-PEER-GROUP maximum-routes 12000
@@ -1373,7 +1061,6 @@ router bgp 12189
    neighbor PNAP-EDGE-PEER-GROUP ebgp-multihop 2
    neighbor PNAP-EDGE-PEER-GROUP route-map PNAP-EDGE-BGP-IN in
    neighbor PNAP-EDGE-PEER-GROUP route-map PNAP-EDGE-BGP-OUT out
-   neighbor PNAP-EDGE-PEER-GROUP password 
    neighbor PNAP-EDGE-PEER-GROUP send-community
    neighbor PNAP-EDGE-PEER-GROUP maximum-routes 0
    neighbor SPN-BMC peer group
@@ -1382,13 +1069,29 @@ router bgp 12189
    neighbor SPN-BMC description eBGP:BMC-CHI0
    neighbor SPN-BMC ebgp-multihop 2
    neighbor SPN-BMC route-map SPN-BMC-OUT out
-   neighbor SPN-BMC password 
    neighbor SPN-BMC default-originate always
    neighbor SPN-BMC send-community standard extended
    neighbor SPN-BMC maximum-routes 12000
+   neighbor BMC-EVPN peer group
+   neighbor BMC-EVPN update-source Loopback3
+   neighbor BMC-EVPN bfd
+   neighbor BMC-EVPN description EVPN-Peers
+   neighbor BMC-EVPN ebgp-multihop 2
+   neighbor BMC-EVPN send-community standard extended
+   neighbor BMC-EVPN maximum-routes 12000
+   neighbor BMC-LEAF-TOR peer group
+   neighbor BMC-LEAF-TOR description EBGP-BMC-TORS
+   neighbor BMC-LEAF-TOR send-community standard extended
+   neighbor BMC-LEAF-TORv6 maximum-routes 12000
+   neighbor BMC-LEAF-TORv6 peer group
+   neighbor BMC-LEAF-TORv6 description EBGP-BMC-TORS
+   neighbor BMC-LEAF-TORv6 send-community standard extended
+   neighbor BMC-LEAF-TORv6 maximum-routes 12000
+   neighbor CORE-SPINE peer group
+   neighbor CORE-SPINEv6 peer group
    neighbor 10.110.0.1 maximum-routes 0
    neighbor 10.110.14.0 maximum-routes 0
-   neighbor 38.101.160.38 update-source Loopback2
+   neighbor 38.101.160.38 update-source loopback12
    neighbor 205.171.3.146 shutdown
    neighbor 205.171.3.146 maximum-routes 12000
    neighbor 2607:6000:900:1::2 maximum-routes 12000
@@ -1417,12 +1120,10 @@ router bgp 12189
       neighbor 131.153.60.1 remote-as 12189
       no neighbor 131.153.60.1 shutdown
       neighbor 131.153.60.1 description eBGP:BB1-PNAP-EDGE-VRF
-      neighbor 131.153.60.1 password 
       neighbor 131.153.60.4 remote-as 46385
       neighbor 131.153.60.4 remove-private-as
       neighbor 131.153.60.4 update-source Loopback101
       neighbor 131.153.60.4 description iBGP:BB2.PNAP.SEA0-CORE-VRF
-      neighbor 131.153.60.4 password 
       neighbor 131.153.60.4 send-community
       neighbor 131.153.60.4 maximum-routes 12000
       neighbor 172.31.203.83 remote-as 64900
@@ -1439,7 +1140,6 @@ router bgp 12189
       neighbor 2607:6000:900:1::1 remote-as 12189
       no neighbor 2607:6000:900:1::1 shutdown
       neighbor 2607:6000:900:1::1 description eBGP:BB1.PNAP.SEA0.EDGE
-      neighbor 2607:6000:900:1::1 password 
       neighbor 2607:6000:900:66::211 remote-as 64900
       neighbor 2607:6000:900:66::211 description eBGP:AR1.INJECT-NETWORK.0101.SEA0
       neighbor 2607:6000:900:66::211 route-map SS-INJECT-IN in
@@ -1453,7 +1153,6 @@ router bgp 12189
       neighbor 2607:ff00:901:1::2 remote-as 46385
       neighbor 2607:ff00:901:1::2 update-source Loopback101
       neighbor 2607:ff00:901:1::2 description iBGP:BB2.PNAP.0101.SEA0-CORE
-      neighbor 2607:ff00:901:1::2 password 
       neighbor 2607:ff00:901:1::2 maximum-routes 12000
       neighbor 2620:129:1:2::1 maximum-routes 12000
       !
@@ -1485,12 +1184,11 @@ router bgp 12189
       maximum-paths 8
       neighbor 4.69.248.73 remote-as 3356
       neighbor 4.69.248.73 remove-private-as
-      neighbor 4.69.248.73 update-source Loopback4
+      neighbor 4.69.248.73 update-source loopback14
       neighbor 4.69.248.73 description EBGP:EBGP:CENTURYLINK3356:LO4
       neighbor 4.69.248.73 ebgp-multihop 2
       neighbor 4.69.248.73 route-map CENTURYLINK-BGP-PEER-IN in
       neighbor 4.69.248.73 route-map CENTURYLINK-BGP-PEER-OUT out
-      neighbor 4.69.248.73 password 
       neighbor 4.69.248.73 send-community
       neighbor 4.69.248.73 maximum-routes 0
       neighbor 10.110.0.1 remote-as 12189
@@ -1499,47 +1197,42 @@ router bgp 12189
       neighbor 10.110.0.1 description iBGP-EU-RR
       neighbor 10.110.0.1 route-map US-RR-IN in
       neighbor 10.110.0.1 route-map US-RR-OUT out
-      neighbor 10.110.0.1 password 
       neighbor 10.110.0.1 send-community standard extended
       neighbor 10.110.0.1 maximum-routes 0
       neighbor 10.110.14.0 remote-as 12189
       neighbor 10.110.14.0 description iBGP-US-TPT
       neighbor 10.110.14.0 route-reflector-client
       neighbor 10.110.14.0 route-map US-TRANSPORT-OUT out
-      neighbor 10.110.14.0 password
       neighbor 10.110.14.0 send-community standard extended
       neighbor 10.110.14.0 maximum-routes 0
       neighbor 38.101.160.38 peer group ISP-PEER-GROUP
       neighbor 38.101.160.38 remote-as 174
       no neighbor 38.101.160.38 shutdown
-      neighbor 38.101.160.38 update-source Loopback2
+      neighbor 38.101.160.38 update-source loopback12
       neighbor 38.101.160.38 description eBGP:COGENT:
       neighbor 38.101.160.38 ebgp-multihop 2
       neighbor 38.101.160.38 route-map COGENT-BGP-PEER-IN in
       neighbor 38.101.160.38 route-map COGENT-BGP-PEER-OUT out
-      neighbor 38.101.160.38 password
       neighbor 38.101.160.38 maximum-routes 0
       neighbor 62.115.56.68 remote-as 1299
       neighbor 62.115.56.68 remove-private-as
       neighbor 62.115.56.68 description EBGP:TELIA1299:
       neighbor 62.115.56.68 route-map TELIA-BGP-PEER-IN in
       neighbor 62.115.56.68 route-map TELIA-BGP-PEER-OUT out
-      neighbor 62.115.56.68 password
       neighbor 62.115.56.68 send-community
       neighbor 62.115.56.68 maximum-routes 0
       neighbor 65.122.235.201 shutdown
       neighbor 65.122.235.201 maximum-routes 12000
       neighbor 66.28.8.2 remote-as 174
       neighbor 66.28.8.2 remove-private-as
-      neighbor 66.28.8.2 update-source Loopback2
+      neighbor 66.28.8.2 update-source loopback12
       neighbor 66.28.8.2 description EBGP:COGENT:BLACHOLE-SERVER:
       neighbor 66.28.8.2 ebgp-multihop 15
       neighbor 66.28.8.2 route-map COGENT-BGP-BLACKHOLE-IN in
       neighbor 66.28.8.2 route-map COGENT-BGP-BLACKHOLE-OUT out
-      neighbor 66.28.8.2 password
       neighbor 66.28.8.2 maximum-routes 12000
       neighbor 131.153.60.2 remote-as 12189
-      neighbor 131.153.60.2 update-source Loopback1
+      neighbor 131.153.60.2 update-source loopback11
       neighbor 131.153.60.2 description iBGP:BB2.PNAP.SEA0-EDGE
       neighbor 131.153.60.2 send-community
       neighbor 131.153.60.2 maximum-routes 0
@@ -1547,40 +1240,36 @@ router bgp 12189
       neighbor 131.153.60.3 remote-as 46385
       no neighbor 131.153.60.3 shutdown
       neighbor 131.153.60.3 description eBGP:PNAP-CORE-VRF:
-      neighbor 131.153.60.3 password
       neighbor 199.201.106.52 remote-as 12189
-      neighbor 199.201.106.52 update-source Loopback2
+      neighbor 199.201.106.52 update-source loopback12
       neighbor 199.201.106.52 description BGP:WANGUARD-GLOBAL_SENSOR
       neighbor 199.201.106.52 route-map BGP-WANGUARD-FILTER-SERVER-IN in
       neighbor 199.201.106.52 maximum-routes 50
       neighbor 208.76.14.223 remote-as 12189
-      neighbor 208.76.14.223 update-source Loopback1
+      neighbor 208.76.14.223 update-source loopback11
       neighbor 208.76.14.223 description Kentik_Detect
       neighbor 208.76.14.223 route-reflector-client
       neighbor 208.76.14.223 timers 30 720
       neighbor 208.76.14.223 route-map BGP-WANGUARD-FILTER-SERVER-IN in
-      neighbor 208.76.14.223 password
       neighbor 208.76.14.223 send-community
       neighbor 208.76.14.223 maximum-routes 100
       neighbor 2001:550:2:23::20 peer group ISP-PEER-GROUP
       neighbor 2001:550:2:23::20 remote-as 174
       no neighbor 2001:550:2:23::20 shutdown
-      neighbor 2001:550:2:23::20 update-source Loopback2
+      neighbor 2001:550:2:23::20 update-source loopback12
       neighbor 2001:550:2:23::20 description eBGP:COGENT:
       neighbor 2001:550:2:23::20 ebgp-multihop 2
       neighbor 2001:550:2:23::20 route-map COGENT-BGP-PEER-IN in
       neighbor 2001:550:2:23::20 route-map COGENT-BGP-PEER-OUT out
-      neighbor 2001:550:2:23::20 password
       neighbor 2001:550:2:23::20 maximum-routes 0
       neighbor 2001:1900::5:37 maximum-routes 12000
       neighbor 2001:1900::5:60 remote-as 3356
       neighbor 2001:1900::5:60 remove-private-as
-      neighbor 2001:1900::5:60 update-source Loopback4
+      neighbor 2001:1900::5:60 update-source loopback14
       neighbor 2001:1900::5:60 description EBGP:EBGP:CENTURYLINK3356:LO4
       neighbor 2001:1900::5:60 ebgp-multihop 2
       neighbor 2001:1900::5:60 route-map CENTURYLINK-BGP-PEER-IN in
       neighbor 2001:1900::5:60 route-map CENTURYLINK-BGP-PEER-OUT out
-      neighbor 2001:1900::5:60 password
       neighbor 2001:1900::5:60 send-community
       neighbor 2001:1900::5:60 maximum-routes 0
       neighbor 2001:2035:0:260c::1 remote-as 1299
@@ -1588,29 +1277,25 @@ router bgp 12189
       neighbor 2001:2035:0:260c::1 description EBGP:TELIA:
       neighbor 2001:2035:0:260c::1 route-map TELIA-BGP-PEER-IN in
       neighbor 2001:2035:0:260c::1 route-map TELIA-BGP-PEER-OUT out
-      neighbor 2001:2035:0:260c::1 password
       neighbor 2001:2035:0:260c::1 send-community
       neighbor 2001:2035:0:260c::1 maximum-routes 0
       neighbor 2607:6000:900:1::2 remote-as 12189
-      neighbor 2607:6000:900:1::2 update-source Loopback1
+      neighbor 2607:6000:900:1::2 update-source loopback11
       neighbor 2607:6000:900:1::2 description iBGP:BB2.PNAP.0101.SEA0-EDGE
       neighbor 2607:6000:900:1::2 ebgp-multihop 2
-      neighbor 2607:6000:900:1::2 password
       neighbor 2607:6000:900:1::2 send-community
       neighbor 2607:6000:900:1::2 maximum-routes 0
       neighbor 2607:ff00:901:1::1 peer group PNAP-CORE-PEER-GROUP
       neighbor 2607:ff00:901:1::1 remote-as 46385
       no neighbor 2607:ff00:901:1::1 shutdown
       neighbor 2607:ff00:901:1::1 description eBGP:BB1.PNAP.SEA0.CORE
-      neighbor 2607:ff00:901:1::1 password
       neighbor 2607:ff00:901:1::1 default-originate
       neighbor 2620:129:1:2::1 remote-as 12189
-      neighbor 2620:129:1:2::1 update-source Loopback1
+      neighbor 2620:129:1:2::1 update-source loopback11
       neighbor 2620:129:1:2::1 description Kentik_Detect
       neighbor 2620:129:1:2::1 route-reflector-client
       neighbor 2620:129:1:2::1 timers 30 720
       neighbor 2620:129:1:2::1 route-map BGP-WANGUARD-FILTER-SERVER-IN in
-      neighbor 2620:129:1:2::1 password
       neighbor 2620:129:1:2::1 send-community standard extended
       neighbor 2620:129:1:2::1 maximum-routes 100
       redistribute static route-map BGP-REDISTR-STATIC
@@ -1631,38 +1316,14 @@ router bgp 12189
 		 
 	vrf SPINE
       router-id 131.153.60.5
-	  local-as 4200000000
-      router-id 
+      local-as 4200000000
       update wait-install
       distance bgp 20 200 1
       maximum-paths 8
-	  bgp listen range 10.216.199.0/24 peer-group BMC-EVPN peer-filter BMC-TOR-PEER-FILTER
+	   bgp listen range 10.216.199.0/24 peer-group BMC-EVPN peer-filter BMC-TOR-PEER-FILTER
       bgp listen range 10.216.197.0/24 peer-group BMC-LEAF-TOR peer-filter BMC-TOR-PEER-FILTER
       bgp listen range 10.216.198.0/24 peer-group BMC-LEAF-TOR peer-filter BMC-TOR-PEER-FILTER
-	  bgp listen range 2000:1000::/64 peer-group BMC-LEAF-TORv6 peer-filter BMC-TOR-PEER-FILTER
-
-!this section goes under general bgp config, is only here for ease of legibility
-	  neighbor BMC-EVPN peer group
-	  neighbor BMC-EVPN update-source Loopback3
-	  neighbor BMC-EVPN bfd
-	  neighbor BMC-EVPN description EVPN-Peers
-	  neighbor BMC-EVPN ebgp-multihop 2
-	  neighbor BMC-EVPN password 7 
-	  neighbor BMC-EVPN send-community standard extended
-	  neighbor BMC-EVPN maximum-routes 12000
-	  neighbor BMC-LEAF-TOR peer group
-	  neighbor BMC-LEAF-TOR description EBGP-BMC-TORS
-	  neighbor BMC-LEAF-TOR password 7 
-	  neighbor BMC-LEAF-TOR send-community standard extended
-	  neighbor BMC-LEAF-TORv6 maximum-routes 12000
-	  neighbor BMC-LEAF-TORv6 peer group
-	  neighbor BMC-LEAF-TORv6 description EBGP-BMC-TORS
-	  neighbor BMC-LEAF-TORv6 password 7 
-	  neighbor BMC-LEAF-TORv6 send-community standard extended
-	  neighbor BMC-LEAF-TORv6 maximum-routes 12000
-	  neighbor CORE-SPINE peer group
-	  neighbor CORE-SPINEv6 peer group
-!end of section
+	   bgp listen range 2000:1000::/64 peer-group BMC-LEAF-TORv6 peer-filter BMC-TOR-PEER-FILTER
       neighbor 131.153.60.6 remote-as 46385
       no neighbor 131.153.60.6 shutdown
       neighbor 131.153.60.9 remote-as 46385

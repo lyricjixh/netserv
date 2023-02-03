@@ -28,11 +28,6 @@ interface Vlan {{ vni.vlan }}
 {% if vni.netv6 is defined and vni.netv6 %}
   ipv6 anycast-address {{ vni.netv6 | ipaddr('1') }}
 {% endif %}
-{% if vni.helper_addrv4 is defined and vni.helper_addrv4 %}
-{% for addr in vni.helper_addrv4 %}
-  ip helper-address {{ addr }}
-{% endfor %}
-{% endif %}
   mtu {{ vxlan_mtu }}
   neigh-suppress
 !

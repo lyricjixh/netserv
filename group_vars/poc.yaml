@@ -249,19 +249,19 @@ oob_ipv4_mask: 24
 oob_netv4: 172.100.100.0/24
 oob_netv4_gw: 172.100.100.1
 
-lpbk0_netv4: "10.0.0.0/24"
-lpbk0_netv6: "2001::/64"
+lpbk_underlay_netv4: "10.216.199.0/24"
+lpbk_underlay_netv6: "2001::/64"
 
-lpbk1_netv4: "10.10.0.0/24"
-lpbk1_netv6: "2001:a::/64"
+lpbk_overlay_netv4: "10.111.252.0/24"
+lpbk_overlay_netv6: "2001:6f:fc::/64"
 
-compute_lpbk0_netv4: "10.99.0.0/24"
-compute_lpbk0_netv6: "2001:99::/64"
+compute_lpbk_netv4: "10.99.0.0/24"
+compute_lpbk_netv6: "2001:63::/64"
 
 fabric_ptp_netmaskv4: 31
 fabric_ptp_netmaskv6: 127
-fabric_ptp_netv4: "10.0.1.0/24"
-fabric_ptp_netv6: "2001:0:1::/64"
+fabric_ptp_netv4: "10.216.197.0/24"
+fabric_ptp_netv6: "2001:1000::/64"
 
 evpn_anycast_vmac: 00:00:00:ff:ff:ff
 
@@ -335,12 +335,9 @@ k8s_tor2_netv4: "{{ v142_netv4 }}"
 k8s_tor2_netv6: "{{ v142_netv6 }}"
 
 #BGP
-spine_asn: "65000"
-spine_g1_asn: "65000"
-spine_g2_asn: "65000"
-rack_tor_asn: "{{ 65000+rack_no }}"
+spine_asn: "12189"
+rack_tor_asn: "{{ 6+rack_no }}"
 rack01_asn: "65001"
 rack02_asn: "65002"
 rack03_asn: "65003"
 rack04_asn: "65004"
-calico_asn: "{{ 65110+rack_no }}"
