@@ -2,7 +2,7 @@
 - hosts: ceos
   gather_facts: false
   vars:
-      temp_file: "vxlan.j2"
+      temp_file: "spine_inherited_cfg.j2"
   collections:
   - arista.eos
 

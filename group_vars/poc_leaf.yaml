@@ -238,7 +238,7 @@ evpn:
         name: "SDDC2"
         desc: "SDDC VRF2"
         rd_pfx: "{{ lpbk1.addr_v4 }}"
-        rt_pfx: "1001"
+        rt_pfx: "1002"
         l3_vni: 
           id: "500054"
           vlan: "902"
@@ -265,7 +265,7 @@ evpn:
         name: "SDDC3"
         desc: "SDDC VRF3"
         rd_pfx: "{{ lpbk1.addr_v4 }}"
-        rt_pfx: "1002"
+        rt_pfx: "1003"
         l3_vni: 
           id: "500055"
           vlan: "903"
@@ -292,27 +292,27 @@ evpn:
 
 ## EVPN iBGP Overlay
 ## Bleaves pair as iBGP RRS, Rest VTEP leaf as RRC.
-evpn_ibgp:
-  local_asn: "64999"
-  rrs_v4:
-    peer_group: "evpn_rrs_v4"
-    remote_as:
-      - "{{ rack03_asn }}"
-      - "{{ rack03_asn }}"
-    addr:
-      - "{{ hostvars['bleaf01']['lpbk0']['addr_v4'] }}"
-      - "{{ hostvars['bleaf02']['lpbk0']['addr_v4'] }}"
-  rrc_v4:
-    peer_group: "evpn_rrc_v4"
-    remote_as:
-      - "{{ rack01_asn }}"
-      - "{{ rack01_asn }}"
-      - "{{ rack02_asn }}"
-      - "{{ rack02_asn }}"
-    addr:
-      - "{{ hostvars['cleaf01']['lpbk0']['addr_v4'] }}"
-      - "{{ hostvars['cleaf02']['lpbk0']['addr_v4'] }}"
-      - "{{ hostvars['cleaf03']['lpbk0']['addr_v4'] }}"
-      - "{{ hostvars['cleaf04']['lpbk0']['addr_v4'] }}"
-  peer_v4:
-    peer_group: "evpn_rrp_v4"
+# evpn_ibgp:
+#   local_asn: "64999"
+#   rrs_v4:
+#     peer_group: "evpn_rrs_v4"
+#     remote_as:
+#       - "{{ rack03_asn }}"
+#       - "{{ rack03_asn }}"
+#     addr:
+#       - "{{ hostvars['bleaf01']['lpbk0']['addr_v4'] }}"
+#       - "{{ hostvars['bleaf02']['lpbk0']['addr_v4'] }}"
+#   rrc_v4:
+#     peer_group: "evpn_rrc_v4"
+#     remote_as:
+#       - "{{ rack01_asn }}"
+#       - "{{ rack01_asn }}"
+#       - "{{ rack02_asn }}"
+#       - "{{ rack02_asn }}"
+#     addr:
+#       - "{{ hostvars['cleaf01']['lpbk0']['addr_v4'] }}"
+#       - "{{ hostvars['cleaf02']['lpbk0']['addr_v4'] }}"
+#       - "{{ hostvars['cleaf03']['lpbk0']['addr_v4'] }}"
+#       - "{{ hostvars['cleaf04']['lpbk0']['addr_v4'] }}"
+#   peer_v4:
+#     peer_group: "evpn_rrp_v4"

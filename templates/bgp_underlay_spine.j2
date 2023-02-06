@@ -42,20 +42,6 @@ router bgp {{ bgp.local_as }}
   neighbor dc_gw_v6 allowas-in
   neighbor dc_gw_v6 remote-as {{ bgp.sas_as }}
   !
-{% for peer in bgp.fabric_peer_v4 %}
-  neighbor {{ peer }} description "leaf peer"
-  neighbor {{ peer }} peer group fabric_peer_v4
-  neighbor {{ peer }} remote-as {{ bgp.remote_as[loop.index0] }}
-  no shutdown
-  !
-{% endfor %}
-{% for peer in bgp.fabric_peer_v6 %}
-  neighbor {{ peer }} description "leaf peer"
-  neighbor {{ peer }} peer group fabric_peer_v6
-  neighbor {{ peer }} remote-as {{ bgp.remote_as[loop.index0] }}
-  no shutdown
-  !
-{% endfor %}
   address-family ipv4
 {% if bgp.afi.ipv4 is defined and bgp.afi.ipv4 %}
 {% for redis in bgp.afi.ipv4 %}
@@ -82,6 +68,10 @@ router bgp {{ bgp.local_as }}
     neighbor fabric_peer_v6 activate
     neighbor dc_gw_v6 activate
   !
+  address-family evpn
+    neighbor fabric_peer_v4 activate
+    neighbor dc_gw_v4 activate
+  !
 {% if bgp.flowspec.ipv4 is defined and bgp.flowspec.ipv4|lower == "enable" %}
   address-family flow-spec ipv4
     neighbor fabric_peer_v4 activate
@@ -94,6 +84,25 @@ router bgp {{ bgp.local_as }}
     neighbor dc_gw_v6 activate
   !
 {% endif %}
+  vrf SPINE
+    update wait-install
+    distance bgp 20 200 1
+    maximum-paths 8
+{% for peer in bgp.fabric_peer_v4 %}
+    neighbor {{ peer }} description "leaf peer"
+    neighbor {{ peer }} peer group fabric_peer_v4
+    neighbor {{ peer }} remote-as {{ bgp.remote_as[loop.index0] }}
+    no shutdown
+    !
+{% endfor %}
+{% for peer in bgp.fabric_peer_v6 %}
+    neighbor {{ peer }} description "leaf peer"
+    neighbor {{ peer }} peer group fabric_peer_v6
+    neighbor {{ peer }} remote-as {{ bgp.remote_as[loop.index0] }}
+    no shutdown
+    !
+{% endfor %}
+  !
 !
 
 

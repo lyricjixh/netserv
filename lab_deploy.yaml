@@ -189,3 +189,10 @@
     when: (features.routing.bgp_stan|lower == "yes")
     tags:
     - standard
+
+  - name: Dump the rest Spine CFG
+    eos_config:
+        src: spine_inherited_cfg.j2
+    when: (features.routing.bgp_stan|lower == "yes")
+    tags:
+    - standard
