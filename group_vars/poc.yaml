@@ -335,9 +335,14 @@ k8s_tor2_netv4: "{{ v142_netv4 }}"
 k8s_tor2_netv6: "{{ v142_netv6 }}"
 
 #BGP
-spine_asn: "12189"
-rack_tor_asn: "{{ 6+rack_no }}"
-rack01_asn: "65001"
-rack02_asn: "65002"
-rack03_asn: "65003"
-rack04_asn: "65004"
+## Global ASN for PNAP Edge VRF
+edge_asn: "12189"
+## ASN for PNAP-CORE VRF
+core_asn: "46385"
+spine_asn: "4200000000"
+asn_base: 64516
+rack_tor_asn: "{{ asn_base+rack_no }}"
+rack01_asn: "{{ asn_base+1 }}"
+rack02_asn: "{{ asn_base+2 }}"
+rack03_asn: "{{ asn_base+3 }}"
+rack04_asn: "{{ asn_base+4 }}"

@@ -1,8 +1,4 @@
-hardware access-list mechanism tcam
-!
 hostname BB1.PNAP.0101.SEA0
-!
-clock timezone US/Arizona
 !
 vlan 43
    name 22961:NCV_NIMBLE_STORAGE
@@ -11,13 +7,18 @@ vlan 201
    name TRANSPORT-EDGE-TPT1/BB1
 !
 vrf instance SPINE
-   rd 3:3
 !
 vrf instance PNAP-CORE
-   rd 2:2
 !
 vrf instance PNAP-EDGE
-   rd 1:1
+!
+ip routing
+ip routing vrf PNAP-CORE
+ip routing vrf PNAP-EDGE
+ip routing vrf SPINE
+ipv6 unicast-routing
+ipv6 unicast-routing vrf PNAP-CORE
+ipv6 unicast-routing vrf PNAP-EDGE
 !
 bfd interval 500 min_rx 500 multiplier 6 default
 !
@@ -31,7 +32,6 @@ interface Port-Channel3
    ip ospf network point-to-point
    ip ospf area 0.0.0.0
    ipv6 ospf network point-to-point
-   sflow enable
 !
 interface Port-Channel4
    description BB1.vrf-edge.po3
@@ -43,94 +43,42 @@ interface Port-Channel4
    ip ospf network point-to-point
    ip ospf area 0.0.0.0
    ipv6 ospf network point-to-point
-   no sflow enable
 !
 interface Port-Channel11
    description TPT1.PNAP.SEA0
    switchport trunk allowed vlan 201
    switchport mode trunk
 !
-interface Ethernet1
+interface Ethernet1/1
    description XCONN:AR1.DDOS.0101.SEA0:Eth49:B4ACL
-   speed forced 10000full
    no switchport
    vrf PNAP-EDGE
    ip address 172.31.204.153/30
    ipv6 address 2607:6000:900:43::185/126
    ip ospf area 0.0.0.0
    ipv6 ospf 1 area 0.0.0.0
-   no sflow enable
 !
-interface Ethernet3
-   description ISP:SEA0:COGENT:AS174:CID:300200613
-   load-interval 30
-   speed forced 10000full
-   no switchport
-   vrf PNAP-EDGE
-   ip address 38.142.190.98/29
-   ipv6 address 2001:550:2:61::2c8:2/112
-   no lldp transmit
-   no lldp receive
-   ip ospf area 0.0.0.0
-   ipv6 ospf 1 area 0.0.0.0
-   sflow enable
-!
-interface Ethernet4
-   description ISP:SEA0:COGENT:AS174:CID:300200614
-   load-interval 30
-   speed forced 10000full
-   no switchport
-   vrf PNAP-EDGE
-   ip address 38.142.49.74/29
-   ipv6 address 2001:550:2:13::93:2/112
-   no lldp transmit
-   no lldp receive
-   ip ospf area 0.0.0.0
-   ipv6 ospf 1 area 0.0.0.0
-   sflow enable
-!
-interface Ethernet25
+interface Ethernet25/1
    description XCONN:TPT1.PNAP.SEA0:Eth25
-   speed forced 10000full
    channel-group 11 mode active
-   sflow enable
 !
-interface Ethernet26
+interface Ethernet26/1
    description XCONN:TPT1.PNAP.SEA0:Eth26
-   speed forced 10000full
    channel-group 11 mode active
-   sflow enable
 !
-interface Ethernet33
+interface Ethernet33/1
    description BB1.vrf-core.Eth34
-   speed forced 25gfull
    no switchport
    channel-group 3 mode on
 !
-interface Ethernet34
+interface Ethernet34/1
    description BB1.vrf-edge.Eth33
-   speed forced 25gfull
-   no switchport
-   channel-group 4 mode on
-!
-interface Ethernet35
-   description BB1.vrf-edge.Eth17-20
-   speed forced 25gfull
-   no switchport
-   channel-group 4 mode on
-!
-interface Ethernet36
-   description BB1.vrf-edge.Eth17-20
-   speed forced 25gfull
    no switchport
    channel-group 4 mode on
 !
 !POC relevant config addition over and above base config
-interface range Ethernet5-6
+interface Ethernet5/1-6/1
  channel-group 50 mode on 
-!
-interface Ethernet50/1
- channel-group 50 mode on
 !
 interface port-channel 50
    description CORE<>CORE cross link for spine cross link
@@ -145,7 +93,6 @@ interface port-channel 50.10
    ip ospf area 0.0.0.0
    ipv6 ospf network point-to-point
    ipv6 ospf 1 area 0.0.0.0
-   sflow enable
 !
 interface port-channel 50.20
 	description CORE<>CORE
@@ -173,8 +120,8 @@ interface port-channel 50.61
     ip address 131.153.60.10/31
     ipv6 enable
     ipv6 address 2000:1000:60::a/126	
-!  
-interface Ethernet35
+!
+interface Ethernet35/1
  channel-group 5 mode on
 !
 interface port-channel 5
@@ -184,23 +131,25 @@ interface port-channel 5
    ipv6 enable
    ipv6 address 2000:1000:60::6/126
 !
-interface Ethernet36
+interface Ethernet36/1
  channel-group 6 mode on
 !
 interface port-channel 6
    description SPINE<>CORE link same device
+   no switchport
    vrf SPINE
    ip address 131.153.60.7/31
    ipv6 enable
    ipv6 address 2000:1000:60::7/126
 !
-interface Ethernet7-10
+interface Ethernet7/1-10/1
 	vrf SPINE
 !
 interface loopback 20
 	description SPINE-VRF-ROUTER-ID
 	vrf SPINE
 	ip address 131.153.60.5/32
+!
 interface loopback 30
 	description SPINE-VRF-EVPN
 	vrf SPINE
@@ -238,186 +187,11 @@ interface Loopback101
    ipv6 address 2607:ff00:901:1::1/128
    ipv6 ospf 100 area 0.0.0.0
 !
-interface Management1
-   ip address 10.118.2.2/25
-!
 interface Vlan201
    description TRANSPORT-EDGE-TPT1/BB1
    vrf PNAP-EDGE
    ip address 10.110.14.1/31
    ntp serve
-!
-hardware tcam
-   profile FLEX-ROUTE
-      feature acl port ip
-         sequence 45
-         key size limit 160
-         key field dscp dst-ip ip-frag ip-protocol l4-dst-port l4-ops l4-src-port src-ip tcp-control ttl
-         action count drop mirror
-         packet ipv4 forwarding bridged
-         packet ipv4 forwarding routed
-         packet ipv4 forwarding routed multicast
-         packet ipv4 mpls ipv4 forwarding mpls decap
-         packet ipv4 mpls ipv6 forwarding mpls decap
-         packet ipv4 non-vxlan forwarding routed decap
-         packet ipv4 vxlan eth ipv4 forwarding routed decap
-         packet ipv4 vxlan forwarding bridged decap
-      !
-      feature acl port ip egress mpls-tunnelled-match
-         sequence 95
-      !
-      feature acl port ipv6
-         sequence 25
-         key field dst-ipv6 ipv6-next-header ipv6-traffic-class l4-dst-port l4-ops-3b l4-src-port src-ip                                                                                                           v6-high src-ipv6-low tcp-control
-         action count drop mirror
-         packet ipv6 forwarding bridged
-         packet ipv6 forwarding routed
-         packet ipv6 forwarding routed multicast
-         packet ipv6 ipv6 forwarding routed decap
-      !
-      feature acl port ipv6 egress
-         sequence 105
-         key field dst-ipv6 ipv6-next-header ipv6-traffic-class l4-dst-port l4-src-port src-ipv6-high sr                                                                                                           c-ipv6-low tcp-control
-         action count drop mirror
-         packet ipv6 forwarding bridged
-         packet ipv6 forwarding routed
-      !
-      feature acl port mac
-         sequence 55
-         key size limit 160
-         key field dst-mac ether-type src-mac
-         action count drop mirror
-         packet ipv4 forwarding bridged
-         packet ipv4 forwarding routed
-         packet ipv4 forwarding routed multicast
-         packet ipv4 mpls ipv4 forwarding mpls decap
-         packet ipv4 mpls ipv6 forwarding mpls decap
-         packet ipv4 non-vxlan forwarding routed decap
-         packet ipv4 vxlan forwarding bridged decap
-         packet ipv6 forwarding bridged
-         packet ipv6 forwarding routed
-         packet ipv6 forwarding routed decap
-         packet ipv6 forwarding routed multicast
-         packet ipv6 ipv6 forwarding routed decap
-         packet mpls forwarding bridged decap
-         packet mpls ipv4 forwarding mpls
-         packet mpls ipv6 forwarding mpls
-         packet mpls non-ip forwarding mpls
-         packet non-ip forwarding bridged
-      !
-      feature acl subintf ip
-         sequence 40
-         key size limit 160
-         key field dscp dst-ip ip-frag ip-protocol l4-dst-port l4-ops-18b l4-src-port src-ip tcp-control                                                                                                            ttl
-         action count drop
-         packet ipv4 forwarding routed
-      !
-      feature acl subintf ipv6
-         sequence 15
-         key field dst-ipv6 ipv6-next-header l4-dst-port l4-src-port src-ipv6-high src-ipv6-low tcp-cont                                                                                                           rol
-         action count drop
-         packet ipv6 forwarding routed
-      !
-      feature acl vlan ip
-         sequence 35
-         key size limit 160
-         key field dscp dst-ip ip-frag ip-protocol l4-dst-port l4-ops-18b l4-src-port src-ip tcp-control                                                                                                            ttl
-         action count drop
-         packet ipv4 forwarding routed
-         packet ipv4 mpls ipv4 forwarding mpls decap
-         packet ipv4 mpls ipv6 forwarding mpls decap
-         packet ipv4 non-vxlan forwarding routed decap
-         packet ipv4 vxlan eth ipv4 forwarding routed decap
-      !
-      feature acl vlan ipv6
-         sequence 10
-         key field dst-ipv6 ipv6-next-header l4-dst-port l4-src-port src-ipv6-high src-ipv6-low tcp-cont                                                                                                           rol
-         action count drop
-         packet ipv6 forwarding routed
-         packet ipv6 ipv6 forwarding routed decap
-      !
-      feature acl vlan ipv6 egress
-         sequence 20
-         key field dst-ipv6 ipv6-next-header ipv6-traffic-class l4-dst-port l4-src-port src-ipv6-high sr                                                                                                           c-ipv6-low tcp-control
-         action count drop mirror
-         packet ipv6 forwarding bridged
-         packet ipv6 forwarding routed
-      !
-      feature counter lfib
-         sequence 85
-      !
-      feature flex-route
-         key size limit 80
-         key field dst-ip
-         action redirect
-         packet ipv4 forwarding routed
-         packet ipv4 non-vxlan forwarding routed decap
-      !
-      feature forwarding-destination mpls
-         sequence 100
-      !
-      feature mpls
-         sequence 5
-         key size limit 160
-         action drop redirect set-ecn
-         packet ipv4 mpls ipv4 forwarding mpls decap
-         packet ipv4 mpls ipv6 forwarding mpls decap
-         packet mpls ipv4 forwarding mpls
-         packet mpls ipv6 forwarding mpls
-         packet mpls non-ip forwarding mpls
-      !
-      feature mpls pop ingress
-         sequence 90
-      !
-      feature pbr ip
-         sequence 60
-         key size limit 160
-         key field dscp dst-ip ip-frag ip-protocol l4-dst-port l4-ops-18b l4-src-port src-ip tcp-control
-         action count redirect
-         packet ipv4 forwarding routed
-         packet ipv4 mpls ipv4 forwarding mpls decap
-         packet ipv4 mpls ipv6 forwarding mpls decap
-         packet ipv4 non-vxlan forwarding routed decap
-         packet ipv4 vxlan forwarding bridged decap
-      !
-      feature pbr ipv6
-         sequence 30
-         key field dst-ipv6 ipv6-next-header l4-dst-port l4-src-port src-ipv6-high src-ipv6-low tcp-cont                                                                                                           rol
-         action count redirect
-         packet ipv6 forwarding routed
-      !
-      feature pbr mpls
-         sequence 65
-         key size limit 160
-         key field mpls-inner-ip-tos
-         action count drop redirect
-         packet mpls ipv4 forwarding mpls
-         packet mpls ipv6 forwarding mpls
-         packet mpls non-ip forwarding mpls
-      !
-      feature qos ip
-         sequence 75
-         key size limit 160
-         key field dscp dst-ip ip-frag ip-protocol l4-dst-port l4-ops l4-src-port src-ip tcp-control
-         action set-dscp set-policer set-tc
-         packet ipv4 forwarding routed
-         packet ipv4 forwarding routed multicast
-         packet ipv4 mpls ipv4 forwarding mpls decap
-         packet ipv4 mpls ipv6 forwarding mpls decap
-         packet ipv4 non-vxlan forwarding routed decap
-      !
-      feature qos ipv6
-         sequence 70
-         key field dst-ipv6 ipv6-next-header ipv6-traffic-class l4-dst-port l4-src-port src-ipv6-high sr                                                                                                           c-ipv6-low
-         action set-dscp set-policer set-tc
-         packet ipv6 forwarding routed
-      !
-      feature tunnel vxlan
-         sequence 50
-         key size limit 160
-         packet ipv4 vxlan eth ipv4 forwarding routed decap
-         packet ipv4 vxlan forwarding bridged decap
-   system profile FLEX-ROUTE
 !
 ip virtual-router mac-address 00:00:00:01:00:20
 !
@@ -453,6 +227,7 @@ ip routing
 ip hardware fib optimize prefixes profile urpf-internet
 ip routing vrf PNAP-CORE
 ip routing vrf PNAP-EDGE
+ip routing vrf SPINE
 !
 ip as-path regex-mode string
 ip as-path access-list 400 permit ^$ any
@@ -602,8 +377,8 @@ ip route vrf PNAP-EDGE 4.69.248.73/32 4.16.224.149 name CENTURYLINK-BGP-LOOPBACK
 ip route vrf PNAP-EDGE 4.69.248.73/32 4.59.234.113 name CENTURYLINK-BGP-LOOPBACK
 ip route vrf PNAP-EDGE 10.110.0.0/19 10.110.14.0
 ip route vrf PNAP-EDGE 10.118.0.8/30 10.118.0.6 109
-ip route vrf PNAP-EDGE 38.101.160.38/32 Ethernet4 38.142.49.73
-ip route vrf PNAP-EDGE 38.101.160.38/32 Ethernet3 38.142.190.97
+ip route vrf PNAP-EDGE 38.101.160.38/32 Ethernet4/1 38.142.49.73
+ip route vrf PNAP-EDGE 38.101.160.38/32 Ethernet3/1 38.142.190.97
 ip route vrf PNAP-EDGE 98.143.32.155/32 172.31.204.154 name DDOS-NEXT-HOP-INJECTION
 ip route vrf PNAP-EDGE 131.153.60.0/22 Null0 name HOLDDOWN
 ip route vrf PNAP-EDGE 131.153.60.2/32 10.118.0.2 name TO-BB2-VRF-EDGE
@@ -619,9 +394,6 @@ ipv6 route vrf PNAP-EDGE 2001:1900::5:60/128 Ethernet7 2001:1900:2100::521d name
 ipv6 route vrf PNAP-EDGE 2607:6000:100:41::155/128 Ethernet24 2607:6000:900:43::186 name DDOS-NEXT-HOP-I                                                                                                           NJECTION
 ipv6 route vrf PNAP-EDGE 2607:6000:900::/40 Null0 name HOLDDOWN
 ipv6 route vrf PNAP-EDGE 2607:ff00:901:1::1/128 2607:6000:900:3::6
-!
-ntp server vrf PNAP-EDGE 98.143.32.107 version 4 source loopback11
-ntp server vrf PNAP-EDGE 131.153.128.49 prefer version 4 source loopback11
 !
 route-map BGP-IPv6-GENERIC-GROUP-IN deny 10
    match ipv6 address prefix-list IPv6-BOGON
@@ -1359,7 +1131,7 @@ router ospf 1 vrf PNAP-EDGE
 router ospf 100 vrf PNAP-CORE
    router-id 131.153.60.3
    passive-interface default
-   no passive-interface Ethernet32
+   no passive-interface Ethernet32/1
    no passive-interface Port-Channel2
    redistribute static
    network 0.0.0.0/0 area 0.0.0.0
@@ -1379,22 +1151,3 @@ ipv6 router ospf 100 vrf PNAP-CORE
    redistribute static
    default-information originate always
 !
-!
-aaa authentication login default group tacacs+ local
-aaa authentication login console local
-aaa accounting exec default start-stop group tacacs+
-aaa accounting system default start-stop group tacacs+
-aaa accounting commands all default start-stop group tacacs+
-!
-management ssh
-   ip access-group TTY in
-   ipv6 access-group TTYv6-ACCESS in
-   idle-timeout 20
-   !
-   vrf PNAP-CORE
-      shutdown
-   !
-   vrf PNAP-EDGE
-      shutdown
-!
-end

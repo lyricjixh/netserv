@@ -10,7 +10,7 @@ ip virtual-router mac-address {{ tor_pair_vmac }}
 vrf instance {{ vrfi.name }}
 !
 ip routing vrf {{ vrfi.name }}
-ipv6 routing vrf {{ vrfi.name }}
+ipv6 unicast-routing vrf {{ vrfi.name }}
 !
 {% if vrfi.interfaces is defined and vrfi.interfaces %}
 {% for intf in vrfi.interfaces %}

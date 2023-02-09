@@ -2,7 +2,7 @@ name_orig: "cal383"
 ## BGP parameter in the host var file for 1st fabric link handling
 ##
 bgp:
-  local_as: "{{ 65000+rack_no }}"
+  local_as: "{{ asn_base+rack_no }}"
   remote_as: "{{ spine_asn }}"
   sas_as: "64999"
   fabric_peer_v4:

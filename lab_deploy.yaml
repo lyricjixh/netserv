@@ -1,109 +1,63 @@
 ---
-- hosts: poc
-  gather_facts: false
-  collections:
-  - arista.eos
+# - hosts: poc
+#   gather_facts: false
+#   collections:
+#   - arista.eos
 
-  tasks:
-  - name: Change Hostname
-    arista.eos.eos_hostname:
-      config:
-        hostname: "{{ inventory_hostname }}"
-      state: merged
-    tags:
-      - hostname
+#   tasks:
+#   - name: Change Hostname
+#     arista.eos.eos_hostname:
+#       config:
+#         hostname: "{{ inventory_hostname }}"
+#       state: merged
+#     tags:
+#       - hostname
 
-  - name: Enable Network Services
-    vars:
-      ansible_command_timeout: 60
-    block:
-    - name: Enable IP Routing
-      eos_config:
-        lines: 
-        - ip routing
-        - ipv6 unicast-routing
-        - ip routing vrf MGMT
-      tags:
-        - routing
+#   - name: Enable Network Services
+#     vars:
+#       ansible_command_timeout: 60
+#     block:
+#     - name: Enable IP Routing
+#       eos_config:
+#         lines: 
+#         - ip routing
+#         - ipv6 unicast-routing
+#         - ip routing vrf MGMT
+#       tags:
+#         - routing
 
-    # - name: Enable Domain/DNS Server
-    #   eos_config:
-    #     src: domain.j2
-    #     # diff_against: validate_config
-    #     # intended_config: "/home/xji/devops/cfggen/{{hostname}}.conf.part"
-    #   tags:
-    #     - domain
+#     - name: Enable Banner Motd
+#       eos_banner:
+#         banner: motd
+#         text: "{{ lookup('file', 'files/banner_motd') }}"
+#         state: present
+#       tags:
+#         - banner
 
-    - name: Enable Banner Motd
-      eos_banner:
-        banner: motd
-        text: "{{ lookup('file', 'files/banner_motd') }}"
-        state: present
-      tags:
-        - banner
+#     - name: Enable Banner Login
+#       eos_banner:
+#         banner: login
+#         text: "{{ lookup('file', 'files/banner_login') }}"
+#         state: present
+#       tags:
+#         - banner
 
-    - name: Enable Banner Login
-      eos_banner:
-        banner: login
-        text: "{{ lookup('file', 'files/banner_login') }}"
-        state: present
-      tags:
-        - banner
+#     - name: Setup the local user accounts
+#       block:
+#       - name: Enable all local users
+#         eos_config:
+#           src: user.j2
 
-    - name: Setup the local user accounts
-      block:
-      - name: Enable all local users
-        eos_config:
-          src: user.j2
+#       - name: Add SSHKEY for Ansible user
+#         arista.eos.eos_user:
+#           name: ansible
+#           sshkey: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+#           state: present
 
-      - name: Add SSHKEY for Ansible user
-        arista.eos.eos_user:
-          name: ansible
-          sshkey: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
-          state: present
-
-      tags:
-        - users
-
-    # - name: Enable NTP
-    #   eos_config:
-    #       src: ntp.j2
-    #   # when: (features.netserv.ntp is defined and features.netserv.ntp|lower == "yes")
-    #   tags:
-    #     - ntp
-
-    # - name: Enable Syslog
-    #   eos_config:
-    #       src: syslog.j2
-    #   # when: (features.netserv.syslog is defined and features.netserv.syslog|lower == "yes")
-    #   tags:
-    #   - syslog
-
-    # - name: Enable SNMP
-    #   eos_config:
-    #       src: snmp.j2
-    #   when: (features.netserv.snmp is defined and features.netserv.snmp|lower == "yes")
-    #   tags:
-    #   - snmp
-
-    # - name: Enable Group & AAA
-    #   block:
-    #   - name: Enable Tacacs
-    #     eos_config:
-    #         src: tacacs.j2
-    #     # when: (features.netserv.tacacs is defined and features.netserv.tacacs|lower == "yes")
-    #   - name: Enable Radius
-    #     eos_config:
-    #         src: radius.j2
-    #     # when: (features.netserv.radius is defined and features.netserv.radius|lower == "yes")
-    #   - name: Enable AAA
-    #     eos_config:
-    #         src: aaa.j2
-    #     # when: (features.netserv.aaa is defined and features.netserv.aaa|lower == "yes")
-    #   tags:
-    #     - aaa
-    tags:
-      - netserv
+#       tags:
+#         - users
+#     tags:
+#       - netserv
 
 - hosts: poc_leaf
   gather_facts: false
@@ -190,9 +144,10 @@
     tags:
     - standard
 
-  - name: Dump the rest Spine CFG
+  - name: Dump the Staged Spine CFG
+    vars:
+      ansible_command_timeout: 180
     eos_config:
         src: spine_inherited_cfg.j2
-    when: (features.routing.bgp_stan|lower == "yes")
     tags:
-    - standard
+    - inherit

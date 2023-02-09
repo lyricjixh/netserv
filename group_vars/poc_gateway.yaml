@@ -66,7 +66,7 @@ afi:
 
 proto:
     bgp:
-        local_asn: "{{ 64516 + seq }}"
+        local_as: "{{ 64516 + seq }}"
         gw_peer_v4:
             - 
                 addr: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_links_seq[0]) | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address') }}"

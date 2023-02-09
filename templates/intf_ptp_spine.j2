@@ -3,12 +3,12 @@
 Purpose:
 Generating Interface Configuration
 ############################################}
-ip routing
-ip hardware fib optimize prefixes profile urpf-internet
 vrf instance SPINE
-   rd 3:3
 !
+ip routing
 ip routing vrf SPINE
+ipv6 unicast-routing
+!
 !
 {% for intf in fabric_links %}
 interface ethernet{{ intf.name }}

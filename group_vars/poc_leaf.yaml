@@ -81,7 +81,7 @@ fabric_links:
 
 # BGP Parameters
 bgp:
-  local_as: "{{ 64516+rack_no }}"
+  local_as: "{{ asn_base+rack_no }}"
   remote_as: "{{ spine_asn }}"
   sas_as: "64999"
   fabric_peer_v4:
@@ -213,7 +213,7 @@ evpn:
         rd_pfx: "{{ lpbk1.addr_v4 }}"
         rt_pfx: "1001"
         l3_vni: 
-          id: "500050"
+          id: "50050"
           vlan: "901"
         interfaces:
         - 
@@ -240,7 +240,7 @@ evpn:
         rd_pfx: "{{ lpbk1.addr_v4 }}"
         rt_pfx: "1002"
         l3_vni: 
-          id: "500054"
+          id: "50054"
           vlan: "902"
         interfaces:
         - 
@@ -267,7 +267,7 @@ evpn:
         rd_pfx: "{{ lpbk1.addr_v4 }}"
         rt_pfx: "1003"
         l3_vni: 
-          id: "500055"
+          id: "50055"
           vlan: "903"
         interfaces:
         - 

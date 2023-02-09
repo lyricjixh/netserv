@@ -3,7 +3,7 @@
 Purpose:
 Generating BGP Dual-Stack Underlay Configuration
 ###################################################}
-router bgp {{ bgp.local_as }}
+router bgp {{ edge_asn }}
   router-id {{ lpbk0.addr_v4 }}
   bgp bestpath as-path multipath-relax
   bgp log-neighbor-changes
@@ -85,6 +85,7 @@ router bgp {{ bgp.local_as }}
   !
 {% endif %}
   vrf SPINE
+    local-as {{ bgp.local_as }}
     update wait-install
     distance bgp 20 200 1
     maximum-paths 8
