@@ -337,9 +337,13 @@ k8s_tor2_netv6: "{{ v142_netv6 }}"
 #BGP
 ## Global ASN for PNAP Edge VRF
 edge_asn: "12189"
-## ASN for PNAP-CORE VRF
+## Local ASN for PNAP-CORE VRF
 core_asn: "46385"
+## Local ASN for SPINE VRF
 spine_asn: "4200000000"
+## ISP Peer ASN
+isp_asn: "174"
+## Base No for Rack ASN Generation
 asn_base: 64516
 rack_tor_asn: "{{ asn_base+rack_no }}"
 rack01_asn: "{{ asn_base+1 }}"
