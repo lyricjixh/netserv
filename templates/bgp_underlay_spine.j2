@@ -4,7 +4,7 @@ Purpose:
 Generating BGP Dual-Stack Underlay Configuration
 ###################################################}
 router bgp {{ edge_asn }}
-  router-id {{ lpbk0.addr_v4 }}
+  router-id {{ lpbk_ulay.addr_v4 }}
   bgp bestpath as-path multipath-relax
   bgp log-neighbor-changes
   maximum-paths 4 ecmp 4

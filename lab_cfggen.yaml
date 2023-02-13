@@ -2,7 +2,7 @@
 - hosts: ceos
   gather_facts: false
   vars:
-      temp_file: "bgp_underlay_spine.j2"
+      temp_file: "bgp_gateway.j2"
   collections:
   - arista.eos
 

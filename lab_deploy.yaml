@@ -151,3 +151,41 @@
         src: spine_inherited_cfg.j2
     tags:
     - inherit
+
+- hosts: poc_gateway
+  gather_facts: false
+  collections:
+  - arista.eos
+
+  tasks:
+  - name: Enable loopback Interface
+    eos_config:
+        src: intf_lpbk.j2
+    tags:
+    - loopback
+
+  - name: Enable PTP Interface
+    eos_config:
+        src: intf_ptp_isp.j2
+    tags:
+    - ptp
+
+  - name: Enable Tester Interface
+    eos_config:
+        src: intf_test_isp.j2
+    tags:
+    - tester
+
+  - name: Enable Routing Policy
+    eos_config:
+        src: route_pol.j2
+    when: "'leaf' in inventory_hostname"
+    tags:
+      - rpol
+
+  - name: Enable Standard BGP
+    eos_config:
+        src: bgp_gateway.j2
+    when: "'leaf' in inventory_hostname"
+    tags:
+    - standard

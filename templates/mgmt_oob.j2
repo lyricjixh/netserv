@@ -14,12 +14,12 @@ service simple-password
 username {{ user.name }} password {{ user.passwd }} role {{ user.role }} priv-lvl 15
 {% endfor %}
 !
-interface loopback0
- description "{{ lpbk0.desc }}"
+interface loopback{{ lpbk_ulay.id }}
+ description "{{ lpbk_ulay.desc }}"
  no shutdown
- ip address {{ lpbk0.addr_v4 }}/32
-{% if lpbk0.addr_v6 is defined and lpbk0.addr_v6 %}
- ipv6 address {{ lpbk0.addr_v6 }}/128
+ ip address {{ lpbk_ulay.addr_v4 }}/32
+{% if lpbk_ulay.addr_v6 is defined and lpbk_ulay.addr_v6 %}
+ ipv6 address {{ lpbk_ulay.addr_v6 }}/128
 {% endif %}
  exit
 !
@@ -132,7 +132,7 @@ interface ethernet1/1/{{tport}}
 {% endfor %}
 {% endif %}
 router bgp {{ bgp.local_as }}
- router-id {{ lpbk0.addr_v4 }}
+ router-id {{ lpbk_ulay.addr_v4 }}
  !
  address-family ipv4 unicast
   redistribute connected

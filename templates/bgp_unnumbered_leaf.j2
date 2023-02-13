@@ -22,7 +22,7 @@ interface vlan{{ mlag_bond.vlan }}
 !
 {% endif %}
 router bgp {{ bgp.local_as }}
-  router-id {{ lpbk0.addr_v4 }}
+  router-id {{ lpbk_ulay.addr_v4 }}
   bgp default ipv4-unicast transport ipv6
   bgp default ipv6-unicast
   bgp bestpath as-path multipath-relax

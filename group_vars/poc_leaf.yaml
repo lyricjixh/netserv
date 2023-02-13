@@ -3,9 +3,10 @@
 vendor: "Arista"
 
 #Vxlan
-lpbk1:
+lpbk_olay:
+    id: "{{ lpbk_olay_id}}"
     desc: "Overlay vTEP Endpoint"
-    addr_v4: "{{ lpbk_overlay_netv4 | ansible.utils.ipaddr(rack_no) | ansible.utils.ipaddr('address') }}"
+    addr_v4: "{{ lpbk_olay_netv4 | ansible.utils.ipaddr(rack_no) | ansible.utils.ipaddr('address') }}"
 
 vlan_port: 
 #   - 
@@ -210,7 +211,7 @@ evpn:
     - 
         name: "SDDC"
         desc: "SDDC VRF"
-        rd_pfx: "{{ lpbk1.addr_v4 }}"
+        rd_pfx: "{{ lpbk_olay.addr_v4 }}"
         rt_pfx: "1001"
         l3_vni: 
           id: "50050"
@@ -237,7 +238,7 @@ evpn:
     - 
         name: "SDDC2"
         desc: "SDDC VRF2"
-        rd_pfx: "{{ lpbk1.addr_v4 }}"
+        rd_pfx: "{{ lpbk_olay.addr_v4 }}"
         rt_pfx: "1002"
         l3_vni: 
           id: "50054"
@@ -264,7 +265,7 @@ evpn:
     - 
         name: "SDDC3"
         desc: "SDDC VRF3"
-        rd_pfx: "{{ lpbk1.addr_v4 }}"
+        rd_pfx: "{{ lpbk_olay.addr_v4 }}"
         rt_pfx: "1003"
         l3_vni: 
           id: "50055"
@@ -300,8 +301,8 @@ evpn:
 #       - "{{ rack03_asn }}"
 #       - "{{ rack03_asn }}"
 #     addr:
-#       - "{{ hostvars['bleaf01']['lpbk0']['addr_v4'] }}"
-#       - "{{ hostvars['bleaf02']['lpbk0']['addr_v4'] }}"
+#       - "{{ hostvars['bleaf01']['lpbk_ulay']['addr_v4'] }}"
+#       - "{{ hostvars['bleaf02']['lpbk_ulay']['addr_v4'] }}"
 #   rrc_v4:
 #     peer_group: "evpn_rrc_v4"
 #     remote_as:
@@ -310,9 +311,9 @@ evpn:
 #       - "{{ rack02_asn }}"
 #       - "{{ rack02_asn }}"
 #     addr:
-#       - "{{ hostvars['cleaf01']['lpbk0']['addr_v4'] }}"
-#       - "{{ hostvars['cleaf02']['lpbk0']['addr_v4'] }}"
-#       - "{{ hostvars['cleaf03']['lpbk0']['addr_v4'] }}"
-#       - "{{ hostvars['cleaf04']['lpbk0']['addr_v4'] }}"
+#       - "{{ hostvars['cleaf01']['lpbk_ulay']['addr_v4'] }}"
+#       - "{{ hostvars['cleaf02']['lpbk_ulay']['addr_v4'] }}"
+#       - "{{ hostvars['cleaf03']['lpbk_ulay']['addr_v4'] }}"
+#       - "{{ hostvars['cleaf04']['lpbk_ulay']['addr_v4'] }}"
 #   peer_v4:
 #     peer_group: "evpn_rrp_v4"

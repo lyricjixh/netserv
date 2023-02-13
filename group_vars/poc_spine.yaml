@@ -26,7 +26,7 @@ collect_logs:
 
 # Changing the interface name here will be reflected in all places
 # Spine to Leaf interface connections
-loopback_intf0: Loopback0
+loopback_intf0: Loopback{{lpbk_ulay_id}}
 
 # Generic Spine to Leaf port in seqence (rack01, 02, 03)
 # overrided by host_var if inconsistent

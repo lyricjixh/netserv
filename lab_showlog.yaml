@@ -1,0 +1,56 @@
+---
+- hosts: poc
+  gather_facts: yes
+  collections:
+  - arista.eos
+
+  tasks:
+  - name: Display UUT information
+    debug:
+      msg:
+        - "The network model: {{ ansible_net_model }}"
+        - "EOS Image version: {{ ansible_net_version }}"
+    tags:
+      - generic
+
+  - name: Confirm Multi-Agent
+    eos_command:
+      commands:
+        - show running-config | in multi-agent
+      wait_for:
+        - result[0] contains multi-agent
+    register: show_output
+    tags:
+      - magent
+
+  - name: Collect Vxlan Logs
+    eos_command:
+      commands: "{{item}}"
+    loop:
+      - show interface vxlan1
+      - show bgp summary
+      - show bgp evpn summary
+      - show bgp evpn route-type imet detail
+      - show bgp evpn route-type mac-ip detail
+      - show bgp evpn route-type ip-prefix ipv4 detail
+    register: show_output
+    tags:
+      - vxlan
+
+  - name: Display the Logs
+    debug:
+      msg:
+        - "### The vxlan interface ###"
+        - "{{ show_output.results[0].stdout_lines }}"
+        - "### bgp summary ###"
+        - "{{ show_output.results[1].stdout_lines }}"
+        - "### bgp evpn summary ###"
+        - "{{ show_output.results[2].stdout_lines }}"
+        - "### evpn remote vtep type-3 ###"
+        - "{{ show_output.results[3].stdout_lines }}"
+        - "### evpn mac/ip type-2 ###"
+        - "{{ show_output.results[4].stdout_lines }}"
+        - "### evpn IP prefix type-5 ###"
+        - "{{ show_output.results[5].stdout_lines }}"
+    tags:
+      - vxlan

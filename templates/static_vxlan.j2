@@ -7,7 +7,7 @@ ip anycast-address enable
 ip anycast-mac-address {{ tor_pair_vmac }}
 !
 interface vxlan vtep100
-  source-ip {{ lpbk1.addr_v4 }}
+  source-ip {{ lpbk_olay.addr_v4 }}
   !
 {% for vni in vxlans %}
   map vni {{ vni.id }} vlan {{ vni.vlan }}

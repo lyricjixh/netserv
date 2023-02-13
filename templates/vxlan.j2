@@ -29,13 +29,13 @@ interface {{ intf.name }}
 !
 {% for vni in vxlans %}
 vlan {{ vni.vlan }}
-  name VLAN-AWARE-BUNDLE-VLAN{{ vni.vlan }}
+  name VLAN{{ vni.vlan }}
 !
 {% endfor %}
 !
 interface vxlan1
   vxlan virtual-router encapsulation mac-address mlag-system-id
-  vxlan source-interface loopback1
+  vxlan source-interface Loopback{{ lpbk_olay.id }}
   vxlan udp-port 4789
 {% for vni in vxlans %}
   vxlan vlan {{ vni.vlan }} vni {{ vni.id }}

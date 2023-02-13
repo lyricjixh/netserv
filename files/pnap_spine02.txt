@@ -97,8 +97,12 @@ interface Ethernet34/1
    channel-group 4 mode on
 !
 !POC relevant config addition over and above base config
-interface Ethernet5/1-6/1
- channel-group 50 mode on 
+interface Ethernet3/1-6/1
+ no vrf
+ no ip address
+ no ipv6 address
+ channel-group 50 mode on
+ no shutdown
 !
 interface port-channel 50
    description CORE<>CORE cross link for spine cross link

@@ -12,7 +12,7 @@ router bgp {{ bgp.local_as }}
 {% if vxlan is defined and vxlan %}
 {% for vni in vxlans %}
   vlan {{ vni.vlan }}
-    rd {{ lpbk1.addr_v4 }}:{{ vni.id }}
+    rd {{ lpbk_olay.addr_v4 }}:{{ vni.id }}
     route-target both {{ vni.id }}:{{ vni.id }}
   !
 {% endfor %}

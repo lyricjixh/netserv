@@ -4,7 +4,7 @@ Purpose:
 Generating BGP Dual-Stack Underlay Configuration
 ###################################################}
 router bgp {{ bgp.local_as }}
-  router-id {{ lpbk0.addr_v4 }}
+  router-id {{ lpbk_ulay.addr_v4 }}
   distance bgp 20 200 200
   bgp bestpath as-path multipath-relax
   bgp log-neighbor-changes
@@ -55,7 +55,7 @@ router bgp {{ bgp.local_as }}
   !
   neighbor DEFAULT-ONLY peer group
   neighbor DEFAULT-ONLY remove-private-as
-  neighbor DEFAULT-ONLY update-source Loopback1
+  neighbor DEFAULT-ONLY update-source Loopback{{ lpbk_olay.id }}
   neighbor DEFAULT-ONLY rib-in pre-policy retain all
   neighbor DEFAULT-ONLY ebgp-multihop 3
   neighbor DEFAULT-ONLY route-map DEFAULT-ONLY-CUSTOMERS-OUT out
@@ -70,7 +70,7 @@ router bgp {{ bgp.local_as }}
   !
   neighbor NO-SEND peer group
   neighbor NO-SEND remove-private-as
-  neighbor NO-SEND update-source Loopback1
+  neighbor NO-SEND update-source Loopback{{ lpbk_olay.id }}
   neighbor NO-SEND rib-in pre-policy retain all
   neighbor NO-SEND ebgp-multihop 3
   neighbor NO-SEND route-map NO-SEND-CUSTOMERS-OUT out
@@ -128,10 +128,10 @@ router bgp {{ bgp.local_as }}
 {% endif %}
   !
 {% endif %}
-{% if vxlan is defined and vxlan %}
+{% if vxlans is defined and vxlans %}
 {% for vni in vxlans %}
   vlan {{ vni.vlan }}
-    rd {{ lpbk1.addr_v4 }}:{{ vni.id }}
+    rd {{ lpbk_olay.addr_v4 }}:{{ vni.id }}
     route-target both {{ vni.id }}:{{ vni.id }}
   !
 {% endfor %}

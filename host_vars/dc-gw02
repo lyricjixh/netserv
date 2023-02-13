@@ -1,1 +1,15 @@
 name_orig: "hs424"
+
+edge_netmaskv4: 30
+edge_netmaskv6: 126
+edge_netv4: "209.249.45.126/30"
+edge_netv6: "2001:438:fffe::35a8/126"
+
+local_asn: "{{ isp_asn.zayo }}"
+
+lpbk_ulay:
+    id: "{{ lpbk_ulay_id }}"
+    desc: "Underlay Loopback"
+    addr_v4: "{{ isp_lpbk_netv4.zayo | ansible.utils.ipaddr(seq) | ansible.utils.ipaddr('address') }}"
+    addr_v6: "{{ isp_lpbk_netv6.zayo | ansible.utils.ipaddr(seq) | ansible.utils.ipaddr('address') }}"
+

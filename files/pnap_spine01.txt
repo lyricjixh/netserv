@@ -77,8 +77,12 @@ interface Ethernet34/1
    channel-group 4 mode on
 !
 !POC relevant config addition over and above base config
-interface Ethernet5/1-6/1
- channel-group 50 mode on 
+interface Ethernet3/1-6/1
+ no vrf
+ no ip address
+ no ipv6 address
+ channel-group 50 mode on
+ no shutdown
 !
 interface port-channel 50
    description CORE<>CORE cross link for spine cross link
@@ -108,7 +112,7 @@ interface port-channel 50.20
 interface port-channel 50.60	
 	description SPINE1>CORE2
 	encapsulation dot1q vlan 60
-	vrf SPINE
+	vrf PNAP-CORE
     ip address 131.153.60.8/31
     ipv6 enable
     ipv6 address 2000:1000:60::15/126
@@ -1098,8 +1102,8 @@ router bgp 12189
 	   bgp listen range 2000:1000::/64 peer-group BMC-LEAF-TORv6 peer-filter BMC-TOR-PEER-FILTER
       neighbor 131.153.60.6 remote-as 46385
       no neighbor 131.153.60.6 shutdown
-      neighbor 131.153.60.9 remote-as 46385
-      no neighbor 131.153.60.9 shutdown
+      neighbor 131.153.60.11 remote-as 46385
+      no neighbor 131.153.60.11 shutdown
 	  !
       neighbor 2000:1000:60::6 remote-as 46385
       no neighbor 2000:1000:60::6 shutdown	 	

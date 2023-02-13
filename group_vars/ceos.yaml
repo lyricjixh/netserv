@@ -12,10 +12,11 @@ ansible_become_pass: "{{ vault_lab_password }}"
 ansible_ssh_common_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 
 # Loopback Interface, leaf/spine Globally
-lpbk0:
+lpbk_ulay:
+    id: "{{ lpbk_ulay_id }}"
     desc: "Underlay Loopback"
-    addr_v4: "{{ lpbk_underlay_netv4 | ansible.utils.ipaddr(seq) | ansible.utils.ipaddr('address') }}"
-    addr_v6: "{{ lpbk_underlay_netv6 | ansible.utils.ipaddr(seq) | ansible.utils.ipaddr('address') }}"
+    addr_v4: "{{ lpbk_ulay_netv4 | ansible.utils.ipaddr(seq) | ansible.utils.ipaddr('address') }}"
+    addr_v6: "{{ lpbk_ulay_netv6 | ansible.utils.ipaddr(seq) | ansible.utils.ipaddr('address') }}"
 
 phy_mtu: 9214
 vxlan_mtu: "9100"
@@ -122,10 +123,10 @@ policy:
             prefix:
                 -
                     action: "permit"
-                    range: "{{ lpbk_underlay_netv4 }} le 32"
+                    range: "{{ lpbk_ulay_netv4 }} le 32"
                 -
                     action: "permit"
-                    range: "{{ lpbk_overlay_netv4 }} le 32"
+                    range: "{{ lpbk_olay_netv4 }} le 32"
                 -
                     action: "permit"
                     range: "{{ fabric_ptp_netv4 }} le 32"
@@ -169,10 +170,10 @@ policy:
             prefix:
                 -
                     action: "permit"
-                    range: "{{ lpbk_underlay_netv6 }} le 128"
+                    range: "{{ lpbk_ulay_netv6 }} le 128"
                 -
                     action: "permit"
-                    range: "{{ lpbk_overlay_netv6 }} le 128"
+                    range: "{{ lpbk_olay_netv6 }} le 128"
                 -
                     action: "permit"
                     range: "{{ edge_netv6 }} le 128"
@@ -254,7 +255,7 @@ policy:
             prefix:
                 -
                     action: "permit"
-                    range: "{{ lpbk_underlay_netv4 }} le 32"
+                    range: "{{ lpbk_ulay_netv4 }} le 32"
                 -
                     action: "permit"
                     range: "{{ fabric_ptp_netv4 }} le 32"
@@ -342,7 +343,7 @@ policy:
             prefix:
                 -
                     action: "permit"
-                    range: "{{ lpbk_underlay_netv4 }} le 32"
+                    range: "{{ lpbk_ulay_netv4 }} le 32"
 
     route_map:
         -

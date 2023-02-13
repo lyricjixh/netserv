@@ -40,3 +40,13 @@
     tags:
       - hostname
 
+  # - name: Switch reload
+  #   arista.eos.eos_command:
+  #     commands:
+  #     - command: reload power
+  #       prompt: \[confirm\]
+  #       answer: y
+  #       newline: false
+  #   tags:
+  #     - reload
+
