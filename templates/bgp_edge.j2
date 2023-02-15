@@ -8,7 +8,14 @@ router bgp {{ edge_bgp.local_as }}
 {% for group in edge_bgp.peer_group.ipv4 %}
   neighbor {{ group.name }} peer group
   neighbor {{ group.name }} description "{{ group.desc }}"
+{% if group.remote_as is defined and group.remote_as %}
   neighbor {{ group.name }} remote-as {{ group.remote_as }}
+{% endif %}
+{% if group.admin_state == "up" %}
+  no neighbor {{ group.name }} shutdown
+{% else %}
+  neighbor {{ group.name }} shutdown
+{% endif %}
 {% if group.attributes is defined and group.attributes %}
 {% for attr in group.attributes %}
   neighbor {{ group.name }} {{ attr }}
@@ -21,7 +28,14 @@ router bgp {{ edge_bgp.local_as }}
 {% for group in edge_bgp.peer_group.ipv6 %}
   neighbor {{ group.name }} peer group
   neighbor {{ group.name }} description "{{ group.desc }}"
+{% if group.remote_as is defined and group.remote_as %}
   neighbor {{ group.name }} remote-as {{ group.remote_as }}
+{% endif %}
+{% if group.admin_state == "up" %}
+  no neighbor {{ group.name }} shutdown
+{% else %}
+  neighbor {{ group.name }} shutdown
+{% endif %}
 {% if group.attributes is defined and group.attributes %}
 {% for attr in group.attributes %}
   neighbor {{ group.name }} {{ attr }}

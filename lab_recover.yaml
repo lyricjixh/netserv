@@ -10,7 +10,7 @@
       local_as: "{{ 65000+rack_no }}"
     arista.eos.eos_bgp_global:
       config:
-        as_number: "{{ bgp.local_as }}"
+        as_number: "{{ edge_bgp.local_as }}"
       state: purged
     tags:
     - bgp

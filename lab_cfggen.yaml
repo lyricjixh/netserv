@@ -3,6 +3,8 @@
   gather_facts: false
   vars:
       temp_file: "config_edge.j2"
+      # save_dir: "{{ build_dir }}"
+      save_dir: "files"
   collections:
   - arista.eos
 
@@ -10,18 +12,17 @@
   - name: Generate the templated config
     template:
       src: "{{ temp_file }}"
-      # dest: "{{ build_dir }}/{{hostname}}.conf.part"
-      dest: "files/{{hostname}}.conf.part"
+      dest: "{{save_dir}}/{{hostname}}.conf.part"
     delegate_to: localhost
     tags:
-    - cfggen
+      - cfggen
 
   - name: Display the generated config
     debug: var=item
     with_file:
-    - "{{ build_dir }}/{{hostname}}.conf.part"
+      - "{{save_dir}}/{{hostname}}.conf.part"
     tags:
-    - cfggen
+      - cfggen
 
   # - name: Generate the templated config
   #   eos_config:

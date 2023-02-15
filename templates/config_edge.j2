@@ -9,7 +9,7 @@ ceos Modular Template
 {% include 'intf_ptp_edge.j2' %}
 !
 {% if 'gw' in inventory_hostname %}
-{% include 'intf_test_edge.j2' %}
+{% include 'intf_test_isp.j2' %}
 {% include 'bgp_gateway.j2' %}
 {% endif %}
 {% if 'spine' in inventory_hostname %}

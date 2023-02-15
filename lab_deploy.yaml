@@ -158,40 +158,38 @@
   - arista.eos
 
   tasks:
-  - name: Enable loopback Interface
-    eos_config:
-        src: intf_lpbk.j2
-    tags:
-    - loopback
+  - name: Enable Edge Functions
+    block:
+      - name: Enable loopback Interface
+        eos_config:
+            src: intf_lpbk.j2
+        tags:
+        - loopback
 
-  - name: Enable PTP Interface
-    eos_config:
-        src: intf_ptp_edge.j2
-    tags:
-    - ptp
+      - name: Enable PTP Interface
+        eos_config:
+            src: intf_ptp_edge.j2
+        tags:
+        - ptp
 
-  - name: Enable Tester Interface
-    eos_config:
-        src: intf_test_edge.j2
-    tags:
-    - tester
+      - name: Enable Tester Interface
+        eos_config:
+            src: intf_test_isp.j2
+        tags:
+        - tester
 
-  - name: Enable Routing Policy
-    eos_config:
-        src: route_pol.j2
-    tags:
-      - rpol
+      - name: Enable Edge BGP on ISP GW
+        eos_config:
+            src: bgp_gateway.j2
+        when: "'gw' in inventory_hostname"
+        tags:
+        - standard
 
-  - name: Enable Edge BGP on ISP GW
-    eos_config:
-        src: bgp_gateway.j2
-    when: "'gw' in inventory_hostname"
+      - name: Enable Edge BGP in EDGE VRF
+        eos_config:
+            src: bgp_edge.j2
+        when: "'spine' in inventory_hostname"
+        tags:
+        - standard
     tags:
-    - standard
-
-  - name: Enable Edge BGP in EDGE VRF
-    eos_config:
-        src: bgp_edge.j2
-    when: "'spine' in inventory_hostname"
-    tags:
-    - standard
+      - edge

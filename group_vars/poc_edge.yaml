@@ -5,9 +5,12 @@ edge_links:
     state: "present"
     desc: "EDGE to ISP GW"
     admin_state: "up"
-    net_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, links_seq[0]) }}"
-    net_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, links_seq[0]) }}"
-    vrf:
+    net_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_seq) }}"
+    net_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_seq) }}"
+    ## Edge Addr higher(2), ISP lower(1)
+    addr_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_seq)|ansible.utils.ipaddr(2) }}"
+    addr_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_seq)|ansible.utils.ipaddr(2) }}"
+    vrf: PNAP-EDGE
 #    -
 #     name: "2"
 #     state: "present"    
@@ -45,6 +48,7 @@ edge_bgp:
         name: "ISP-PEER-GROUP_v4"
         desc: "GENERIC-ISP-PG"
         remote_as:
+        admin_state: "up"
         attributes:
           - "remove-private-as"
           - "route-map ISP-GENERIC-IN in"
@@ -57,6 +61,7 @@ edge_bgp:
         name: "ISP-PEER-GROUP_v6"
         desc: "GENERIC-ISP-PG"
         remote_as:
+        admin_state: "up"
         attributes:
           - "remove-private-as"
           - "route-map ISP-GENERIC-IN in"
