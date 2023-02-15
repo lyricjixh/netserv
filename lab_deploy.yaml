@@ -1,63 +1,63 @@
 ---
-# - hosts: poc
-#   gather_facts: false
-#   collections:
-#   - arista.eos
+- hosts: poc
+  gather_facts: false
+  collections:
+  - arista.eos
 
-#   tasks:
-#   - name: Change Hostname
-#     arista.eos.eos_hostname:
-#       config:
-#         hostname: "{{ inventory_hostname }}"
-#       state: merged
-#     tags:
-#       - hostname
+  tasks:
+  - name: Change Hostname
+    arista.eos.eos_hostname:
+      config:
+        hostname: "{{ inventory_hostname }}"
+      state: merged
+    tags:
+      - hostname
 
-#   - name: Enable Network Services
-#     vars:
-#       ansible_command_timeout: 60
-#     block:
-#     - name: Enable IP Routing
-#       eos_config:
-#         lines: 
-#         - ip routing
-#         - ipv6 unicast-routing
-#         - ip routing vrf MGMT
-#       tags:
-#         - routing
+  - name: Enable Network Services
+    vars:
+      ansible_command_timeout: 60
+    block:
+    - name: Enable IP Routing
+      eos_config:
+        lines: 
+        - ip routing
+        - ipv6 unicast-routing
+        - ip routing vrf MGMT
+      tags:
+        - routing
 
-#     - name: Enable Banner Motd
-#       eos_banner:
-#         banner: motd
-#         text: "{{ lookup('file', 'files/banner_motd') }}"
-#         state: present
-#       tags:
-#         - banner
+    - name: Enable Banner Motd
+      eos_banner:
+        banner: motd
+        text: "{{ lookup('file', 'files/banner_motd') }}"
+        state: present
+      tags:
+        - banner
 
-#     - name: Enable Banner Login
-#       eos_banner:
-#         banner: login
-#         text: "{{ lookup('file', 'files/banner_login') }}"
-#         state: present
-#       tags:
-#         - banner
+    - name: Enable Banner Login
+      eos_banner:
+        banner: login
+        text: "{{ lookup('file', 'files/banner_login') }}"
+        state: present
+      tags:
+        - banner
 
-#     - name: Setup the local user accounts
-#       block:
-#       - name: Enable all local users
-#         eos_config:
-#           src: user.j2
+    - name: Setup the local user accounts
+      block:
+      - name: Enable all local users
+        eos_config:
+          src: user.j2
 
-#       - name: Add SSHKEY for Ansible user
-#         arista.eos.eos_user:
-#           name: ansible
-#           sshkey: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
-#           state: present
+      - name: Add SSHKEY for Ansible user
+        arista.eos.eos_user:
+          name: ansible
+          sshkey: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+          state: present
 
-#       tags:
-#         - users
-#     tags:
-#       - netserv
+      tags:
+        - users
+    tags:
+      - netserv
 
 - hosts: poc_leaf
   gather_facts: false
@@ -152,7 +152,7 @@
     tags:
     - inherit
 
-- hosts: poc_gateway
+- hosts: func_edge
   gather_facts: false
   collections:
   - arista.eos
@@ -166,26 +166,32 @@
 
   - name: Enable PTP Interface
     eos_config:
-        src: intf_ptp_isp.j2
+        src: intf_ptp_edge.j2
     tags:
     - ptp
 
   - name: Enable Tester Interface
     eos_config:
-        src: intf_test_isp.j2
+        src: intf_test_edge.j2
     tags:
     - tester
 
   - name: Enable Routing Policy
     eos_config:
         src: route_pol.j2
-    when: "'leaf' in inventory_hostname"
     tags:
       - rpol
 
-  - name: Enable Standard BGP
+  - name: Enable Edge BGP on ISP GW
     eos_config:
         src: bgp_gateway.j2
-    when: "'leaf' in inventory_hostname"
+    when: "'gw' in inventory_hostname"
+    tags:
+    - standard
+
+  - name: Enable Edge BGP in EDGE VRF
+    eos_config:
+        src: bgp_edge.j2
+    when: "'spine' in inventory_hostname"
     tags:
     - standard

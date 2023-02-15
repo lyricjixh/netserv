@@ -85,14 +85,14 @@ policy:
         -
             name: "COMM_EVPN_PE"
             permit:
-                - "{{ spine_asn }}:9000"
+                - "{{ edge_asn }}:9000"
                 - "65100:9001"
                 - "65100:9002"
             deny:
         -
             name: "COMM_LOCAL_ROUTE"
             permit:
-                - "{{ spine_asn }}:{{ spine_asn }}"
+                - "{{ edge_asn }}:{{ edge_asn }}"
             deny:
     as_path:
         -

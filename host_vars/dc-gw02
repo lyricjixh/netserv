@@ -1,12 +1,15 @@
 name_orig: "hs424"
 
-edge_netmaskv4: 30
-edge_netmaskv6: 126
-edge_netv4: "209.249.45.126/30"
-edge_netv6: "2001:438:fffe::35a8/126"
+edge_isp: "zayo"
 
-local_asn: "{{ isp_asn.zayo }}"
+edge_netmaskv4: "{{ xconn_v4 | json_query('[?pointa==`edge2` && pointb==`dc-gw02`].netmask') | first }}"
+edge_netmaskv6: "{{ xconn_v6 | json_query('[?pointa==`edge2` && pointb==`dc-gw02`].netmask') | first }}"
+edge_netv4: "{{ xconn_v4 | json_query('[?pointa==`edge2` && pointb==`dc-gw02`].net') | first }}"
+edge_netv6: "{{ xconn_v6 | json_query('[?pointa==`edge2` && pointb==`dc-gw02`].net') | first }}"
 
+local_asn: "{{ isp_asn | json_query('[?name==`zayo`].id') | first }}"
+
+## ZAYO's loopback block
 lpbk_ulay:
     id: "{{ lpbk_ulay_id }}"
     desc: "Underlay Loopback"

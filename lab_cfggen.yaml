@@ -2,7 +2,7 @@
 - hosts: ceos
   gather_facts: false
   vars:
-      temp_file: "bgp_gateway.j2"
+      temp_file: "config_edge.j2"
   collections:
   - arista.eos
 
@@ -10,7 +10,8 @@
   - name: Generate the templated config
     template:
       src: "{{ temp_file }}"
-      dest: "{{ build_dir }}/{{hostname}}.conf.part"
+      # dest: "{{ build_dir }}/{{hostname}}.conf.part"
+      dest: "files/{{hostname}}.conf.part"
     delegate_to: localhost
     tags:
     - cfggen

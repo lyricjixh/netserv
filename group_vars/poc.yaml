@@ -314,25 +314,17 @@ v402_netv6: "2001:100:42::/64"
 
 v403_netv4: "10.100.43.0/24"
 v403_netv6: "2001:100:43::/64"
-# gw_ptp_netmaskv4: 27
-# gw_ptp_netmaskv6: 80
-# gw_ptp_netv4: "10.99.1.0/24"
-# gw_ptp_netv6: "2001:2001:99::/64"
-edge_netmaskv4: 30
-edge_netmaskv6: 126
-edge_netv4: "10.99.1.0/24"
-edge_netv6: "2001:2001:99:1::/64"
+
+## Not Shared Edge Subnet on Edge
+# edge_netmaskv4: 30
+# edge_netmaskv6: 126
+# edge_netv4: "10.99.1.0/24"
+# edge_netv6: "2001:2001:99:1::/64"
 
 test_netmaskv4: 30
 test_netmaskv6: 126
 test_netv4: "10.100.199.0/24"
-test_netv6: "2001:2001:2001:c7::/64"
-
-# edge01_netv4: "10.99.1.0/24"
-# edge01_netv6: "2001:2001:99:1::/64"
-
-# edge02_netv4: "10.99.2.0/24"
-# edge02_netv6: "2001:2001:99:2::/64"
+test_netv6: "2001:2001:2001:c7::/124"
 
 k8s_tor_netmaskv4: 24
 k8s_tor_netmaskv6: 64
@@ -363,11 +355,21 @@ core_asn: "46385"
 spine_asn: "4200000000"
 ## ISP Peer ASN
 isp_asn:
-  cogent: "174"
-  zayo: "6461"
-  centurylink: "3356"
-  telia: "1299"
-  GTT: "3257"
+  -
+    name: "cogent"
+    id: "174"
+  -
+    name: "zayo"
+    id: "6461"
+  -
+    name: centurylink
+    id: "3356"
+  -
+    name: "telia"
+    id: "1299"
+  -
+    name: "GTT"
+    id: "3257"
 ## Base No for Rack ASN Generation
 tester_asn: "1234"
 asn_base: 64516

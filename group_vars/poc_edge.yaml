@@ -1,0 +1,90 @@
+---
+edge_links:
+   -
+    name: "1/1"
+    state: "present"
+    desc: "EDGE to ISP GW"
+    admin_state: "up"
+    net_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, links_seq[0]) }}"
+    net_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, links_seq[0]) }}"
+    vrf:
+#    -
+#     name: "2"
+#     state: "present"    
+#     desc: "ISP GW To EDGE"
+#     admin_state: "up"
+#     net_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, links_seq[1]) }}"
+#     net_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, links_seq[1]) }}"
+#     vrf:
+
+# edge_vlans:
+#    -
+#     id: "1991"
+#     port: "27"
+#     state: "present"    
+#     desc: "ISP GW To EDGE"
+#     admin_state: "up"
+#     net_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, links_seq[0]) }}"
+#     net_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, links_seq[0]) }}"
+#     vrf:
+#    -
+#     id: "1992"
+#     port: "28"
+#     state: "present"    
+#     desc: "ISP GW To EDGE"
+#     admin_state: "up"
+#     net_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, links_seq[0]) }}"
+#     net_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, links_seq[0]) }}"
+#     vrf:
+
+edge_bgp:
+  local_as: "{{ edge_asn }}"
+  peer_group:
+    ipv4:
+      -
+        name: "ISP-PEER-GROUP_v4"
+        desc: "GENERIC-ISP-PG"
+        remote_as:
+        attributes:
+          - "remove-private-as"
+          - "route-map ISP-GENERIC-IN in"
+          - "route-map ISP-GENERIC-OUT out"
+          - "send-community"
+          - "ebgp-multihop 2"
+          - "maximum-routes 0"
+    ipv6:
+      -
+        name: "ISP-PEER-GROUP_v6"
+        desc: "GENERIC-ISP-PG"
+        remote_as:
+        attributes:
+          - "remove-private-as"
+          - "route-map ISP-GENERIC-IN in"
+          - "route-map ISP-GENERIC-OUT out"
+          - "send-community"
+          - "ebgp-multihop 2"
+          - "maximum-routes 0"
+  peers:
+    - 
+      addr: "{{ edge_links[0].net_v4 | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V4"
+      remote_as: "{{ remote_isp_asn }}"
+      peer_group: "ISP-PEER-GROUP_v4"
+    - 
+      addr: "{{ edge_links[0].net_v6 | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V6"
+      remote_as: "{{ remote_isp_asn }}"
+      peer_group: "ISP-PEER-GROUP_v6"
+  afi: 
+  #   ipv4:
+  #   -
+  #       r_map: "LOCAL_CONNECTED_V4"
+  #       proto: connected
+  #   ipv6:
+  #   -
+  #       r_map: "LOCAL_CONNECTED_V6"
+  #       proto: connected
+  # flowspec: 
+  #   ipv4: "disable"
+  #   ipv6: "disable"
+

@@ -1,24 +1,15 @@
 ---
-
-## link seqeunce calculation
-## link count per switch
-link_ct: 1
-offset: "{{ hostvars['dc-gw01'].seq }}"
-links_seq:
-    - "{{ (seq-offset|int)*link_ct + 0 }}"
-    # - "{{ (seq-offset|int)*link_ct + 1 }}"
-
 edge_links:
    -
-    name: "1/1"
-    state: "present"    
+    name: "49/1"
+    state: "present"
     desc: "ISP GW To EDGE"
     admin_state: "up"
     net_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, links_seq[0]) }}"
     net_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, links_seq[0]) }}"
     vrf:
 #    -
-#     name: "1/2"
+#     name: "2"
 #     state: "present"    
 #     desc: "ISP GW To EDGE"
 #     admin_state: "up"
@@ -48,7 +39,7 @@ edge_links:
 
 test_links:
    -
-    name: "31/1"
+    name: "48"
     state: "present"    
     desc: "To IXIA"
     admin_state: "up"
@@ -58,21 +49,20 @@ test_links:
 
 bgp:
   local_as: "{{ local_asn }}"
-  peer-group:
+  peer_group:
     ipv4:
       - 
         name: "fabric_edge_v4"
-        desc: "PEER GROUP to EDGE"
+        desc: "PEER GROUP to EDGE v4"
         remote_as: "{{ edge_asn }}"
         attributes:
-          - "advertisement-interval 5"
-          - "capability extended-nexthop"
           - "time 3 9"
           - "bfd"
           - "allowas-in"
           - "send-community standard extended"
       - 
         name: "tester_v4"
+        desc: "PEER GROUP to Tester v4"
         remote_as: "{{ tester_asn }}"
         attributes:
           - "time 3 9"
@@ -82,6 +72,7 @@ bgp:
     ipv6:
       - 
         name: "fabric_edge_v6"
+        desc: "PEER GROUP to EDGE v6"
         remote_as: "{{ edge_asn }}"
         attributes:
           - "time 3 9"
@@ -90,6 +81,7 @@ bgp:
           - "send-community standard extended"
       - 
         name: "tester_v6"
+        desc: "PEER GROUP to Tester v6"
         remote_as: "{{ tester_asn }}"
         attributes:
           - "time 3 9"
