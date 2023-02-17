@@ -1,0 +1,131 @@
+{##################################################
+
+Purpose:
+Generating BGP Dual-Stack Underlay Configuration
+###################################################}
+router bgp {{ edge_asn }}
+{% if spine_bgp.peer_group.ipv4 is defined and spine_bgp.peer_group.ipv4 %}
+{% for group in spine_bgp.peer_group.ipv4 %}
+  neighbor {{ group.name }} peer group
+  neighbor {{ group.name }} description "{{ group.desc }}"
+{% if group.remote_as is defined and group.remote_as %}
+  neighbor {{ group.name }} remote-as {{ group.remote_as }}
+{% endif %}
+{% if group.admin_state == "down" %}
+  neighbor {{ group.name }} shutdown
+{% endif %}
+{% if group.attributes is defined and group.attributes %}
+{% for attr in group.attributes %}
+  neighbor {{ group.name }} {{ attr }}
+{% endfor %}
+{% endif %}
+  !
+{% endfor %}
+{% endif %}
+{% if spine_bgp.peer_group.ipv6 is defined and spine_bgp.peer_group.ipv6 %}
+{% for group in spine_bgp.peer_group.ipv6 %}
+  neighbor {{ group.name }} peer group
+  neighbor {{ group.name }} description "{{ group.desc }}"
+{% if group.remote_as is defined and group.remote_as %}
+  neighbor {{ group.name }} remote-as {{ group.remote_as }}
+{% endif %}
+{% if group.admin_state == "down" %}
+  neighbor {{ group.name }} shutdown
+{% endif %}
+{% if group.attributes is defined and group.attributes %}
+{% for attr in group.attributes %}
+  neighbor {{ group.name }} {{ attr }}
+{% endfor %}
+{% endif %}
+  !
+{% endfor %}
+{% endif %}
+{% if spine_bgp.peer_group.evpn is defined and spine_bgp.peer_group.evpn %}
+{% for group in spine_bgp.peer_group.evpn %}
+  neighbor {{ group.name }} peer group
+  neighbor {{ group.name }} description "{{ group.desc }}"
+{% if group.remote_as is defined and group.remote_as %}
+  neighbor {{ group.name }} remote-as {{ group.remote_as }}
+{% endif %}
+{% if group.admin_state == "down" %}
+  neighbor {{ group.name }} shutdown
+{% endif %}
+{% if group.attributes is defined and group.attributes %}
+{% for attr in group.attributes %}
+  neighbor {{ group.name }} {{ attr }}
+{% endfor %}
+{% endif %}
+  !
+{% endfor %}
+{% endif %}
+  address-family ipv4
+{% if spine_bgp.afi.ipv4 is defined and spine_bgp.afi.ipv4 %}
+{% for redis in spine_bgp.afi.ipv4 %}
+{% if redis.r_map %}
+    redistribute {{ redis.proto }} route-map {{ redis.r_map }}
+{% else %}
+    redistribute {{ redis.proto }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if spine_bgp.peer_group.ipv4 is defined and spine_bgp.peer_group.ipv4 %}
+{% for group in spine_bgp.peer_group.ipv4 %}
+    neighbor {{ group.name }} activate
+{% endfor %}
+{% endif %}
+  !
+  address-family ipv6
+{% if spine_bgp.afi.ipv6 is defined and spine_bgp.afi.ipv6 %}
+{% for redis in spine_bgp.afi.ipv6 %}
+{% if redis.r_map %}
+    redistribute {{ redis.proto }} route-map {{ redis.r_map }}
+{% else %}
+    redistribute {{ redis.proto }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if spine_bgp.peer_group.ipv6 is defined and spine_bgp.peer_group.ipv6 %}
+{% for group in spine_bgp.peer_group.ipv6 %}
+    neighbor {{ group.name }} activate
+{% endfor %}
+{% endif %}
+  !
+  address-family evpn
+{% if spine_bgp.afi.evpn is defined and spine_bgp.afi.evpn %}
+{% for redis in spine_bgp.afi.evpn %}
+{% if redis.r_map %}
+    redistribute {{ redis.proto }} route-map {{ redis.r_map }}
+{% else %}
+    redistribute {{ redis.proto }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if spine_bgp.peer_group.evpn is defined and spine_bgp.peer_group.evpn %}
+{% for group in spine_bgp.peer_group.evpn %}
+    neighbor {{ group.name }} activate
+{% endfor %}
+{% endif %}
+{% if spine_bgp.peer_group.ipv4 is defined and spine_bgp.peer_group.ipv4 %}
+{% for group in spine_bgp.peer_group.ipv4 %}
+    neighbor {{ group.name }} activate
+{% endfor %}
+{% endif %}
+{% if spine_bgp.peer_group.ipv6 is defined and spine_bgp.peer_group.ipv6 %}
+{% for group in spine_bgp.peer_group.ipv6 %}
+    no neighbor {{ group.name }} activate
+{% endfor %}
+{% endif %}
+  !
+{% if spine_bgp.peers is defined and spine_bgp.peers %}
+{% for peer in spine_bgp.peers %}
+  neighbor {{ peer.addr }} description "{{ peer.desc }}"
+{% if peer.peer_group %}
+  neighbor {{ peer.addr }} peer group {{ peer.peer_group }}
+{% endif %}
+{% if peer.remote_as %}
+  neighbor {{ peer.addr }} remote-as {{ peer.remote_as }}
+{% endif %}
+  !
+{% endfor %}
+{% endif %}
+!

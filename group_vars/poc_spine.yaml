@@ -157,3 +157,127 @@ bgp:
     ipv4: "disable"
     ipv6: "disable"
 
+spine_bgp:
+  local_as: "{{ spine_asn }}"
+  peer_group:
+    ipv4:
+      -
+        name: "FABRIC-PEER_v4"
+        desc: "SPINE-LEAF PEER GROUP"
+        remote_as:
+        admin_state: "up"
+        attributes:
+          - "remove-private-as"
+          - "send-community standard extended"
+          - "ebgp-multihop 2"
+          - "local-as {{ spine_asn }} no-prepend replace-as"
+      -
+        name: "SPN-CORE"
+        desc: "SPINE-CORE PEER GROUP"
+        remote_as: "{{ core_asn }}"
+        admin_state: "up"
+        attributes:
+          - "remove-private-as"
+          - "send-community standard extended"
+          - "bfd"
+          - "ebgp-multihop 2"
+          - "local-as {{ spine_asn }} no-prepend replace-as"
+          - "maximum-routes 12000"
+      -
+        name: "SPN-CORE_v4"
+        desc: "SPINE-CORE PEER GROUP"
+        remote_as: "{{ core_asn }}"
+        admin_state: "up"
+        attributes:
+          - "send-community standard extended"
+          - "bfd"
+          - "ebgp-multihop 2"
+          - "local-as {{ spine_asn }} no-prepend replace-as"
+          - "maximum-routes 12000"
+    ipv6:
+      -
+        name: "FABRIC-PEER_v6"
+        desc: "LEAF-PEER-GROUP"
+        remote_as:
+        admin_state: "up"
+        attributes:
+          - "send-community standard extended"
+          - "bfd"
+          - "ebgp-multihop 2"
+          - "local-as {{ spine_asn }} no-prepend replace-as"
+          - "maximum-routes 12000"
+      -
+        name: "SPN-CORE_v6"
+        desc: "SPINE-CORE PEER GROUP"
+        remote_as: "{{ core_asn }}"
+        admin_state: "up"
+        attributes:
+          - "remove-private-as"
+          - "send-community standard extended"
+          - "bfd"
+          - "ebgp-multihop 2"
+          - "local-as {{ spine_asn }} no-prepend replace-as"
+          - "maximum-routes 12000"
+    evpn:
+      -
+        name: "EVPN-PEER"
+        desc: "EVPN PEER GROUP"
+        remote_as:
+        admin_state: "up"
+        attributes:
+          - "send-community standard extended"
+          - "ebgp-multihop 2"
+          - "local-as {{ spine_asn }} no-prepend replace-as"
+  peers:
+    - 
+      addr: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[0]|int+1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V4"
+      remote_as: "{{ rack01_asn }}"
+      peer_group: "FABRIC-PEER_v4"
+    - 
+      addr: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[1]|int+1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V4"
+      remote_as: "{{ rack01_asn }}"
+      peer_group: "FABRIC-PEER_v4"
+    - 
+      addr: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[2]|int+1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V4"
+      remote_as: "{{ rack02_asn }}"
+      peer_group: "FABRIC-PEER_v4"
+    - 
+      addr: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[3]|int+1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V4"
+      remote_as: "{{ rack02_asn }}"
+      peer_group: "FABRIC-PEER_v4"
+    - 
+      addr: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[0]|int+1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V6"
+      remote_as: "{{ rack01_asn }}"
+      peer_group: "FABRIC-PEER_v6"
+    - 
+      addr: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[1]|int+1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V6"
+      remote_as: "{{ rack01_asn }}"
+      peer_group: "FABRIC-PEER_v6"
+    - 
+      addr: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[2]|int+1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V6"
+      remote_as: "{{ rack02_asn }}"
+      peer_group: "FABRIC-PEER_v6"
+    - 
+      addr: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[3]|int+1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V6"
+      remote_as: "{{ rack02_asn }}"
+      peer_group: "FABRIC-PEER_v6"
+  afi: 
+  #   ipv4:
+  #   -
+  #       r_map: "LOCAL_CONNECTED_V4"
+  #       proto: connected
+  #   ipv6:
+  #   -
+  #       r_map: "LOCAL_CONNECTED_V6"
+  #       proto: connected
+  # flowspec: 
+  #   ipv4: "disable"
+  #   ipv6: "disable"

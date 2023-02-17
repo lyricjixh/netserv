@@ -23,6 +23,15 @@
     tags:
       - magent
 
+  - name: Backup cfg
+    arista.eos.eos_config:
+      backup: yes
+      backup_options:
+        filename: "{{hostname}}.conf.backup"
+        dir_path: "{{ build_dir }}"
+    tags:
+      - archive
+
   - name: Collect Vxlan Logs
     eos_command:
       commands: "{{item}}"

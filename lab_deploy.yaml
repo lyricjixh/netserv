@@ -131,26 +131,37 @@
   - arista.eos
 
   tasks:
-  - name: Enable Leaf/Spine PTP Interface
-    eos_config:
-        src: intf_ptp_spine.j2
-    tags:
-    - ptp
+  - name: Enable SPINE Functions
+    block:
+    # - name: Enable Leaf/Spine PTP Interface
+    #   eos_config:
+    #       src: intf_ptp_spine.j2
+    #   tags:
+    #   - ptp
 
-  - name: Enable Standard BGP on Spine
-    eos_config:
-        src: bgp_underlay_spine.j2
-    when: (features.routing.bgp_stan|lower == "yes")
-    tags:
-    - standard
+    # - name: Enable Standard BGP on Spine
+    #   eos_config:
+    #       src: bgp_spine.j2
+    #   when: (features.routing.bgp_stan|lower == "yes")
+    #   tags:
+    #   - standard
 
-  - name: Dump the Staged Spine CFG
-    vars:
-      ansible_command_timeout: 180
-    eos_config:
-        src: spine_inherited_cfg.j2
+    - name: Config Cluster on Spine
+      eos_config:
+          src: config_spine.j2
+      when: (features.routing.bgp_stan|lower == "yes")
+      tags:
+      - complete
+
+    # - name: Dump the Staged Spine CFG
+    #   vars:
+    #     ansible_command_timeout: 180
+    #   eos_config:
+    #       src: spine_inherited_cfg.j2
+    #   tags:
+    #     - inherit
     tags:
-    - inherit
+      - spine
 
 - hosts: func_edge
   gather_facts: false

@@ -1,0 +1,142 @@
+hostname spine01.poc.arista.com
+!!
+interface loopback0
+ description "Underlay Loopback"
+ ip address 10.216.199.101/32
+ ipv6 address 2001::65/128
+!
+!
+interface ethernet7/1
+ description "Fabric Port To LEAF01"
+ no switchport
+ ip address 10.216.197.0/31
+ ipv6 address 2001:1000::/127
+ mtu 9214
+ no shutdown
+!
+interface ethernet8/1
+ description "Fabric Port To LEAF02"
+ no switchport
+ ip address 10.216.197.4/31
+ ipv6 address 2001:1000::4/127
+ mtu 9214
+ no shutdown
+!
+interface ethernet9/1
+ description "Fabric Port To LEAF03"
+ no switchport
+ ip address 10.216.197.8/31
+ ipv6 address 2001:1000::8/127
+ mtu 9214
+ no shutdown
+!
+interface ethernet10/1
+ description "Fabric Port To LEAF04"
+ no switchport
+ ip address 10.216.197.12/31
+ ipv6 address 2001:1000::c/127
+ mtu 9214
+ no shutdown
+!
+!
+router bgp 12189
+  neighbor FABRIC-PEER_v4 peer group
+  neighbor FABRIC-PEER_v4 description "SPINE-LEAF PEER GROUP"
+  neighbor FABRIC-PEER_v4 remove-private-as
+  neighbor FABRIC-PEER_v4 send-community standard extended
+  neighbor FABRIC-PEER_v4 ebgp-multihop 2
+  neighbor FABRIC-PEER_v4 local-as 4200000000 no-prepend replace-as
+  !
+  neighbor SPN-CORE peer group
+  neighbor SPN-CORE description "SPINE-CORE PEER GROUP"
+  neighbor SPN-CORE remote-as 46385
+  neighbor SPN-CORE remove-private-as
+  neighbor SPN-CORE send-community standard extended
+  neighbor SPN-CORE bfd
+  neighbor SPN-CORE ebgp-multihop 2
+  neighbor SPN-CORE local-as 4200000000 no-prepend replace-as
+  neighbor SPN-CORE maximum-routes 12000
+  !
+  neighbor SPN-CORE_v4 peer group
+  neighbor SPN-CORE_v4 description "SPINE-CORE PEER GROUP"
+  neighbor SPN-CORE_v4 remote-as 46385
+  neighbor SPN-CORE_v4 remove-private-as
+  neighbor SPN-CORE_v4 send-community standard extended
+  neighbor SPN-CORE_v4 bfd
+  neighbor SPN-CORE_v4 ebgp-multihop 2
+  neighbor SPN-CORE_v4 local-as 4200000000 no-prepend replace-as
+  neighbor SPN-CORE_v4 maximum-routes 12000
+  !
+  neighbor FABRIC-PEER_v6 peer group
+  neighbor FABRIC-PEER_v6 description "LEAF-PEER-GROUP"
+  neighbor FABRIC-PEER_v6 remove-private-as
+  neighbor FABRIC-PEER_v6 route-map ISP-GENERIC-IN in
+  neighbor FABRIC-PEER_v6 route-map ISP-GENERIC-OUT out
+  neighbor FABRIC-PEER_v6 send-community
+  neighbor FABRIC-PEER_v6 ebgp-multihop 2
+  neighbor FABRIC-PEER_v6 maximum-routes 0
+  !
+  neighbor SPN-CORE_v6 peer group
+  neighbor SPN-CORE_v6 description "SPINE-CORE PEER GROUP"
+  neighbor SPN-CORE_v6 remote-as 46385
+  neighbor SPN-CORE_v6 remove-private-as
+  neighbor SPN-CORE_v6 send-community standard extended
+  neighbor SPN-CORE_v6 bfd
+  neighbor SPN-CORE_v6 ebgp-multihop 2
+  neighbor SPN-CORE_v6 local-as 4200000000 no-prepend replace-as
+  neighbor SPN-CORE_v6 maximum-routes 12000
+  !
+  neighbor EVPN-PEER peer group
+  neighbor EVPN-PEER description "EVPN PEER GROUP"
+  neighbor EVPN-PEER remove-private-as
+  neighbor EVPN-PEER send-community standard extended
+  neighbor EVPN-PEER ebgp-multihop 2
+  neighbor EVPN-PEER local-as 4200000000 no-prepend replace-as
+  !
+  address-family ipv4
+    neighbor FABRIC-PEER_v4 activate
+    neighbor SPN-CORE activate
+    neighbor SPN-CORE_v4 activate
+  !
+  address-family ipv6
+    neighbor FABRIC-PEER_v6 activate
+    neighbor SPN-CORE_v6 activate
+  !
+  address-family evpn
+    neighbor EVPN-PEER activate
+    no neighbor FABRIC-PEER_v6 activate
+    no neighbor SPN-CORE_v6 activate
+  !
+  neighbor 10.216.197.1 description "DC Fabric Edge Peer V4"
+  neighbor 10.216.197.1 peer group FABRIC-PEER_v4
+  neighbor 10.216.197.1 remote-as 64517
+  !
+  neighbor 10.216.197.5 description "DC Fabric Edge Peer V4"
+  neighbor 10.216.197.5 peer group FABRIC-PEER_v4
+  neighbor 10.216.197.5 remote-as 64517
+  !
+  neighbor 10.216.197.9 description "DC Fabric Edge Peer V4"
+  neighbor 10.216.197.9 peer group FABRIC-PEER_v4
+  neighbor 10.216.197.9 remote-as 64517
+  !
+  neighbor 10.216.197.13 description "DC Fabric Edge Peer V4"
+  neighbor 10.216.197.13 peer group FABRIC-PEER_v4
+  neighbor 10.216.197.13 remote-as 64517
+  !
+  neighbor 2001:1000::1 description "DC Fabric Edge Peer V6"
+  neighbor 2001:1000::1 peer group FABRIC-PEER_v6
+  neighbor 2001:1000::1 remote-as 64517
+  !
+  neighbor 2001:1000::5 description "DC Fabric Edge Peer V6"
+  neighbor 2001:1000::5 peer group FABRIC-PEER_v6
+  neighbor 2001:1000::5 remote-as 64517
+  !
+  neighbor 2001:1000::9 description "DC Fabric Edge Peer V6"
+  neighbor 2001:1000::9 peer group FABRIC-PEER_v6
+  neighbor 2001:1000::9 remote-as 64517
+  !
+  neighbor 2001:1000::d description "DC Fabric Edge Peer V6"
+  neighbor 2001:1000::d peer group FABRIC-PEER_v6
+  neighbor 2001:1000::d remote-as 64517
+  !
+!
