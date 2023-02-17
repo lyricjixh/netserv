@@ -160,74 +160,84 @@ bgp:
 spine_bgp:
   local_as: "{{ spine_asn }}"
   peer_group:
-    ipv4:
-      -
-        name: "FABRIC-PEER_v4"
-        desc: "SPINE-LEAF PEER GROUP"
-        remote_as:
-        admin_state: "up"
-        attributes:
-          - "remove-private-as"
-          - "send-community standard extended"
-          - "ebgp-multihop 2"
-          - "local-as {{ spine_asn }} no-prepend replace-as"
-      -
-        name: "SPN-CORE"
-        desc: "SPINE-CORE PEER GROUP"
-        remote_as: "{{ core_asn }}"
-        admin_state: "up"
-        attributes:
-          - "remove-private-as"
-          - "send-community standard extended"
-          - "bfd"
-          - "ebgp-multihop 2"
-          - "local-as {{ spine_asn }} no-prepend replace-as"
-          - "maximum-routes 12000"
-      -
-        name: "SPN-CORE_v4"
-        desc: "SPINE-CORE PEER GROUP"
-        remote_as: "{{ core_asn }}"
-        admin_state: "up"
-        attributes:
-          - "send-community standard extended"
-          - "bfd"
-          - "ebgp-multihop 2"
-          - "local-as {{ spine_asn }} no-prepend replace-as"
-          - "maximum-routes 12000"
-    ipv6:
-      -
-        name: "FABRIC-PEER_v6"
-        desc: "LEAF-PEER-GROUP"
-        remote_as:
-        admin_state: "up"
-        attributes:
-          - "send-community standard extended"
-          - "bfd"
-          - "ebgp-multihop 2"
-          - "local-as {{ spine_asn }} no-prepend replace-as"
-          - "maximum-routes 12000"
-      -
-        name: "SPN-CORE_v6"
-        desc: "SPINE-CORE PEER GROUP"
-        remote_as: "{{ core_asn }}"
-        admin_state: "up"
-        attributes:
-          - "remove-private-as"
-          - "send-community standard extended"
-          - "bfd"
-          - "ebgp-multihop 2"
-          - "local-as {{ spine_asn }} no-prepend replace-as"
-          - "maximum-routes 12000"
-    evpn:
-      -
-        name: "EVPN-PEER"
-        desc: "EVPN PEER GROUP"
-        remote_as:
-        admin_state: "up"
-        attributes:
-          - "send-community standard extended"
-          - "ebgp-multihop 2"
-          - "local-as {{ spine_asn }} no-prepend replace-as"
+  -
+    name: "FABRIC-PEER_v4"
+    desc: "SPINE-LEAF PEER GROUP"
+    remote_as:
+    admin_state: "up"
+    afi:
+    - "ipv4"
+    - "evpn"
+    attributes:
+      - "remove-private-as"
+      - "send-community standard extended"
+      - "ebgp-multihop 2"
+      - "local-as {{ spine_asn }} no-prepend replace-as"
+  -
+    name: "SPN-CORE"
+    desc: "SPINE-CORE PEER GROUP"
+    remote_as: "{{ core_asn }}"
+    admin_state: "up"
+    afi:
+    - "ipv4"
+    attributes:
+      - "remove-private-as"
+      - "send-community standard extended"
+      - "bfd"
+      - "ebgp-multihop 2"
+      - "local-as {{ spine_asn }} no-prepend replace-as"
+      - "maximum-routes 12000"
+  -
+    name: "SPN-CORE_v4"
+    desc: "SPINE-CORE PEER GROUP"
+    remote_as: "{{ core_asn }}"
+    admin_state: "up"
+    afi:
+    - "ipv4"
+    attributes:
+      - "send-community standard extended"
+      - "bfd"
+      - "ebgp-multihop 2"
+      - "local-as {{ spine_asn }} no-prepend replace-as"
+      - "maximum-routes 12000"
+  -
+    name: "FABRIC-PEER_v6"
+    desc: "LEAF-PEER-GROUP"
+    remote_as:
+    admin_state: "up"
+    afi:
+    - "ipv6"
+    attributes:
+      - "send-community standard extended"
+      - "bfd"
+      - "ebgp-multihop 2"
+      - "local-as {{ spine_asn }} no-prepend replace-as"
+      - "maximum-routes 12000"
+  -
+    name: "SPN-CORE_v6"
+    desc: "SPINE-CORE PEER GROUP"
+    remote_as: "{{ core_asn }}"
+    admin_state: "up"
+    afi:
+    - "ipv6"
+    attributes:
+      - "remove-private-as"
+      - "send-community standard extended"
+      - "bfd"
+      - "ebgp-multihop 2"
+      - "local-as {{ spine_asn }} no-prepend replace-as"
+      - "maximum-routes 12000"
+  -
+    name: "EVPN-PEER"
+    desc: "EVPN PEER GROUP"
+    remote_as:
+    admin_state: "up"
+    afi:
+    - "evpn"
+    attributes:
+      - "send-community standard extended"
+      - "ebgp-multihop 2"
+      - "local-as {{ spine_asn }} no-prepend replace-as"
   peers:
     - 
       addr: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[0]|int+1) | ansible.utils.ipaddr('address') }}"

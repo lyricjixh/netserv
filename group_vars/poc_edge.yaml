@@ -43,32 +43,34 @@ edge_links:
 edge_bgp:
   local_as: "{{ edge_asn }}"
   peer_group:
-    ipv4:
-      -
-        name: "ISP-PEER-GROUP_v4"
-        desc: "GENERIC-ISP-PG"
-        remote_as:
-        admin_state: "up"
-        attributes:
-          - "remove-private-as"
-          - "route-map ISP-GENERIC-IN in"
-          - "route-map ISP-GENERIC-OUT out"
-          - "send-community"
-          - "ebgp-multihop 2"
-          - "maximum-routes 0"
-    ipv6:
-      -
-        name: "ISP-PEER-GROUP_v6"
-        desc: "GENERIC-ISP-PG"
-        remote_as:
-        admin_state: "up"
-        attributes:
-          - "remove-private-as"
-          - "route-map ISP-GENERIC-IN in"
-          - "route-map ISP-GENERIC-OUT out"
-          - "send-community"
-          - "ebgp-multihop 2"
-          - "maximum-routes 0"
+  -
+    name: "ISP-PEER-GROUP_v4"
+    desc: "GENERIC-ISP-PG"
+    remote_as:
+    admin_state: "up"
+    afi:
+    - "ipv4"
+    attributes:
+      - "remove-private-as"
+      - "route-map ISP-GENERIC-IN in"
+      - "route-map ISP-GENERIC-OUT out"
+      - "send-community"
+      - "ebgp-multihop 2"
+      - "maximum-routes 0"
+  -
+    name: "ISP-PEER-GROUP_v6"
+    desc: "GENERIC-ISP-PG"
+    remote_as:
+    admin_state: "up"
+    afi:
+    - "ipv6"
+    attributes:
+      - "remove-private-as"
+      - "route-map ISP-GENERIC-IN in"
+      - "route-map ISP-GENERIC-OUT out"
+      - "send-community"
+      - "ebgp-multihop 2"
+      - "maximum-routes 0"
   peers:
     - 
       addr: "{{ edge_links[0].net_v4 | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address') }}"

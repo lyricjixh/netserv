@@ -4,44 +4,11 @@ Purpose:
 Generating BGP Dual-Stack Underlay Configuration
 ###################################################}
 router bgp {{ edge_asn }}
-{% if spine_bgp.peer_group.ipv4 is defined and spine_bgp.peer_group.ipv4 %}
-{% for group in spine_bgp.peer_group.ipv4 %}
-  neighbor {{ group.name }} peer group
-  neighbor {{ group.name }} description "{{ group.desc }}"
-{% if group.remote_as is defined and group.remote_as %}
-  neighbor {{ group.name }} remote-as {{ group.remote_as }}
-{% endif %}
-{% if group.admin_state == "down" %}
-  neighbor {{ group.name }} shutdown
-{% endif %}
-{% if group.attributes is defined and group.attributes %}
-{% for attr in group.attributes %}
-  neighbor {{ group.name }} {{ attr }}
-{% endfor %}
-{% endif %}
-  !
-{% endfor %}
-{% endif %}
-{% if spine_bgp.peer_group.ipv6 is defined and spine_bgp.peer_group.ipv6 %}
-{% for group in spine_bgp.peer_group.ipv6 %}
-  neighbor {{ group.name }} peer group
-  neighbor {{ group.name }} description "{{ group.desc }}"
-{% if group.remote_as is defined and group.remote_as %}
-  neighbor {{ group.name }} remote-as {{ group.remote_as }}
-{% endif %}
-{% if group.admin_state == "down" %}
-  neighbor {{ group.name }} shutdown
-{% endif %}
-{% if group.attributes is defined and group.attributes %}
-{% for attr in group.attributes %}
-  neighbor {{ group.name }} {{ attr }}
-{% endfor %}
-{% endif %}
-  !
-{% endfor %}
-{% endif %}
-{% if spine_bgp.peer_group.evpn is defined and spine_bgp.peer_group.evpn %}
-{% for group in spine_bgp.peer_group.evpn %}
+{% if spine_bgp.peer_group is defined and spine_bgp.peer_group %}
+{% set pgroup_v4 = spine_bgp.peer_group | json_query('[?contains(afi,`ipv4`)].name') %}
+{% set pgroup_v6 = spine_bgp.peer_group | json_query('[?contains(afi,`ipv6`)].name') %}
+{% set pgroup_evpn = spine_bgp.peer_group | json_query('[?contains(afi,`evpn`)].name') %}
+{% for group in spine_bgp.peer_group %}
   neighbor {{ group.name }} peer group
   neighbor {{ group.name }} description "{{ group.desc }}"
 {% if group.remote_as is defined and group.remote_as %}
@@ -68,9 +35,9 @@ router bgp {{ edge_asn }}
 {% endif %}
 {% endfor %}
 {% endif %}
-{% if spine_bgp.peer_group.ipv4 is defined and spine_bgp.peer_group.ipv4 %}
-{% for group in spine_bgp.peer_group.ipv4 %}
-    neighbor {{ group.name }} activate
+{% if pgroup_v4 is defined and pgroup_v4 %}
+{% for group in pgroup_v4 %}
+    neighbor {{ group}} activate
 {% endfor %}
 {% endif %}
   !
@@ -84,9 +51,9 @@ router bgp {{ edge_asn }}
 {% endif %}
 {% endfor %}
 {% endif %}
-{% if spine_bgp.peer_group.ipv6 is defined and spine_bgp.peer_group.ipv6 %}
-{% for group in spine_bgp.peer_group.ipv6 %}
-    neighbor {{ group.name }} activate
+{% if pgroup_v6 is defined and pgroup_v6 %}
+{% for group in pgroup_v6 %}
+    neighbor {{ group}} activate
 {% endfor %}
 {% endif %}
   !
@@ -100,19 +67,14 @@ router bgp {{ edge_asn }}
 {% endif %}
 {% endfor %}
 {% endif %}
-{% if spine_bgp.peer_group.evpn is defined and spine_bgp.peer_group.evpn %}
-{% for group in spine_bgp.peer_group.evpn %}
-    neighbor {{ group.name }} activate
+{% if pgroup_evpn is defined and pgroup_evpn %}
+{% for group in pgroup_evpn %}
+    neighbor {{ group}} activate
 {% endfor %}
 {% endif %}
-{% if spine_bgp.peer_group.ipv4 is defined and spine_bgp.peer_group.ipv4 %}
-{% for group in spine_bgp.peer_group.ipv4 %}
-    neighbor {{ group.name }} activate
-{% endfor %}
-{% endif %}
-{% if spine_bgp.peer_group.ipv6 is defined and spine_bgp.peer_group.ipv6 %}
-{% for group in spine_bgp.peer_group.ipv6 %}
-    no neighbor {{ group.name }} activate
+{% if pgroup_v6 is defined and pgroup_v6 %}
+{% for group in pgroup_v6 %}
+    no neighbor {{ group}} activate
 {% endfor %}
 {% endif %}
   !

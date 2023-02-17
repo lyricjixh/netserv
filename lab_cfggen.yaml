@@ -2,8 +2,8 @@
 - hosts: ceos
   gather_facts: false
   vars:
-      temp_file: "config_spine.j2"
-      # save_dir: "{{ build_dir }}"
+      # temp_file: "bgp_edge.j2"
+      save_dir: "{{ build_dir }}"
       save_dir: "files"
   collections:
   - arista.eos
@@ -13,7 +13,7 @@
     template:
       src: "{{ temp_file }}"
       dest: "{{save_dir}}/{{hostname}}.conf.part"
-    delegate_to: localhost
+    # delegate_to: localhost
     tags:
       - cfggen
 

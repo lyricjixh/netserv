@@ -56,40 +56,46 @@ test_links:
 edge_bgp:
   local_as: "{{ local_asn }}"
   peer_group:
-    ipv4:
-      - 
-        name: "fabric_edge_v4"
-        desc: "PEER GROUP to EDGE v4"
-        remote_as: "{{ edge_asn }}"
-        admin_state: "up"
-        attributes:
-          - "time 3 9"
-          - "send-community standard extended"
-      - 
-        name: "tester_v4"
-        desc: "PEER GROUP to Tester v4"
-        remote_as: "{{ tester_asn }}"
-        admin_state: "down"
-        attributes:
-          - "time 3 9"
-          - "send-community standard extended"
-    ipv6:
-      - 
-        name: "fabric_edge_v6"
-        desc: "PEER GROUP to EDGE v6"
-        remote_as: "{{ edge_asn }}"
-        admin_state: "up"
-        attributes:
-          - "time 3 9"
-          - "send-community standard extended"
-      - 
-        name: "tester_v6"
-        desc: "PEER GROUP to Tester v6"
-        remote_as: "{{ tester_asn }}"
-        admin_state: "down"
-        attributes:
-          - "time 3 9"
-          - "send-community standard extended"
+  - 
+    name: "fabric_edge_v4"
+    desc: "PEER GROUP to EDGE v4"
+    remote_as: "{{ edge_asn }}"
+    admin_state: "up"
+    afi:
+    - "ipv4"
+    attributes:
+      - "time 3 9"
+      - "send-community standard extended"
+  - 
+    name: "tester_v4"
+    desc: "PEER GROUP to Tester v4"
+    remote_as: "{{ tester_asn }}"
+    admin_state: "down"
+    afi:
+    - "ipv4"
+    attributes:
+      - "time 3 9"
+      - "send-community standard extended"
+  - 
+    name: "fabric_edge_v6"
+    desc: "PEER GROUP to EDGE v6"
+    remote_as: "{{ edge_asn }}"
+    admin_state: "up"
+    afi:
+    - "ipv6"
+    attributes:
+      - "time 3 9"
+      - "send-community standard extended"
+  - 
+    name: "tester_v6"
+    desc: "PEER GROUP to Tester v6"
+    remote_as: "{{ tester_asn }}"
+    admin_state: "down"
+    afi:
+    - "ipv6"
+    attributes:
+      - "time 3 9"
+      - "send-community standard extended"
   peers:
     - 
       addr: "{{ edge_links[0].net_v4 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
