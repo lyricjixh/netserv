@@ -828,7 +828,7 @@ router bgp 12189
 	  neighbor BMC-EVPN peer group
 	  neighbor BMC-EVPN update-source Loopback3
 	  neighbor BMC-EVPN bfd
-	  neighbor BMC-EVPN description EVPN-Peers
+	  neighbor BMC-EVPN description FABRIC-PEER_EVPNs
 	  neighbor BMC-EVPN ebgp-multihop 2
 	  neighbor BMC-EVPN send-community standard extended
 	  neighbor BMC-EVPN maximum-routes 12000

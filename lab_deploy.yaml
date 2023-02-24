@@ -108,10 +108,17 @@
 
   - name: Enable Standard BGP on Leaf
     eos_config:
-        src: bgp_underlay_leaf.j2
+        src: bgp_leaf.j2
     when: "'leaf' in inventory_hostname"
     tags:
-    - standard
+    - bgp
+
+  # - name: Enable Standard BGP on Leaf
+  #   eos_config:
+  #       src: bgp_underlay_leaf.j2
+  #   when: "'leaf' in inventory_hostname"
+  #   tags:
+  #   - standard
 
   - name: Enable Vxlan Tunneling
     eos_config:
@@ -142,14 +149,12 @@
     # - name: Enable Standard BGP on Spine
     #   eos_config:
     #       src: bgp_spine.j2
-    #   when: (features.routing.bgp_stan|lower == "yes")
     #   tags:
     #   - standard
 
     - name: Config Cluster on Spine
       eos_config:
           src: config_spine.j2
-      when: (features.routing.bgp_stan|lower == "yes")
       tags:
       - complete
 

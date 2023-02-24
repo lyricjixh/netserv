@@ -10,7 +10,7 @@ interface vxlan vtep100
   source-ip {{ lpbk_olay.addr_v4 }}
   !
 {% for vni in vxlans %}
-  map vni {{ vni.id }} vlan {{ vni.vlan }}
+  map vni {{ vxlan_id_prx }}{{ vni.vlan }} vlan {{ vni.vlan }}
 {% endfor %}
 {% for vrfi in evpn.vrf %}
   map vni {{ vrfi.l3_vni }} vlan {{ vrfi.l3_vni_vlan }}

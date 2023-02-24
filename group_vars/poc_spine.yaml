@@ -167,11 +167,10 @@ spine_bgp:
     admin_state: "up"
     afi:
     - "ipv4"
-    - "evpn"
     attributes:
       - "remove-private-as"
       - "send-community standard extended"
-      - "ebgp-multihop 2"
+      - "ebgp-multihop 3"
       - "local-as {{ spine_asn }} no-prepend replace-as"
   -
     name: "SPN-CORE"
@@ -184,7 +183,7 @@ spine_bgp:
       - "remove-private-as"
       - "send-community standard extended"
       - "bfd"
-      - "ebgp-multihop 2"
+      - "ebgp-multihop 3"
       - "local-as {{ spine_asn }} no-prepend replace-as"
       - "maximum-routes 12000"
   -
@@ -197,7 +196,7 @@ spine_bgp:
     attributes:
       - "send-community standard extended"
       - "bfd"
-      - "ebgp-multihop 2"
+      - "ebgp-multihop 3"
       - "local-as {{ spine_asn }} no-prepend replace-as"
       - "maximum-routes 12000"
   -
@@ -210,7 +209,7 @@ spine_bgp:
     attributes:
       - "send-community standard extended"
       - "bfd"
-      - "ebgp-multihop 2"
+      - "ebgp-multihop 3"
       - "local-as {{ spine_asn }} no-prepend replace-as"
       - "maximum-routes 12000"
   -
@@ -224,11 +223,11 @@ spine_bgp:
       - "remove-private-as"
       - "send-community standard extended"
       - "bfd"
-      - "ebgp-multihop 2"
+      - "ebgp-multihop 3"
       - "local-as {{ spine_asn }} no-prepend replace-as"
       - "maximum-routes 12000"
   -
-    name: "EVPN-PEER"
+    name: "FABRIC-PEER_EVPN"
     desc: "EVPN PEER GROUP"
     remote_as:
     admin_state: "up"
@@ -236,7 +235,8 @@ spine_bgp:
     - "evpn"
     attributes:
       - "send-community standard extended"
-      - "ebgp-multihop 2"
+      - "ebgp-multihop 3"
+      - "update-source Loopback{{ lpbk_ulay.id }}"
       - "local-as {{ spine_asn }} no-prepend replace-as"
   peers:
     - 
@@ -279,6 +279,26 @@ spine_bgp:
       desc: "DC Fabric Edge Peer V6"
       remote_as: "{{ rack02_asn }}"
       peer_group: "FABRIC-PEER_v6"
+    - 
+      addr: "{{ hostvars['cleaf01'].lpbk_ulay.addr_v4 }}"
+      desc: "EVPN PEER"
+      remote_as: "{{ rack01_asn }}"
+      peer_group: "FABRIC-PEER_EVPN"
+    - 
+      addr: "{{ hostvars['cleaf02'].lpbk_ulay.addr_v4 }}"
+      desc: "EVPN PEER"
+      remote_as: "{{ rack01_asn }}"
+      peer_group: "FABRIC-PEER_EVPN"
+    - 
+      addr: "{{ hostvars['cleaf03'].lpbk_ulay.addr_v4 }}"
+      desc: "EVPN PEER"
+      remote_as: "{{ rack02_asn }}"
+      peer_group: "FABRIC-PEER_EVPN"
+    - 
+      addr: "{{ hostvars['cleaf04'].lpbk_ulay.addr_v4 }}"
+      desc: "EVPN PEER"
+      remote_as: "{{ rack02_asn }}"
+      peer_group: "FABRIC-PEER_EVPN"
   afi: 
   #   ipv4:
   #   -

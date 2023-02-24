@@ -1,6 +1,6 @@
 ---
 - hosts: poc
-  gather_facts: yes
+  gather_facts: "false"
   collections:
   - arista.eos
 
@@ -63,3 +63,29 @@
         - "{{ show_output.results[5].stdout_lines }}"
     tags:
       - vxlan
+
+  - name: CFG Changes
+    arista.eos.eos_config:
+      lines:
+        - "no neighbor FABRIC-PEER_EVPN activate"
+      parents: "address-family ipv4"
+      before: "router bgp 12189"
+      replace: line
+    # loop:
+    #   - "50"
+    #   - "50.20"
+    #   - "50.60"
+    #   - "50.61"
+    tags:
+      - pnap
+
+  - name: Flip the port
+    eos_interfaces:
+      config:
+        - name: "Ethernet{{ item }}"
+          enabled: true
+    loop:
+      - 1
+      - 2
+    tags:
+      - port

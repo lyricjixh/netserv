@@ -2,6 +2,13 @@
 
 vendor: "Arista"
 
+## Override CEOS for loopback conflict
+lpbk_ulay:
+    id: "{{ lpbk_ulay_id }}"
+    desc: "Underlay Loopback"
+    addr_v4: "{{ lpbk_ulay_netv4 | ansible.utils.ipaddr(seq+10) | ansible.utils.ipaddr('address') }}"
+    addr_v6: "{{ lpbk_ulay_netv6 | ansible.utils.ipaddr(seq+10) | ansible.utils.ipaddr('address') }}"
+
 #Vxlan
 lpbk_olay:
     id: "{{ lpbk_olay_id}}"
@@ -80,17 +87,168 @@ fabric_links:
     addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[1]|int+1) | ansible.utils.ipaddr('address') }}"
     addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[1]|int+1) | ansible.utils.ipaddr('address') }}"
 
-# BGP Parameters
-bgp:
-  local_as: "{{ asn_base+rack_no }}"
-  remote_as: "{{ spine_asn }}"
-  sas_as: "64999"
-  fabric_peer_v4:
+bgp_fabric_peer_v4:
     - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[0]) | ansible.utils.ipaddr('address') }}"
     - "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[1]) | ansible.utils.ipaddr('address') }}"
-  fabric_peer_v6:
+bgp_fabric_peer_v6:
     - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[0]) | ansible.utils.ipaddr('address') }}"
     - "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[1]) | ansible.utils.ipaddr('address') }}"
+
+bgp:
+  local_as: "{{ asn_base+rack_no }}"
+  attributes:
+    - "distance bgp 20 200 200"
+    - "maximum-paths 4 ecmp 4"
+    - "no bgp bestpath ecmp-fast"
+  peer_group:
+  -
+    name: "FABRIC-PEER_v4"
+    desc: "SPINE-LEAF PEER GROUP"
+    remote_as: "{{ spine_asn }}"
+    admin_state: "up"
+    afi:
+    - "ipv4"
+    attributes:
+      - "remove-private-as"
+      - "allowas-in 3"
+      - "route-map SEND-COMMUNITY out"
+      - "send-community standard extended"
+  -
+    name: "TOR-PEER_v4"
+    desc: "TOR LEAF PEER GROUP"
+    remote_as: "{{ asn_base+rack_no }}"
+    admin_state: "up"
+    afi:
+    - "ipv4"
+    - "evpn"
+    attributes:
+      - "update-source Vlan{{ vlans.pair_vlan.id }}"
+      - "bfd"
+      - "allowas-in 3"
+      - "send-community standard extended"
+  -
+    name: "FABRIC-PEER_EVPN"
+    desc: "EVPN PEER GROUP"
+    remote_as: "{{ spine_asn }}"
+    admin_state: "up"
+    afi:
+    - "evpn"
+    attributes:
+      - "update-source loopback{{lpbk_ulay.id}}"
+      - "send-community extended"
+      - "ebgp-multihop 3"
+  -
+    name: "TOR-PEER_EVPN"
+    desc: "TOR LEAF PEER EVPN GROUP"
+    remote_as: "{{ asn_base+rack_no }}"
+    admin_state: "up"
+    afi:
+    - "evpn"
+    attributes:
+      - "update-source loopback{{lpbk_ulay.id}}"
+      - "bfd"
+      - "allowas-in 3"
+      - "send-community extended"
+  -
+    name: "DEFAULT-ONLY"
+    desc: "DEFAULT ONLY PEER GROUP"
+    remote_as: "{{ core_asn }}"
+    admin_state: "up"
+    afi:
+    - "ipv4"
+    attributes:
+      - "remove-private-as"
+      - "update-source Loopback{{lpbk_ulay.id}}"
+      - "rib-in pre-policy retain all"
+      - "ebgp-multihop 3"
+      - "route-map DEFAULT-ONLY-CUSTOMERS-OUT out"
+      - "maximum-routes 12000"
+  -
+    name: "DEFAULT-ONLY-VCF"
+    desc: "DEFAULT ONLY PEER GROUP"
+    remote_as: 65401
+    admin_state: "up"
+    afi:
+    - "ipv4"
+    attributes:
+      - "local-as 65400 no-prepend replace-as"
+      - "rib-in pre-policy retain all"
+      - "route-map DEFAULT-ONLY-CUSTOMERS-OUT out"
+      - "maximum-routes 200"
+  -
+    name: "NO-SEND"
+    desc: "NO SEND PREFIX PEER GROUP"
+    remote_as:
+    admin_state: "up"
+    afi:
+    - "ipv4"
+    attributes:
+      - "remove-private-as"
+      - "update-source Loopback{{lpbk_ulay.id}}"
+      - "rib-in pre-policy retain all"
+      - "ebgp-multihop 3"
+      - "route-map NO-SEND-CUSTOMERS-OUT out"
+      - "maximum-routes 12000"
+  -
+    name: "FABRIC-PEER_v6"
+    desc: "SPINE-LEAF V6 PEER GROUP"
+    remote_as: "{{ spine_asn }}"
+    admin_state: "up"
+    afi:
+    - "ipv6"
+    attributes:
+      - "remove-private-as"
+      - "allowas-in 3"
+      - "route-map SEND-COMMUNITY out"
+      - "send-community standard extended"
+  -
+    name: "TOR-PEER_v6"
+    desc: "TOR LEAF V6 PEER GROUP"
+    remote_as: "{{ asn_base+rack_no }}"
+    admin_state: "up"
+    afi:
+    - "ipv6"
+    attributes:
+      - "update-source Vlan{{ vlans.pair_vlan.id }}"
+      - "bfd"
+      - "allowas-in 3"
+      - "send-community standard extended"
+  peers:
+    - 
+      addr: "{{ bgp_fabric_peer_v4[0] }}"
+      desc: "DC Fabric Edge Peer V4"
+      remote_as: 
+      peer_group: "FABRIC-PEER_v4"
+    - 
+      addr: "{{ bgp_fabric_peer_v4[1] }}"
+      desc: "DC Fabric Edge Peer V4"
+      remote_as: 
+      peer_group: "FABRIC-PEER_v4"
+    - 
+      addr:
+      desc: "ToR LEAF Peer V4"
+      remote_as: 
+      peer_group: "TOR-PEER_v4"
+    - 
+      addr: "{{ bgp_fabric_peer_v6[0] }}"
+      desc: "DC Fabric Edge Peer V6"
+      remote_as: 
+      peer_group: "FABRIC-PEER_v6"
+    - 
+      addr: "{{ bgp_fabric_peer_v6[0] }}"
+      desc: "DC Fabric Edge Peer V6"
+      remote_as:
+      peer_group: "FABRIC-PEER_v6"
+    - 
+      addr: "{{ hostvars['spine01'].lpbk_ulay.addr_v4 }}"
+      desc: "FABRIC EVPN PEER"
+      remote_as: 
+      peer_group: "FABRIC-PEER_EVPN"
+    - 
+      addr: "{{ hostvars['spine02'].lpbk_ulay.addr_v4 }}"
+      desc: "FABRIC EVPN PEER"
+      remote_as: 
+      peer_group: "FABRIC-PEER_EVPN"
   afi: 
     ipv4:
     -

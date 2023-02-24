@@ -72,6 +72,11 @@ router bgp {{ edge_asn }}
     neighbor {{ group}} activate
 {% endfor %}
 {% endif %}
+{% if pgroup_v4 is defined and pgroup_v4 %}
+{% for group in pgroup_v4 %}
+    no neighbor {{ group}} activate
+{% endfor %}
+{% endif %}
 {% if pgroup_v6 is defined and pgroup_v6 %}
 {% for group in pgroup_v6 %}
     no neighbor {{ group}} activate

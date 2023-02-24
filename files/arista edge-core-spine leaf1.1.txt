@@ -2506,7 +2506,7 @@ router bgp 64517
    neighbor BMC-EVPN remote-as  4200000000
    neighbor BMC-EVPN update-source Loopback1
    neighbor BMC-EVPN bfd
-   neighbor BMC-EVPN description EVPN-Peers
+   neighbor BMC-EVPN description FABRIC-PEER_EVPNs
    neighbor BMC-EVPN ebgp-multihop 3
    neighbor BMC-EVPN password
    neighbor BMC-EVPN send-community standard extended
