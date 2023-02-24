@@ -32,6 +32,13 @@
     tags:
       - archive
 
+  - name: Generate the intial configuration
+    template:
+        src: initial_cfg.j2
+        dest: "files/{{hostname}}.conf.init"
+    tags:
+    - init_cfg
+
   - name: Collect Vxlan Logs
     eos_command:
       commands: "{{item}}"
@@ -89,3 +96,80 @@
       - 2
     tags:
       - port
+
+  - name : "Remove BGPv4 Config"
+    eos_config:
+      lines:
+        - "no router bgp {{ bgp.local_as }}"
+    tags:
+      - nobgp
+
+  - name : "Shutdown the BGPv4 Peer"
+    eos_config:
+      lines:
+        - "shutdown"
+        - 
+      parents: ['router bgp {{ bgp.local_as }}']
+      match: exact
+      # prompt: "[confirm]"
+      # answer: "yes"
+    notify:
+    - display BGP info
+    tags:
+      - bgpdown
+
+  - name : "Bringup the BGPv4 Peer"
+    eos_config:
+      lines:
+        - "no shutdown"
+      parents: ['router bgp {{ bgp.local_as }}']
+      match: exact
+    notify:
+      - display BGP info
+    tags:
+      - bgpup
+
+  - name: Wait 15 secs for BGP Peers coming up
+    pause:
+      seconds: 15
+    delegate_to: localhost
+    when: peerstate == "up"
+
+  - name: Create a directory if it does not exist
+    ansible.builtin.file:
+      path: "~xji/devops/show_tech"
+      state: directory
+      mode: '0755'
+    tags:
+    - showtech
+
+  - name: Collecting EOS Show Tech  
+    block:
+    - name: Collect show tech onto the local disk
+      vars:
+        ansible_timeout: 60
+        ansible_command_timeout: 60
+        ansible_connect_timeout: 60
+      eos_command:
+        commands: "show tech-support all > file:home/admin/show_tech_{{ inventory_hostname }}"
+
+    - name: Fetch show tech file from switch to local host 
+      ansible.builtin.expect:
+          command: "scp admin@{{ ansible_host }}:/home/admin/show_tech_{{ inventory_hostname }} /home/xji/devops/show_tech/"
+          responses:
+              '\?': "yes"
+              'Password\:': "{{ vault_ceos_password }}"
+      delegate_to: localhost
+      tags:
+      - fetch
+    tags:
+    - showtech
+
+  - name: Delete Layer2 Port
+    eos_l2_interfaces:
+        config:
+        - name: Ethernet1
+        - name: Ethernet2
+        state: deleted
+    tags:
+      - del-layer2
