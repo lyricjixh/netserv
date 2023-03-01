@@ -1,0 +1,15 @@
+cal383.12:04:59#show bgp evpn route-type ip-prefix 10.201.1.0/27
+BGP routing table information for VRF default
+Router identifier 10.216.199.11, local AS number 64517
+BGP routing table entry for ip-prefix 10.201.1.0/27, Route Distinguisher: 10.111.252.2:50050
+ Paths: 2 available
+  4200000000 64518
+    10.216.199.3 from 10.216.199.102 (10.216.199.102)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, invalid, external
+      Extended Community: Route-Target-AS:10101:10101 Route-Target-AS:50050:50050 TunnelEncap:tunnelTypeVxlan EvpnRouterMac:76:83:ef:78:47:cc
+      VNI: 50050
+  4200000000 64518
+    10.216.199.3 from 10.216.199.101 (10.216.199.101)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, invalid, external
+      Extended Community: Route-Target-AS:10101:10101 Route-Target-AS:50050:50050 TunnelEncap:tunnelTypeVxlan EvpnRouterMac:76:83:ef:78:47:cc
+      VNI: 50050

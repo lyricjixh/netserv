@@ -4,7 +4,7 @@ Purpose:
 Generating ceos Vxlan Configuration
 ############################################}
 ip anycast-address enable
-ip anycast-mac-address {{ tor_pair_vmac }}
+ip anycast-mac-address {{ evpn_anycast_vmac }}
 !
 interface vxlan vtep100
   source-ip {{ lpbk_olay.addr_v4 }}

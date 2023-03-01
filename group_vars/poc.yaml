@@ -265,7 +265,7 @@ fabric_ptp_netmaskv6: 127
 fabric_ptp_netv4: "10.216.197.0/24"
 fabric_ptp_netv6: "2001:1000::/64"
 
-evpn_anycast_vmac: 00:00:00:ff:ff:ff
+evpn_anycast_vmac: 00:00:00:aa:aa:aa
 
 mlag_ctl_netv4: "10.253.{{rack_no}}.0/30"
 mlag_ctl_netv6: "2001:fd:{{rack_no}}::/126"

@@ -4,7 +4,8 @@ Purpose:
 Generating ceos Vxlan Configuration
 ############################################}
 {% if evpn is defined and evpn %}
-ip virtual-router mac-address {{ tor_pair_vmac }}
+{% ip virtual-router mac-address mlag-peer %}
+ip virtual-router mac-address {{ evpn_anycast_vmac }}
 !
 {% for vrfi in evpn.vrf %}
 vrf instance {{ vrfi.name }}
@@ -12,11 +13,12 @@ vrf instance {{ vrfi.name }}
 ip routing vrf {{ vrfi.name }}
 ipv6 unicast-routing vrf {{ vrfi.name }}
 !
-{% if vrfi.interfaces is defined and vrfi.interfaces %}
-{% for intf in vrfi.interfaces %}
+{% if vrfi.lpbks is defined and vrfi.lpbks %}
+{% for intf in vrfi.lpbks %}
 interface {{ intf.name }}
   description "VRF_{{ vrfi.name }} {{ intf.desc }}"
   vrf {{ vrfi.name }}
+  no ip address
   ip address {{ intf.addr_v4 }}
 {% if intf.addr_v6 is defined and intf.addr_v6 %}
   no ipv6 address
@@ -26,7 +28,6 @@ interface {{ intf.name }}
 {% endfor %}
 {% endif %}
 {% endfor %}
-!
 {% for vni in vxlans %}
 vlan {{ vni.vlan }}
   name VLAN{{ vni.vlan }}

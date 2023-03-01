@@ -32,6 +32,24 @@ router bgp {{ bgp.local_as }}
   !
 {% endfor %}
 {% endif %}
+{% if evpn.vrf is defined and evpn.vrf %}
+{% for vrf in evpn.vrf %}
+  vrf {{ vrf.name }}
+    rd {{ lpbk_olay.addr_v4 }}:{{ vrf.l3_vni.id }}
+    route-target export evpn {{ vrf.l3_vni.id }}:{{ vrf.l3_vni.id }}
+    route-target import evpn {{ vrf.l3_vni.id }}:{{ vrf.l3_vni.id }}
+{% if vrf.type5 is defined and vrf.type5 %}
+{% for redis in vrf.type5 %}
+{% if redis.r_map %}
+    redistribute {{ redis.proto }} route-map {{ redis.r_map }}
+{% else %}
+    redistribute {{ redis.proto }}
+{% endif %}
+{% endfor %}
+{% endif %}
+  !
+{% endfor %}
+{% endif %}
 {% if vxlans is defined and vxlans %}
 {% for vni in vxlans %}
   vlan {{ vni.vlan }}

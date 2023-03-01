@@ -374,21 +374,25 @@ evpn:
         l3_vni: 
           id: "50050"
           vlan: "901"
-        interfaces:
+        lpbks:
         - 
-            name: "loopback901"
+            name: "loopback101"
             desc: "Loopback Interface"
-            addr_v4: "10.201.201.{{ seq }}/32"
+            addr_v4: "10.99.11.{{ seq }}/32"
             addr_v6: "2001:fff1:fff1::{{ '%0x' % seq }}/128"
         type5:
         - 
             afi: ipv4
-            proto: connected
+            proto: attached-host
             r_map: 
         - 
             afi: ipv4
-            r_map: 
+            proto: connected
+            r_map: "loopbacks"
+        - 
+            afi: ipv4
             proto: static
+            r_map: 
         # - 
         #     afi: ipv4
         #     r_map: 
@@ -401,17 +405,21 @@ evpn:
         l3_vni: 
           id: "50054"
           vlan: "902"
-        interfaces:
+        lpbks:
         - 
-            name: "loopback901"
+            name: "loopback201"
             desc: "Loopback Interface"
-            addr_v4: "10.202.202.{{ seq }}/32"
+            addr_v4: "10.99.22.{{ seq }}/32"
             addr_v6: "2001:fff2:fff2::{{ '%0x' % seq }}/128"
         type5:
         - 
             afi: ipv4
-            proto: connected
+            proto: attached-host
             r_map: 
+        - 
+            afi: ipv4
+            proto: connected
+            r_map: loopbacks
         - 
             afi: ipv4
             r_map: 
@@ -428,17 +436,21 @@ evpn:
         l3_vni: 
           id: "50055"
           vlan: "903"
-        interfaces:
+        lpbks:
         - 
-            name: "loopback901"
+            name: "loopback301"
             desc: "Loopback Interface"
-            addr_v4: "10.203.203.{{ seq }}/32"
+            addr_v4: "10.99.33.{{ seq }}/32"
             addr_v6: "2001:fff3:fff3::{{ '%0x' % seq }}/128"
         type5:
         - 
             afi: ipv4
-            proto: connected
+            proto: attached-host
             r_map: 
+        - 
+            afi: ipv4
+            proto: connected
+            r_map: loopbacks
         - 
             afi: ipv4
             r_map: 

@@ -21,19 +21,19 @@ vxlans:
         netv4: "{{ v101_netv4 }}"
         netv6: "{{ v101_netv6 }}"
         vrf: "SDDC"
-        # helper_addrv4:
-        #     - 11.11.11.11
-        #     - 12.12.12.12
+        helper_addrv4:
+            - 11.11.11.11
+            - 12.12.12.12
         state: "present"
     - 
         desc: "overlay_vlan"
         vlan: "201"
-        # netv4: "{{ v201_netv4 }}"
-        # netv6: "{{ v201_netv6 }}"
+        netv4: "{{ v201_netv4 }}"
+        netv6: "{{ v201_netv6 }}"
         vrf: "SDDC"
-        # helper_addrv4:
-        #     - 11.11.11.11
-        #     - 12.12.12.12
+        helper_addrv4:
+            - 11.11.11.11
+            - 12.12.12.12
         state: "present"
     - 
         desc: "overlay_vlan"
@@ -41,10 +41,10 @@ vxlans:
         netv4: "{{ v202_netv4 }}"
         netv6: "{{ v202_netv6 }}"
         vrf: "SDDC"
-        # helper_addrv4:
-        #     - 11.11.11.11
-        #     - 12.12.12.12
-        state: "absence"
+        helper_addrv4:
+            - 11.11.11.11
+            - 12.12.12.12
+        state: "present"
     - 
         desc: "overlay_vlan"
         vlan: "141"
@@ -54,7 +54,7 @@ vxlans:
         # helper_addrv4:
         #     - 11.11.11.11
         #     - 12.12.12.12
-        state: "absence"
+        state: "present"
     - 
         desc: "overlay_vlan"
         vlan: "142"
@@ -64,14 +64,14 @@ vxlans:
         # helper_addrv4:
         #     - 11.11.11.11
         #     - 12.12.12.12
-        state: "absence"
+        state: "present"
     - 
         desc: "overlay_vlan"
         vlan: "143"
         # netv4: "{{ v143_netv4 }}"
         # netv6: "{{ v143_netv6 }}"
         vrf: "SDDC"
-        # helper_addrv4:
-        #     - 11.11.11.11
-        #     - 12.12.12.12
-        state: "absence"
+        helper_addrv4:
+            - 11.11.11.11
+            - 12.12.12.12
+        state: "present"

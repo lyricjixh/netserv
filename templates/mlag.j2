@@ -83,9 +83,9 @@ mlag
  heartbeat-interval 1200
  local-interface vlan{{ mlag_bond.vlan.id }}
 {% if seq is odd %}
- peer-address {{ tor_pair_netv4 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}
+ peer-address {{ mlag_bond.vlan.netv4 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}
 {% else %}
- peer-address {{ tor_pair_netv4 | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address') }}
+ peer-address {{ mlag_bond.vlan.netv4 | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address') }}
 {% endif %}
 {% if seq is odd %}
  primary-priority 100
