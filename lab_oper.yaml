@@ -23,14 +23,72 @@
     tags:
       - magent
 
+  - name: Create a show log directory if it does not exist
+    ansible.builtin.file:
+      path: "{{ log_dir }}"
+      state: directory
+      mode: '0755'
+    tags:
+     - logdir
+
   - name: Backup cfg
     arista.eos.eos_config:
       backup: yes
       backup_options:
-        filename: "{{hostname}}.conf.backup"
-        dir_path: "{{ build_dir }}"
+        filename: "cfg_archive.{{hostname}}"
+        dir_path: "{{ log_dir }}"
     tags:
       - archive
+    
+  - name: Collect Show Logs
+    block:
+    # - name: Collect Vxlan Logs_Itemized
+    #   eos_command:
+    #     commands: "{{item}}"
+    #   loop:
+    #     - show interface vxlan1
+    #     - show bgp summary
+    #     - show bgp evpn summary
+    #     - show bgp evpn route-type imet detail
+    #     - show bgp evpn route-type mac-ip detail
+    #     - show bgp evpn route-type ip-prefix ipv4 detail
+    #     - show hardware capacity
+    #   register: show_output
+
+    # - name: Display the itemized Logs
+    #   debug:
+    #     msg:
+    #       - "### The vxlan interface ###"
+    #       - "{{ show_output.results[0].stdout_lines }}"
+    #       - "### bgp summary ###"
+    #       - "{{ show_output.results[1].stdout_lines }}"
+    #       - "### bgp evpn summary ###"
+    #       - "{{ show_output.results[2].stdout_lines }}"
+    #       - "### evpn remote vtep type-3 ###"
+    #       - "{{ show_output.results[3].stdout_lines }}"
+    #       - "### evpn mac/ip type-2 ###"
+    #       - "{{ show_output.results[4].stdout_lines }}"
+    #       - "### evpn IP prefix type-5 ###"
+    #       - "{{ show_output.results[5].stdout_lines }}"
+
+    - name: Show holistical Logs
+      eos_command:
+        commands:
+          - show interface vxlan1
+          - show bgp summary
+          - show bgp evpn summary
+          - show bgp evpn route-type imet detail
+          - show bgp evpn route-type mac-ip detail
+          - show bgp evpn route-type ip-prefix ipv4 detail
+          - show hardware capacity
+      register: show_output
+
+    - name: save output to local directory
+      copy:
+        content: "{{ show_output.stdout | replace('\\n', '\n') }}"
+        dest: "{{ log_dir }}/showlog.{{ inventory_hostname }}"
+    tags:
+      - showlog
 
   - name: Generate the intial configuration
     template:
@@ -38,38 +96,6 @@
         dest: "files/{{hostname}}.conf.init"
     tags:
     - init_cfg
-
-  - name: Collect Vxlan Logs
-    eos_command:
-      commands: "{{item}}"
-    loop:
-      - show interface vxlan1
-      - show bgp summary
-      - show bgp evpn summary
-      - show bgp evpn route-type imet detail
-      - show bgp evpn route-type mac-ip detail
-      - show bgp evpn route-type ip-prefix ipv4 detail
-    register: show_output
-    tags:
-      - vxlan
-
-  - name: Display the Logs
-    debug:
-      msg:
-        - "### The vxlan interface ###"
-        - "{{ show_output.results[0].stdout_lines }}"
-        - "### bgp summary ###"
-        - "{{ show_output.results[1].stdout_lines }}"
-        - "### bgp evpn summary ###"
-        - "{{ show_output.results[2].stdout_lines }}"
-        - "### evpn remote vtep type-3 ###"
-        - "{{ show_output.results[3].stdout_lines }}"
-        - "### evpn mac/ip type-2 ###"
-        - "{{ show_output.results[4].stdout_lines }}"
-        - "### evpn IP prefix type-5 ###"
-        - "{{ show_output.results[5].stdout_lines }}"
-    tags:
-      - vxlan
 
   - name: CFG Changes
     arista.eos.eos_config:
@@ -135,14 +161,6 @@
     delegate_to: localhost
     when: peerstate == "up"
 
-  - name: Create a directory if it does not exist
-    ansible.builtin.file:
-      path: "~xji/devops/show_tech"
-      state: directory
-      mode: '0755'
-    tags:
-    - showtech
-
   - name: Collecting EOS Show Tech  
     block:
     - name: Collect show tech onto the local disk
@@ -151,14 +169,14 @@
         ansible_command_timeout: 60
         ansible_connect_timeout: 60
       eos_command:
-        commands: "show tech-support all > file:home/admin/show_tech_{{ inventory_hostname }}"
+        commands: "show tech-support all > file:home/{{ansible_ssh_user}}/show_tech_{{ inventory_hostname }}"
 
     - name: Fetch show tech file from switch to local host 
       ansible.builtin.expect:
-          command: "scp admin@{{ ansible_host }}:/home/admin/show_tech_{{ inventory_hostname }} /home/xji/devops/show_tech/"
+          command: "scp {{ansible_ssh_user}}@{{ ansible_host }}:/home/{{ansible_ssh_user}}/show_tech_{{ inventory_hostname }} {{ log_dir }}"
           responses:
               '\?': "yes"
-              'Password\:': "{{ vault_ceos_password }}"
+              'Password\:': "{{vault_lab_password}}"
       delegate_to: localhost
       tags:
       - fetch
@@ -173,3 +191,19 @@
         state: deleted
     tags:
       - del-layer2
+
+  - name: Apply dummy loopback
+    vars:
+      ansible_command_timeout: 600
+    eos_config:
+        src: dummy_lpbk.j2
+    tags:
+    - dummy_lpbk
+
+  - name: Apply dummy vlans
+    vars:
+      ansible_command_timeout: 600
+    eos_config:
+        src: dummy_vlans.j2
+    tags:
+    - dummy_vlan

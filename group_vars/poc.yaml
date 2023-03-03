@@ -212,12 +212,14 @@ telemetry:
     -
       type: "grpc"
       name: "cust_def"
-      port: "8080"
-      vrf: "MGMT"
+      port: 
+      vrf:
+      state: "enable"
   eapi: 
     - 
       type: "http-commands"
       proto: "http"
+      state: "enable"
   auth:
     - password
     - jwt

@@ -1,5 +1,5 @@
 ---
-- hosts: poc
+- hosts: ceos
   gather_facts: false
   collections:
   - arista.eos
@@ -58,6 +58,31 @@
         - users
     tags:
       - netserv
+
+  - name: Enable Monitoring
+    block:
+    - name: Enable Sflow
+      eos_config:
+          src: sflow.j2
+      when: (features.netserv.sflow is defined and features.netserv.sflow|lower == "yes")
+      tags:
+        - sflow
+
+    - name: Enable SPAN
+      eos_config:
+        src: span.j2
+      when: (features.netserv.span is defined and features.netserv.span|lower == "yes")
+      tags:
+        - span
+
+    - name: Enable Telemetry
+      eos_config:
+        src: telemetry.j2
+      when: (features.netserv.telemetry is defined and features.netserv.telemetry|lower == "yes")
+      tags:
+        - telemetry
+    tags:
+      - monitor
 
 - hosts: poc_leaf
   gather_facts: false

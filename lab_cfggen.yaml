@@ -2,7 +2,7 @@
 - hosts: ceos
   gather_facts: false
   vars:
-      temp_file: "bgp_leaf.j2"
+      temp_file: "dummy_lpbk.j2"
       save_dir: "{{ build_dir }}"
       # save_dir: "files"
   collections:

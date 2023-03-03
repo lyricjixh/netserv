@@ -9,9 +9,16 @@ management api gnmi
     transport {{ trans.type }} {{ trans.name }}
 {% if trans.port %}
         port {{ trans.port }}
+{% else %}
+        port 6030
 {% endif %}
 {% if trans.vrf %}
         vrf {{ trans.vrf }}
+{% endif %}
+{% if trans.state == "disable" %}
+        shutdown
+{% else %}
+        no shutdown
 {% endif %}
     !
 {% endfor %}
@@ -21,7 +28,11 @@ management api gnmi
 {% for eapi in telemetry.eapi %}
 management api {{ eapi.type }}
    protocol {{ eapi.proto }}
-   no shutdown
+{% if eapi.state == "disable" %}
+        shutdown
+{% else %}
+        no shutdown
+{% endif %}
 !
 {% endfor %}
 {% endif %}

@@ -1,0 +1,79 @@
+[
+  {
+    "source": "cal383:6030",
+    "timestamp": 1677705856317661095,
+    "time": "2023-03-01T16:24:16.317661095-05:00",
+    "prefix": "eos_native:LANZ/error",
+    "updates": [
+      {
+        "Path": "errorRecord",
+        "values": {
+          "errorRecord": {
+            "errorMessage": "",
+            "timestamp": 0
+          }
+        }
+      },
+      {
+        "Path": "name",
+        "values": {
+          "name": "error"
+        }
+      }
+    ]
+  },
+  {
+    "source": "cal383:6030",
+    "timestamp": 1677705856317471074,
+    "time": "2023-03-01T16:24:16.317471074-05:00",
+    "prefix": "eos_native:LANZ/config",
+    "updates": [
+      {
+        "Path": "name",
+        "values": {
+          "name": "config"
+        }
+      },
+      {
+        "Path": "configRecord",
+        "values": {
+          "configRecord": {
+            "globalUsageHighThreshold": 0,
+            "globalUsageLowThreshold": 0,
+            "globalUsageReportingEnabled": false,
+            "lanzVersion": 0,
+            "maxQueueSize": 0,
+            "numOfPorts": 0,
+            "segmentSize": 0,
+            "timestamp": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "source": "cal383:6030",
+    "timestamp": 1677705856317631693,
+    "time": "2023-03-01T16:24:16.317631693-05:00",
+    "prefix": "eos_native:LANZ/globalBufferUsage",
+    "updates": [
+      {
+        "Path": "globalBufferUsageRecord",
+        "values": {
+          "globalBufferUsageRecord": {
+            "bufferSize": 0,
+            "duration": 0,
+            "entryType": "",
+            "timestamp": 0
+          }
+        }
+      },
+      {
+        "Path": "name",
+        "values": {
+          "name": "globalBufferUsage"
+        }
+      }
+    ]
+  }
+]
