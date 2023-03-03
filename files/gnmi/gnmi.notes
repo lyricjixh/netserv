@@ -1,0 +1,50 @@
+gnmic -a 172.100.100.2:6030 -u admin -p admin --insecure --gzip get --path "/"
+
+
+gnmic -a 172.100.100.2:6030 -u admin -p admin --insecure --gzip set --update-path '/network-instances/network-instance[name=default]/protocols/protocol[name=BGP]/bgp/neighbors/neighbor[neighbor-address=10.216.197.0]’ --update-file value.json
+
+{"config": {"neighbor-address":"10.216.197.0", "enabled": false}}
+
+Bgp v6 neighbor discovery
+
+
+gnmic -a 172.28.133.157:6030 -u admin -p admin --insecure --gzip set \
+  --update-path '/network-instances/network-instance[name=default]/protocols/protocol[name=BGP]/bgp/peer-groups/peer-group[peer-group-name=grpc-group]' \
+  --update-file ./gnmi/value.json
+
+gnmic -a 172.100.100.2:6030 -u admin -p admin --insecure set --update-path "/interfaces/interface[name=Ethernet1]/config/description" --update-value "test"
+
+gnmic -a 172.100.100.2:6030 -u admin -p admin --insecure get --path "/interfaces/interface[name=Ethernet1]/config/description"
+
+gnmic -a 172.100.100.2:6030 -u admin -p admin --insecure --gzip get --path "/Smash/counters/ethIntf/StrataCounters/current/counter"
+
+gnmic -a cal383:6030 -u admin -p admin --insecure --gzip get --path '/Kernel/proc/cpu/utilization/total'
+
+gnmic -a cal383:6030 -u admin -p admin --insecure --gzip get --path 'eos_native:/Smash/counters/ethIntf/StrataCounters/current/counter'
+
+gnmic -a cal383:6030 -u admin -p admin --insecure --gzip get --path 'eos_native:/LANZ/globalBufferUsage'
+
+gnmic -a cal383:6030 -u admin -p admin --insecure --gzip subscribe --path 'eos_native:/LANZ'
+
+
+gnmic -a cal383:6030 -u admin -p admin --insecure  get --path "cli:/show running-config"
+
+gnmic -a 172.100.100.2:6030 -u admin -p admin --insecure --gzip set --request-file .files/intf.json
+
+gnmic -a 172.100.100.2:6030 -u admin -p admin --insecure --gzip \
+   --encoding ASCII set \
+   --update-path "cli:" \
+   --update-value "interface Ethernet1" \
+   --update-path "cli:" \
+   --update-value "description gnmic test"
+
+gnmic -a 172.100.100.2:6030 -u admin -p admin --insecure --gzip \
+   --encoding ASCII set \
+   --update-path "cli:" \
+   --update-value "router bgp 65101" \
+   --update-path "cli:" \
+   --update-value "neighbor IPv4-UNDERLAY-PEERS maximum-routes 13500"
+
+
+gnmic -a cal383:6030 -u admin -p admin --insecure get --path \
+  /network-instances/network-instance[name=default]/protocols/protocol[name=BGP]
