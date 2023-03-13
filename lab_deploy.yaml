@@ -231,6 +231,6 @@
             src: bgp_edge.j2
         when: "'spine' in inventory_hostname"
         tags:
-        - standard
+        - bgpedge
     tags:
       - edge

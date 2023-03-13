@@ -39,6 +39,18 @@ edge_links:
 #     net_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, links_seq[0]) }}"
 #     net_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, links_seq[0]) }}"
 #     vrf:
+test_links:
+   -
+    name: 
+    state: "present"    
+    desc: "To IXIA"
+    admin_state: "up"
+    net_v4: "{{ test_netv4|ansible.utils.ipsubnet(test_netmaskv4, seq-101 ) }}"
+    net_v6: "{{ test_netv6|ansible.utils.ipsubnet(test_netmaskv6, seq-101 ) }}"
+## Edge Addr higher(2), ISP lower(1)
+    addr_v4: "{{ test_netv4|ansible.utils.ipsubnet(edge_netmaskv4, seq-101)|ansible.utils.ipaddr(1) }}"
+    addr_v6: "{{ test_netv6|ansible.utils.ipsubnet(edge_netmaskv6, seq-101)|ansible.utils.ipaddr(1) }}"
+    vrf:
 
 edge_bgp:
   local_as: "{{ edge_asn }}"
@@ -71,9 +83,31 @@ edge_bgp:
       - "send-community"
       - "ebgp-multihop 2"
       - "maximum-routes 0"
+  -
+    name: "tester_v4"
+    desc: "IXIA PG V4"
+    remote_as: "1234"
+    admin_state: "up"
+    afi:
+    - "ipv4"
+    attributes:
+      - "send-community"
+      - "ebgp-multihop 5"
+      - "maximum-routes 0"
+  -
+    name: "tester_v6"
+    desc: "IXIA PG V6"
+    remote_as: "1234"
+    admin_state: "up"
+    afi:
+    - "ipv6"
+    attributes:
+      - "send-community"
+      - "ebgp-multihop 5"
+      - "maximum-routes 0"
   peers:
     - 
-      addr: "{{ edge_links[0].net_v4 | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address') }}"
+      addr: "{{ edge_links[0].net_v4 | ansible.utils.(1) | ansible.utils.ipaddr('address') }}"
       desc: "DC Fabric Edge Peer V4"
       remote_as: "{{ remote_isp_asn }}"
       peer_group: "ISP-PEER-GROUP_v4"
@@ -82,6 +116,16 @@ edge_bgp:
       desc: "DC Fabric Edge Peer V6"
       remote_as: "{{ remote_isp_asn }}"
       peer_group: "ISP-PEER-GROUP_v6"
+    - 
+      addr: "{{ test_links[0].net_v4 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
+      desc: "Tester Peer V4"
+      remote_as:
+      peer_group: "tester_v4"
+    - 
+      addr: "{{ test_links[0].net_v6 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
+      desc: "Tester Peer V6"
+      remote_as:
+      peer_group: "tester_v6"
   afi: 
   #   ipv4:
   #   -

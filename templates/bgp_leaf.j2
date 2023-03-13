@@ -35,11 +35,12 @@ router bgp {{ bgp.local_as }}
 {% if evpn.vrf is defined and evpn.vrf %}
 {% for vrf in evpn.vrf %}
   vrf {{ vrf.name }}
+    router-id 10.99.11.{{ seq }}
     rd {{ lpbk_olay.addr_v4 }}:{{ vrf.l3_vni.id }}
     route-target export evpn {{ vrf.l3_vni.id }}:{{ vrf.l3_vni.id }}
     route-target import evpn {{ vrf.l3_vni.id }}:{{ vrf.l3_vni.id }}
-{% if vrf.type5 is defined and vrf.type5 %}
-{% for redis in vrf.type5 %}
+{% if vrf.redistribute is defined and vrf.redistribute %}
+{% for redis in vrf.redistribute %}
 {% if redis.r_map %}
     redistribute {{ redis.proto }} route-map {{ redis.r_map }}
 {% else %}
@@ -47,9 +48,30 @@ router bgp {{ bgp.local_as }}
 {% endif %}
 {% endfor %}
 {% endif %}
-  !
+{% if vrf.bgp is defined and vrf.bgp %}
+{% if vrf.bgp.attributes is defined and vrf.bgp.attributes %}
+{% for attr in vrf.bgp.attributes %}
+    {{ attr }}
 {% endfor %}
 {% endif %}
+{% if vrf.bgp.peers %}
+{% for peer in vrf.bgp.peers %}
+{% if peer.desc %}
+    neighbor {{ peer.addr }} description "{{ peer.desc }}"
+{% endif %}
+{% if peer.peer_group %}
+    neighbor {{ peer.addr }} peer group {{ peer.peer_group }}
+{% endif %}
+{% if peer.remote_as %}
+    neighbor {{ peer.addr }} remote-as {{ peer.remote_as }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+    !
+{% endfor %}
+{% endif %}
+  !
 {% if vxlans is defined and vxlans %}
 {% for vni in vxlans %}
   vlan {{ vni.vlan }}

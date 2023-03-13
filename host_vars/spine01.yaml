@@ -10,6 +10,7 @@ edge_netv6: "{{ xconn_v6 | json_query('[?pointa==`edge1` && pointb==`dc-gw01`].n
 
 remote_isp_asn: "{{ isp_asn | json_query('[?name==`cogent`].id') | first }}"
 
+# test_seq: 0
 ## spine01's fabirc link defined in its own host file due to ipaddr not handling 0.
 fabric_links:
   - 

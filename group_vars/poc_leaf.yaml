@@ -213,6 +213,30 @@ bgp:
       - "bfd"
       - "allowas-in 3"
       - "send-community standard extended"
+  -
+    name: "tester_v4"
+    desc: "Tester PEER GROUP v4"
+    remote_as: "65333"
+    admin_state: "up"
+    afi:
+    - "ipv4"
+    attributes:
+      - "update-source Vlan101"
+      - "send-community standard"
+      - "ebgp-multihop 3"
+      - "maximum-routes 0"
+  -
+    name: "tester_v6"
+    desc: "Tester PEER GROUP v4"
+    remote_as: "65333"
+    admin_state: "up"
+    afi:
+    - "ipv6"
+    attributes:
+      - "update-source Vlan101"
+      - "send-community standard"
+      - "ebgp-multihop 3"
+      - "maximum-routes 0"
   peers:
     - 
       addr: "{{ bgp_fabric_peer_v4[0] }}"
@@ -380,7 +404,7 @@ evpn:
             desc: "Loopback Interface"
             addr_v4: "10.99.11.{{ seq }}/32"
             addr_v6: "2001:fff1:fff1::{{ '%0x' % seq }}/128"
-        type5:
+        redistribute:
         - 
             afi: ipv4
             proto: attached-host
@@ -393,10 +417,24 @@ evpn:
             afi: ipv4
             proto: static
             r_map: 
-        # - 
-        #     afi: ipv4
-        #     r_map: 
-        #     proto: bgp
+        bgp:
+          attributes:
+            - update wait-install
+            - "maximum-paths 4 ecmp 4"
+            - "no bgp bestpath ecmp-fast"
+            - graceful-restart restart-time 300
+            - graceful-restart
+          peers:
+            - 
+              addr: "{{ v101_netv4 | ansible.utils.ipaddr(1+rack_no|int) | ansible.utils.ipaddr('address') }}"
+              desc: "IXIA Peer v4"
+              remote_as: 
+              peer_group: "tester_v4"
+            - 
+              addr: "{{ v101_netv6 | ansible.utils.ipaddr(1+rack_no|int) | ansible.utils.ipaddr('address') }}"
+              desc: "IXIA Peer v6"
+              remote_as: 
+              peer_group: "tester_v6"
     - 
         name: "SDDC2"
         desc: "SDDC VRF2"
@@ -411,7 +449,7 @@ evpn:
             desc: "Loopback Interface"
             addr_v4: "10.99.22.{{ seq }}/32"
             addr_v6: "2001:fff2:fff2::{{ '%0x' % seq }}/128"
-        type5:
+        redistribute:
         - 
             afi: ipv4
             proto: attached-host
@@ -442,7 +480,7 @@ evpn:
             desc: "Loopback Interface"
             addr_v4: "10.99.33.{{ seq }}/32"
             addr_v6: "2001:fff3:fff3::{{ '%0x' % seq }}/128"
-        type5:
+        redistribute:
         - 
             afi: ipv4
             proto: attached-host
@@ -455,11 +493,6 @@ evpn:
             afi: ipv4
             r_map: 
             proto: static
-        # - 
-        #     afi: ipv4
-        #     r_map: 
-        #     proto: bgp
-
 
 ## EVPN iBGP Overlay
 ## Bleaves pair as iBGP RRS, Rest VTEP leaf as RRC.

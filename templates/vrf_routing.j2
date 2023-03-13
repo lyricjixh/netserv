@@ -36,8 +36,8 @@ router bgp {{ bgp.local_as }}
     route-target import evpn route-map {{ vrfi.rleak_rules.rmap_in }}
 {% endif %}
     !
-{% if vrfi.type5 is defined and vrfi.type5 %}
-{% for redist in vrfi.type5 %}
+{% if vrfi.redistribute is defined and vrfi.redistribute %}
+{% for redist in vrfi.redistribute %}
 {% if redist.r_map is defined and redist.r_map %}
     redistribute {{ redist.proto }} route-map {{ redist.r_map }}
 {% else %}

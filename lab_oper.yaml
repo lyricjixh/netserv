@@ -1,6 +1,8 @@
 ---
 - hosts: poc
   gather_facts: "false"
+  vars:
+    temp_file: "hostanme.j2"
   collections:
   - arista.eos
 
@@ -74,6 +76,8 @@
     - name: Show holistical Logs
       eos_command:
         commands:
+          - show platform sand l3 summary
+          - show platform sand mac-address-table learning limit
           - show interface vxlan1
           - show bgp summary
           - show bgp evpn summary
@@ -95,7 +99,13 @@
         src: initial_cfg.j2
         dest: "files/{{hostname}}.conf.init"
     tags:
-    - init_cfg
+    - cfg_init
+
+  - name: Change Config with Template
+    eos_config:
+        src: "{{ temp_file }}"
+    tags:
+    - cfg_temp
 
   - name: CFG Changes
     arista.eos.eos_config:
@@ -118,8 +128,7 @@
         - name: "Ethernet{{ item }}"
           enabled: true
     loop:
-      - 1
-      - 2
+      - 49/1
     tags:
       - port
 
@@ -134,7 +143,6 @@
     eos_config:
       lines:
         - "shutdown"
-        - 
       parents: ['router bgp {{ bgp.local_as }}']
       match: exact
       # prompt: "[confirm]"
@@ -147,7 +155,8 @@
   - name : "Bringup the BGPv4 Peer"
     eos_config:
       lines:
-        - "no shutdown"
+        - "neighbor tester_v4 maximum-routes 0"
+        - "neighbor tester_v6 maximum-routes 0"
       parents: ['router bgp {{ bgp.local_as }}']
       match: exact
     notify:

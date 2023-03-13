@@ -1,0 +1,16 @@
+## BGP AF on Spine layer
+control plane:
+10K-12K type 2
+10K type 5 - IPv4
+5K type 5 - IPv6
+
+## default vrf on EDGE
+Fib:
+IPv4 A.F - 1.2M routes in EDGE VRF/default if EDGE in default  --> 500k v4 due to memory limitation
+IPv6 - A.F. 280K  routes in EDGE VRF/default if EDGE in default --> 100k v6 due to memory limitation
+
+ip hardware fib optimize prefix-length 32 24
+
+router bgp 64517
+   vrf SDDC
+      neighbor 172.168.1.8 remote-as 65005

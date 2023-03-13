@@ -1,0 +1,10 @@
+platform sand mdb profile l3
+ip hardware fib optimize prefixes profile internet
+ipv6 hardware fib optimize prefixes profile internet
+!
+hardware tcam
+profile FLEX-ROUTE copy default
+feature flex-route copy system-feature-source-profile
+no feature acl vlan ip
+no feature mirror ip
+system profile FLEX-ROUTE
