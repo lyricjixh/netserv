@@ -1,6 +1,6 @@
 ubuntu_users:
   - name: "netbox"
-    groups: "netbox"
+    groups: "devops"
     password: "{{ vault_netbox_password }}"
     state: "present"
   - name: "xji"

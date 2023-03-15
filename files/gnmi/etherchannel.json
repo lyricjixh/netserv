@@ -1,0 +1,17 @@
+{
+            "openconfig-if-aggregate:config": {
+              "arista-intf-augments:fallback": "individual",
+              "arista-intf-augments:fallback-timeout": 1,
+              "arista-intf-augments:mlag": 99,
+              "lag-type": "LACP"
+            },
+            "openconfig-vlan:switched-vlan": {
+              "config": {
+                "interface-mode": "TRUNK",
+                "native-vlan": 1,
+                "trunk-vlans": [
+                  "101..102"
+                ]
+              }
+            }
+          }

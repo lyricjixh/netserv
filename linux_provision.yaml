@@ -275,31 +275,27 @@
 
 - hosts: netbox01
   become: yes
-  gather_facts: no
   vars:
-    # netbox_stable: true
-    # netbox_superuser_password: netbox
-    # netbox_socket: "0.0.0.0:80"
-    # netbox_config:
-    #   ALLOWED_HOSTS:
-    #     - "{{ inventory_hostname }}"
-    #   MEDIA_ROOT: "{{ netbox_shared_path }}/media"
-    #   REPORTS_ROOT: "{{ netbox_shared_path }}/reports"
-    #   SCRIPTS_ROOT: "{{ netbox_shared_path }}/scripts"
-    # netbox_database_host: pg-netbox01
-    # netbox_database_port: 15432
-    # netbox_database: netbox_prod
-    # netbox_database_user: netbox_prod_user
-    # netbox_database_password: "very_secure_password_for_prod"
-    # netbox_database_maintenance: netbox_prod
-    # redis_bind: 127.0.0.1
-    # redis_version: 6.0.9
-    # redis_checksum: sha256:dc2bdcf81c620e9f09cfd12e85d3bc631c897b2db7a55218fd8a65eaa37f86dd
+    netbox_stable: true
+    netbox_database_socket: "{{ postgresql_unix_socket_directories[0] }}"
+    netbox_superuser_password: netbox
+    netbox_socket: "0.0.0.0:80"
+    netbox_config:
+      ALLOWED_HOSTS:
+        - netbox01
+      MEDIA_ROOT: "{{ netbox_shared_path }}/media"
+      REPORTS_ROOT: "{{ netbox_shared_path }}/reports"
+      SCRIPTS_ROOT: "{{ netbox_shared_path }}/scripts"
+    postgresql_users:
+      - name: "{{ netbox_database_user }}"
+        role_attr_flags: CREATEDB,NOSUPERUSER
+    redis_bind: 127.0.0.1
+    redis_version: 6.0.9
+    redis_checksum: sha256:dc2bdcf81c620e9f09cfd12e85d3bc631c897b2db7a55218fd8a65eaa37f86dd
   roles:
     - geerlingguy.postgresql
     - davidwittman.redis
     - lae.netbox
-
 
   # - name: NMCLI the k8s uplink IP
   #   community.general.nmcli:

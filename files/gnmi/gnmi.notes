@@ -48,3 +48,19 @@ gnmic -a 172.100.100.2:6030 -u admin -p admin --insecure --gzip \
 
 gnmic -a cal383:6030 -u admin -p admin --insecure get --path \
   /network-instances/network-instance[name=default]/protocols/protocol[name=BGP]
+
+gnmic --encoding json_ietf \
+          generate \
+          --file EOS-4.23.2F/openconfig/public/release/models \
+          --dir ../openconfig/public/third_party/ietf \
+          --exclude ietf-interfaces \
+          set-request \
+          --replace bgp/neighbors/neighbor/config
+
+gnmic --encoding json_ietf \
+          generate \
+          --file EOS-4.29.1F/openconfig/public/release/models \
+          --dir ../public/third_party/ietf \
+          --exclude ietf-interfaces \
+          set-request \
+          --replace interfaces/interface/aggregation/config

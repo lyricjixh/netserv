@@ -136,7 +136,7 @@
         src: bgp_leaf.j2
     when: "'leaf' in inventory_hostname"
     tags:
-    - bgp
+    - bgpleaf
 
   # - name: Enable Standard BGP on Leaf
   #   eos_config:

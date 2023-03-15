@@ -3,6 +3,7 @@
   gather_facts: "false"
   vars:
     temp_file: "hostanme.j2"
+    ansible_command_timeout: 300
   collections:
   - arista.eos
 
@@ -12,6 +13,7 @@
       msg:
         - "The network model: {{ ansible_net_model }}"
         - "EOS Image version: {{ ansible_net_version }}"
+        - "Memory: {{ ansible_net_version }}"
     tags:
       - generic
 
@@ -73,18 +75,26 @@
     #       - "### evpn IP prefix type-5 ###"
     #       - "{{ show_output.results[5].stdout_lines }}"
 
-    - name: Show holistical Logs
+    - name: Show holistic Logs
       eos_command:
         commands:
-          - show platform sand l3 summary
-          - show platform sand mac-address-table learning limit
-          - show interface vxlan1
-          - show bgp summary
+          - show version
+          # - show platform sand l3 summary
+          - show bgp summary vrf all
           - show bgp evpn summary
-          - show bgp evpn route-type imet detail
-          - show bgp evpn route-type mac-ip detail
-          - show bgp evpn route-type ip-prefix ipv4 detail
-          - show hardware capacity
+          - show bgp evpn route-type imet detail | no-more
+          # - show bgp evpn route-type mac-ip detail
+          # - show bgp evpn route-type ip-prefix ipv4 detail
+          - show hardware capacity | no-more
+          - show process top once | no-more
+          - show process top memory once | no-more
+          - show ip route vrf all summary
+          # - show vrf
+          # - show ip ospf nei vrf all
+          # - show ipv6 ospf nei vrf all
+          - show port-channel dense
+          - show log | no-more
+
       register: show_output
 
     - name: save output to local directory
@@ -132,12 +142,13 @@
     tags:
       - port
 
-  - name : "Remove BGPv4 Config"
+  - name : "Change partition"
     eos_config:
       lines:
-        - "no router bgp {{ bgp.local_as }}"
+        - "platform trident routing-table partition 4"
+        - "platform trident forwarding-table partition 4"
     tags:
-      - nobgp
+      - partition
 
   - name : "Shutdown the BGPv4 Peer"
     eos_config:
@@ -174,9 +185,7 @@
     block:
     - name: Collect show tech onto the local disk
       vars:
-        ansible_timeout: 60
-        ansible_command_timeout: 60
-        ansible_connect_timeout: 60
+        ansible_command_timeout: 180
       eos_command:
         commands: "show tech-support all > file:home/{{ansible_ssh_user}}/show_tech_{{ inventory_hostname }}"
 
