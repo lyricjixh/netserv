@@ -69,3 +69,12 @@ fabric_links:
   #   admin_state: "up"
   #   addr_v4: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[7]) | ansible.utils.ipaddr('address') }}"
   #   addr_v6: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[7]) | ansible.utils.ipaddr('address') }}"
+
+urpf_port:
+  - "Port-Channel5"
+  - "Port-Channel50.60"
+  # - "Eth7/1"
+  # - "Eth8/1"
+  # - "Eth9/1"
+  # - "Eth10/1"
+  

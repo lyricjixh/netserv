@@ -9,3 +9,11 @@ edge_netv4: "{{ xconn_v4 | json_query('[?pointa==`edge2` && pointb==`dc-gw02`].n
 edge_netv6: "{{ xconn_v6 | json_query('[?pointa==`edge2` && pointb==`dc-gw02`].net') | first }}"
 
 remote_isp_asn: "{{ isp_asn | json_query('[?name==`zayo`].id') | first }}"
+
+urpf_port:
+  - "Port-Channel5"
+  - "Port-Channel50.60"
+  # - "Eth7/1"
+  # - "Eth8/1"
+  # - "Eth9/1"
+  # - "Eth10/1"

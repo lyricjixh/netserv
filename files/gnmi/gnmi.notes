@@ -63,4 +63,17 @@ gnmic --encoding json_ietf \
           --dir ../public/third_party/ietf \
           --exclude ietf-interfaces \
           set-request \
-          --replace interfaces/interface/aggregation/config
+          --replace interfaces/interface[name=Port-Channel101]/aggregation
+
+- path: interfaces/interface[name=Port-Channel999]/aggregation
+  value:
+    config:
+      lag-type: ["LACP"]
+      min-links: [1]
+    switched-vlan:
+      config:
+        access-vlan: []
+        interface-mode: ["TRUNK"]
+        native-vlan: [1]
+        trunk-vlans: ["101..102"]
+  encoding: JSON_IETF

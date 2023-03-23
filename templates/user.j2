@@ -4,5 +4,5 @@ Purpose:
 Generating Local User Configuration
 ############################################}
 {% for user in users %}
-username {{ user.name }}  privilege {{ user.priv }} secret 0 {{ user.passwd }}
+username {{ user.name }}  privilege {{ user.priv }} role network-admin secret 0 {{ user.passwd }}
 {% endfor %}

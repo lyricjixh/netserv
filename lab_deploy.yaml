@@ -1,5 +1,5 @@
 ---
-- hosts: ceos
+- hosts: poc
   gather_facts: false
   collections:
   - arista.eos

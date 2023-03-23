@@ -235,7 +235,7 @@ users:
   - name: "lab" 
     passwd: "{{ vault_lab_password }}"
     role: "sysadmin"
-    priv: 10
+    priv: 15
 
   - name: "ansible"
     passwd: "{{ vault_ansible_password }}"
