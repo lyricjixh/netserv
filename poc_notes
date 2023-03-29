@@ -9,6 +9,11 @@ Fib:
 IPv4 A.F - 1.2M routes in EDGE VRF/default if EDGE in default  --> 500k v4 due to memory limitation
 IPv6 - A.F. 280K  routes in EDGE VRF/default if EDGE in default --> 100k v6 due to memory limitation
 
+## SVI scale on T3
+1440 x VLANs & SVI
+20 IP address virtual per VLAN
+20 ipv6 address virtual per VLAN
+
 ip hardware fib optimize prefix-length 32 24
 
 platform sand mdb profile l3
@@ -22,6 +27,7 @@ no feature acl vlan ip
 no feature mirror ip
 system profile FLEX-ROUTE
 
+## Trident rib/fib partition
 platform trident routing-table partition ?
   1  32K IPv4, 12K IPv6 ( prefix len up to /64 ), 2K IPv6 ( any prefix length )
   2  32K IPv4, 8K IPv6 ( prefix len up to /64 ), 4K IPv6 ( any prefix length )
@@ -35,3 +41,15 @@ platform trident forwarding-table partition ?
   3         96k l2 entries, 208k l3 host, 32k lpm entries
   4         32k l2 entries, 16k l3 host, 360k lpm entries
   flexible  Configure the size of MAC, host, exact-match and ALPM tables
+
+## HA Testing:
+1. physical reloading
+2. VRF CORE shutdowing
+   no ip routing vrf PNAP-CORE
+3. shutdowning link between CORE/EDGE
+
+## Future PoC Planning
+On-Prem Lab
+virtual lab (GNS3, Containerlab, ATD)
+Automation integration/Single Source of Truth
+New Platforms Validation

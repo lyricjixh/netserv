@@ -299,6 +299,16 @@ spine_bgp:
       desc: "EVPN PEER"
       remote_as: "{{ rack02_asn }}"
       peer_group: "FABRIC-PEER_EVPN"
+  listen_range:
+    - 
+      network: "{{ fabric_ptp_netv4 }}"
+      peer_group: "FABRIC-PEER_v4"
+      peer_filter: "leaf_asn_range"
+    - 
+      network: "{{ fabric_ptp_netv6 }}"
+      peer_group: "FABRIC-PEER_v6"
+      peer_filter: "leaf_asn_range"
+  #   ipv4:
   afi: 
   #   ipv4:
   #   -

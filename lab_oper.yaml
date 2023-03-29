@@ -156,7 +156,7 @@
         lines:
           - "no hardware access-list resource sharing vlan ipv4 out"
 
-    - name : "Enalbe uRPF"
+    - name : "Enable uRPF"
       eos_config:
         lines:
           - "ip verify unicast source reachable-via rx allow-default"

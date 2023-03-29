@@ -95,4 +95,9 @@ router bgp {{ edge_asn }}
   !
 {% endfor %}
 {% endif %}
+{% if spine_bgp.listen_range is defined and spine_bgp.listen_range %}
+{% for lrange in spine_bgp.listen_range %}
+  bgp listen range {{ lrange.network }} peer-group {{ lrange.peer_group }} peer-filter {{ lrange.peer_filter }}
+{% endfor %}
+{% endif %}
 !

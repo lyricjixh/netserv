@@ -325,9 +325,6 @@ test_netmaskv6: 126
 test_netv4: "10.100.199.0/24"
 test_netv6: "2001:2001:2001:c7::/124"
 
-test_route_netv4: "101.101.0.0/16"
-test_route_netv6: "2001:2001:101:101::/48"
-
 k8s_tor_netmaskv4: 24
 k8s_tor_netmaskv6: 64
 k8s_tor1_netv4: "{{ v141_netv4 }}"
