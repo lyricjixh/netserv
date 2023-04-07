@@ -1,10 +1,2 @@
-.ceos.clab.yml.bak
-clab-ceos-lab01/
-clab-pod1/
-clab-clab/
-clab-arista/
-clab-poc/
-clab-poc01/
-topology/.poc*
 files/gnmi/*.py
 files/gnmi/__*
