@@ -31,9 +31,9 @@
   - name: Push the templated config
     vars:
         ansible_command_timeout: 900
-        round: "{{ item }}"
+        # round: "{{ item }}"
     eos_config:
       src: "{{ temp_file }}"
-    with_items: [5,6,7,8,9]
+    # with_items: [5,6,7,8,9]
     tags:
     - cfgpush

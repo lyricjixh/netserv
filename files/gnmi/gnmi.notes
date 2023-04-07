@@ -77,3 +77,32 @@ gnmic --encoding json_ietf \
         native-vlan: [1]
         trunk-vlans: ["101..102"]
   encoding: JSON_IETF
+
+cp -R ./arista_oc/EOS-4.29.2F/openconfig/public/release/models/*/*.yang yang_modules/.
+
+pyang --plugindir $HOME/.local/lib/python3.10/site-packages/pyangbind/plugin/ -f pybind -o oc_bgp.py openconfig-bgp.yang
+
+#!/bin/bash
+rm -Rf yang
+mkdir -p yang/consolidated
+git clone https://github.com/openconfig/public.git yang/openconfig
+git clone https://github.com/aristanetworks/yang.git yang/arista
+cp yang/openconfig/release/models/*.yang yang/consolidated/
+cp -R yang/openconfig/release/models/*/*.yang yang/consolidated/
+cp yang/openconfig/third_party/ietf/*.yang yang/consolidated/
+for i in `find yang/arista/EOS-4.26.1F/ -name 'arista*.yang'`; do cp $i yang/consolidated; done
+
+export PYBINDPLUGIN=`/usr/bin/env python -c \
+'import pyangbind; import os; print ("{}/plugin".format(os.path.dirname(pyangbind.__file__)))'`
+echo $PYBINDPLUGIN
+
+cd yang/consolidated
+pyang --plugindir $PYBINDPLUGIN -f pybind -o ./oc_bgp.py openconfig-bgp.yang
+pyang --plugindir $PYBINDPLUGIN -f pybind -o ./openconfig_network_instance.py openconfig-network-instance.yang openconfig-bgp.yang
+pyang --plugindir $PYBINDPLUGIN -f pybind -o ./openconfig_interfaces.py openconfig-interfaces.yang openconfig-if-ip.yang arista-intf-augments.yang
+pyang --plugindir $PYBINDPLUGIN -f pybind -o ./openconfig_routing_policy.py openconfig-routing-policy.yang arista-rpol-augments.yang
+cd ../../
+
+
+
+

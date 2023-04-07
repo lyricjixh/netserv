@@ -135,3 +135,13 @@ span_sku:
     source:     "eth15"      #Mirror session source interface
     acl_grp: "span_acl3"
     state:      "present"         #State, absent or present
+
+strata_fib:
+   partition:
+   flex_partition:
+      exact: 118784  ## 116K
+      l2: 0
+      l3: 128000     ## 125k
+      alpm: 65536    ## 64k
+strata_rib:
+   partition: 3

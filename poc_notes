@@ -53,3 +53,41 @@ On-Prem Lab
 virtual lab (GNS3, Containerlab, ATD)
 Automation integration/Single Source of Truth
 New Platforms Validation
+
+
+Flex partiion:
+Host                                                     81919    100%          0            0        81919      144003
+Host           V4Hosts                                   81463    100%          0            0        81919       86403
+Host           V4Mroutes                                     0      0%          0            0        81919           0
+Host           V6Hosts                                     456    100%          0            0        81919       57600
+Host           V6Mroutes                                     0      0%          0            0        81919           0
+LPM                                                      16382    100%          0            0        16382       16382
+LPM            V4Routes                                  15833    100%          0            0        16382       15833
+LPM            V6Routes                                    549    100%          0            0        16382       12288
+
+cal384.08:39:14#show platform trident l3 summary | grep 'interfaces\|unicast\|LPM'
+
+L3 interfaces: 1440/16383
+NextHop entries: 4429/65535 (4427 unicast, 0 multicast, 0 L3MC, 2 sdtag)
+IPv4 unicast entries: 81463
+IPv6 unicast entries: 228
+Reserved IPv4 unicast hosts: 0 (configured: 0)
+Reserved IPv6 unicast hosts: 0 (configured: 0)
+LPM table mode: 3, table usage: 16382/16382
+
+partition flexible exact-match 16384 l2-shared 98304 l3-shared 131072
+
+* Bare Metal (EVPN Spine/Leaf) 
+*    Collapsed Edge/Core 
+*    VLAN translation / QinQ (potential new product still in development)
+*    Virtualized product L2/L3 spine leaf
+*    Edge
+*    IEDGE/Core
+*    Bare Metal (MLAG , NON-MLAG)
+*    Co-location
+*    DDoS (two layers)
+*    Transport L3
+*    Virtualized product MLAG pair
+*    Transport L2
+*    Storage
+
