@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# pnap lab information
+# PoC lab information
 
 ## windows VM running ixia client 
     (RDP with u: arista, p: arastra)
@@ -52,4 +51,3 @@
         ixia --- do421 et 3
 =======
 # netserv
->>>>>>> 61eb28d (Initial commit)
