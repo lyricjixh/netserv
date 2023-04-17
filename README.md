@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # pnap lab information
 
 ## windows VM running ixia client 
@@ -49,3 +50,6 @@
         cal388 et1 — do421 et2
         ixia --- do420 et 3
         ixia --- do421 et 3
+=======
+# netserv
+>>>>>>> 61eb28d (Initial commit)
