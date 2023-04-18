@@ -8,12 +8,20 @@ no sflow enable
 {% elif sflow.sflow_enable == "true" %}
 sflow hardware acceleration
 sflow run
+{% if sflow.src_intf is defined and sflow.src_intf %}
+{% if sflow.vrf is defined and sflow.vrf %}
+sflow vrf {{ sflow.vrf }} source-interface {{ sflow.src_intf }}
+{% else %}
+sflow source-interface {{ sflow.src_intf }}
+{% endif %}
+{% endif %}
+!
 {% for collector in sflow.collector %}
 {% if collector.state == "absent" %}
 no sflow destination {{ collector.collector_ip }}
 {% elif collector.state == "present" %}
 {% if sflow.vrf is defined and sflow.vrf %}
-sflow destination {{ collector.collector_ip }} vrf {{ sflow.vrf }} {{ collector.udp_port }}
+sflow vrf {{ sflow.vrf }} destination {{ collector.collector_ip }} {{ collector.udp_port }}
 {% else %}
 sflow destination {{ collector.collector_ip }} {{ collector.udp_port }}
 {% endif %}
@@ -27,9 +35,6 @@ sflow sample {{ sflow.sample_rate }}
 {% endif %}
 {% if sflow.bgp is defined and sflow.bgp|lower == "enabled" %}
 sflow extension bgp
-{% endif %}
-{% if sflow.src_intf is defined and sflow.src_intf %}
-sflow source-interface {{ sflow.src_intf }}
 {% endif %}
 !
 {% endif %}

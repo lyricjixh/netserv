@@ -7,11 +7,11 @@ site-id: "Lab01"
 
 #Services
 domain:
-    name: "aexp.com"
-    vrf: "MGMT"
+    name: "ca.aexp.com"
+    vrf: "management"
     server:
-        - "8.8.8.8"
-        - "8.8.4.4"
+        - "10.21.12.89"
+        - "148.173.250.45"
 
 ntp:
     src_intf: "mgmt1/1/1" 
@@ -191,17 +191,17 @@ stp:
 
 sflow:
   sflow_enable: "true"
-  vrf: 
-  src_intf: "loopback{{ lpbk_ulay_id }}"
+  vrf: "management"
+  src_intf: "Management1"
   collector:
-    - collector_ip: "172.100.100.249"
-      udp_port: 6343
+    - collector_ip: "148.171.54.50"
+      udp_port: 9995
       state: present
     - collector_ip: "172.100.99.99"
       udp_port: 6343
       state: present
   polling_interval: 30
-  sample_rate: 1024
+  sample_rate: 16384
   bgp: 'Enabled'
   port: "{{ sflow_port_sku }}"
 

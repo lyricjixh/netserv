@@ -11,13 +11,13 @@
 
   tasks:
   - name: Generate the templated config
-    vars:
-        round: "{{ item }}"
+    # vars:
+    #     round: "{{ item }}"
     template:
       src: "{{ temp_file }}"
       dest: "{{save_dir}}/{{hostname}}.conf.part.{{round}}"
     # delegate_to: localhost
-    with_items: [0,1]
+    # with_items: [0,1]
     tags:
       - cfggen
 
