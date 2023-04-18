@@ -4,7 +4,6 @@
   vars:
       temp_file: "dummy_lpbk.j2"
       save_dir: "{{ build_dir }}"
-      round: 1
       # save_dir: "files"
   collections:
   - arista.eos
@@ -15,7 +14,7 @@
     #     round: "{{ item }}"
     template:
       src: "{{ temp_file }}"
-      dest: "{{save_dir}}/{{hostname}}.conf.part.{{round}}"
+      dest: "{{save_dir}}/{{hostname}}.conf.part"
     # delegate_to: localhost
     # with_items: [0,1]
     tags:
@@ -24,7 +23,7 @@
   - name: Display the generated config
     debug: var=item
     with_file:
-      - "{{save_dir}}/{{hostname}}.conf.part.0"
+      - "{{save_dir}}/{{hostname}}.conf.part"
     tags:
       - cfggen
 
