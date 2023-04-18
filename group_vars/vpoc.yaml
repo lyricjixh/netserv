@@ -13,7 +13,7 @@ site-id: "Lab01"
 
 #Services
 domain:
-    name: "poc.arista.com"
+    name: "aexp.com"
     vrf: "MGMT"
     server:
         - "8.8.8.8"
@@ -116,7 +116,7 @@ aaa_radius:
 
 snmp:
     vrf: "MGMT"
-    contact: "labadmin@poc.arista.com"
+    contact: "labadmin@aexp.com"
     proto_port: "1161"    ## leave blank for default 161
     location: "Container PoC Lab"
     view:

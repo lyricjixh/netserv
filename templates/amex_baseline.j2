@@ -1,0 +1,23 @@
+{###########################################
+
+Purpose:
+Generating Initial Configuration
+############################################}
+{% if domain is defined and domain %}
+hostname {{ hostname }}.{{ domain.name }}
+{% else %}
+hostname {{ hostname }}
+{% endif %}
+!
+no aaa root
+!
+hardware counter feature vtep encap
+hardware counter feature vtep decap
+!
+dhcp relay
+   tunnel requests disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
