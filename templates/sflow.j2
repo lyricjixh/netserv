@@ -7,7 +7,6 @@ Generating Syslog Configuration
 no sflow enable
 {% elif sflow.sflow_enable == "true" %}
 sflow hardware acceleration
-sflow run
 {% if sflow.src_intf is defined and sflow.src_intf %}
 {% if sflow.vrf is defined and sflow.vrf %}
 sflow vrf {{ sflow.vrf }} source-interface {{ sflow.src_intf }}
@@ -29,6 +28,8 @@ sflow destination {{ collector.collector_ip }} {{ collector.udp_port }}
 {% endfor %}
 {% if sflow.polling_interval is defined and sflow.polling_interval %}
 sflow polling-interval {{ sflow.polling_interval }}
+{% else %}
+no sflow polling-interval
 {% endif %}
 {% if sflow.sample_rate is defined and sflow.sample_rate %}
 sflow sample {{ sflow.sample_rate }}
@@ -37,6 +38,7 @@ sflow sample {{ sflow.sample_rate }}
 sflow extension bgp
 {% endif %}
 !
+sflow run
 {% endif %}
 {% for port in sflow.port %}
 interface {{ port.id }}

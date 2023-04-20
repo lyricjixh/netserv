@@ -138,10 +138,15 @@ span_sku:
 
 strata_fib:
    partition:
+   # flex_partition:
+   #    exact: 118784  ## 116K
+   #    l2: 0
+   #    l3: 128000     ## 125k
+   #    alpm: 65536    ## 64k
    flex_partition:
-      exact: 118784  ## 116K
-      l2: 0
-      l3: 128000     ## 125k
-      alpm: 65536    ## 64k
+      exact: 16000    ## 16K, heavy acl
+      l2: 32000       ## 32k
+      l3: 24000       ## 24k
+      alpm: 0         ## 0
 strata_rib:
    partition: 3

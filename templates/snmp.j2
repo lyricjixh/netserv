@@ -7,6 +7,9 @@ Generating SNMP Configuration
 {% if snmp.contact is defined and snmp.contact %}
 snmp-server contact "{{ snmp.contact }}"
 {% endif %}
+{% if snmp.location is defined and snmp.location %}
+snmp-server location {{ snmp.location }}
+{% endif %}
 !
 {% if snmp.view is defined and snmp.view %}
 {% for view in snmp.view %}
@@ -57,13 +60,21 @@ snmp-server host {{ host.addr }} version 3 {{ host.auth }} {{ host.user }}
 {% if snmp.traps is defined and snmp.traps %}
 {% for trap in snmp.traps %}
 {% if trap.type %}
-snmp-server enable traps {{ trap.category }} {{ trap.type|join(' ') }}
+{% for type in trap.type %}
+snmp-server enable traps {{ trap.category }} {{ type }}
+{% endfor %}
 {% else %}
 snmp-server enable traps {{ trap.category }}
 {% endif %}
 {% endfor %}
 {% endif %}
 !
-snmp-server vrf MGMT local-interface management0
+{% if snmp.src_intf %}
+{% if snmp.vrf %}
+snmp-server vrf {{ snmp.vrf }} local-interface {{ snmp.src_intf }}
+{% else %}
+snmp-server local-interface {{ snmp.src_intf }}
+{% endif %}
+{% endif %}
 !
 {% endif %}

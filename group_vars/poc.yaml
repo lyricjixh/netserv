@@ -6,16 +6,19 @@ city: "Santa Clara"
 site-id: "Lab01"
 
 #Services
+mgmt_vrf: "management"
+mgmt_intf: "1"
+
 domain:
     name: "ca.aexp.com"
     vrf: "management"
     server:
         - "10.21.12.89"
         - "148.173.250.45"
-
+timezone: "GMT0"
 ntp:
-    src_intf: "mgmt1/1/1" 
-    vrf: "MGMT"
+    src_intf: "Management1" 
+    vrf: "management"
     authenticate: "yes"
     auth_key:
       - seq: 2
@@ -37,13 +40,15 @@ ntp:
           state: "present"
 
 log:
-    src_intf: "management0" 
-    vrf: "MGMT"
+    src_intf: "Management1" 
+    vrf: "management"
+    console: "no"
+    monitor: "no"
     server:
-        - addr: "172.100.100.81"
+        - addr: "10.14.8.12"
           port: "514"
           protocol: "tcp"
-        - addr: "172.100.100.249"
+        - addr: "139.71.242.20"
           port: "514"
           protocol: "tcp"
     trap: "critical"
@@ -76,7 +81,7 @@ aaa:
 
 aaa_tac:
     timeout: "15" 
-    vrf: "MGMT"
+    vrf: "management"
     group:
       - name: "tac_group1"
         server:
@@ -93,7 +98,7 @@ aaa_tac:
 
 aaa_radius:
     timeout: "15" 
-    vrf: "MGMT"
+    vrf: "management"
     group:
       - name: "radius_group1"
         server:
@@ -109,10 +114,11 @@ aaa_radius:
               key: "{{ vault_radius_key }}"
 
 snmp:
-    vrf: "MGMT"
-    contact: "labadmin@aexp.com"
+    vrf: "management"
+    src_intf: "Management1"
+    contact: "netadmin@aexp.com, contact 602-766-3000"
     proto_port: "1161"    ## leave blank for default 161
-    location: "Container PoC Lab"
+    location: "E3:CAN-TOR-029:AMEX:CC:24X7:Sheperd:001:A04"
     view:
       - name: "globalView"
         oid: "1.3.6.1"
@@ -153,37 +159,54 @@ snmp:
     traps:
       - category: "bgp"
         type:
-        - established
-        - backward-transition
+          - established
+          - backward-transition
+      - category: "ospf"
+        type:
+          - if-state-change
+          - nbr-state-change
       - category: "capacity"
         type:
-        - arista-hardware-utilization-alert
-      - category: "external-alarm"
+          - arista-hardware-utilization-alert
+      - category: "entity"
         type:
+          - arista-ent-sensor-alarm
+          - ent-config-change
+          - ent-state-oper-enabled
+      - category: "snmpConfigManEvent"
+        type:
+      - category: "switchover"
+        type:
+      - category: "vrrp"
+        type:
+          - trap-new-master
     host:
-        - addr: "172.100.100.249"
+        - addr: "148.171.161.70"
           version: "2c"
-          community: "community_01"
-          vrf: "MGMT"
-        - addr: "99.99.99.99"
+          community: "{{ vault_snmp_comm_ro }}"
+          vrf: "management"
+        - addr: "148.171.54.9"
           version: "3"
           user: "netops"
           auth: "auth"
-          vrf: "MGMT"
+          vrf: "management"
     community:
         - name: "community_ro"
           string: "{{ vault_snmp_comm_ro }}"
           priv: "ro"
-          acl: "SNMP-HOSTS"
+          acl: "gnoc_ro"
           group: "admin01"
         - name: "community_rw"
           string: "{{ vault_snmp_comm_rw }}"
           priv: "rw"
-          acl: "SNMP-HOSTS"
+          acl: "gnoc_ro"
           group: "admin02"
 
 stp:
     mode: "rapid-pvst"
+    attributes:
+      - "edge-port bpduguard default"
+      - "guard loop default"
     priority: "8192"
     vlan:
         - id: "3939"
@@ -200,7 +223,7 @@ sflow:
     - collector_ip: "172.100.99.99"
       udp_port: 6343
       state: present
-  polling_interval: 30
+  polling_interval:
   sample_rate: 16384
   bgp: 'Enabled'
   port: "{{ sflow_port_sku }}"
