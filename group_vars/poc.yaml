@@ -11,14 +11,14 @@ mgmt_intf: "1"
 
 domain:
     name: "ca.aexp.com"
-    vrf: "management"
+    vrf: "{{ mgmt_vrf }}"
     server:
         - "10.21.12.89"
         - "148.173.250.45"
 timezone: "GMT0"
 ntp:
-    src_intf: "Management1" 
-    vrf: "management"
+    src_intf: "Management{{mgmt_intf}}" 
+    vrf: "{{ mgmt_vrf }}"
     authenticate: "yes"
     auth_key:
       - seq: 2
@@ -40,8 +40,8 @@ ntp:
           state: "present"
 
 log:
-    src_intf: "Management1" 
-    vrf: "management"
+    src_intf: "Management{{mgmt_intf}}" 
+    vrf: "{{ mgmt_vrf }}"
     console: "no"
     monitor: "no"
     server:
@@ -81,7 +81,8 @@ aaa:
 
 aaa_tac:
     timeout: "15" 
-    vrf: "management"
+    vrf: "{{ mgmt_vrf }}"
+    src_intf: "Management{{mgmt_intf}}"
     group:
       - name: "tac_group1"
         server:
@@ -98,7 +99,7 @@ aaa_tac:
 
 aaa_radius:
     timeout: "15" 
-    vrf: "management"
+    vrf: "{{ mgmt_vrf }}"
     group:
       - name: "radius_group1"
         server:
@@ -114,8 +115,8 @@ aaa_radius:
               key: "{{ vault_radius_key }}"
 
 snmp:
-    vrf: "management"
-    src_intf: "Management1"
+    vrf: "{{ mgmt_vrf }}"
+    src_intf: "Management{{mgmt_intf}}"
     contact: "netadmin@aexp.com, contact 602-766-3000"
     proto_port: "1161"    ## leave blank for default 161
     location: "E3:CAN-TOR-029:AMEX:CC:24X7:Sheperd:001:A04"
@@ -184,12 +185,12 @@ snmp:
         - addr: "148.171.161.70"
           version: "2c"
           community: "{{ vault_snmp_comm_ro }}"
-          vrf: "management"
+          vrf: "{{ mgmt_vrf }}"
         - addr: "148.171.54.9"
           version: "3"
           user: "netops"
           auth: "auth"
-          vrf: "management"
+          vrf: "{{ mgmt_vrf }}"
     community:
         - name: "community_ro"
           string: "{{ vault_snmp_comm_ro }}"
@@ -214,8 +215,8 @@ stp:
 
 sflow:
   sflow_enable: "true"
-  vrf: "management"
-  src_intf: "Management1"
+  vrf: "{{ mgmt_vrf }}"
+  src_intf: "Management{{mgmt_intf}}"
   collector:
     - collector_ip: "148.171.54.50"
       udp_port: 9995

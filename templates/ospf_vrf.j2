@@ -1,25 +1,25 @@
 {##################################################
 
 Purpose:
-Generating OSPF Underlay Configuration
+Generating vrf.ospf Underlay Configuration
 ###################################################}
 {% if evpn.vrf is defined and evpn.vrf %}
 {% for vrf in evpn.vrf %}
 {% if vrf.ospf is defined and vrf.ospf %}
-{% if ospf.daemon_id is defined and ospf.daemon_id %}
-router ospf {{ ospf.daemon_id }} vrf {{ vrf.name }}
+{% if vrf.ospf.daemon_id is defined and vrf.ospf.daemon_id %}
+router ospf {{ vrf.ospf.daemon_id }} vrf {{ vrf.name }}
 {% else %}
 router ospf vrf {{ vrf.name }}
 {% endif %}
  log-adjacency-changes
  router-id {{ lpbk_ulay.addr_v4}}
-{% if ospf.attributes is defined and ospf.attributes %}
-{% for attri in ospf.attributes %}
- {{ ospf.attributes }}
+{% if vrf.ospf.attributes is defined and vrf.ospf.attributes %}
+{% for attri in vrf.ospf.attributes %}
+ {{ attri }}
 {% endfor %}
 {% endif %}
-{% if ospf.redis is defined and ospf.redis %}
-{% for redis in ospf.redis %}
+{% if vrf.ospf.redis is defined and vrf.ospf.redis %}
+{% for redis in vrf.ospf.redis %}
 {% if redis.r_map %}
  redistribute {{ redis.proto }} route-map {{ redis.r_map }}
 {% else %}
@@ -27,26 +27,32 @@ router ospf vrf {{ vrf.name }}
 {% endif %}
 {% endfor %}
 {% endif %}
-{% if ospf.authenticate is defined and ospf.authenticate %}
-{% for auth in ospf.authenticate %}
+{% if vrf.ospf.authenticate is defined and vrf.ospf.authenticate %}
+{% for auth in vrf.ospf.authenticate %}
  area {{ auth.area }} authentication
 {% endfor %}
 {% endif %}
-{% if ospf.interfaces is defined and ospf.interfaces %}
-{% for intf in ospf.interfaces %}
+{% if vrf.ospf.area is defined and vrf.ospf.area %}
+{% for area in vrf.ospf.area %}
+ area {{ area.id }} {{ area.type }}
+{% endfor %}
+{% endif %}
+{% if vrf.ospf.interfaces is defined and vrf.ospf.interfaces %}
+{% for intf in vrf.ospf.interfaces %}
  no passive-interface {{ intf }}
 {% endfor %}
 {% endif %}
-{% if ospf.aggregate is defined and ospf.aggregate %}
-{% for aggr in ospf.aggregate %}
+{% if vrf.ospf.aggregate is defined and vrf.ospf.aggregate %}
+{% for aggr in vrf.ospf.aggregate %}
  area {{ aggr.area }} range {{ aggr.supernet }}
 {% endfor %}
 {% endif %}
-{% if ospf.network is defined and ospf.network %}
-{% for network in ospf.network %}
+{% if vrf.ospf.network is defined and vrf.ospf.network %}
+{% for network in vrf.ospf.network %}
  network {{ network.id }} area {{ network.area }}
 {% endfor %}
 {% endif %}
 exit
+{% endif %}
 {% endfor %}
 {% endif %}

@@ -10,6 +10,9 @@ router ospf
 {% endif %}
  log-adjacency-changes
  router-id {{ lpbk_ulay.addr_v4}}
+{% for attri in ospf.attributes %}
+ {{ attri }}
+{% endfor %}
 {% if ospf.redis is defined and ospf.redis %}
 {% for redis in ospf.redis %}
 {% if redis.r_map %}
@@ -19,14 +22,14 @@ router ospf
 {% endif %}
 {% endfor %}
 {% endif %}
-{% if ospf.attributes is defined and ospf.attributes %}
-{% for attri in ospf.attributes %}
- {{ ospf.attributes }}
-{% endfor %}
-{% endif %}
 {% if ospf.authenticate is defined and ospf.authenticate %}
 {% for auth in ospf.authenticate %}
  area {{ auth.area }} authentication
+{% endfor %}
+{% endif %}
+{% if ospf.area is defined and ospf.area %}
+{% for area in ospf.area %}
+ area {{ area.id }} {{ area.type }}
 {% endfor %}
 {% endif %}
 {% if ospf.interfaces is defined and ospf.interfaces %}

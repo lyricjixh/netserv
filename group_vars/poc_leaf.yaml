@@ -324,7 +324,9 @@ ospf:
     # - key: "{{ vault_ospf_auth}}"
     #   area: "0.0.0.0"
   interfaces:
-    - Ethernet45.11
+    - Ethernet45.10
+    - Port-Channel11
+  area:
   network:
     - id: "10.80.1.190/31"
       area: "0.0.0.11"
@@ -339,6 +341,12 @@ ospf:
     - r_map:
       proto: connected
 
+multicast:
+  - type: ipv4
+    attributes:
+      - routing
+      - multipath deterministic router-id
+      - software-forwarding sfe
 vrrp:
   version: 3
   delay_reload: 3
@@ -447,32 +455,33 @@ evpn:
         - 
             afi: ipv4
             proto: static
-            r_map: 
+            r_map:
         ospf:
-          daemon_id: 10
+          daemon_id: 11
           attributes:
             - auto-cost reference-bandwidth 100000
             - distance ospf external 205
             - passive-interface default
+            - max-lsa 12000
           authenticate:
             # - key: "{{ vault_ospf_auth}}"
             #   area: "0.0.0.0"
           interfaces:
-            - Ethernet45.10
-            - Port-Channel11
+            - Ethernet45.11
+          area:
+            - id: "0.0.0.11"
+              type: "nssa"
           network:
-            - id: "10.80.1.190/31"
-              area: "0.0.0.0"
-            - id: "10.80.2.0/31"
-              area: "0.0.0.0"
+            - id: "10.80.5.34/31"
+              area: "0.0.0.11"
           aggregate:
-            - area: "0.0.0.0"
-              supernet: "172.17.0.0/16"
+            # - area: "0.0.0.12"
+            #   supernet: "172.17.0.0/16"
           redis: 
-            # - r_map: "LOCAL_CONNECTED_V4"
-            #   proto: connected
-            # - r_map: "static_to_ospf"
-            #   proto: static
+            - r_map:
+              proto: bgp
+            - r_map:
+              proto: connected
         bgp:
           attributes:
             - update wait-install
@@ -522,6 +531,32 @@ evpn:
         #     afi: ipv4
         #     r_map: 
         #     proto: bgp
+        ospf:
+          daemon_id: 12
+          attributes:
+            - auto-cost reference-bandwidth 100000
+            - distance ospf external 205
+            - passive-interface default
+            - max-lsa 12000
+          authenticate:
+            # - key: "{{ vault_ospf_auth}}"
+            #   area: "0.0.0.0"
+          interfaces:
+            - Ethernet45.12
+          area:
+            - id: "0.0.0.12"
+              type: "nssa"
+          network:
+            - id: "10.80.5.38/31"
+              area: "0.0.0.12"
+          aggregate:
+            # - area: "0.0.0.12"
+            #   supernet: "172.17.0.0/16"
+          redis: 
+            - r_map: "subnet-from-IOT-vrf"
+              proto: bgp
+            - r_map:
+              proto: connected
     - 
         name: "campus-subnet"
         desc: "Campus VRF3"
@@ -536,6 +571,36 @@ evpn:
             desc: "Loopback Interface"
             addr_v4: "10.99.33.{{ seq }}/32"
             addr_v6: "2001:fff3:fff3::{{ '%0x' % seq }}/128"
+        ospf:
+          daemon_id: 13
+          attributes:
+            - auto-cost reference-bandwidth 100000
+            - distance ospf external 205
+            - passive-interface default
+            - max-lsa 12000
+          authenticate:
+            # - key: "{{ vault_ospf_auth}}"
+            #   area: "0.0.0.0"
+          interfaces:
+            - Ethernet45.13
+          area:
+            - id: "0.0.0.13"
+              type: "nssa"
+          network:
+            - id: "10.80.5.58/31"
+              area: "0.0.0.13"
+          aggregate:
+            # - area: "0.0.0.12"
+            #   supernet: "172.17.0.0/16"
+          redis: 
+            - r_map: "subnet-from-BMS-vrf"
+              proto: bgp
+            - r_map:
+              proto: connected
+        multicast:
+          - type: ipv4
+            attributes:
+              - routing
         redistribute:
         - 
             afi: ipv4

@@ -12,6 +12,7 @@ tacacs-server host {{ server.addr }} vrf {{ aaa_tac.vrf }} timeout {{ aaa_tac.ti
 tacacs-server host {{ server.addr }} timeout {{ aaa_tac.timeout }} key 0 {{ server.key }}
 {% endif %}
 {% endfor %}
+!
 aaa group server tacacs+ {{ group.name }}
 {% for server in group.server %}
    server {{ server.addr }}
@@ -20,6 +21,8 @@ aaa group server tacacs+ {{ group.name }}
 {% endfor %}
 !
 {% if aaa_tac.vrf is defined and aaa_tac.vrf %}
-ip tacacs source-interface management0
+ip tacacs vrf {{ aaa_tac.vrf }} source-interface {{ aaa_tac.src_intf }}
+{% else %}
+ip tacacs source-interface {{ aaa_tac.src_intf }}
 {% endif %}
 {% endif %}
