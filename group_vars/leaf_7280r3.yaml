@@ -68,7 +68,7 @@ mlag_bond:
      - "27"
      - "28"
 
-trunk_bond:
+port_channel:
    #  - bond_id: 101
    #    mlag_id: 101
    #    desc: "compute bond"

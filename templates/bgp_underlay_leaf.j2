@@ -76,11 +76,11 @@ router bgp {{ bgp.local_as }}
   neighbor NO-SEND route-map NO-SEND-CUSTOMERS-OUT out
   neighbor NO-SEND maximum-routes 12000
   !
-  neighbor SDDC-IGP peer group
-  neighbor SDDC-IGP remote-as {{ bgp.local_as }}
-  neighbor SDDC-IGP next-hop-self
-  neighbor SDDC-IGP route-map SDDC-IGP out
-  neighbor SDDC-IGP send-community standard extended
+  neighbor BMS-subnet-IGP peer group
+  neighbor BMS-subnet-IGP remote-as {{ bgp.local_as }}
+  neighbor BMS-subnet-IGP next-hop-self
+  neighbor BMS-subnet-IGP route-map BMS-subnet-IGP out
+  neighbor BMS-subnet-IGP send-community standard extended
   !
   neighbor VCF-IGP peer group
   neighbor VCF-IGP remote-as {{ bgp.local_as }}

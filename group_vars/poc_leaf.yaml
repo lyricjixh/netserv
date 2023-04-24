@@ -57,6 +57,30 @@ vlans:
         desc: "Native Vlan if not default 1"
         id: "1"
 
+sub_interfaces:
+# - phy_intf: 45
+#   sub_vlans:
+#       - 
+#           desc: "yyz-shepcorra VLAN10 Te1-1 to Eth45.11:SW:UP"
+#           id: "10"
+#           vrf:
+#           netv4: "{{ subvlan_netv4 }}"
+#       - 
+#           desc: "yyz-shepcorra VLAN11 Te1-1 to Eth45.11:SW:UP"
+#           id: "11"
+#           vrf: "campus-subnet"
+#           netv4: "{{ subvlan_netv4 }}"
+#       - 
+#           desc: "yyz-shepcorra VLAN12 Te1-1 to Eth45.11:SW:UP"
+#           id: "11"
+#           vrf: "IOT-subnet"
+#           netv4: "{{ subvlan_netv4 }}"
+#       - 
+#           desc: "yyz-shepcorra VLAN13 Te1-1 to Eth45.11:SW:UP"
+#           id: "13"
+#           vrf: "BMS-subnet"
+#           netv4: "{{ subvlan_netv4 }}"
+
 bfd:
     interval: 100
     min_rx: 300
@@ -291,22 +315,29 @@ bgp:
 
 # ospf Parameters
 ospf:
+  daemon_id: 10
+  attributes:
+    - auto-cost reference-bandwidth 100000
+    - distance ospf external 205
+    - passive-interface default
   authenticate:
-    - key: "{{ vault_ospf_auth}}"
-      area: "0.0.0.0"
+    # - key: "{{ vault_ospf_auth}}"
+    #   area: "0.0.0.0"
+  interfaces:
+    - Ethernet45.11
   network:
-    - id: "172.100.100.0/24"
-      area: "0.0.0.0"
-    - id: "172.17.70.0/24"
+    - id: "10.80.1.190/31"
+      area: "0.0.0.11"
+    - id: "10.80.2.0/31"
       area: "0.0.0.0"
   aggregate:
     - area: "0.0.0.0"
       supernet: "172.17.0.0/16"
   redis: 
-    - r_map: "LOCAL_CONNECTED_V4"
+    - r_map:
+      proto: bgp
+    - r_map:
       proto: connected
-    - r_map: "static_to_ospf"
-      proto: static
 
 vrrp:
   version: 3
@@ -391,8 +422,8 @@ evpn:
         pfx_list: "ARP_NO_PROXY"
     vrf:
     - 
-        name: "SDDC"
-        desc: "SDDC VRF"
+        name: "BMS-subnet"
+        desc: "BMS VRF"
         rd_pfx: "{{ lpbk_olay.addr_v4 }}"
         rt_pfx: "1001"
         l3_vni: 
@@ -417,6 +448,31 @@ evpn:
             afi: ipv4
             proto: static
             r_map: 
+        ospf:
+          daemon_id: 10
+          attributes:
+            - auto-cost reference-bandwidth 100000
+            - distance ospf external 205
+            - passive-interface default
+          authenticate:
+            # - key: "{{ vault_ospf_auth}}"
+            #   area: "0.0.0.0"
+          interfaces:
+            - Ethernet45.10
+            - Port-Channel11
+          network:
+            - id: "10.80.1.190/31"
+              area: "0.0.0.0"
+            - id: "10.80.2.0/31"
+              area: "0.0.0.0"
+          aggregate:
+            - area: "0.0.0.0"
+              supernet: "172.17.0.0/16"
+          redis: 
+            # - r_map: "LOCAL_CONNECTED_V4"
+            #   proto: connected
+            # - r_map: "static_to_ospf"
+            #   proto: static
         bgp:
           attributes:
             - update wait-install
@@ -436,8 +492,8 @@ evpn:
               remote_as: 
               peer_group: "tester_v6"
     - 
-        name: "SDDC2"
-        desc: "SDDC VRF2"
+        name: "IOT-subnet"
+        desc: "IOT VRF2"
         rd_pfx: "{{ lpbk_olay.addr_v4 }}"
         rt_pfx: "1002"
         l3_vni: 
@@ -467,8 +523,8 @@ evpn:
         #     r_map: 
         #     proto: bgp
     - 
-        name: "SDDC3"
-        desc: "SDDC VRF3"
+        name: "campus-subnet"
+        desc: "Campus VRF3"
         rd_pfx: "{{ lpbk_olay.addr_v4 }}"
         rt_pfx: "1003"
         l3_vni: 

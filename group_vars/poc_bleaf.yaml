@@ -1,0 +1,29 @@
+---
+sub_interfaces:
+    - phy_intf: 45
+      desc: "yyz-shepcorra Te1-1 to Eth45 :SW:UP"
+      sub_vlans:
+        - 
+            desc: "yyz-shepcorra VLAN10 Te1-1 to Eth45.11:SW:UP"
+            id: "10"
+            vrf:
+            netv4:  "{{ subvlan_netv4 }}"
+            state: "UP"
+        - 
+            desc: "yyz-shepcorra VLAN11 Te1-1 to Eth45.11:SW:UP"
+            id: "11"
+            vrf: "campus-subnet"
+            netv4: "{{ subvlan_netv4 }}"
+            state: "UP"
+        - 
+            desc: "yyz-shepcorra VLAN12 Te1-1 to Eth45.11:SW:UP"
+            id: "11"
+            vrf: "IOT-subnet"
+            netv4: "{{ subvlan_netv4 }}"
+            state: "present"
+        - 
+            desc: "yyz-shepcorra VLAN13 Te1-1 to Eth45.11:SW:UP"
+            id: "13"
+            vrf: "BMS-subnet"
+            netv4: "{{ subvlan_netv4 }}"
+            state: "present"

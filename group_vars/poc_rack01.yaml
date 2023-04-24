@@ -23,7 +23,7 @@ vxlans:
         vlan: "101"
         netv4: "{{ v101_netv4 }}"
         netv6: "{{ v101_netv6 }}"
-        vrf: "SDDC"
+        vrf: "BMS-subnet"
         helper_addrv4:
             - 11.11.11.11
             - 12.12.12.12
@@ -33,7 +33,7 @@ vxlans:
         vlan: "102"
         netv4: "{{ v102_netv4 }}"
         netv6: "{{ v102_netv6 }}"
-        vrf: "SDDC"
+        vrf: "BMS-subnet"
         helper_addrv4:
             - 11.11.11.11
             - 12.12.12.12
@@ -43,7 +43,7 @@ vxlans:
         vlan: "103"
         netv4: "{{ v103_netv4 }}"
         netv6: "{{ v103_netv6 }}"
-        vrf: "SDDC"
+        vrf: "BMS-subnet"
         helper_addrv4:
             - 11.11.11.11
             - 12.12.12.12
@@ -53,7 +53,7 @@ vxlans:
         vlan: "141"
         # netv4: "{{ v141_netv4 }}"
         # netv6: "{{ v141_netv6 }}"
-        vrf: "SDDC"
+        vrf: "BMS-subnet"
         helper_addrv4:
             - 11.11.11.11
             - 12.12.12.12
@@ -63,7 +63,7 @@ vxlans:
         vlan: "142"
         # netv4: "{{ v142_netv4 }}"
         # netv6: "{{ v142_netv6 }}"
-        vrf: "SDDC"
+        vrf: "BMS-subnet"
         helper_addrv4:
             - 11.11.11.11
             - 12.12.12.12
@@ -73,7 +73,7 @@ vxlans:
         vlan: "143"
         # netv4: "{{ v143_netv4 }}"
         # netv6: "{{ v143_netv6 }}"
-        vrf: "SDDC"
+        vrf: "BMS-subnet"
         helper_addrv4:
             - 11.11.11.11
             - 12.12.12.12

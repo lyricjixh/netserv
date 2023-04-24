@@ -59,14 +59,16 @@ mlag_bond:
      - "51/1"
      - "52/1"
 
-trunk_bond:
-    - bond_id: 101
-      mlag_id: 101
+port_channel:
+    - bond_id: 11
+      mlag_id:
       desc: "compute bond"
-      vlan_list: "{{ vxlans | json_query('[?state==`present`].vlan') }}"
+      type: "l3"
+      # vlan_list: "{{ vxlans | json_query('[?state==`present`].vlan') }}"
       bmem_range:
       bmem_indiv:
-         - "1"
+         - "47"
+         - "48"
    #  - bond_id: 102 
    #    mlag_id: 102
    #    desc: "compute bond"

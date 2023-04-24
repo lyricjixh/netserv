@@ -90,4 +90,3 @@ partition flexible exact-match 16384 l2-shared 98304 l3-shared 131072
 *    Virtualized product MLAG pair
 *    Transport L2
 *    Storage
-

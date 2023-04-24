@@ -301,6 +301,11 @@ tor_pair_netv6: "2001:a:{{rack_no}}::/126"
 #vlt_mac: 00:00:00:{{rack_no}}{{rack_no}}:{{rack_no}}{{rack_no}}:{{rack_no}}{{rack_no}}
 tor_pair_vmac: 00:00:00:{{rack_no}}{{rack_no}}:{{rack_no}}{{rack_no}}:{{rack_no}}{{rack_no}}
 
+subvlan_netv4: "10.80.5.0/24"
+subvlan_netmaskv4: 31
+subvlan_netv6: "2001:11:1::/120"
+subvlan_netmaskv6: 127
+
 v101_netv4: "10.101.1.0/27"
 v101_netv6: "2001:101:1::/120"
 
