@@ -109,3 +109,9 @@ cd ../../
 
 https://www.arista.com/custom_data/downloads/?f=/support/download/DesignGuides/MSS-G_Design_Deployment_Guide.pdf
 
+daemon TerminAttr
+  exec /usr/bin/TerminAttr -cpu_counters_expiration=1 -allowed_ips=10.92.59.0/24
+  no shutdown
+!
+
+gnmic -a smd501:6030 -u admin -p lab123! --insecure --gzip subscribe --path 'eos_native:/Smash/counters/ethIntf/SandCounters/current/counter'

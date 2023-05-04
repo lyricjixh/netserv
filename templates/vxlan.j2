@@ -4,7 +4,7 @@ Purpose:
 Generating ceos Vxlan Configuration
 ############################################}
 {% if evpn is defined and evpn %}
-{% ip virtual-router mac-address mlag-peer %}
+{# ip virtual-router mac-address mlag-peer #}
 ip virtual-router mac-address {{ evpn_anycast_vmac }}
 !
 {% for vrfi in evpn.vrf %}
