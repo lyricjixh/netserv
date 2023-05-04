@@ -347,6 +347,25 @@ multicast:
       - routing
       - multipath deterministic router-id
       - software-forwarding sfe
+pim:
+  - mode: sparse-mode
+    type: ipv4
+    anycast_rps:
+    - addr: 10.17.255.2
+      count: 15
+      routers:
+      - 10.1.1.14
+      - 10.1.2.14
+    rps:
+    - addr: 10.17.255.83
+      groups:
+    - addr: 10.21.18.23
+      groups: 
+      - "238.1.12.0/24"
+    attributes:
+      - ssm range standard
+      - make-before-break disabled
+
 vrrp:
   version: 3
   delay_reload: 3
@@ -601,6 +620,14 @@ evpn:
           - type: ipv4
             attributes:
               - routing
+        pim:
+          - mode: sparse-mode
+            type: ipv4
+            rps:
+            - addr: 10.80.0.31
+              groups: 
+              - "access-list MCAST-SM"
+            attributes:
         redistribute:
         - 
             afi: ipv4
@@ -614,7 +641,6 @@ evpn:
             afi: ipv4
             r_map: 
             proto: static
-
 ## EVPN iBGP Overlay
 ## Bleaves pair as iBGP RRS, Rest VTEP leaf as RRC.
 # evpn_ibgp:
