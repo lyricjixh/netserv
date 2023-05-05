@@ -356,12 +356,34 @@ pim:
       routers:
       - 10.1.1.14
       - 10.1.2.14
+      - 10.1.3.14
     rps:
     - addr: 10.17.255.83
       groups:
     - addr: 10.21.18.23
       groups: 
       - "238.1.12.0/24"
+    interfaces:
+      - name: vlan300
+        mode: "sparse-mode"
+        attributes:
+        - "hello interval 1"
+        - "local-interface Loopback99"
+      - name: vlan400
+        mode: "sparse-mode"
+        attributes:
+        - "hello interval 1"
+        - "local-interface Loopback99"
+      - name: vlan500
+        mode: "sparse-mode"
+        attributes:
+        - "hello interval 1"
+        - "local-interface Loopback99"
+      - name: vlan600
+        mode: "sparse-mode"
+        attributes:
+        - "hello interval 1"
+        - "local-interface Loopback99"
     attributes:
       - ssm range standard
       - make-before-break disabled
