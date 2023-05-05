@@ -23,7 +23,7 @@ router pim
 {% endif %}
 {% if instance.rps %}
 {% for rp in instance.rps %}
-{% if rp.groups %}
+{% if rp.groups is defined and rp.groups %}
 {% for group in rp.groups %}
        rp address {{ rp.addr }} {{ group }}
 {% endfor %}
@@ -32,13 +32,26 @@ router pim
 {% endif %}
 {% endfor %}
 {% endif %}
-
 {% if instance.attributes %}
 {% for attri in instance.attributes %}
      {{ attri }}
 {% endfor %}
 {% endif %}
-exit
+!
+{% if instance.interfaces is defined and instance.interfaces %}
+{% for intf in instance.interfaces %}
+interface {{ intf.name }}
+   vrf {{ vrf.name }}
+   multicast ipv4 static
+   pim ipv4 {{ intf.mode }}
+{% if intf.attributes is defined and intf.attributes %}
+{% for attri in intf.attributes %}
+   pim ipv4 {{ attri }}
+{% endfor %}
+{% endif %}
+!
+{% endfor %}
+{% endif %}
 {% endfor %}
 {% endif %}
 {% endfor %}

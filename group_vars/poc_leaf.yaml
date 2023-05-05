@@ -484,19 +484,6 @@ evpn:
             desc: "Loopback Interface"
             addr_v4: "10.99.11.{{ seq }}/32"
             addr_v6: "2001:fff1:fff1::{{ '%0x' % seq }}/128"
-        redistribute:
-        - 
-            afi: ipv4
-            proto: attached-host
-            r_map: 
-        - 
-            afi: ipv4
-            proto: connected
-            r_map: "loopbacks"
-        - 
-            afi: ipv4
-            proto: static
-            r_map:
         ospf:
           daemon_id: 11
           attributes:
@@ -525,11 +512,6 @@ evpn:
               proto: connected
         bgp:
           attributes:
-            - update wait-install
-            - "maximum-paths 4 ecmp 4"
-            - "no bgp bestpath ecmp-fast"
-            - graceful-restart restart-time 300
-            - graceful-restart
           peers:
             - 
               addr: "{{ v101_netv4 | ansible.utils.ipaddr(1+rack_no|int) | ansible.utils.ipaddr('address') }}"
@@ -541,6 +523,40 @@ evpn:
               desc: "IXIA Peer v6"
               remote_as: 
               peer_group: "tester_v6"
+          redistribute:
+          - 
+              afi: ipv4
+              proto: connected
+              r_map: 
+          - 
+              afi: ipv4
+              proto: "ospf match internal"
+              r_map: redistribute-default-route
+          - 
+              afi: ipv4
+              proto: "ospf match external"
+              r_map: redistribute-default-route
+          - 
+              afi: ipv4
+              proto: "ospf match nssa-external"
+              r_map: redistribute-default-route
+        multicast:
+          - type: ipv4
+            attributes:
+              - routing
+        pim:
+          - mode: sparse-mode
+            type: ipv4
+            rps:
+            - addr: 10.80.1.31
+              groups: 
+              - "access-list MCAST-SM1"
+            interfaces:
+            - name: vlan701
+              mode: "sparse-mode"
+              attributes:
+              - "hello interval 1"
+            attributes:
     - 
         name: "IOT-subnet"
         desc: "IOT VRF2"
@@ -555,23 +571,6 @@ evpn:
             desc: "Loopback Interface"
             addr_v4: "10.99.22.{{ seq }}/32"
             addr_v6: "2001:fff2:fff2::{{ '%0x' % seq }}/128"
-        redistribute:
-        - 
-            afi: ipv4
-            proto: attached-host
-            r_map: 
-        - 
-            afi: ipv4
-            proto: connected
-            r_map: loopbacks
-        - 
-            afi: ipv4
-            r_map: 
-            proto: static
-        # - 
-        #     afi: ipv4
-        #     r_map: 
-        #     proto: bgp
         ospf:
           daemon_id: 12
           attributes:
@@ -598,6 +597,46 @@ evpn:
               proto: bgp
             - r_map:
               proto: connected
+        bgp:
+          attributes:
+          redistribute:
+          - 
+              afi: ipv4
+              proto: connected
+              r_map: 
+          - 
+              afi: ipv4
+              proto: "ospf match internal"
+              r_map: redistribute-default-route
+          - 
+              afi: ipv4
+              proto: "ospf match external"
+              r_map: redistribute-default-route
+          - 
+              afi: ipv4
+              proto: "ospf match nssa-external"
+              r_map: redistribute-default-route
+        multicast:
+          - type: ipv4
+            attributes:
+              - routing
+        pim:
+          - mode: sparse-mode
+            type: ipv4
+            rps:
+            - addr: 10.80.2.31
+              groups: 
+              - "access-list MCAST-SM2"
+            interfaces:
+            - name: vlan702
+              mode: "sparse-mode"
+              attributes:
+              - "hello interval 1"
+            attributes:
+          # - 
+          #     afi: ipv4
+          #     r_map: 
+          #     proto: bgp
     - 
         name: "campus-subnet"
         desc: "Campus VRF3"
@@ -638,6 +677,26 @@ evpn:
               proto: bgp
             - r_map:
               proto: connected
+        bgp:
+          attributes:
+            - "evpn multicast"
+          redistribute:
+          - 
+              afi: ipv4
+              proto: connected
+              r_map: 
+          - 
+              afi: ipv4
+              proto: "ospf match internal"
+              r_map: redistribute-default-route
+          - 
+              afi: ipv4
+              proto: "ospf match external"
+              r_map: redistribute-default-route
+          - 
+              afi: ipv4
+              proto: "ospf match nssa-external"
+              r_map: redistribute-default-route
         multicast:
           - type: ipv4
             attributes:
@@ -648,21 +707,13 @@ evpn:
             rps:
             - addr: 10.80.0.31
               groups: 
-              - "access-list MCAST-SM"
+              - "access-list MCAST-SM3"
+            interfaces:
+            - name: vlan703
+              mode: "sparse-mode"
+              attributes:
+              - "hello interval 1"
             attributes:
-        redistribute:
-        - 
-            afi: ipv4
-            proto: attached-host
-            r_map: 
-        - 
-            afi: ipv4
-            proto: connected
-            r_map: loopbacks
-        - 
-            afi: ipv4
-            r_map: 
-            proto: static
 ## EVPN iBGP Overlay
 ## Bleaves pair as iBGP RRS, Rest VTEP leaf as RRC.
 # evpn_ibgp:
