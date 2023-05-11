@@ -18,9 +18,15 @@ ntp trusted-key {{ ntp.trusted_key }}
 {% for server in ntp.server %}
 {% if ntp.vrf is defined and ntp.vrf %}
 {% if server.state|lower == "present" %}
-ntp server vrf MGMT {{ server.addr }}
+ntp server vrf {{ ntp.vrf }} {{ server.addr }}
 {% elif server.state|lower == "absence" %}
 no ntp server vrf MGMT {{ server.addr }}
+{% endif %}
+{% else %}
+{% if server.state|lower == "present" %}
+ntp server {{ server.addr }}
+{% elif server.state|lower == "absence" %}
+no ntp server {{ server.addr }}
 {% endif %}
 {% endif %}
 {% endfor %}
