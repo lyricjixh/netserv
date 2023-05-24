@@ -1,5 +1,5 @@
 ---
-- hosts: poc
+- hosts: dc2
   gather_facts: false
   collections:
   - arista.eos
@@ -59,31 +59,6 @@
     tags:
       - netserv
 
-  - name: Enable Monitoring
-    block:
-    - name: Enable Sflow
-      eos_config:
-          src: sflow.j2
-      when: (features.netserv.sflow is defined and features.netserv.sflow|lower == "yes")
-      tags:
-        - sflow
-
-    - name: Enable SPAN
-      eos_config:
-        src: span.j2
-      when: (features.netserv.span is defined and features.netserv.span|lower == "yes")
-      tags:
-        - span
-
-    - name: Enable Telemetry
-      eos_config:
-        src: telemetry.j2
-      when: (features.netserv.telemetry is defined and features.netserv.telemetry|lower == "yes")
-      tags:
-        - telemetry
-    tags:
-      - monitor
-
 - hosts: poc_leaf
   gather_facts: false
   collections:
@@ -117,7 +92,7 @@
         - mlag
     - name: Enable Bond and Trunking
       eos_config:
-          src: intf_bond.j2
+          src: intf_portchannel.j2
       when: (features.interface.bond is defined and features.interface.bond|lower == "yes")
       ignore_errors: yes
     when: "'leaf' in inventory_hostname"
@@ -157,6 +132,31 @@
     tags:
       - vrf_routing
 
+  - name: Enable Monitoring
+    block:
+    - name: Enable Sflow
+      eos_config:
+          src: sflow.j2
+      when: (features.netserv.sflow is defined and features.netserv.sflow|lower == "yes")
+      tags:
+        - sflow
+
+    - name: Enable SPAN
+      eos_config:
+        src: span.j2
+      when: (features.netserv.span is defined and features.netserv.span|lower == "yes")
+      tags:
+        - span
+
+    - name: Enable Telemetry
+      eos_config:
+        src: telemetry.j2
+      when: (features.netserv.telemetry is defined and features.netserv.telemetry|lower == "yes")
+      tags:
+        - telemetry
+    tags:
+      - monitor
+
 - hosts: poc_spine
   gather_facts: false
   collections:
@@ -193,44 +193,44 @@
     tags:
       - spine
 
-- hosts: func_edge
-  gather_facts: false
-  collections:
-  - arista.eos
+# - hosts: func_edge
+#   gather_facts: false
+#   collections:
+#   - arista.eos
 
-  tasks:
-  - name: Enable Edge Functions
-    block:
-      - name: Enable loopback Interface
-        eos_config:
-            src: intf_lpbk.j2
-        tags:
-        - loopback
+#   tasks:
+#   - name: Enable Edge Functions
+#     block:
+#       - name: Enable loopback Interface
+#         eos_config:
+#             src: intf_lpbk.j2
+#         tags:
+#         - loopback
 
-      - name: Enable PTP Interface
-        eos_config:
-            src: intf_ptp_edge.j2
-        tags:
-        - ptp
+#       - name: Enable PTP Interface
+#         eos_config:
+#             src: intf_ptp_edge.j2
+#         tags:
+#         - ptp
 
-      - name: Enable Tester Interface
-        eos_config:
-            src: intf_test_isp.j2
-        tags:
-        - tester
+#       - name: Enable Tester Interface
+#         eos_config:
+#             src: intf_test_isp.j2
+#         tags:
+#         - tester
 
-      - name: Enable Edge BGP on ISP GW
-        eos_config:
-            src: bgp_gateway.j2
-        when: "'gw' in inventory_hostname"
-        tags:
-        - standard
+#       - name: Enable Edge BGP on ISP GW
+#         eos_config:
+#             src: bgp_gateway.j2
+#         when: "'gw' in inventory_hostname"
+#         tags:
+#         - standard
 
-      - name: Enable Edge BGP in EDGE VRF
-        eos_config:
-            src: bgp_edge.j2
-        when: "'spine' in inventory_hostname"
-        tags:
-        - bgpedge
-    tags:
-      - edge
+#       - name: Enable Edge BGP in EDGE VRF
+#         eos_config:
+#             src: bgp_edge.j2
+#         when: "'spine' in inventory_hostname"
+#         tags:
+#         - bgpedge
+#     tags:
+#       - edge

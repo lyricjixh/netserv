@@ -3,6 +3,7 @@
 Purpose:
 Generating MLAG Domain Configuration
 ############################################}
+{% if mlag_bond is defined and mlag_bond %}
 vlan {{ mlag_bond.vlan.id }}
  name {{ mlag_bond.vlan.desc }}
  trunk group {{ mlag_bond.group }}
@@ -95,4 +96,5 @@ mlag
  peer-link Port-Channel{{ mlag_bond.bond_id }}
  reload-delay 60
 !
+{% endif %}
 {% endif %}

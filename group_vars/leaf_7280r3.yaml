@@ -60,7 +60,11 @@ vlt:
 mlag_bond: 
    domain_id: "1"
    desc: "MLAG Control link Port-Channel"
-   vlan: "{{ vlans.pair_vlan.id }}"
+   vlan: 
+      desc: "MLAG_CTL_VLAN"
+      id: "4094"
+      netv4: "{{ mlag_ctl_netv4 }}"
+      netv6: "{{ mlag_ctl_netv6 }}"
    group: "mlagpeer"
    bond_id: "100"
    bmem_range:
