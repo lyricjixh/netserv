@@ -35,13 +35,14 @@ trunk_port:
 
 ports:
    fabric:
-   - 49/1
-   - 50/1
+   - 31
+   - 32
    mlag_ctl:
-   - 51/1
-   - 52/1
+   - 27
+   - 28
    compute:
    - 1
+   - 2
 
 #MLAG
 mlag_bond: 
@@ -60,22 +61,22 @@ mlag_bond:
      - "52/1"
 
 port_channel:
-    - bond_id: 11
-      mlag_id:
+    - bond_id: 101
+      mlag_id: 101
       desc: "compute bond"
-      type: "l3"
-      # vlan_list: "{{ vxlans | json_query('[?state==`present`].vlan') }}"
+      type: "l2"
+      vlan_list: "{{ vxlans | json_query('[?state==`present`].vlan') }}"
       bmem_range:
       bmem_indiv:
-         - "47"
-         - "48"
-   #  - bond_id: 102 
-   #    mlag_id: 102
-   #    desc: "compute bond"
-   #    vlan_list: "{{ vxlans | json_query('[?state==`present`].vlan') }}"
-   #    bmem_range:
-   #    bmem_indiv:
-   #       - "2"
+         - "1"
+    - bond_id: 102 
+      mlag_id: 102
+      desc: "compute bond"
+      type: "l2"
+      vlan_list: "{{ vxlans | json_query('[?state==`present`].vlan') }}"
+      bmem_range:
+      bmem_indiv:
+         - "2"
 
 ## Sflow per SKU
 sflow_port_sku:
@@ -88,20 +89,6 @@ sflow_port_sku:
    sample_rate:
 -
    id: Eth2
-   sflow_enable : true
-   ingress_enable: true
-   state: present
-   # polling_interval: 30
-   sample_rate:
--
-   id: Eth3
-   sflow_enable : true
-   ingress_enable: true
-   state: present
-   # polling_interval: 30
-   sample_rate:
--
-   id: Eth4
    sflow_enable : true
    ingress_enable: true
    state: present

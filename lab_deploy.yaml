@@ -11,7 +11,7 @@
         hostname: "{{ inventory_hostname }}"
       state: merged
     tags:
-      - hostname
+    - hostname
 
   - name: Enable Network Services
     vars:
@@ -24,7 +24,7 @@
         - ipv6 unicast-routing
         - ip routing vrf MGMT
       tags:
-        - routing
+      - routing
 
     - name: Enable Banner Motd
       eos_banner:
@@ -32,7 +32,7 @@
         text: "{{ lookup('file', 'files/banner_motd') }}"
         state: present
       tags:
-        - banner
+      - banner
 
     - name: Enable Banner Login
       eos_banner:
@@ -40,7 +40,7 @@
         text: "{{ lookup('file', 'files/banner_login') }}"
         state: present
       tags:
-        - banner
+      - banner
 
     - name: Setup the local user accounts
       block:
@@ -55,16 +55,10 @@
           state: present
 
       tags:
-        - users
+      - users
     tags:
-      - netserv
+    - netserv
 
-- hosts: poc_leaf
-  gather_facts: false
-  collections:
-  - arista.eos
-
-  tasks:
   - name: Enable loopback Interface
     eos_config:
         src: intf_lpbk.j2
@@ -97,40 +91,45 @@
       ignore_errors: yes
     when: "'leaf' in inventory_hostname"
     tags:
-      - l2port
+    - l2port
 
-  - name: Enable Routing Policy on LEAF
+  - name: Enable Routing Policy
     eos_config:
         src: route_pol.j2
-    when: "'leaf' in inventory_hostname"
+    # when: "'leaf' in inventory_hostname"
     tags:
-      - rpol
+    - rpol
 
-  - name: Enable Standard BGP on Leaf
+  - name: Enable MBGP on Leaf/Spine fabric
     eos_config:
-        src: bgp_leaf.j2
-    when: "'leaf' in inventory_hostname"
+        src: bgp_fabric.j2
     tags:
-    - bgpleaf
+    - bgp
 
   # - name: Enable Standard BGP on Leaf
   #   eos_config:
   #       src: bgp_underlay_leaf.j2
-  #   when: "'leaf' in inventory_hostname"
   #   tags:
   #   - standard
 
-  - name: Enable Vxlan Tunneling
-    eos_config:
-        src: vxlan.j2
-    tags:
+  - name: Enable EVPN on LEAVES
+    block:
+    - name: Enable Vxlan Tunneling
+      eos_config:
+          src: vxlan.j2
+      when: "'leaf' in inventory_hostname"
+      tags:
       - vxlan
 
-  - name: Enable EVPN Routing
-    eos_config:
-        src: vrf_routing.j2
-    tags:
+    - name: Enable EVPN Routing
+      eos_config:
+          src: vrf_routing.j2
+      when: "'leaf' in inventory_hostname"
+      tags:
       - vrf_routing
+    when: "'leaf' in inventory_hostname"
+    tags:
+    - evpn
 
   - name: Enable Monitoring
     block:
@@ -139,59 +138,24 @@
           src: sflow.j2
       when: (features.netserv.sflow is defined and features.netserv.sflow|lower == "yes")
       tags:
-        - sflow
+      - sflow
 
     - name: Enable SPAN
       eos_config:
         src: span.j2
       when: (features.netserv.span is defined and features.netserv.span|lower == "yes")
       tags:
-        - span
+      - span
 
     - name: Enable Telemetry
       eos_config:
         src: telemetry.j2
       when: (features.netserv.telemetry is defined and features.netserv.telemetry|lower == "yes")
       tags:
-        - telemetry
+      - telemetry
+    when: "'leaf' in inventory_hostname"
     tags:
-      - monitor
-
-- hosts: poc_spine
-  gather_facts: false
-  collections:
-  - arista.eos
-
-  tasks:
-  - name: Enable SPINE Functions
-    block:
-    # - name: Enable Leaf/Spine PTP Interface
-    #   eos_config:
-    #       src: intf_ptp_spine.j2
-    #   tags:
-    #   - ptp
-
-    # - name: Enable Standard BGP on Spine
-    #   eos_config:
-    #       src: bgp_spine.j2
-    #   tags:
-    #   - standard
-
-    - name: Config Cluster on Spine
-      eos_config:
-          src: config_spine.j2
-      tags:
-      - complete
-
-    # - name: Dump the Staged Spine CFG
-    #   vars:
-    #     ansible_command_timeout: 180
-    #   eos_config:
-    #       src: spine_inherited_cfg.j2
-    #   tags:
-    #     - inherit
-    tags:
-      - spine
+    - monitor
 
 # - hosts: func_edge
 #   gather_facts: false
