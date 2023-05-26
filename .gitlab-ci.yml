@@ -8,7 +8,7 @@ stages:
 stage_job:
   stage: stage
   variables:
-    CLAB_TOPO_META: "~/topology/poc01.clab.yaml"
+    CLAB_TOPO_META: "topology/poc01.clab.yaml"
   tags:
     - ansible
   script:
