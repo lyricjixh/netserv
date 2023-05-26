@@ -1,7 +1,7 @@
 stages:
-  - stage
-  - wait
-  - check
+  # - stage
+  # - wait
+  # - check
   - deploy
   - validate
 
