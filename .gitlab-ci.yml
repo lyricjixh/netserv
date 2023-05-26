@@ -1,0 +1,55 @@
+stages:
+  - stage
+  - wait
+  - check
+  - deploy
+  - hold
+  - validate
+
+stage_job:
+  stage: stage
+  variables:
+    CLAB_TOPO_META: "~/topology/poc01.clab.yaml"
+  tags:
+    - ansible
+  script:
+    - sudo CLAB_LABDIR_BASE=~ containerlab deploy -t $CLAB_TOPO_META --reconfigure
+
+wait:
+  stage: wait
+  needs:
+    - "stage_job"
+  tags:
+    - ansible
+  script:
+    - sleep 15
+
+check_job:
+  stage: check
+  tags:
+    - ansible
+  script:
+    - ansible -m eos_command -a "commands='show version'" dc2 -v
+
+deploy_job:
+  stage: deploy
+  tags:
+    - ansible
+  script:
+    - ansible-playbook lab_deploy.yaml -v 
+
+hold:
+  stage: wait
+  needs:
+    - "deploy_job"
+  tags:
+    - ansible
+  script:
+    - sleep 15
+
+validate_job:
+  stage: validate
+  tags:
+    - ansible
+  script:
+    - ansible -m eos_command -a "commands='show bgp summary'" poc_spine -v
