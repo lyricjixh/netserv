@@ -1,12 +1,13 @@
 stages:
-  # - stage
-  # - wait
-  # - check
+  - stage
+  - wait
+  - check
   - deploy
   - validate
 
 stage_job:
   stage: stage
+  when: manual
   variables:
     CLAB_TOPO_META: "topology/poc01.clab.yaml"
   tags:
@@ -16,6 +17,7 @@ stage_job:
 
 wait:
   stage: wait
+  when: manual
   needs:
     - "stage_job"
   tags:
@@ -25,6 +27,7 @@ wait:
 
 check_job:
   stage: check
+  when: manual
   tags:
     - ansible
   script:
