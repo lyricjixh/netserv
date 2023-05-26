@@ -337,13 +337,16 @@ policy:
                     action: "permit"
                     range: "{{ fabric_ptp_netv4 }} le 32"
         -
-            name: "loopback"
+            name: "loopback_v4"
             afi: "ipv4"
             step: 10
             prefix:
                 -
                     action: "permit"
                     range: "{{ lpbk_ulay_netv4 }} le 32"
+                -
+                    action: "permit"
+                    range: "{{ lpbk_olay_netv4 }} le 32"
 
     route_map:
         -
@@ -363,7 +366,7 @@ policy:
                     object: "COMM_EVPN_PE"
                     action:
         -
-            name: "LOCAL_CONNECTED_V6"
+            name: "LOCAL-LOOPBACK-V6"
             step: 10
             rule:
                 -
@@ -457,13 +460,13 @@ policy:
                     object:
                     action:
         -
-            name: "REDIST-CONNECTED"
+            name: "REDIST-LOOPBACK-V4"
             step: 10
             rule:
                 -
                     allow: "permit"
                     type: "ip address prefix-list"
-                    object: "loopbacks"
+                    object: "loopback_v4"
                     action:
                 -
                     allow: "deny"

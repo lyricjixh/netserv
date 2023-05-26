@@ -155,7 +155,7 @@ fabric_links:
 #         proto: connected
 #     ipv6:
 #     -
-#         r_map: "LOCAL_CONNECTED_V6"
+#         r_map: "LOCAL-LOOPBACK-V6"
 #         proto: connected
 #   flowspec: 
 #     ipv4: "disable"
@@ -264,6 +264,16 @@ bgp:
       remote_as: "{{ rack02_asn }}"
       peer_group: "FABRIC-PEER_v4"
     - 
+      addr: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[4]|int+1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V4"
+      remote_as: "{{ rack03_asn }}"
+      peer_group: "FABRIC-PEER_v4"
+    - 
+      addr: "{{ fabric_ptp_netv4 | ansible.utils.ipaddr(fabric_link_seq[5]|int+1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V4"
+      remote_as: "{{ rack03_asn }}"
+      peer_group: "FABRIC-PEER_v4"
+    - 
       addr: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[0]|int+1) | ansible.utils.ipaddr('address') }}"
       desc: "DC Fabric Edge Peer V6"
       remote_as: "{{ rack01_asn }}"
@@ -282,6 +292,16 @@ bgp:
       addr: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[3]|int+1) | ansible.utils.ipaddr('address') }}"
       desc: "DC Fabric Edge Peer V6"
       remote_as: "{{ rack02_asn }}"
+      peer_group: "FABRIC-PEER_v6"
+    - 
+      addr: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[4]|int+1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V6"
+      remote_as: "{{ rack03_asn }}"
+      peer_group: "FABRIC-PEER_v6"
+    - 
+      addr: "{{ fabric_ptp_netv6 | ansible.utils.ipaddr(fabric_link_seq[5]|int+1) | ansible.utils.ipaddr('address') }}"
+      desc: "DC Fabric Edge Peer V6"
+      remote_as: "{{ rack03_asn }}"
       peer_group: "FABRIC-PEER_v6"
     - 
       addr: "{{ hostvars['cleaf01'].lpbk_ulay.addr_v4 }}"
@@ -303,6 +323,28 @@ bgp:
       desc: "EVPN PEER"
       remote_as: "{{ rack02_asn }}"
       peer_group: "FABRIC-PEER_EVPN"
+    - 
+      addr: "{{ hostvars['bleaf01'].lpbk_ulay.addr_v4 }}"
+      desc: "EVPN PEER"
+      remote_as: "{{ rack03_asn }}"
+      peer_group: "FABRIC-PEER_EVPN"
+    - 
+      addr: "{{ hostvars['bleaf02'].lpbk_ulay.addr_v4 }}"
+      desc: "EVPN PEER"
+      remote_as: "{{ rack03_asn }}"
+      peer_group: "FABRIC-PEER_EVPN"
+  afi: 
+    ipv4:
+    -
+        proto: "connected"
+        r_map: "REDIST-LOOPBACK-V4"
+    -
+        proto: "static"
+        r_map: 
+    ipv6:
+    -
+        proto: connected
+        r_map: "LOCAL-LOOPBACK-V6"
   listen_range:
     - 
       network: "{{ fabric_ptp_netv4 }}"
@@ -312,16 +354,6 @@ bgp:
       network: "{{ fabric_ptp_netv6 }}"
       peer_group: "FABRIC-PEER_v6"
       peer_filter: "leaf_asn_range"
-  #   ipv4:
-  afi: 
-  #   ipv4:
-  #   -
-  #       r_map: "LOCAL_CONNECTED_V4"
-  #       proto: connected
-  #   ipv6:
-  #   -
-  #       r_map: "LOCAL_CONNECTED_V6"
-  #       proto: connected
   # flowspec: 
   #   ipv4: "disable"
   #   ipv6: "disable"

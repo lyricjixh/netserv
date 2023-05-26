@@ -133,7 +133,7 @@ edge_bgp:
   #       proto: connected
   #   ipv6:
   #   -
-  #       r_map: "LOCAL_CONNECTED_V6"
+  #       r_map: "LOCAL-LOOPBACK-V6"
   #       proto: connected
   # flowspec: 
   #   ipv4: "disable"

@@ -301,14 +301,14 @@ bgp:
     ipv4:
     -
         proto: "connected"
-        r_map: "REDIST-CONNECTED"
+        r_map: "REDIST-LOOPBACK-V4"
     -
         proto: "static"
         r_map: 
     ipv6:
     -
         proto: connected
-        r_map: "LOCAL_CONNECTED_V6"
+        r_map: "LOCAL-LOOPBACK-V6"
   flowspec: 
     ipv4: "disable"
     ipv6: "disable"
