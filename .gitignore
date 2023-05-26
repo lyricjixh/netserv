@@ -1,2 +1,3 @@
 files/gnmi/*.py
 files/gnmi/__*
+topology/.*
