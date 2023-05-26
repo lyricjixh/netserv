@@ -3,7 +3,6 @@ stages:
   - wait
   - check
   - deploy
-  - hold
   - validate
 
 stage_job:
@@ -37,15 +36,6 @@ deploy_job:
     - ansible
   script:
     - ansible-playbook lab_deploy.yaml -v 
-
-hold:
-  stage: wait
-  needs:
-    - "deploy_job"
-  tags:
-    - ansible
-  script:
-    - sleep 15
 
 validate_job:
   stage: validate
