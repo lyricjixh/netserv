@@ -7,7 +7,7 @@ stages:
 
 stage_job:
   stage: stage
-  when: manual
+  # when: manual
   variables:
     CLAB_TOPO_META: "topology/poc01.clab.yaml"
   tags:
@@ -17,7 +17,7 @@ stage_job:
 
 wait:
   stage: wait
-  when: manual
+  # when: manual
   needs:
     - "stage_job"
   tags:
