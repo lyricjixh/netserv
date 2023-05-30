@@ -27,7 +27,7 @@ wait:
 
 check_job:
   stage: check
-  when: manual
+  # when: manual
   tags:
     - ansible
   script:
