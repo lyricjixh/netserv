@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-fire off the ci/cd pipeline for demo purpose
-=======
-<<<<<<< HEAD
-# arista naas
-
 
 
 ## Getting started
