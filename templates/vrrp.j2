@@ -3,6 +3,7 @@
 Purpose:
 Generating VRRP Underlay Configuration
 ###################################################}
+{% if vrrp is defined and vrrp %}
 {% for group in vrrp.group %}
 interface Eth {{ group.intf }}
 {% if group.vrf_instance %}
@@ -14,3 +15,4 @@ interface Eth {{ group.intf }}
  mtu {{ vxlan_mtu }}
 exit
 {% endfor %}
+{% endif %}

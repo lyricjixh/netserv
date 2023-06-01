@@ -3,6 +3,7 @@
 Purpose:
 Generating Syslog Configuration
 ############################################}
+{% if sflow is defined and sflow %}
 {% if sflow.sflow_enable == "false" %}
 no sflow enable
 {% elif sflow.sflow_enable == "true" %}
@@ -49,3 +50,4 @@ interface {{ port.id }}
 {% endif %}
 !
 {% endfor %}
+{% endif %}

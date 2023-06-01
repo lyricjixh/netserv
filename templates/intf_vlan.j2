@@ -3,6 +3,7 @@
 Purpose:
 Generating Vlan Interface Configuration
 ############################################}
+{% if vxlans is defined and vxlans %}
 {% for vni in vxlans %}
 interface vlan{{ vni.vlan }}
   description "{{ vni.desc }}"
@@ -10,3 +11,4 @@ interface vlan{{ vni.vlan }}
   exit
 !
 {% endfor %}
+{% endif %}

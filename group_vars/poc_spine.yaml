@@ -357,3 +357,61 @@ bgp:
   # flowspec: 
   #   ipv4: "disable"
   #   ipv6: "disable"
+
+sflow_port_sku:
+-
+   id: Eth1
+   sflow_enable : true
+   ingress_enable: true
+   state: present
+   # polling_interval: 30
+   sample_rate:
+-
+   id: Eth2
+   sflow_enable : true
+   ingress_enable: true
+   state: present
+   # polling_interval: 30
+   sample_rate:
+-
+   id: Eth3
+   sflow_enable : true
+   ingress_enable: true
+   state: present
+   # polling_interval: 30
+   sample_rate:
+-
+   id: Eth4
+   sflow_enable : true
+   ingress_enable: true
+   state: present
+   # polling_interval: 30
+   sample_rate:
+-
+   id: Eth5
+   sflow_enable : true
+   ingress_enable: true
+   state: present
+   # polling_interval: 30
+   sample_rate:
+-
+   id: Eth6
+   sflow_enable : true
+   ingress_enable: true
+   state: present
+   # polling_interval: 30
+   sample_rate:
+-
+   id: Eth7
+   sflow_enable : true
+   ingress_enable: true
+   state: present
+   # polling_interval: 30
+   sample_rate:
+-
+   id: Eth8
+   sflow_enable : true
+   ingress_enable: true
+   state: present
+   # polling_interval: 30
+   sample_rate:

@@ -56,18 +56,22 @@ features:
         l2port: "no"
         bond: "yes"
         vrrp: "yes"
-        ufd: "yes"
+        ufd: "no"
     routing:
         policy: "yes"
         bgp_stan: "yes"
         bgp_unno: "no"
         flowspec: "no"
-        ospf: "no"
+        ospf: "yes"
+        multicast: "yes"
+        pim: "yes"
     overlay:
         evpn: "yes"
         uni_bgp: "yes"   ## uni_bgp (unified bgp) and ibgp are exclusive in overlay
         ibgp: "no"       ## uni_bgp (unified bgp) and ibgp are exclusive in overlay
         static_vxlan: "no"
+        multicast: "yes"
+        pim: "yes"        
     security:
         acl: "no"
         copp: "no"

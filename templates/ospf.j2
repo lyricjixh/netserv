@@ -3,6 +3,7 @@
 Purpose:
 Generating OSPF Underlay Configuration
 ###################################################}
+{% if ospf is defined and ospf %}
 {% if ospf.daemon_id is defined and ospf.daemon_id %}
 router ospf {{ ospf.daemon_id }}
 {% else %}
@@ -48,3 +49,4 @@ router ospf
 {% endfor %}
 {% endif %}
 exit
+{% endif %}
