@@ -8,11 +8,11 @@ Generating Vlan Interface Configuration
 {% set vlan_netmaskv4 = "29" %}
 {% set vlan_netmaskv6 = "112" %}
 {% set vlan_batch = 144 %}
+{% set round = 144 %}
 {% set vlan_scale_low = vlan_batch*round %}
 {% set vlan_scale_high = vlan_batch*(round+1) %}
 {% set vip_scale = 20 %}
 {% set offset = 1001 %}
-{% set round = 144 %}
 {#
   hardware access-list resource sharing vlan in
 !
