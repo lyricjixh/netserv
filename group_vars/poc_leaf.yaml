@@ -283,7 +283,7 @@ bgp:
       remote_as: 
       peer_group: "FABRIC-PEER_v6"
     - 
-      addr: "{{ bgp_fabric_peer_v6[0] }}"
+      addr: "{{ bgp_fabric_peer_v6[1] }}"
       desc: "DC Fabric Edge Peer V6"
       remote_as:
       peer_group: "FABRIC-PEER_v6"

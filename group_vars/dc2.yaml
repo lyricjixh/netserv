@@ -145,7 +145,7 @@ snmp:
         - "write view_01"
         - "notify view_02"
     user:
-      - name: "netops"
+      - name: "cvpadmin"
         group: "admin01"
         version: "3"
         password: "{{ vault_snmp_labadmin_auth }}"
