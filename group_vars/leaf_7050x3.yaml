@@ -57,8 +57,8 @@ mlag_bond:
    bond_id: "100"
    bmem_range:
    bmem_indiv:
-     - "51/1"
-     - "52/1"
+     - "27"
+     - "28"
 
 port_channel:
     - bond_id: 101
