@@ -412,3 +412,62 @@ rack01_asn: "{{ asn_base+1 }}"
 rack02_asn: "{{ asn_base+2 }}"
 rack03_asn: "{{ asn_base+3 }}"
 rack04_asn: "{{ asn_base+4 }}"
+
+# ospf Parameters
+ospf:
+  daemon_id: 10
+  attributes:
+    - auto-cost reference-bandwidth 100000
+    - distance ospf external 205
+    - passive-interface default
+  authenticate:
+    # - key: "{{ vault_ospf_auth}}"
+    #   area: "0.0.0.0"
+  interfaces: "{{ ospf_intf }}"
+  area:
+  network:
+    - id: "10.80.1.190/31"
+      area: "0.0.0.11"
+    - id: "10.80.2.0/31"
+      area: "0.0.0.0"
+  aggregate:
+    - area: "0.0.0.0"
+      supernet: "172.17.0.0/16"
+  redis: 
+    - r_map:
+      proto: bgp
+    - r_map:
+      proto: connected
+
+multicast:
+  - type: ipv4
+    attributes:
+      - routing
+      - multipath deterministic router-id
+      - software-forwarding sfe
+pim:
+  - mode: sparse-mode
+    type: ipv4
+    anycast_rps:
+    # - addr: 10.17.255.2
+    #   count: 15
+    #   routers:
+    #   - 10.1.1.14
+    #   - 10.1.2.14
+    #   - 10.1.3.14
+    rps:
+    - addr: 10.17.255.83
+      groups:
+    - addr: 10.21.18.23
+      groups: 
+      - "238.1.12.0/24"
+    attributes:
+    - ssm range standard
+    - make-before-break disabled
+    interfaces:
+      name: "{{ pim_intf }}"
+      state: "present"
+      mode: "sparse-mode"
+      attributes:
+      - "hello interval 1"
+      - "local-interface Loopback99"

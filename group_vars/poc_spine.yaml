@@ -161,6 +161,10 @@ fabric_links:
 #     ipv4: "disable"
 #     ipv6: "disable"
 
+# routing protocols Parameters
+ospf_intf: [eth1,eth2,eth3,eth4,eth5,eth6,eth7,eth8]
+pim_intf: [eth1,eth2,eth3,eth4,eth5,eth6,eth7,eth8]
+
 bgp:
   local_as: "{{ spine_asn }}"
   peer_group:

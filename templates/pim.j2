@@ -36,12 +36,12 @@ router pim
 {% endif %}
 !
 {% if instance.interfaces is defined and instance.interfaces %}
-{% for intf in instance.interfaces %}
-interface {{ intf.name }}
+{% for intf in instance.interfaces.name %}
+interface {{ intf }}
    multicast ipv4 static
-   pim ipv4 {{ intf.mode }}
-{% if intf.attributes is defined and intf.attributes %}
-{% for attri in intf.attributes %}
+   pim ipv4 {{ instance.interfaces.mode }}
+{% if instance.interfaces.attributes is defined and instance.interfaces.attributes %}
+{% for attri in instance.interfaces.attributes %}
    pim ipv4 {{ attri }}
 {% endfor %}
 {% endif %}
