@@ -567,6 +567,8 @@ acl_gen: "arista_edge.eacl"
 
 ceos_acl:
   - name: copp_v4
+    copp:
+      state: present
     type: ipv4
     state: present
     remark:
@@ -602,14 +604,14 @@ ceos_acl:
         other_options:
         state: present
     ingress:
-      - name: control-plane
-        state: present
     egress:
   - name: copp_v6
+    copp:
+      state: present
     type: ipv6
     state: present
     remark:
-    #   - description: NOC-Priv-Mgmt-Net-IPv6-Infilter
+    #   - description: NOC-Priv-Mgmt-Net
     #     number: 5
     #     state: absent
     entries:
@@ -641,10 +643,7 @@ ceos_acl:
         other_options:
         state: present
     ingress:
-      - name: control-plane
-        state: present
     egress:
-
   - name: "edge_inbound_v4"
     type: ipv4
     state: present
@@ -665,7 +664,7 @@ ceos_acl:
 #         state: present
 #     egress:
 
-  - name: MAC_Filter_v1
+  - name: mac_filter
     type: mac
     state: present
     remark:
@@ -698,17 +697,9 @@ ceos_acl:
         other_options:
         state: present
     ingress:
-      - name: Eth12
+      - name: eth12
         state: absent
     egress:
-
-copp:
-    v4: 
-     name: copp_v4
-     state: "absent"
-    v6:
-     name: copp_v6
-     state: "absent"
 
 ufd:
   desc: "tracking_group"
