@@ -20,8 +20,8 @@ term accept-to-dns {
 
 term accept-to-splunk {
   comment:: "Allow splunk telemetry"
-  destination-address:: PROD_NETS
-  source-port:: SPLUNK
+  source-address:: PROD_NETS
+  destination-port:: SPLUNK
   protocol:: tcp
   action:: accept
 }

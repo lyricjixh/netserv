@@ -2,3 +2,4 @@ files/gnmi/*.py
 files/gnmi/__*
 topology/.*
 clab-poc01/
+templates/*.eacl

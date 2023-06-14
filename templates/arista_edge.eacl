@@ -18,6 +18,14 @@ ip access-list edge_inbound_v4
  permit udp any eq domain 200.200.99.0/24
 
 
+ remark accept-to-splunk
+ remark Allow splunk telemetry
+ permit tcp any eq 8000 200.200.99.0/24
+ permit tcp any eq 8080 200.200.99.0/24
+ permit tcp any eq 8089 200.200.99.0/24
+ permit tcp any eq 9100 200.200.99.0/24
+
+
  remark accept-tcp-replies
  remark Allow tcp replies to internal hosts.
  permit tcp any 200.200.99.0/24 established
