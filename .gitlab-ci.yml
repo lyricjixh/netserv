@@ -58,6 +58,9 @@ aclgen_job:
     - ansible
   script:
     - aclgen --config_file ./aclgen/config.yaml
+  artifacts:
+    paths:
+      - ./templates/arista_edge.eacl
 
 aclpush_job:
   stage: acl_apply
