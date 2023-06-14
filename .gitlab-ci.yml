@@ -4,6 +4,8 @@ stages:
   - check
   - deploy
   - validate
+  - acl_gen
+  - acl_apply
 
 stage_job:
   stage: stage
@@ -46,3 +48,17 @@ validate_job:
     - ansible
   script:
     - ansible -m eos_command -a "commands='show bgp summary'" poc_spine -v
+
+aclgen_job:
+  stage: acl_gen
+  tags:
+    - ansible
+  script:
+    - aclgen --config_file ./aclgen/config.yaml
+
+aclpush_job:
+  stage: acl_push
+  tags:
+    - ansible
+  script:
+    - ansible-playbook lab_oper.yaml -l poc_leaf -t acl -v
