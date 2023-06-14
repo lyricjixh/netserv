@@ -563,7 +563,7 @@ policy:
                     range: "1-4294967295"
                     result: "accept"
 
-acl_gen: "files/arista_edge.eacl"
+acl_gen: "arista_edge.eacl"
 
 ceos_acl:
   - name: copp_v4
