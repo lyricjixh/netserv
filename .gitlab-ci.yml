@@ -57,7 +57,7 @@ aclgen_job:
     - aclgen --config_file ./aclgen/config.yaml
 
 aclpush_job:
-  stage: acl_push
+  stage: acl_apply
   tags:
     - ansible
   script:
