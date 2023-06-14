@@ -1,5 +1,5 @@
 ---
 policy_file: "./aclgen/policies/pol/arista_edge.pol"
 definitions_directory: "./aclgen/def"
-output_directory: "./templates"
+output_directory: "./files"
 base_directory: "./aclgen/policies"
