@@ -1,0 +1,45 @@
+header {
+  comment:: "Server network ingress ACL to be applied to gateway vlan interface"
+  target:: arista edge_inbound_v4
+}
+ 
+term accept-dhcp {
+  comment:: "Optional - allow forwarding of DHCP requests."
+  destination-port:: DHCP
+  protocol:: udp
+  action:: accept
+}
+ 
+term accept-to-dns {
+  comment:: "Allow name resolution"
+  destination-address:: PROD_NETS
+  source-port:: DNS
+  protocol:: udp
+  action:: accept
+}
+ 
+term accept-tcp-replies {
+  comment:: "Allow tcp replies to internal hosts."
+  destination-address:: PROD_NETS
+  protocol:: tcp
+  option:: tcp-established
+  action:: accept
+}
+ 
+term deny-to-internal {
+  comment:: "Deny access to rfc1918/internal."
+  destination-address:: INTERNAL
+  action:: deny
+}
+ 
+term deny-to-bogons {
+  comment:: "Deny access to bogons"
+  destination-address:: BOGON
+  action:: deny
+  expiration:: 2024-10-01
+}
+ 
+term default-permit {
+  comment:: "Allow what's left (internet)"
+  action:: accept
+}

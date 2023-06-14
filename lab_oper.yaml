@@ -1,5 +1,5 @@
 ---
-- hosts: poc
+- hosts: dc2
   gather_facts: "false"
   vars:
     temp_file: "hostanme.j2"
@@ -289,3 +289,17 @@
         src: dummy_vlans.j2
     tags:
     - dummy_vlan
+
+  - name: Apply ACL Rules
+    block: 
+      - name: Push ACL Rules
+        eos_config:
+            src: "{{ acl_gen }}"
+        tags:
+        - aclgen
+
+      - name: Apply ACL Rules
+        eos_config:
+            src: "acl.j2"
+    tags:
+    - acl

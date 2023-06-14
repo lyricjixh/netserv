@@ -563,6 +563,8 @@ policy:
                     range: "1-4294967295"
                     result: "accept"
 
+acl_gen: "arista_edge.eacl"
+
 ceos_acl:
   - name: copp_v4
     type: ipv4
@@ -600,10 +602,8 @@ ceos_acl:
         other_options:
         state: present
     ingress:
-      - name: Vlan101
-        state: absent
-      - name: Vlan201
-        state: absent
+      - name: control-plane
+        state: present
     egress:
   - name: copp_v6
     type: ipv6
@@ -641,11 +641,29 @@ ceos_acl:
         other_options:
         state: present
     ingress:
-      - name: Vlan101
-        state: absent
-      - name: Vlan201
-        state: absent
+      - name: control-plane
+        state: present
     egress:
+
+  - name: "edge_inbound_v4"
+    type: ipv4
+    state: present
+    ingress:
+      - name: Vlan101
+        state: present
+      - name: Vlan201
+        state: present
+    egress:
+
+#   - name: "edge_inbound_v6"
+#     type: ipv6
+#     state: present
+#     ingress:
+#       - name: Vlan101
+#         state: present
+#       - name: Vlan201
+#         state: present
+#     egress:
 
   - name: MAC_Filter_v1
     type: mac
@@ -654,8 +672,8 @@ ceos_acl:
     entries:
       - number: 10
         permit: true
-        protocol: host
-        source: 8c:47:be:66:c6:80
+        protocol:
+        source: 8c:47:be:66:c6:80 0.0.0
         destination: any 
         src_condition:
         dest_condition:
@@ -663,8 +681,8 @@ ceos_acl:
         state: present
       - number: 20
         permit: true
-        protocol: host
-        source: 8c:47:be:00:00:00
+        protocol:
+        source: 8c:47:be:00:00:00 0.0.0
         destination: any 
         src_condition:
         dest_condition:
@@ -680,41 +698,9 @@ ceos_acl:
         other_options:
         state: present
     ingress:
-      - name: Eth 1/12
+      - name: Eth12
         state: absent
     egress:
-
-#   - name: acl_test_v4
-#     type: ipv4
-#     state: absent
-#     ingress:
-#       - name: Vlan101
-#         state: absent
-#       - name: Vlan201
-#         state: absent
-#     egress:
-#   - name: acl_test_v6
-#     type: ipv6
-#     state: absent
-#     ingress:
-#       - name: Vlan101
-#         state: absent
-#       - name: Vlan201
-#         state: absent
-#     egress:
-#   - name: test
-#     type: mac
-#     state: absent
-#     ingress:
-#       - name: Eth 1/12
-#         state: absent
-#       - name: Eth 1/13
-#         state: absent
-#     egress:
-#       - name: Eth 1/14
-#         state: absent
-#       - name: Eth 1/15
-#         state: absent
 
 copp:
     v4: 

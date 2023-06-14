@@ -1,0 +1,49 @@
+! $Id:$
+! $Date:$
+! $Revision:$
+no ip access-list edge_inbound_v4
+ip access-list edge_inbound_v4
+ remark $Id:$
+ remark Server network ingress ACL to be applied to gateway vlan interface
+
+
+ remark accept-dhcp
+ remark Optional - allow forwarding of DHCP requests.
+ permit udp any any eq bootps
+ permit udp any any eq bootpc
+
+
+ remark accept-to-dns
+ remark Allow name resolution
+ permit udp any eq domain 200.200.99.0/24
+
+
+ remark accept-tcp-replies
+ remark Allow tcp replies to internal hosts.
+ permit tcp any 200.200.99.0/24 established
+
+
+ remark deny-to-internal
+ remark Deny access to rfc1918/internal.
+ deny ip any 10.0.0.0/8
+ deny ip any 172.16.0.0/12
+ deny ip any 192.168.0.0/16
+
+
+ remark deny-to-bogons
+ remark Deny access to bogons
+ deny ip any 0.0.0.0/8
+ deny ip any 192.0.0.0/24
+ deny ip any 192.0.2.0/24
+ deny ip any 198.18.0.0/15
+ deny ip any 198.51.100.0/24
+ deny ip any 203.0.113.0/24
+ deny ip any 224.0.0.0/4
+ deny ip any 240.0.0.0/4
+
+
+ remark default-permit
+ remark Allow what's left (internet)
+ permit ip any any
+
+exit
