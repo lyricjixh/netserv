@@ -9,7 +9,7 @@ stages:
 
 stage_job:
   stage: stage
-  # when: manual
+  when: manual
   variables:
     CLAB_TOPO_META: "topology/poc01.clab.yaml"
   tags:
@@ -19,7 +19,7 @@ stage_job:
 
 wait:
   stage: wait
-  # when: manual
+  when: manual
   needs:
     - "stage_job"
   tags:
@@ -29,7 +29,7 @@ wait:
 
 check_job:
   stage: check
-  # when: manual
+  when: manual
   tags:
     - ansible
   script:
@@ -37,6 +37,7 @@ check_job:
 
 deploy_job:
   stage: deploy
+  when: manual
   tags:
     - ansible
   script:
@@ -44,6 +45,7 @@ deploy_job:
 
 validate_job:
   stage: validate
+  when: manual
   tags:
     - ansible
   script:
@@ -51,6 +53,7 @@ validate_job:
 
 aclgen_job:
   stage: acl_gen
+  # when: manual
   tags:
     - ansible
   script:
@@ -58,7 +61,9 @@ aclgen_job:
 
 aclpush_job:
   stage: acl_apply
+  # when: manual
   tags:
     - ansible
   script:
     - ansible-playbook lab_oper.yaml -l poc_leaf -t acl -v
+    - ansible -m eos_command -a "commands='show run sec system control-plane, show run sec access-list, show run interface vlan101'" cleaf01 -v

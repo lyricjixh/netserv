@@ -17,7 +17,15 @@ term accept-to-dns {
   protocol:: udp
   action:: accept
 }
- 
+
+term accept-to-splunk {
+  comment:: "Allow splunk telemetry"
+  destination-address:: PROD_NETS
+  source-port:: SPLUNK
+  protocol:: tcp
+  action:: accept
+}
+
 term accept-tcp-replies {
   comment:: "Allow tcp replies to internal hosts."
   destination-address:: PROD_NETS
