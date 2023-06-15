@@ -3,6 +3,21 @@ header {
   target:: arista edge_inbound_v4
 }
  
+term accept-icmp {
+  comment:: "allow inbound ICMP from any source."
+  protocol:: icmp
+  icmp-type:: echo-request echo-reply
+  action:: accept
+}
+
+term accept-traceroute {
+  comment:: "allow inbound traceroute from any source."
+  destination-port:: TRACEROUTE
+  protocol:: udp
+  action:: accept
+  expiration:: 2023-12-31
+}
+
 term accept-dhcp {
   comment:: "Optional - allow forwarding of DHCP requests."
   destination-port:: DHCP
@@ -12,7 +27,7 @@ term accept-dhcp {
  
 term accept-to-dns {
   comment:: "Allow name resolution"
-  destination-address:: PROD_NETS
+  source-address:: PROD_NETS
   source-port:: DNS
   protocol:: udp
   action:: accept
@@ -21,14 +36,121 @@ term accept-to-dns {
 term accept-to-splunk {
   comment:: "Allow splunk telemetry"
   source-address:: PROD_NETS
+  destination-address:: SPLUNK_NETS
   destination-port:: SPLUNK
+  protocol:: tcp
+  action:: accept
+}
+
+term accept-to-prometheus {
+  comment:: "Allow splunk telemetry"
+  source-address:: PROD_NETS
+  destination-address:: PROMETHEUS_NETS
+  destination-port:: PROMETHEUS
+  protocol:: tcp
+  action:: accept
+}
+
+term accept-to-gnmi {
+  comment:: "Allow splunk telemetry"
+  source-address:: PROD_NETS
+  destination-address:: GNMI_NETS
+  destination-port:: GNMI
   protocol:: tcp
   action:: accept
 }
 
 term accept-tcp-replies {
   comment:: "Allow tcp replies to internal hosts."
-  destination-address:: PROD_NETS
+  source-address:: PROD_NETS
+  protocol:: tcp
+  option:: tcp-established
+  action:: accept
+}
+ 
+term deny-to-internal {
+  comment:: "Deny access to rfc1918/internal."
+  destination-address:: INTERNAL
+  action:: deny
+}
+ 
+term deny-to-bogons {
+  comment:: "Deny access to bogons"
+  destination-address:: BOGON
+  action:: deny
+  expiration:: 2024-10-01
+}
+ 
+term default-permit {
+  comment:: "Allow what's left (internet)"
+  action:: accept
+}
+
+header {
+  comment:: "Server network ingress ACL to be applied to gateway vlan interface"
+  target:: arista edge_inbound_v6 inet6
+}
+ 
+term accept-icmp {
+  comment:: "allow inbound ICMP from any source."
+  protocol:: icmp
+  icmp-type:: echo-request echo-reply
+  action:: accept
+}
+
+term accept-traceroute {
+  comment:: "allow inbound traceroute from any source."
+  destination-port:: TRACEROUTE
+  protocol:: udp
+  action:: accept
+  expiration:: 2023-12-31
+}
+
+term accept-dhcp {
+  comment:: "Optional - allow forwarding of DHCP requests."
+  destination-port:: DHCP
+  protocol:: udp
+  action:: accept
+}
+ 
+term accept-to-dns {
+  comment:: "Allow name resolution"
+  source-address:: PROD_NETS
+  source-port:: DNS
+  protocol:: udp
+  action:: accept
+}
+
+term accept-to-splunk {
+  comment:: "Allow splunk telemetry"
+  source-address:: PROD_NETS
+  destination-address:: SPLUNK_NETS
+  destination-port:: SPLUNK
+  protocol:: tcp
+  action:: accept
+}
+
+term accept-to-prometheus {
+  comment:: "Allow splunk telemetry"
+  source-address:: PROD_NETS
+  destination-address:: PROMETHEUS_NETS
+  destination-port:: PROMETHEUS
+  protocol:: tcp
+  action:: accept
+}
+
+term accept-to-gnmi {
+  comment:: "Allow splunk telemetry"
+  source-address:: PROD_NETS
+  destination-address:: GNMI_NETS
+  destination-port:: GNMI
+  protocol:: tcp
+  action:: accept
+}
+
+term accept-tcp-replies {
+  comment:: "Allow tcp replies to internal hosts."
+  source-address:: PROD_NETS
   protocol:: tcp
   option:: tcp-established
   action:: accept

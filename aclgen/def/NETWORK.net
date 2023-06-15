@@ -104,4 +104,11 @@ PROD_NETS = 200.200.99.0/24     # Production network#1
             172.168.98.0/24     # Production network#2
             172.168.99.0/24     # Production network#3
 
-SPLUNK_NETS = 200.200.101.0/24  # SPLUNK cluster network
+SPLUNK_NETS = 200.200.101.0/24          # SPLUNK cluster network V4
+              2001:2001:101::/64        # SPLUNK cluster network V6
+
+PROMETHEUS_NETS = 200.200.102.0/24      # PROMTHEUS cluster network V4
+                  2001:2001:102::/64    # PROMTHEUS cluster network V6
+
+GNMI_NETS = 200.200.103.0/24            # GNMI cluster network V4
+            2001:2001:103::/64          # GNMI cluster network V6
