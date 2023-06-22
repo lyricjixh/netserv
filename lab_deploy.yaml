@@ -88,7 +88,9 @@
       eos_config:
           src: intf_portchannel.j2
       when: (features.interface.bond is defined and features.interface.bond|lower == "yes")
-      ignore_errors: yes
+      tags:
+        - mlag
+        - bond
     when: "'leaf' in inventory_hostname"
     tags:
     - l2port

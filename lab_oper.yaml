@@ -303,3 +303,9 @@
             src: "acl.j2"
     tags:
     - acl
+
+  - name: Apply Faults in Cleaf01
+    eos_config:
+        src: fault_inject_cleaf01
+    tags:
+    - faulty
