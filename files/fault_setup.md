@@ -17,7 +17,8 @@ Here's the virtual lab to work on, majorly focus on the cleaf01 (leaf in the 1st
 5. vxlan tunnel up with mlag active/active redundant formation
 
 ## Login
-cleaf01: ssh admin@172.100.100.2
-cleaf02: ssh admin@172.100.100.3
-spine01: ssh admin@172.100.100.101
-spine02: ssh admin@172.100.100.102
+cleaf01: ssh admin@172.100.100.2\
+cleaf02: ssh admin@172.100.100.3\
+spine01: ssh admin@172.100.100.101\
+spine02: ssh admin@172.100.100.102\
+
