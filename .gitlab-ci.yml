@@ -53,7 +53,7 @@ validate_job:
 
 aclgen_job:
   stage: acl_gen
-  # when: manual
+  when: manual
   tags:
     - ansible
   script:
@@ -64,7 +64,7 @@ aclgen_job:
 
 aclpush_job:
   stage: acl_apply
-  # when: manual
+  when: manual
   tags:
     - ansible
   script:

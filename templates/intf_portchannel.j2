@@ -17,8 +17,8 @@ interface Port-Channel{{ bond.bond_id }}
 {% endif %}
  port-channel lacp fallback individual
  port-channel lacp fallback timeout 1
-{% if port_channel.mlag_id is defined and port_channel.mlag_id %}
- mlag {{ port_channel.mlag_id }}
+{% if bond.mlag_id is defined and bond.mlag_id %}
+ mlag {{ bond.mlag_id }}
 {% endif %}
  no shutdown
 !
