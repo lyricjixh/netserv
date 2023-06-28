@@ -1,3 +1,0 @@
-username lab  privilege 10 secret 0 lab123!
-username ansible  privilege 15 secret 0 lab123!
-username netops  privilege 15 secret 0 lab123!
