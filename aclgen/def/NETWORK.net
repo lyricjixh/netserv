@@ -112,3 +112,34 @@ PROMETHEUS_NETS = 200.200.102.0/24      # PROMTHEUS cluster network V4
 
 GNMI_NETS = 200.200.103.0/24            # GNMI cluster network V4
             2001:2001:103::/64          # GNMI cluster network V6
+
+US-1-DC =   10.135.0.0/14               # DC Subnet V4
+            10.140.0.0/14               # DC Subnet V4
+            10.144.0.0/14               # DC Subnet V4
+            10.148.0.0/14               # DC Subnet V4
+            10.188.0.0/14               # DC Subnet V4
+            2001:2001:135::/64          # DC Subnet V6
+            2001:2001:140::/64          # DC Subnet V6
+            2001:2001:148::/64          # DC Subnet V6
+            2001:2001:188::/64          # DC Subnet V6
+
+US-2-DC =   10.132.0.0/14               # DC Subnet V4
+            10.160.0.0/14               # DC Subnet V4
+            10.164.0.0/14               # DC Subnet V4
+            10.168.0.0/14               # DC Subnet V4
+            2001:2001:132::/64          # DC Subnet V6
+            2001:2001:160::/64          # DC Subnet V6
+            2001:2001:164::/64          # DC Subnet V6
+            2001:2001:168::/64          # DC Subnet V6
+
+EU-1-DC =   10.172.0.0/14               # DC Subnet V4
+            10.176.0.0/14               # DC Subnet V4
+            10.180.0.0/14               # DC Subnet V4
+            2001:2001:172::/64          # DC Subnet V6
+            2001:2001:176::/64          # DC Subnet V6
+            2001:2001:180::/64          # DC Subnet V6
+
+AWS     =   10.182.0.0/14               # DC Subnet V4
+            10.186.0.0/14               # DC Subnet V4
+            2001:2001:182::/64          # DC Subnet V6
+            2001:2001:186::/64          # DC Subnet V6

@@ -5,6 +5,7 @@ Generating Multitanency VRF Intance Configuration
 ############################################}
 {% if evpn is defined and evpn %}
 {% for vrfi in evpn.vrf %}
+{% if vrfi.proto is defined and vrfi.proto %}
 {% if vrfi.proto.static_v4 is defined and vrfi.proto.static_v4 %}
 {% for route in vrfi.proto.static_v4 %}
 ip route vrf {{ vrfi.name }} {{ route.dest }} {{ route.nh }}
@@ -15,6 +16,7 @@ ip route vrf {{ vrfi.name }} {{ route.dest }} {{ route.nh }}
 {% for route in vrfi.proto.static_v6 %}
 ipv6 route vrf {{ vrfi.name }} {{ route.dest }} {{ route.nh }}
 {% endfor %}
+{% endif %}
 {% endif %}
 !
 {% endfor %}
