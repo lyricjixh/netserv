@@ -20,6 +20,14 @@ interface Port-Channel{{ bond.bond_id }}
 {% if bond.mlag_id is defined and bond.mlag_id %}
  mlag {{ bond.mlag_id }}
 {% endif %}
+{% if bond.esi_id is defined and bond.esi_id %}
+ !
+ evpn ethernet-segment
+   identifier {{ bond.esi_id }}
+   route-target import {{ bond.esi_rt}}
+{% set esid = bond.esi_id.split(':') %}
+ lacp system-id {{ esid[2]}}.{{ esid[3]}}.{{ esid[4]}}
+{% endif %}
  no shutdown
 !
 {% if port_channel.bmem_range is defined and port_channel.bmem_range %}
