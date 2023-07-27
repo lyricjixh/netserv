@@ -397,7 +397,7 @@ cluster_acl:
 
 evpn:
     arp_suppression:
-        pfx_list: "ARP_NO_PROXY"
+        pfx_list: "NO_ARP_PROXY"
     vrf:
     - 
         name: "BMS-subnet"
@@ -471,6 +471,7 @@ evpn:
               r_map: redistribute-default-route
         multicast:
           - type: ipv4
+            l3_group: "225.0.0.100"
             attributes:
               - routing
         pim:
@@ -480,11 +481,11 @@ evpn:
             - addr: 10.80.1.31
               groups: 
               - "access-list MCAST-SM1"
-            interfaces:
-            - name: vlan701
-              mode: "sparse-mode"
-              attributes:
-              - "hello interval 1"
+            # interfaces:
+            # - name: vlan701
+            #   mode: "sparse-mode"
+            #   attributes:
+            #   - "hello interval 1"
             attributes:
     - 
         name: "IOT-subnet"
@@ -527,7 +528,7 @@ evpn:
             - r_map:
               proto: connected
         bgp:
-          attributes:
+          attributes:         ## list definition
           redistribute:
           - 
               afi: ipv4
@@ -556,11 +557,6 @@ evpn:
             - addr: 10.80.2.31
               groups: 
               - "access-list MCAST-SM2"
-            interfaces:
-            - name: vlan702
-              mode: "sparse-mode"
-              attributes:
-              - "hello interval 1"
             attributes:
           # - 
           #     afi: ipv4
@@ -607,8 +603,7 @@ evpn:
             - r_map:
               proto: connected
         bgp:
-          attributes:
-            - "evpn multicast"
+          attributes:         ## list definition
           redistribute:
           - 
               afi: ipv4
@@ -637,35 +632,30 @@ evpn:
             - addr: 10.80.0.31
               groups: 
               - "access-list MCAST-SM3"
-            interfaces:
-            - name: vlan703
-              mode: "sparse-mode"
-              attributes:
-              - "hello interval 1"
             attributes:
 ## EVPN iBGP Overlay
 ## Bleaves pair as iBGP RRS, Rest VTEP leaf as RRC.
-# evpn_ibgp:
-#   local_asn: "64999"
-#   rrs_v4:
-#     peer_group: "evpn_rrs_v4"
-#     remote_as:
-#       - "{{ rack03_asn }}"
-#       - "{{ rack03_asn }}"
-#     addr:
-#       - "{{ hostvars['bleaf01']['lpbk_ulay']['addr_v4'] }}"
-#       - "{{ hostvars['bleaf02']['lpbk_ulay']['addr_v4'] }}"
-#   rrc_v4:
-#     peer_group: "evpn_rrc_v4"
-#     remote_as:
-#       - "{{ rack01_asn }}"
-#       - "{{ rack01_asn }}"
-#       - "{{ rack02_asn }}"
-#       - "{{ rack02_asn }}"
-#     addr:
-#       - "{{ hostvars['cleaf01']['lpbk_ulay']['addr_v4'] }}"
-#       - "{{ hostvars['cleaf02']['lpbk_ulay']['addr_v4'] }}"
-#       - "{{ hostvars['cleaf03']['lpbk_ulay']['addr_v4'] }}"
-#       - "{{ hostvars['cleaf04']['lpbk_ulay']['addr_v4'] }}"
-#   peer_v4:
-#     peer_group: "evpn_rrp_v4"
+evpn_ibgp:
+  local_asn: "64999"
+  rrs_v4:
+    peer_group: "evpn_rrs_v4"
+    remote_as:
+      - "{{ rack03_asn }}"
+      - "{{ rack03_asn }}"
+    addr:
+      - "{{ hostvars['bleaf01']['lpbk_ulay']['addr_v4'] }}"
+      - "{{ hostvars['bleaf02']['lpbk_ulay']['addr_v4'] }}"
+  rrc_v4:
+    peer_group: "evpn_rrc_v4"
+    remote_as:
+      - "{{ rack01_asn }}"
+      - "{{ rack01_asn }}"
+      - "{{ rack02_asn }}"
+      - "{{ rack02_asn }}"
+    addr:
+      - "{{ hostvars['cleaf01']['lpbk_ulay']['addr_v4'] }}"
+      - "{{ hostvars['cleaf02']['lpbk_ulay']['addr_v4'] }}"
+      - "{{ hostvars['cleaf03']['lpbk_ulay']['addr_v4'] }}"
+      - "{{ hostvars['cleaf04']['lpbk_ulay']['addr_v4'] }}"
+  peer_v4:
+    peer_group: "evpn_rrp_v4"

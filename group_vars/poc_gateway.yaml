@@ -5,8 +5,8 @@ edge_links:
     state: "present"
     desc: "ISP GW To EDGE"
     admin_state: "up"
-    net_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_seq) }}"
-    net_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_seq) }}"
+    netv4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_seq) }}"
+    netv6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_seq) }}"
 ## Edge Addr higher(2), ISP lower(1)
     addr_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_seq)|ansible.utils.ipaddr(1) }}"
     addr_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_seq)|ansible.utils.ipaddr(1) }}"
@@ -16,8 +16,8 @@ edge_links:
 #     state: "present"    
 #     desc: "ISP GW To EDGE"
 #     admin_state: "up"
-#     net_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, links_seq[1]) }}"
-#     net_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, links_seq[1]) }}"
+#     netv4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, links_seq[1]) }}"
+#     netv6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, links_seq[1]) }}"
 #     vrf:
 
 # edge_vlans:
@@ -27,8 +27,8 @@ edge_links:
 #     state: "present"    
 #     desc: "ISP GW To EDGE"
 #     admin_state: "up"
-#     net_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_seq) }}"
-#     net_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_seq) }}"
+#     netv4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_seq) }}"
+#     netv6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_seq) }}"
 #     vrf:
 #    -
 #     id: "1992"
@@ -36,8 +36,8 @@ edge_links:
 #     state: "present"    
 #     desc: "ISP GW To EDGE"
 #     admin_state: "up"
-#     net_v4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_seq) }}"
-#     net_v6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_seq) }}"
+#     netv4: "{{ edge_netv4|ansible.utils.ipsubnet(edge_netmaskv4, edge_seq) }}"
+#     netv6: "{{ edge_netv6|ansible.utils.ipsubnet(edge_netmaskv6, edge_seq) }}"
 #     vrf:
 
 test_links:
@@ -46,8 +46,8 @@ test_links:
     state: "present"    
     desc: "To IXIA"
     admin_state: "up"
-    net_v4: "{{ test_netv4|ansible.utils.ipsubnet(test_netmaskv4, test_seq) }}"
-    net_v6: "{{ test_netv6|ansible.utils.ipsubnet(test_netmaskv6, test_seq) }}"
+    netv4: "{{ test_netv4|ansible.utils.ipsubnet(test_netmaskv4, test_seq) }}"
+    netv6: "{{ test_netv6|ansible.utils.ipsubnet(test_netmaskv6, test_seq) }}"
 ## Edge Addr higher(2), ISP lower(1)
     addr_v4: "{{ test_netv4|ansible.utils.ipsubnet(edge_netmaskv4, test_seq)|ansible.utils.ipaddr(1) }}"
     addr_v6: "{{ test_netv6|ansible.utils.ipsubnet(edge_netmaskv6, test_seq)|ansible.utils.ipaddr(1) }}"
@@ -98,22 +98,22 @@ edge_bgp:
       - "send-community standard extended"
   peers:
     - 
-      addr: "{{ edge_links[0].net_v4 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
+      addr: "{{ edge_links[0].netv4 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
       desc: "DC Fabric Edge Peer V4"
       remote_as:
       peer_group: "fabric_edge_v4"
     - 
-      addr: "{{ edge_links[0].net_v6 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
+      addr: "{{ edge_links[0].netv6 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
       desc: "DC Fabric Edge Peer V6"
       remote_as:
       peer_group: "fabric_edge_v6"
     - 
-      addr: "{{ test_links[0].net_v4 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
+      addr: "{{ test_links[0].netv4 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
       desc: "Tester Peer V4"
       remote_as:
       peer_group: "tester_v4"
     - 
-      addr: "{{ test_links[0].net_v6 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
+      addr: "{{ test_links[0].netv6 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
       desc: "Tester Peer V6"
       remote_as:
       peer_group: "tester_v6"

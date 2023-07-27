@@ -17,7 +17,7 @@ ip as-path access-list SS-INJECT permit ^[0-9]+$ any
 ip community-list 110 permit 174:3000
 ip community-list 110 permit 174:990
 ip community-list CWIE-NETWORKS-COMMUNITY permit 46385:888
-ip community-list PNAP-ADVERTISED-LOCAL-ONLY permit 12189:200
+ip community-list FABRIC-ADVERTISED-LOCAL-ONLY permit 12189:200
 ip community-list regexp REMOVE-NO-EXPORT permit no-export
 ip community-list SS-ATTACHED-CUSTOMERS-COMMUNITY permit 65534:1
 ip community-list regexp TO-RR permit _12189:100.._
@@ -46,7 +46,7 @@ ip prefix-list INTERNAL-IP-CONNECTED
 ip prefix-list INTERNAL-IPv6-CONNECTED
 !
 !
-ip prefix-list PUBLIC-PNAP-SEA
+ip prefix-list PUBLIC-FABRIC-SEA
    seq 20 permit 131.153.61.0/24
 !
 ip prefix-list SEA-PREF-LOCAL-ONLY
@@ -270,38 +270,38 @@ route-map COGENT-BGP-PEER-OUT deny 100
    match community COGENT-DENY
 !
 route-map COGENT-BGP-PEER-OUT permit 110
-   match ip address prefix-list PNAP-GLOBAL
+   match ip address prefix-list FABRIC-GLOBAL
    continue
    set community 46385:889 additive
 !
 route-map COGENT-BGP-PEER-OUT permit 115
-   match ip address prefix-list PNAP-GLOBAL-BLACKHOLE
+   match ip address prefix-list FABRIC-GLOBAL-BLACKHOLE
    match tag 999
    continue
    set community 46385:999 additive
 !
 route-map COGENT-BGP-PEER-OUT permit 120
-   match ip address prefix-list PNAP-GLOBAL-PHX
+   match ip address prefix-list FABRIC-GLOBAL-PHX
    continue
    set community 46385:884 additive
 !
 route-map COGENT-BGP-PEER-OUT permit 125
-   match ip address prefix-list PNAP-GLOBAL-ASH
+   match ip address prefix-list FABRIC-GLOBAL-ASH
    continue
    set community 46385:886 additive
 !
 route-map COGENT-BGP-PEER-OUT permit 130
-   match ip address prefix-list PNAP-GLOBAL-LA
+   match ip address prefix-list FABRIC-GLOBAL-LA
    continue
    set community 46385:888 additive
 !
 route-map COGENT-BGP-PEER-OUT permit 135
-   match ip address prefix-list PNAP-GLOBAL-NLD
+   match ip address prefix-list FABRIC-GLOBAL-NLD
    continue
    set community 46385:885 additive
 !
 route-map COGENT-BGP-PEER-OUT permit 140
-   match ip address prefix-list PNAP-GLOBAL-ATL
+   match ip address prefix-list FABRIC-GLOBAL-ATL
    continue
    set community 46385:883 additive
 !
@@ -356,84 +356,84 @@ route-map NULL-CONNECTED permit 120
    match ipv6 address prefix-list INTERNAL-IPv6-CONNECTED
    set community 174:990 174:3000 209:0 1299:999 1299:2009 1299:5009 1299:7009 2914:666 3257:666 3257:26                                                                                                           66 3356:123 3356:666 3356:9999 3549:600 3549:666 6461:5990 6762:666 7385:640 7385:666 7922:666 9002:666                                                                                                            12189:0 12189:999 12956:666 17819:666 19181:9 19181:301 22773:666 31042:999 32421:999 38930:666 64666:0                                                                                                            64999:0 65000:0 65009:0
 !
-route-map PNAP-CORE-BGP-IN deny 10
+route-map FABRIC-CORE-BGP-IN deny 10
    match ip address prefix-list BOGON
 !
-route-map PNAP-CORE-BGP-IN permit 100
+route-map FABRIC-CORE-BGP-IN permit 100
    match as-path SS-ASN
    set local-preference 1100
    set community 12189:10000 additive
 !
-route-map PNAP-CORE-BGP-IN permit 200
+route-map FABRIC-CORE-BGP-IN permit 200
    match as-path SS-ATTACHED-CUSTOMERS
    match community SS-ATTACHED-CUSTOMERS-COMMUNITY
    set local-preference 1100
 !
-route-map PNAP-CORE-BGP-IN permit 300
+route-map FABRIC-CORE-BGP-IN permit 300
    match ip address prefix-list SLASH32
    match community WANGUARD-BH
    set local-preference 1100
 !
-route-map PNAP-CORE-BGP-OUT permit 10
+route-map FABRIC-CORE-BGP-OUT permit 10
    match ip address prefix-list DEFAULT-ONLY
 !
-route-map PNAP-CORE-BGP-OUT permit 15
+route-map FABRIC-CORE-BGP-OUT permit 15
    match ipv6 address prefix-list IPv6-DEFAULT-ONLY
 !
-route-map PNAP-CORE-BGP-OUT deny 100
+route-map FABRIC-CORE-BGP-OUT deny 100
 !
-route-map PNAP-EDGE-BGP-IN deny 10
+route-map FABRIC-EDGE-BGP-IN deny 10
    match ip address prefix-list BOGON
 !
-route-map PNAP-EDGE-BGP-IN deny 15
+route-map FABRIC-EDGE-BGP-IN deny 15
    match ipv6 address prefix-list IPv6-BOGON
 !
-route-map PNAP-EDGE-BGP-IN permit 20
+route-map FABRIC-EDGE-BGP-IN permit 20
    match ip address prefix-list DEFAULT-ONLY
 !
-route-map PNAP-EDGE-BGP-IN permit 30
+route-map FABRIC-EDGE-BGP-IN permit 30
    match ipv6 address prefix-list IPv6-DEFAULT-ONLY
 !
-route-map PNAP-EDGE-BGP-IN permit 100
+route-map FABRIC-EDGE-BGP-IN permit 100
    match ip address prefix-list SS-FILTER
 !
-route-map PNAP-EDGE-BGP-OUT permit 40
-   match ip address prefix-list PNAP-GLOBAL
+route-map FABRIC-EDGE-BGP-OUT permit 40
+   match ip address prefix-list FABRIC-GLOBAL
    continue
    set community 46385:889 additive
 !
-route-map PNAP-EDGE-BGP-OUT permit 50
-   match ip address prefix-list PNAP-GLOBAL-BLACKHOLE
+route-map FABRIC-EDGE-BGP-OUT permit 50
+   match ip address prefix-list FABRIC-GLOBAL-BLACKHOLE
    match tag 999
    continue
    set community 46385:999 additive
 !
-route-map PNAP-EDGE-BGP-OUT permit 51
-   match ip address prefix-list PNAP-GLOBAL-PHX
+route-map FABRIC-EDGE-BGP-OUT permit 51
+   match ip address prefix-list FABRIC-GLOBAL-PHX
    continue
    set community 46385:884 additive
 !
-route-map PNAP-EDGE-BGP-OUT permit 55
-   match ip address prefix-list PNAP-GLOBAL-ASH
+route-map FABRIC-EDGE-BGP-OUT permit 55
+   match ip address prefix-list FABRIC-GLOBAL-ASH
    continue
    set community 46385:886 additive
 !
-route-map PNAP-EDGE-BGP-OUT permit 60
-   match ip address prefix-list PNAP-GLOBAL-LA
+route-map FABRIC-EDGE-BGP-OUT permit 60
+   match ip address prefix-list FABRIC-GLOBAL-LA
    continue
    set community 46385:888 additive
 !
-route-map PNAP-EDGE-BGP-OUT permit 65
-   match ip address prefix-list PNAP-GLOBAL-NLD
+route-map FABRIC-EDGE-BGP-OUT permit 65
+   match ip address prefix-list FABRIC-GLOBAL-NLD
    continue
    set community 46385:885 additive
 !
-route-map PNAP-EDGE-BGP-OUT permit 70
-   match ip address prefix-list PNAP-GLOBAL-ATL
+route-map FABRIC-EDGE-BGP-OUT permit 70
+   match ip address prefix-list FABRIC-GLOBAL-ATL
    continue
    set community 46385:883 additive
 !
-route-map PNAP-EDGE-BGP-OUT permit 100
+route-map FABRIC-EDGE-BGP-OUT permit 100
    match as-path 400
 !
 route-map SC-BGP-PEER-OUT deny 10

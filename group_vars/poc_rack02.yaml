@@ -21,29 +21,13 @@ vxlans:
         netv4: "{{ v101_netv4 }}"
         netv6: "{{ v101_netv6 }}"
         vrf: "BMS-subnet"
-        helper_addrv4:
-            - 11.11.11.11
-            - 12.12.12.12
-        state: "present"
-    - 
-        desc: "overlay_vlan"
-        vlan: "201"
-        netv4: "{{ v201_netv4 }}"
-        netv6: "{{ v201_netv6 }}"
-        vrf: "BMS-subnet"
-        helper_addrv4:
-            - 11.11.11.11
-            - 12.12.12.12
-        state: "present"
-    - 
-        desc: "overlay_vlan"
-        vlan: "202"
-        netv4: "{{ v202_netv4 }}"
-        netv6: "{{ v202_netv6 }}"
-        vrf: "BMS-subnet"
-        helper_addrv4:
-            - 11.11.11.11
-            - 12.12.12.12
+        mcast:
+            igmp: "yes"
+            l2_group: "{{ v101_mcast }}"
+            local_intf: "Loopback101"
+            pim_mode:
+            pim_attri:
+        helper_addrv4: "{{ v101_helper }}"
         state: "present"
     - 
         desc: "overlay_vlan"
@@ -51,27 +35,33 @@ vxlans:
         # netv4: "{{ v141_netv4 }}"
         # netv6: "{{ v141_netv6 }}"
         vrf: "BMS-subnet"
-        # helper_addrv4:
-        #     - 11.11.11.11
-        #     - 12.12.12.12
+        helper_addrv4: "{{ v141_helper }}"
         state: "present"
     - 
         desc: "overlay_vlan"
-        vlan: "142"
-        # netv4: "{{ v142_netv4 }}"
-        # netv6: "{{ v142_netv6 }}"
+        vlan: "201"
+        netv4: "{{ v201_netv4 }}"
+        netv6: "{{ v201_netv6 }}"
         vrf: "BMS-subnet"
-        # helper_addrv4:
-        #     - 11.11.11.11
-        #     - 12.12.12.12
+        mcast:
+            igmp: "yes"
+            l2_group: "{{ v201_mcast }}"
+            local_intf: "Loopback201"
+            pim_mode:
+            pim_attri:
+        helper_addrv4: "{{ v201_helper }}"
         state: "present"
     - 
         desc: "overlay_vlan"
-        vlan: "143"
-        # netv4: "{{ v143_netv4 }}"
-        # netv6: "{{ v143_netv6 }}"
+        vlan: "202"
+        netv4: "{{ v202_netv4 }}"
+        netv6: "{{ v202_netv6 }}"
         vrf: "BMS-subnet"
-        helper_addrv4:
-            - 11.11.11.11
-            - 12.12.12.12
+        mcast:
+            igmp: "yes"
+            l2_group: "{{ v202_mcast }}"
+            local_intf: "Loopback202"
+            pim_mode:
+            pim_attri:
+        helper_addrv4: "{{ v202_helper }}"
         state: "present"

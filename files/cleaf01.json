@@ -663,7 +663,7 @@
     ],
     "evpn": {
         "arp_suppression": {
-            "pfx_list": "ARP_NO_PROXY"
+            "pfx_list": "NO_ARP_PROXY"
         },
         "vrf": [
             {
@@ -1629,7 +1629,7 @@
             },
             {
                 "afi": "ipv4",
-                "name": "ARP_NO_PROXY",
+                "name": "NO_ARP_PROXY",
                 "prefix": [
                     {
                         "action": "deny",
@@ -2156,7 +2156,7 @@
                 "vrf": "{{ mgmt_vrf }}"
             }
         ],
-        "location": "E3:CAN-TOR-029:AMEX:CC:24X7:Sheperd:001:A04",
+        "location": "E3:CAN-TOR-029:FABRIC:CC:24X7:Sheperd:001:A04",
         "proto_port": "1161",
         "src_intf": "Management{{mgmt_intf}}",
         "traps": [

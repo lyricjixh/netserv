@@ -49,6 +49,9 @@ router bgp {{ bgp.local_as }}
 {% endif %}
 {% endfor %}
 {% endif %}
+{% if vrf.multicast is defined and vrf.multicast %}
+    evpn multicast
+{% endif %}
 {% if vrf.bgp.attributes is defined and vrf.bgp.attributes %}
 {% for attr in vrf.bgp.attributes %}
     {{ attr }}
@@ -77,6 +80,9 @@ router bgp {{ bgp.local_as }}
     rd {{ lpbk_olay.addr_v4 }}:{{ vxlan_id_prx }}{{ vni.vlan }}
     route-target both {{ vxlan_id_prx }}{{ vni.vlan }}:{{ vxlan_id_prx }}{{ vni.vlan }}
     redistribute learned
+{% if vni.mcast is defined and vni.mcast %}
+    redistribute igmp
+{% endif %}
   !
 {% endfor %}
 {% endif %}

@@ -129,7 +129,7 @@
     #   - "50.60"
     #   - "50.61"
     tags:
-      - pnap
+      - FABRIC
 
   - name: Flip the port
     eos_interfaces:
@@ -167,8 +167,8 @@
     - name: Collect uRPF Logs
       eos_command:
         commands:
-          - show ip route rpf unicast vrf PNAP-CORE
-          - show ipv6 route rpf unicast vrf PNAP-CORE
+          - show ip route rpf unicast vrf FABRIC-CORE
+          - show ipv6 route rpf unicast vrf FABRIC-CORE
           - show platform fap label sharing inlif shadow | no-more
           - show hardware counter drop
       register: show_output
@@ -187,7 +187,7 @@
     eos_config:
       lines:
         - "passive-interface port-Channel 3"
-      parents: ['router ospf 1 vrf PNAP-EDGE']
+      parents: ['router ospf 1 vrf FABRIC-EDGE']
       match: exact
     tags:
       - ospf
@@ -196,7 +196,7 @@
     eos_config:
       lines:
         - "passive-interface port-Channel 3"
-      parents: ['ipv6 router ospf 1 vrf PNAP-EDGE']
+      parents: ['ipv6 router ospf 1 vrf FABRIC-EDGE']
       match: exact
     tags:
       - ospfv3
@@ -206,7 +206,7 @@
       lines:
         - "no network 131.153.60.0/22"
       parents: ['address-family ipv4']
-      before: ['router bgp 12189', 'vrf PNAP-EDGE']
+      before: ['router bgp 12189', 'vrf FABRIC-EDGE']
       match: exact
       # prompt: "[confirm]"
       # answer: "yes"
@@ -220,7 +220,7 @@
       lines:
         - "network 131.153.60.0/22"
       parents: ['address-family ipv4']
-      before: ['router bgp 12189', 'vrf PNAP-CORE']
+      before: ['router bgp 12189', 'vrf FABRIC-CORE']
       match: exact
       # prompt: "[confirm]"
       # answer: "yes"

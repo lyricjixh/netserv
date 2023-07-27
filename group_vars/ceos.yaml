@@ -239,7 +239,7 @@ policy:
                     action: "permit"
                     range: "{{ fabric_ptp_netv6 }} le 128"
         -
-            name: "ARP_NO_PROXY"
+            name: "NO_ARP_PROXY"
             afi: "ipv4"
             step: 10
             prefix:

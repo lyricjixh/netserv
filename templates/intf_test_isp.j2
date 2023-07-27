@@ -11,9 +11,9 @@ interface ethernet{{ intf.name }}
 {% if intf.vrf is defined and intf.vrf %}
  vrf {{ intf.vrf }}
 {% endif %}
- ip address {{ intf.net_v4 | ansible.utils.ipaddr(1) }}
-{% if intf.net_v6 is defined and intf.net_v6 %}
- ipv6 address {{ intf.net_v6 | ansible.utils.ipaddr(1) }}
+ ip address {{ intf.netv4 | ansible.utils.ipaddr(1) }}
+{% if intf.netv6 is defined and intf.netv6 %}
+ ipv6 address {{ intf.netv6 | ansible.utils.ipaddr(1) }}
 {% endif %}
 {# flowcontrol receive off
  no lldp tlv-select basic-tlv management-address ipv4

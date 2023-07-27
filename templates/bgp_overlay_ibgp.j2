@@ -3,6 +3,7 @@
 Purpose:
 Generating BGP EVPN Overlay Configuration
 ############################################}
+{% if router_reflector is defined and router_reflector %}
 router bgp {{ bgp.local_as }}
 {% if router_reflector|lower == "no" %}
   neighbor {{ evpn_ibgp.rrs_v4.peer_group }} peer group
@@ -83,3 +84,4 @@ router bgp {{ bgp.local_as }}
 {% endif %}
   !
 !
+{% endif %}

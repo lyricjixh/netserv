@@ -82,7 +82,7 @@ router bgp {{ edge_bgp.local_as }}
 {% endfor %}
 {% endif %}
   !
-  vrf PNAP-EDGE
+  vrf FABRIC-EDGE
 {% if edge_bgp.peers is defined and edge_bgp.peers %}
 {% for peer in edge_bgp.peers %}
     neighbor {{ peer.addr }} description "{{ peer.desc }}"
@@ -175,7 +175,7 @@ router bgp {{ edge_asn }}
 {% endfor %}
 {% endif %}
   !
-  vrf PNAP-EDGE
+  vrf FABRIC-EDGE
 {% if edge_bgp.peers is defined and edge_bgp.peers %}
 {% for peer in edge_bgp.peers %}
     neighbor {{ peer.addr }} description "{{ peer.desc }}"
