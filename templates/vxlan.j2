@@ -85,14 +85,20 @@ interface Vlan {{ vni.vlan }}
   mtu {{ vxlan_mtu }}
 !
 {% endfor %}
-{% if edge_vlans is defined and edge_vlans %}
-{% for intf in edge_vlans %}
+{% if edge_links is defined and edge_links %}
+{% for intf in edge_links %}
+{% if intf.vlan is defined and intf.vlan %}
 vlan {{ intf.vlan }}
   name VLAN{{ intf.vlan }}
 !
+{% endif %}
 {% endfor %}
-{% for intf in edge_vlans %}
+{% for intf in edge_links %}
+{% if intf.vlan is defined and intf.vlan %}
 interface Vlan {{ intf.vlan }}
+{% elif intf.l3_port is defined and intf.l3_port %}
+interface ethernet{{ intf.l3_port }}
+{% endif %}
  description "{{ intf.desc }}"
  no switchport
 {% if intf.vrf is defined and intf.vrf %}
@@ -115,16 +121,16 @@ interface Vlan {{ intf.vlan }}
 {% endfor %}
 {% endif %}
 {% endif %}
- ip address {{ intf.netv4 | ansible.utils.ipaddr('1') }}
+ ip address {{ intf.netv4 | ansible.utils.ipaddr('2') }}
 {% if intf.netv6 is defined and intf.netv6 %}
- ipv6 address {{ intf.netv6 | ansible.utils.ipaddr('1') }}
+ ipv6 address {{ intf.netv6 | ansible.utils.ipaddr('2') }}
 {% endif %}
  mtu {{ phy_mtu }}
  no shutdown
 !
 {% if intf.trunk_port is defined and intf.trunk_port %}
 {% for port in intf.trunk_port %}
-interface Eth{{ port }}
+interface ethernet{{ port }}
  description "{{ intf.desc }}-VLAN{{ intf.vlan }} Trunk"
  mtu {{ phy_mtu }}
  load-interval 30
@@ -135,23 +141,6 @@ interface Eth{{ port }}
 !
 {% endfor %}
 {% endif %}
-{% endfor %}
-{% endif %}
-{% if edge_links is defined and edge_links %}
-{% for intf in edge_links %}
-interface ethernet{{ intf.name }}
- description "{{ intf.desc }}"
- no switchport
-{% if intf.vrf is defined and intf.vrf %}
- vrf {{ intf.vrf }}
-{% endif %}
- ip address {{ intf.netv4 | ansible.utils.ipaddr('1') }}
-{% if intf.netv6 is defined and intf.netv6 %}
- ipv6 address {{ intf.netv6 | ansible.utils.ipaddr('1') }}
-{% endif %}
- mtu {{ phy_mtu }}
- no shutdown
-!
 {% endfor %}
 {% endif %}
 {% endif %}
