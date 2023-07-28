@@ -57,7 +57,7 @@ vlans:
         desc: "Native Vlan if not default 1"
         id: "1"
 
-sub_interfaces:
+# sub_interfaces:
 # - phy_intf: 45
 #   sub_vlans:
 #       - 

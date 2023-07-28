@@ -146,12 +146,10 @@ test_links:
     state: "present"    
     desc: "To IXIA"
     admin_state: "up"
+## Edge Addr higher(2), ISP lower(1)
     netv4: "{{ test_netv4|ansible.utils.ipsubnet(test_netmaskv4, seq-101 ) }}"
     netv6: "{{ test_netv6|ansible.utils.ipsubnet(test_netmaskv6, seq-101 ) }}"
-## Edge Addr higher(2), ISP lower(1)
-    addr_v4: "{{ test_netv4|ansible.utils.ipsubnet(edge_netmaskv4, seq-101)|ansible.utils.ipaddr(1) }}"
-    addr_v6: "{{ test_netv6|ansible.utils.ipsubnet(edge_netmaskv6, seq-101)|ansible.utils.ipaddr(1) }}"
-    vrf:
+    vrf: "BMS-subnet"
 
 edge_bgp:
   local_as: "{{ edge_asn }}"
@@ -212,21 +210,25 @@ edge_bgp:
       desc: "DC Fabric Edge Peer V4"
       remote_as: "{{ remote_isp_asn }}"
       peer_group: "ISP-PEER-GROUP_v4"
+      vrf: "BMS-subnet"
     - 
       addr: "{{ edge_links[0].netv6 | ansible.utils.ipaddr(1) | ansible.utils.ipaddr('address') }}"
       desc: "DC Fabric Edge Peer V6"
       remote_as: "{{ remote_isp_asn }}"
       peer_group: "ISP-PEER-GROUP_v6"
+      vrf: "BMS-subnet"
     - 
       addr: "{{ test_links[0].netv4 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
       desc: "Tester Peer V4"
       remote_as:
       peer_group: "tester_v4"
+      vrf: "BMS-subnet"
     - 
       addr: "{{ test_links[0].netv6 | ansible.utils.ipaddr(2) | ansible.utils.ipaddr('address') }}"
       desc: "Tester Peer V6"
       remote_as:
       peer_group: "tester_v6"
+      vrf: "BMS-subnet"
   afi: 
   #   ipv4:
   #   -
