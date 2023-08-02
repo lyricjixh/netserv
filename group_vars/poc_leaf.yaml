@@ -267,36 +267,43 @@ bgp:
       desc: "DC Fabric Edge Peer V4"
       remote_as: 
       peer_group: "FABRIC-PEER_v4"
+      vrf:
     - 
       addr: "{{ bgp_fabric_peer_v4[1] }}"
       desc: "DC Fabric Edge Peer V4"
       remote_as: 
       peer_group: "FABRIC-PEER_v4"
+      vrf:
     - 
       addr:
       desc: "ToR LEAF Peer V4"
       remote_as: 
       peer_group: "TOR-PEER_v4"
+      vrf:
     - 
       addr: "{{ bgp_fabric_peer_v6[0] }}"
       desc: "DC Fabric Edge Peer V6"
       remote_as: 
       peer_group: "FABRIC-PEER_v6"
+      vrf:
     - 
       addr: "{{ bgp_fabric_peer_v6[1] }}"
       desc: "DC Fabric Edge Peer V6"
       remote_as:
       peer_group: "FABRIC-PEER_v6"
+      vrf:
     - 
       addr: "{{ hostvars['spine01'].lpbk_ulay.addr_v4 }}"
       desc: "FABRIC EVPN PEER"
       remote_as: 
       peer_group: "FABRIC-PEER_EVPN"
+      vrf:
     - 
       addr: "{{ hostvars['spine02'].lpbk_ulay.addr_v4 }}"
       desc: "FABRIC EVPN PEER"
       remote_as: 
       peer_group: "FABRIC-PEER_EVPN"
+      vrf:
   afi: 
     ipv4:
     -

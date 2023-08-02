@@ -152,7 +152,7 @@ test_links:
     vrf: "BMS-subnet"
 
 edge_bgp:
-  local_as: "{{ edge_asn }}"
+  local_as: "{{ asn_base+rack_no }}"
   peer_group:
   -
     name: "ISP-PEER-GROUP_v4"

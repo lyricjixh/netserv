@@ -3,7 +3,8 @@
 Purpose:
 Generating BGP Dual-Stack Underlay Configuration
 ###################################################}
-router bgp {{ edge_asn }}
+{% if edge_bgp is defined and edge_bgp %}
+router bgp {{ bgp.local_as }}
 {% if edge_bgp.peer_group is defined and edge_bgp.peer_group %}
 {% set pgroup_v4 = edge_bgp.peer_group | json_query('[?contains(afi,`ipv4`)].name') %}
 {% set pgroup_v6 = edge_bgp.peer_group | json_query('[?contains(afi,`ipv6`)].name') %}
@@ -103,3 +104,4 @@ router bgp {{ edge_asn }}
 {% endfor %}
 {% endif %}
 !
+{% endif %}
