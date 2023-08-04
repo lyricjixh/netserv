@@ -12,6 +12,7 @@
       state: merged
     tags:
     - hostname
+    - skips
 
   - name: Enable Network Services
     vars:
@@ -58,18 +59,21 @@
       - users
     tags:
     - netserv
+    - skips
 
   - name: Enable loopback Interface
     eos_config:
         src: intf_lpbk.j2
     tags:
     - loopback
+    - skips
 
   - name: Enable Leaf/Spine PTP Interface
     eos_config:
         src: intf_ptp.j2
     tags:
     - ptp
+    - skips
 
   - name: Enable Southbound L2/MLAG/Trunk Interface
     block:
@@ -94,6 +98,7 @@
     when: "'leaf' in inventory_hostname"
     tags:
     - l2port
+    - skips
 
   - name: Enable Routing Policy
     eos_config:
@@ -101,12 +106,19 @@
     # when: "'leaf' in inventory_hostname"
     tags:
     - rpol
+    - skips
 
   - name: Enable MBGP on Leaf/Spine fabric
     eos_config:
         src: bgp_fabric.j2
     tags:
     - bgp
+
+  - name: Enable MBGP on Leaf/Spine fabric
+    eos_config:
+        src: bgp_edge.j2
+    tags:
+    - edge
 
   # - name: Enable Standard BGP on Leaf
   #   eos_config:

@@ -475,10 +475,10 @@ pim:
     attributes:
     - ssm range standard
     - make-before-break disabled
+    local_intf: "Loopback{{lpbk_ulay.id}}"
     interfaces:
       name: "{{ pim_intf }}"
       state: "present"
       mode: "sparse-mode"
       attributes:
       - "hello interval 1"
-      - "local-interface Loopback99"

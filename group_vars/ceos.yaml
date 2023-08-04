@@ -145,12 +145,6 @@ policy:
                     range: "{{ v104_netv4 }} le 32"
                 -
                     action: "permit"
-                    range: "{{ v121_netv4 }} le 32"
-                -
-                    action: "permit"
-                    range: "{{ v124_netv4 }} le 32"
-                -
-                    action: "permit"
                     range: "{{ v141_netv4 }} le 32"
                 -
                     action: "permit"
@@ -164,9 +158,6 @@ policy:
                 -
                     action: "permit"
                     range: "{{ v301_netv4 }} le 32"
-                -
-                    action: "permit"
-                    range: "{{ v304_netv4 }} le 32"
         -
             name: "PFX_V6_CONNECTED"
             afi: "ipv6"
@@ -189,12 +180,6 @@ policy:
                     range: "{{ v104_netv6 }} le 128"
                 -
                     action: "permit"
-                    range: "{{ v121_netv6 }} le 128"
-                -
-                    action: "permit"
-                    range: "{{ v124_netv6 }} le 128"
-                -
-                    action: "permit"
                     range: "{{ v141_netv6 }} le 128"
                 -
                     action: "permit"
@@ -208,9 +193,6 @@ policy:
                 -
                     action: "permit"
                     range: "{{ v301_netv6 }} le 128"
-                -
-                    action: "permit"
-                    range: "{{ v304_netv6 }} le 128"
         -
             name: "V4-NH"
             afi: "ipv4"

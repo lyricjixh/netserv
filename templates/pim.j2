@@ -40,7 +40,10 @@ router pim
 interface {{ intf }}
    multicast ipv4 static
    pim ipv4 {{ instance.interfaces.mode }}
-{% if instance.interfaces.attributes is defined and instance.interfaces.attributes %}
+{% if instance.local_intf is defined and instance.local_intf %}
+   pim ipv4 local-interface {{ instance.local_intf }}
+{% endif %}
+{% if instance.local_intf is defined and instance.local_intf %}
 {% for attri in instance.interfaces.attributes %}
    pim ipv4 {{ attri }}
 {% endfor %}

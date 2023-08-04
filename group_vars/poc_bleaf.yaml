@@ -147,8 +147,8 @@ test_links:
     desc: "To IXIA"
     admin_state: "up"
 ## Edge Addr higher(2), ISP lower(1)
-    netv4: "{{ test_netv4|ansible.utils.ipsubnet(test_netmaskv4, seq-101 ) }}"
-    netv6: "{{ test_netv6|ansible.utils.ipsubnet(test_netmaskv6, seq-101 ) }}"
+    netv4: "{{ test_netv4|ansible.utils.ipsubnet(test_netmaskv4, seq-5 ) }}"
+    netv6: "{{ test_netv6|ansible.utils.ipsubnet(test_netmaskv6, seq-5 ) }}"
     vrf: "BMS-subnet"
 
 edge_bgp:

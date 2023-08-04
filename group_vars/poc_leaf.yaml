@@ -322,7 +322,7 @@ bgp:
 
 # routing protocols Parameters
 ospf_intf: [eth1,eth2,eth45.10,port-channel11]
-pim_intf: [eth1,eth2,vlan300,vlan400,vlan500]
+pim_intf: [eth1,eth2]
 
 vrrp:
   version: 3
