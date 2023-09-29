@@ -482,3 +482,4 @@ pim:
       mode: "sparse-mode"
       attributes:
       - "hello interval 1"
+
