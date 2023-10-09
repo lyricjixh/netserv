@@ -1,0 +1,5 @@
+---
+vrf:
+- name: MGMT
+  description: "Out-Of-BAND MGMT"
+  prefix: 172.100.100.0/24

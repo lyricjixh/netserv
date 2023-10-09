@@ -1,0 +1,35 @@
+---
+###################################################################
+# General Data and Site Specific Data for all pods
+###################################################################
+regions:
+- name: US
+  parent_region: ROOT
+  slug: us
+- name: APAC
+  parent_region: ROOT
+  slug: apac
+- name: EMEA
+  parent_region: ROOT
+  slug: emea
+- name: US-West
+  parent_region: US
+  slug: uswest
+- name: US-Northeast
+  parent_region: US
+  slug: usnortheast
+- name: US-Midwest
+  parent_region: US
+  slug: usmidwest
+- name: US-Southwest
+  parent_region: US
+  slug: ussouthwest
+- name: US-Southeast
+  parent_region: US
+  slug: ussoutheast
+- name: Japan
+  parent_region: APAC
+  slug: japan
+- name: UK
+  parent_region: EMEA
+  slug: UK

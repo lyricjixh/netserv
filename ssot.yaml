@@ -8,37 +8,74 @@
   collections:
   - networktocode.nautobot
 
+  vars_files:
+   - inventory/nautobot_vars/regions.yaml
+   - inventory/nautobot_vars/sites.yaml
+   - inventory/nautobot_vars/tags.yaml
+   - inventory/nautobot_vars/vrfs.yaml
+   - inventory/nautobot_vars/devices.yaml
+   - inventory/nautobot_vars/nodes_design.yaml
+   - inventory/nautobot_vars/device_local_context.yaml
+   - inventory/nautobot_vars/custom_fields.yaml
+   - inventory/nautobot_vars/device_connections.yaml
+
   tasks:
-  - name: Create region within Nautobot with only required information
+  - name: Create ROOT region
     region:
-      url: "http://10.92.59.139:8000"
-      token: "47942ba1733978d2842528ae15e028a59b70f69b"
-      name: "Northeasten"
+      url: "{{ nb_url }}"
+      token: "{{ nb_token }}"
+      name: "ROOT"
+      slug: "root"
       state: present
     tags:
       - region
 
+  - name: Create following regions
+    region:
+      url: "{{ nb_url }}"
+      token: "{{ nb_token }}"
+      name: "{{ item.name }}"
+      parent_region: "{{ item.parent_region }}"
+      slug: "{{ item.slug }}"
+      state: present
+    loop: "{{ regions }}"
+    tags:
+      - region
+
+  - name: Create site with all parameters
+    networktocode.nautobot.site:
+      url: "{{ nb_url }}"
+      token: "{{ nb_token }}"
+      validate_certs: no
+      name: "{{ item.name }}"
+      status: "{{ item.status }}"
+      asn: "{{ item.asn }}"
+      time_zone: "{{ item.time_zone }}"
+      description: "{{ item.description }}"
+      physical_address: "{{ item.physical_address }}"
+      shipping_address: "{{ item.shipping_address }}"
+      latitude: "{{ item.latitude }}"
+      longitude: "{{ item.longitude }}"
+      contact_name: "{{ item.contact_name }}"
+      contact_phone: "{{ item.contact_phone }}"
+      contact_email: "{{ item.contact_email }}"
+      slug: "{{ item.slug }}"
+      comments: "{{ item.comments }}"
+      state: absent
+    loop: "{{ sites }}"
+    tags:
+      - site
+
   - name: Create site within Nautobot with only required information
     site:
-      url: "http://10.92.59.139:8000"
-      token: "47942ba1733978d2842528ae15e028a59b70f69b"
+      url: "{{ nb_url }}"
+      token: "{{ nb_token }}"
       name: Boston
       region: "Northeasten"
       status: active
       state: present
-    tags:
-      - site
-
-  - name: Create rack within Nautobot with only required information
-    rack:
-      url: "http://10.92.59.139:8000"
-      token: "47942ba1733978d2842528ae15e028a59b70f69b"
-      name: Rack01
-      site: Boston
-      status: active
-      state: present
-    tags:
-      - site
+    # tags:
+    #   - site
 
   - name: Create device role within Nautobot with only required information
     device_role:
@@ -178,4 +215,5 @@
         device_type: "720XP"
     tags:
       - device
+
 
