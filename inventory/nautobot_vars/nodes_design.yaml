@@ -1,9 +1,9 @@
 device_list:
-- name: pod1r1
+- name: sjcr1
   device_type: vios_router
   device_role: pod_router
-  site: pod1
-  rack: "pod1_rr_1"
+  site: sjc
+  rack: "sjc_rr_1"
   position: 38
   face: front
   status: active
@@ -30,7 +30,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet0/1
-      description: "DOWNLINK POD1SW1"
+      description: "DOWNLINK sjcSW1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -43,10 +43,10 @@ device_list:
       vrf: global
       status: active
       connection:
-        device: pod1sw1
+        device: sjcsw1
         int: GigabitEthernet0/0
     - name: GigabitEthernet0/2
-      description: "DOWNLINK POD1SW2"
+      description: "DOWNLINK sjcSW2"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -59,7 +59,7 @@ device_list:
       vrf: global
       status: active
       connection:
-        device: pod1sw2
+        device: sjcsw2
         int: GigabitEthernet0/0
     - name: GigabitEthernet0/7
       description: "MGMT-INTERFACE"
@@ -85,17 +85,17 @@ device_list:
       type: 1000base-t
       enabled: false    
 
-- name: pod1sw1
+- name: sjcsw1
   device_type: vios_switch
   device_role: pod_l3_switch
-  site: pod1
-  rack: "pod1_rr_1"
+  site: sjc
+  rack: "sjc_rr_1"
   position: 37
   face: front
   status: active
   trunk_interfaces:
     - name: Port-Channel12
-      description: "TRUNK TO POD1SW2"
+      description: "TRUNK TO sjcSW2"
       type: lag
       label: trunk
       enabled: True
@@ -108,7 +108,7 @@ device_list:
       tagged_vlan_3: GUESTS
 
     - name: GigabitEthernet0/1
-      description: "TRUNK TO POD1SW2"
+      description: "TRUNK TO sjcSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -121,11 +121,11 @@ device_list:
       tagged_vlan_3: GUESTS
       lag: port-channel12
       connection:
-        device: pod1sw2
+        device: sjcsw2
         int: GigabitEthernet0/1
 
     - name: GigabitEthernet0/2
-      description: "TRUNK TO POD1SW2"
+      description: "TRUNK TO sjcSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -138,11 +138,11 @@ device_list:
       tagged_vlan_3: GUESTS
       lag: port-channel12
       connection:
-        device: pod1sw2
+        device: sjcsw2
         int: GigabitEthernet0/2
 
     - name: GigabitEthernet0/3
-      description: "TRUNK TO POD1SW3"
+      description: "TRUNK TO sjcSW3"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -154,7 +154,7 @@ device_list:
       tagged_vlan_2: SERVERS
       tagged_vlan_3: GUESTS
       connection:
-        device: pod1sw3
+        device: sjcsw3
         int: GigabitEthernet0/1
   lag_interfaces:
     - name: GigabitEthernet0/1
@@ -219,7 +219,7 @@ device_list:
       vrrp_priority: 200
       vrrp_primary_ip: 155.1.1.129
     - name: GigabitEthernet0/0
-      description: "UPLINK POD1R1"
+      description: "UPLINK sjcR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -253,17 +253,17 @@ device_list:
       type: 1000base-t
       enabled: false 
 
-- name: pod1sw2
+- name: sjcsw2
   device_type: vios_switch
   device_role: pod_l3_switch
-  site: pod1
-  rack: "pod1_rr_1"
+  site: sjc
+  rack: "sjc_rr_1"
   position: 36
   face: front
   status: active
   trunk_interfaces:
     - name: Port-Channel12
-      description: "TRUNK TO POD1SW1"
+      description: "TRUNK TO sjcSW1"
       type: lag
       label: trunk
       enabled: True
@@ -276,7 +276,7 @@ device_list:
       tagged_vlan_3: GUESTS
 
     - name: GigabitEthernet0/1
-      description: "TRUNK TO POD1SW1"
+      description: "TRUNK TO sjcSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -290,7 +290,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/2
-      description: "TRUNK TO POD1SW1"
+      description: "TRUNK TO sjcSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -304,7 +304,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/3
-      description: "TRUNK TO POD1SW3"
+      description: "TRUNK TO sjcSW3"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -316,7 +316,7 @@ device_list:
       tagged_vlan_2: SERVERS
       tagged_vlan_3: GUESTS
       connection:
-        device: pod1sw2
+        device: sjcsw2
         int: GigabitEthernet0/2
   lag_interfaces:
     - name: GigabitEthernet0/1
@@ -381,7 +381,7 @@ device_list:
       vrrp_priority: 100
       vrrp_primary_ip: 155.1.1.129
     - name: GigabitEthernet0/0
-      description: "UPLINK POD1R1"
+      description: "UPLINK sjcR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -414,11 +414,11 @@ device_list:
       type: 1000base-t
       enabled: false  
 
-- name: pod1sw3
+- name: sjcsw3
   device_type: vios_switch
   device_role: pod_l2_switch
-  site: pod1
-  rack: "pod1_rr_1"
+  site: sjc
+  rack: "sjc_rr_1"
   position: 35
   face: front
   status: active
@@ -452,7 +452,7 @@ device_list:
       untag_vlan: GUESTS
   trunk_interfaces:
     - name: GigabitEthernet0/1
-      description: "TRUNK TO POD1SW1"
+      description: "TRUNK TO sjcSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -464,7 +464,7 @@ device_list:
       tagged_vlan_2: SERVERS
       tagged_vlan_3: GUESTS
     - name: GigabitEthernet0/2
-      description: "TRUNK TO POD1SW2"
+      description: "TRUNK TO sjcSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -493,11 +493,11 @@ device_list:
     - name: GigabitEthernet0/0
       type: 1000base-t
       enabled: false
-- name: pod2r1
+- name: laxr1
   device_type: vios_router
   device_role: pod_router
-  site: pod2
-  rack: "pod2_rr_1"
+  site: lax
+  rack: "lax_rr_1"
   position: 38
   face: front
   status: active
@@ -524,7 +524,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet0/1
-      description: "DOWNLINK pod2SW1"
+      description: "DOWNLINK laxSW1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -537,7 +537,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet0/2
-      description: "DOWNLINK pod2SW2"
+      description: "DOWNLINK laxSW2"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -573,17 +573,17 @@ device_list:
       type: 1000base-t
       enabled: false    
 
-- name: pod2sw1
+- name: laxsw1
   device_type: vios_switch
   device_role: pod_l3_switch
-  site: pod2
-  rack: "pod2_rr_1"
+  site: lax
+  rack: "lax_rr_1"
   position: 37
   face: front
   status: active
   trunk_interfaces:
     - name: Port-Channel12
-      description: "TRUNK TO pod2SW2"
+      description: "TRUNK TO laxSW2"
       type: lag
       label: trunk
       enabled: True
@@ -596,7 +596,7 @@ device_list:
       tagged_vlan_3: GUESTS
 
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod2SW2"
+      description: "TRUNK TO laxSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -610,7 +610,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod2SW2"
+      description: "TRUNK TO laxSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -624,7 +624,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/3
-      description: "TRUNK TO pod2SW3"
+      description: "TRUNK TO laxSW3"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -698,7 +698,7 @@ device_list:
       vrrp_priority: 100
       vrrp_primary_ip: 155.2.2.129
     - name: GigabitEthernet0/0
-      description: "UPLINK pod2R1"
+      description: "UPLINK laxR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -730,17 +730,17 @@ device_list:
     - name: GigabitEthernet1/2
       type: 1000base-t
       enabled: false 
-- name: pod2sw2
+- name: laxsw2
   device_type: vios_switch
   device_role: pod_l3_switch
-  site: pod2
-  rack: "pod2_rr_1"
+  site: lax
+  rack: "lax_rr_1"
   position: 36
   face: front
   status: active
   trunk_interfaces:
     - name: Port-Channel12
-      description: "TRUNK TO pod2SW1"
+      description: "TRUNK TO laxSW1"
       type: lag
       label: trunk
       enabled: True
@@ -753,7 +753,7 @@ device_list:
       tagged_vlan_3: GUESTS
 
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod2SW1"
+      description: "TRUNK TO laxSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -767,7 +767,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod2SW1"
+      description: "TRUNK TO laxSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -781,7 +781,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/3
-      description: "TRUNK TO pod2SW3"
+      description: "TRUNK TO laxSW3"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -855,7 +855,7 @@ device_list:
       vrrp_priority: 200
       vrrp_primary_ip: 155.2.2.129
     - name: GigabitEthernet0/0
-      description: "UPLINK pod2R1"
+      description: "UPLINK laxR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -887,11 +887,11 @@ device_list:
     - name: GigabitEthernet1/2
       type: 1000base-t
       enabled: false  
-- name: pod2sw3
+- name: laxsw3
   device_type: vios_switch
   device_role: pod_l2_switch
-  site: pod2
-  rack: "pod2_rr_1"
+  site: lax
+  rack: "lax_rr_1"
   position: 35
   face: front
   status: active
@@ -925,7 +925,7 @@ device_list:
       untag_vlan: GUESTS
   trunk_interfaces:
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod2SW1"
+      description: "TRUNK TO laxSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -937,7 +937,7 @@ device_list:
       tagged_vlan_2: SERVERS
       tagged_vlan_3: GUESTS
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod2SW2"
+      description: "TRUNK TO laxSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -966,11 +966,11 @@ device_list:
     - name: GigabitEthernet0/0
       type: 1000base-t
       enabled: false
-- name: pod3r1
+- name: bosr1
   device_type: vios_router
   device_role: pod_router
-  site: pod3
-  rack: "pod3_rr_1"
+  site: bos
+  rack: "bos_rr_1"
   position: 38
   face: front
   status: active
@@ -997,7 +997,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet0/1
-      description: "DOWNLINK pod3SW1"
+      description: "DOWNLINK bosSW1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -1010,7 +1010,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet0/2
-      description: "DOWNLINK pod3SW2"
+      description: "DOWNLINK bosSW2"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -1046,17 +1046,17 @@ device_list:
       type: 1000base-t
       enabled: false    
 
-- name: pod3sw1
+- name: bossw1
   device_type: vios_switch
   device_role: pod_l3_switch
-  site: pod3
-  rack: "pod3_rr_1"
+  site: bos
+  rack: "bos_rr_1"
   position: 37
   face: front
   status: active
   trunk_interfaces:
     - name: Port-Channel12
-      description: "TRUNK TO pod3SW2"
+      description: "TRUNK TO bosSW2"
       type: lag
       label: trunk
       enabled: True
@@ -1069,7 +1069,7 @@ device_list:
       tagged_vlan_3: GUESTS
 
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod3SW2"
+      description: "TRUNK TO bosSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1083,7 +1083,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod3SW2"
+      description: "TRUNK TO bosSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1097,7 +1097,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/3
-      description: "TRUNK TO pod3SW3"
+      description: "TRUNK TO bosSW3"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1171,7 +1171,7 @@ device_list:
       vrrp_priority: 100
       vrrp_primary_ip: 155.2.2.129
     - name: GigabitEthernet0/0
-      description: "UPLINK pod3R1"
+      description: "UPLINK bosR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -1204,17 +1204,17 @@ device_list:
       type: 1000base-t
       enabled: false 
 
-- name: pod3sw2
+- name: bossw2
   device_type: vios_switch
   device_role: pod_l3_switch
-  site: pod3
-  rack: "pod3_rr_1"
+  site: bos
+  rack: "bos_rr_1"
   position: 36
   face: front
   status: active
   trunk_interfaces:
     - name: Port-Channel12
-      description: "TRUNK TO pod3SW1"
+      description: "TRUNK TO bosSW1"
       type: lag
       label: trunk
       enabled: True
@@ -1227,7 +1227,7 @@ device_list:
       tagged_vlan_3: GUESTS
 
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod3SW1"
+      description: "TRUNK TO bosSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1241,7 +1241,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod3SW1"
+      description: "TRUNK TO bosSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1255,7 +1255,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/3
-      description: "TRUNK TO pod3SW3"
+      description: "TRUNK TO bosSW3"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1329,7 +1329,7 @@ device_list:
       vrrp_priority: 100
       vrrp_primary_ip: 155.3.3.129
     - name: GigabitEthernet0/0
-      description: "UPLINK pod3R1"
+      description: "UPLINK bosR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -1362,11 +1362,11 @@ device_list:
       type: 1000base-t
       enabled: false  
 
-- name: pod3sw3
+- name: bossw3
   device_type: vios_switch
   device_role: pod_l2_switch
-  site: pod3
-  rack: "pod3_rr_1"
+  site: bos
+  rack: "bos_rr_1"
   position: 35
   face: front
   status: active
@@ -1400,7 +1400,7 @@ device_list:
       untag_vlan: GUESTS
   trunk_interfaces:
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod3SW1"
+      description: "TRUNK TO bosSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1412,7 +1412,7 @@ device_list:
       tagged_vlan_2: SERVERS
       tagged_vlan_3: GUESTS
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod3SW2"
+      description: "TRUNK TO bosSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1441,11 +1441,11 @@ device_list:
     - name: GigabitEthernet0/0
       type: 1000base-t
       enabled: false
-- name: pod4r1
+- name: lasr1
   device_type: vios_router
   device_role: pod_router
-  site: pod4
-  rack: "pod4_rr_1"
+  site: las
+  rack: "las_rr_1"
   position: 38
   face: front
   status: active
@@ -1472,7 +1472,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet0/1
-      description: "DOWNLINK pod4SW1"
+      description: "DOWNLINK lasSW1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -1485,7 +1485,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet0/2
-      description: "DOWNLINK pod4SW2"
+      description: "DOWNLINK lasSW2"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -1521,17 +1521,17 @@ device_list:
       type: 1000base-t
       enabled: false    
 
-- name: pod4sw1
+- name: lassw1
   device_type: vios_switch
   device_role: pod_l3_switch
-  site: pod4
-  rack: "pod4_rr_1"
+  site: las
+  rack: "las_rr_1"
   position: 37
   face: front
   status: active
   trunk_interfaces:
     - name: Port-Channel12
-      description: "TRUNK TO pod4SW2"
+      description: "TRUNK TO lasSW2"
       type: lag
       label: trunk
       enabled: True
@@ -1544,7 +1544,7 @@ device_list:
       tagged_vlan_3: GUESTS
 
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod4SW2"
+      description: "TRUNK TO lasSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1558,7 +1558,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod4SW2"
+      description: "TRUNK TO lasSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1572,7 +1572,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/3
-      description: "TRUNK TO pod4SW3"
+      description: "TRUNK TO lasSW3"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1646,7 +1646,7 @@ device_list:
       vrrp_priority: 200
       vrrp_primary_ip: 155.4.4.129
     - name: GigabitEthernet0/0
-      description: "UPLINK pod4R1"
+      description: "UPLINK lasR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -1679,17 +1679,17 @@ device_list:
       type: 1000base-t
       enabled: false 
 
-- name: pod4sw2
+- name: lassw2
   device_type: vios_switch
   device_role: pod_l3_switch
-  site: pod4
-  rack: "pod4_rr_1"
+  site: las
+  rack: "las_rr_1"
   position: 36
   face: front
   status: active
   trunk_interfaces:
     - name: Port-Channel12
-      description: "TRUNK TO pod4SW1"
+      description: "TRUNK TO lasSW1"
       type: lag
       label: trunk
       enabled: True
@@ -1702,7 +1702,7 @@ device_list:
       tagged_vlan_3: GUESTS
 
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod4SW1"
+      description: "TRUNK TO lasSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1716,7 +1716,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod4SW1"
+      description: "TRUNK TO lasSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1730,7 +1730,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/3
-      description: "TRUNK TO pod4SW3"
+      description: "TRUNK TO lasSW3"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1804,7 +1804,7 @@ device_list:
       vrrp_priority: 100
       vrrp_primary_ip: 155.4.4.129
     - name: GigabitEthernet0/0
-      description: "UPLINK pod4R1"
+      description: "UPLINK lasR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -1837,11 +1837,11 @@ device_list:
       type: 1000base-t
       enabled: false  
 
-- name: pod4sw3
+- name: lassw3
   device_type: vios_switch
   device_role: pod_l2_switch
-  site: pod4
-  rack: "pod4_rr_1"
+  site: las
+  rack: "las_rr_1"
   position: 35
   face: front
   status: active
@@ -1875,7 +1875,7 @@ device_list:
       untag_vlan: GUESTS
   trunk_interfaces:
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod4SW1"
+      description: "TRUNK TO lasSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1887,7 +1887,7 @@ device_list:
       tagged_vlan_2: SERVERS
       tagged_vlan_3: GUESTS
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod4SW2"
+      description: "TRUNK TO lasSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -1916,11 +1916,11 @@ device_list:
     - name: GigabitEthernet0/0
       type: 1000base-t
       enabled: false
-- name: pod5r1
+- name: atlr1
   device_type: vios_router
   device_role: pod_router
-  site: pod5
-  rack: "pod5_rr_1"
+  site: atl
+  rack: "atl_rr_1"
   position: 38
   face: front
   status: active
@@ -1947,7 +1947,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet0/1
-      description: "DOWNLINK pod5SW1"
+      description: "DOWNLINK atlSW1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -1960,7 +1960,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet0/2
-      description: "DOWNLINK pod5SW2"
+      description: "DOWNLINK atlSW2"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -1996,17 +1996,17 @@ device_list:
       type: 1000base-t
       enabled: false    
 
-- name: pod5sw1
+- name: atlsw1
   device_type: vios_switch
   device_role: pod_l3_switch
-  site: pod5
-  rack: "pod5_rr_1"
+  site: atl
+  rack: "atl_rr_1"
   position: 37
   face: front
   status: active
   trunk_interfaces:
     - name: Port-Channel12
-      description: "TRUNK TO pod5SW2"
+      description: "TRUNK TO atlSW2"
       type: lag
       label: trunk
       enabled: True
@@ -2019,7 +2019,7 @@ device_list:
       tagged_vlan_3: GUESTS
 
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod5SW2"
+      description: "TRUNK TO atlSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2033,7 +2033,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod5SW2"
+      description: "TRUNK TO atlSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2047,7 +2047,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/3
-      description: "TRUNK TO pod5SW3"
+      description: "TRUNK TO atlSW3"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2121,7 +2121,7 @@ device_list:
       vrrp_priority: 200
       vrrp_primary_ip: 155.5.5.129
     - name: GigabitEthernet0/0
-      description: "UPLINK pod5R1"
+      description: "UPLINK atlR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -2154,17 +2154,17 @@ device_list:
       type: 1000base-t
       enabled: false 
 
-- name: pod5sw2
+- name: atlsw2
   device_type: vios_switch
   device_role: pod_l3_switch
-  site: pod5
-  rack: "pod5_rr_1"
+  site: atl
+  rack: "atl_rr_1"
   position: 36
   face: front
   status: active
   trunk_interfaces:
     - name: Port-Channel12
-      description: "TRUNK TO pod5SW1"
+      description: "TRUNK TO atlSW1"
       type: lag
       label: trunk
       enabled: True
@@ -2177,7 +2177,7 @@ device_list:
       tagged_vlan_3: GUESTS
 
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod5SW1"
+      description: "TRUNK TO atlSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2191,7 +2191,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod5SW1"
+      description: "TRUNK TO atlSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2205,7 +2205,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/3
-      description: "TRUNK TO pod5SW3"
+      description: "TRUNK TO atlSW3"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2279,7 +2279,7 @@ device_list:
       vrrp_priority: 100
       vrrp_primary_ip: 155.5.5.129 
     - name: GigabitEthernet0/0
-      description: "UPLINK pod5R1"
+      description: "UPLINK atlR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -2312,11 +2312,11 @@ device_list:
       type: 1000base-t
       enabled: false  
 
-- name: pod5sw3
+- name: atlsw3
   device_type: vios_switch
   device_role: pod_l2_switch
-  site: pod5
-  rack: "pod5_rr_1"
+  site: atl
+  rack: "atl_rr_1"
   position: 35
   face: front
   status: active
@@ -2350,7 +2350,7 @@ device_list:
       untag_vlan: GUESTS
   trunk_interfaces:
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod5SW1"
+      description: "TRUNK TO atlSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2362,7 +2362,7 @@ device_list:
       tagged_vlan_2: SERVERS
       tagged_vlan_3: GUESTS
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod5SW2"
+      description: "TRUNK TO atlSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2391,11 +2391,11 @@ device_list:
     - name: GigabitEthernet0/0
       type: 1000base-t
       enabled: false
-- name: pod6r1
+- name: mcir1
   device_type: vios_router
   device_role: pod_router
-  site: pod6
-  rack: "pod6_rr_1"
+  site: mci
+  rack: "mci_rr_1"
   position: 38
   face: front
   status: active
@@ -2422,7 +2422,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet0/1
-      description: "DOWNLINK pod6SW1"
+      description: "DOWNLINK mciSW1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -2435,7 +2435,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet0/2
-      description: "DOWNLINK pod6SW2"
+      description: "DOWNLINK mciSW2"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -2471,17 +2471,17 @@ device_list:
       type: 1000base-t
       enabled: false    
 
-- name: pod6sw1
+- name: mcisw1
   device_type: vios_switch
   device_role: pod_l3_switch
-  site: pod6
-  rack: "pod6_rr_1"
+  site: mci
+  rack: "mci_rr_1"
   position: 37
   face: front
   status: active
   trunk_interfaces:
     - name: Port-Channel12
-      description: "TRUNK TO pod6SW2"
+      description: "TRUNK TO mciSW2"
       type: lag
       label: trunk
       enabled: True
@@ -2494,7 +2494,7 @@ device_list:
       tagged_vlan_3: GUESTS
 
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod6SW2"
+      description: "TRUNK TO mciSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2508,7 +2508,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod6SW2"
+      description: "TRUNK TO mciSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2522,7 +2522,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/3
-      description: "TRUNK TO pod6SW3"
+      description: "TRUNK TO mciSW3"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2596,7 +2596,7 @@ device_list:
       vrrp_priority: 200
       vrrp_primary_ip: 155.6.6.129 
     - name: GigabitEthernet0/0
-      description: "UPLINK pod6R1"
+      description: "UPLINK mciR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -2629,17 +2629,17 @@ device_list:
       type: 1000base-t
       enabled: false 
 
-- name: pod6sw2
+- name: mcisw2
   device_type: vios_switch
   device_role: pod_l3_switch
-  site: pod6
-  rack: "pod6_rr_1"
+  site: mci
+  rack: "mci_rr_1"
   position: 36
   face: front
   status: active
   trunk_interfaces:
     - name: Port-Channel12
-      description: "TRUNK TO pod6SW1"
+      description: "TRUNK TO mciSW1"
       type: lag
       label: trunk
       enabled: True
@@ -2652,7 +2652,7 @@ device_list:
       tagged_vlan_3: GUESTS
 
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod6SW1"
+      description: "TRUNK TO mciSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2666,7 +2666,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod6SW1"
+      description: "TRUNK TO mciSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2680,7 +2680,7 @@ device_list:
       lag: port-channel12
 
     - name: GigabitEthernet0/3
-      description: "TRUNK TO pod6SW3"
+      description: "TRUNK TO mciSW3"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2754,7 +2754,7 @@ device_list:
       vrrp_priority: 100
       vrrp_primary_ip: 155.6.6.129
     - name: GigabitEthernet0/0
-      description: "UPLINK pod6R1"
+      description: "UPLINK mciR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -2787,11 +2787,11 @@ device_list:
       type: 1000base-t
       enabled: false  
 
-- name: pod6sw3
+- name: mcisw3
   device_type: vios_switch
   device_role: pod_l2_switch
-  site: pod6
-  rack: "pod6_rr_1"
+  site: mci
+  rack: "mci_rr_1"
   position: 35
   face: front
   status: active
@@ -2825,7 +2825,7 @@ device_list:
       untag_vlan: GUESTS
   trunk_interfaces:
     - name: GigabitEthernet0/1
-      description: "TRUNK TO pod6SW1"
+      description: "TRUNK TO mciSW1"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2837,7 +2837,7 @@ device_list:
       tagged_vlan_2: SERVERS
       tagged_vlan_3: GUESTS
     - name: GigabitEthernet0/2
-      description: "TRUNK TO pod6SW2"
+      description: "TRUNK TO mciSW2"
       type: 1000base-t
       label: trunk
       enabled: True
@@ -2876,7 +2876,7 @@ device_list:
   status: active
   l3_interfaces:
     - name: GigabitEthernet1
-      description: "TO POD1R1"
+      description: "TO sjcR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -2886,7 +2886,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet2
-      description: "TO POD2R1"
+      description: "TO laxR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -2896,7 +2896,7 @@ device_list:
       vrf: global
       status: active  
     - name: GigabitEthernet3
-      description: "TO POD3R1"
+      description: "TO bosR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -2906,7 +2906,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet4
-      description: "TO POD4R1"
+      description: "TO lasR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -2916,7 +2916,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet5
-      description: "TO POD5R1"
+      description: "TO atlR1"
       type: 1000base-t
       label: layer3
       enabled: True
@@ -2926,7 +2926,7 @@ device_list:
       vrf: global
       status: active
     - name: GigabitEthernet1
-      description: "TO POD6R1"
+      description: "TO mciR1"
       type: 1000base-t
       label: layer3
       enabled: True

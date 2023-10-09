@@ -59,23 +59,30 @@
       contact_name: "{{ item.contact_name }}"
       contact_phone: "{{ item.contact_phone }}"
       contact_email: "{{ item.contact_email }}"
+      region: "{{ item.region }}"
       slug: "{{ item.slug }}"
       comments: "{{ item.comments }}"
-      state: absent
+      state: present
     loop: "{{ sites }}"
     tags:
       - site
 
-  - name: Create site within Nautobot with only required information
+  - name: Create Specific Sites
     site:
       url: "{{ nb_url }}"
       token: "{{ nb_token }}"
-      name: Boston
-      region: "Northeasten"
-      status: active
+      name: "Cloud"
+      status: "active"
+      asn: "400"
+      description: "Cloud Instances"
+      contact_name: "cloudadmin"
+      contact_phone: "878-8238"
+      contact_email: "cloudadmin@arista.com"
+      slug: "cloud"
+      comments: "cloud instance"
       state: present
-    # tags:
-    #   - site
+    tags:
+      - site
 
   - name: Create device role within Nautobot with only required information
     device_role:

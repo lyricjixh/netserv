@@ -1,165 +1,165 @@
 connections:
-- name: pod1r1
+- name: sjcr1
   interface:
   - name: GigabitEthernet0/1
-    bside_device: pod1sw1
+    bside_device: sjcsw1
     bside_port: GigabitEthernet0/0 
   - name: GigabitEthernet0/2
-    bside_device: pod1sw2
+    bside_device: sjcsw2
     bside_port: GigabitEthernet0/0  
-- name: pod1sw1
+- name: sjcsw1
   interface: 
   - name: GigabitEthernet0/1
-    bside_device: pod1sw2
+    bside_device: sjcsw2
     bside_port: GigabitEthernet0/1
   - name: GigabitEthernet0/2
-    bside_device: pod1sw2
+    bside_device: sjcsw2
     bside_port: GigabitEthernet0/2  
   - name: GigabitEthernet0/3
-    bside_device: pod1sw3
+    bside_device: sjcsw3
     bside_port: GigabitEthernet0/1
-- name: pod1sw2
+- name: sjcsw2
   interface:
   - name: GigabitEthernet0/3
-    bside_device: pod1sw3
+    bside_device: sjcsw3
     bside_port: GigabitEthernet0/2
-- name: pod2r1
+- name: laxr1
   interface:
   - name: GigabitEthernet0/1
-    bside_device: pod2sw1
+    bside_device: laxsw1
     bside_port: GigabitEthernet0/0
   - name: GigabitEthernet0/2
-    bside_device: pod2sw2
+    bside_device: laxsw2
     bside_port: GigabitEthernet0/0  
-- name: pod2sw1
+- name: laxsw1
   interface:
   - name: GigabitEthernet0/1
-    bside_device: pod2sw2
+    bside_device: laxsw2
     bside_port: GigabitEthernet0/1
   - name: GigabitEthernet0/2
-    bside_device: pod2sw2
+    bside_device: laxsw2
     bside_port: GigabitEthernet0/2  
   - name: GigabitEthernet0/3
-    bside_device: pod2sw3
+    bside_device: laxsw3
     bside_port: GigabitEthernet0/1
-- name: pod2sw2
+- name: laxsw2
   interface:
   - name: GigabitEthernet0/3
-    bside_device: pod2sw3
+    bside_device: laxsw3
     bside_port: GigabitEthernet0/2
-- name: pod3r1
+- name: bosr1
   interface:
   - name: GigabitEthernet0/1
-    bside_device: pod3sw1
+    bside_device: bossw1
     bside_port: GigabitEthernet0/0
   - name: GigabitEthernet0/2
-    bside_device: pod3sw2
+    bside_device: bossw2
     bside_port: GigabitEthernet0/0  
-- name: pod3sw1
+- name: bossw1
   interface:
   - name: GigabitEthernet0/1
-    bside_device: pod3sw2
+    bside_device: bossw2
     bside_port: GigabitEthernet0/1
   - name: GigabitEthernet0/2
-    bside_device: pod3sw2
+    bside_device: bossw2
     bside_port: GigabitEthernet0/2  
   - name: GigabitEthernet0/3
-    bside_device: pod3sw3
+    bside_device: bossw3
     bside_port: GigabitEthernet0/1
-- name: pod3sw2
+- name: bossw2
   interface:
   - name: GigabitEthernet0/3
-    bside_device: pod3sw3
+    bside_device: bossw3
     bside_port: GigabitEthernet0/2
-- name: pod4r1
+- name: lasr1
   interface:
   - name: GigabitEthernet0/1
-    bside_device: pod4sw1
+    bside_device: lassw1
     bside_port: GigabitEthernet0/0
   - name: GigabitEthernet0/2
-    bside_device: pod4sw2
+    bside_device: lassw2
     bside_port: GigabitEthernet0/0  
-- name: pod4sw1
+- name: lassw1
   interface:
   - name: GigabitEthernet0/1
-    bside_device: pod4sw2
+    bside_device: lassw2
     bside_port: GigabitEthernet0/1
   - name: GigabitEthernet0/2
-    bside_device: pod4sw2
+    bside_device: lassw2
     bside_port: GigabitEthernet0/2  
   - name: GigabitEthernet0/3
-    bside_device: pod4sw3
+    bside_device: lassw3
     bside_port: GigabitEthernet0/1
-- name: pod4sw2
+- name: lassw2
   interface:
   - name: GigabitEthernet0/3
-    bside_device: pod4sw3
+    bside_device: lassw3
     bside_port: GigabitEthernet0/2
-- name: pod5r1
+- name: atlr1
   interface:
   - name: GigabitEthernet0/1
-    bside_device: pod5sw1
+    bside_device: atlsw1
     bside_port: GigabitEthernet0/0
   - name: GigabitEthernet0/2
-    bside_device: pod5sw2
+    bside_device: atlsw2
     bside_port: GigabitEthernet0/0  
-- name: pod5sw1
+- name: atlsw1
   interface:
   - name: GigabitEthernet0/1
-    bside_device: pod5sw2
+    bside_device: atlsw2
     bside_port: GigabitEthernet0/1
   - name: GigabitEthernet0/2
-    bside_device: pod5sw2
+    bside_device: atlsw2
     bside_port: GigabitEthernet0/2  
   - name: GigabitEthernet0/3
-    bside_device: pod5sw3
+    bside_device: atlsw3
     bside_port: GigabitEthernet0/1
-- name: pod5sw2
+- name: atlsw2
   interface:
   - name: GigabitEthernet0/3
-    bside_device: pod5sw3
+    bside_device: atlsw3
     bside_port: GigabitEthernet0/2
-- name: pod6r1
+- name: mcir1
   interface:
   - name: GigabitEthernet0/1
-    bside_device: pod6sw1
+    bside_device: mcisw1
     bside_port: GigabitEthernet0/0
   - name: GigabitEthernet0/2
-    bside_device: pod6sw2
+    bside_device: mcisw2
     bside_port: GigabitEthernet0/0  
-- name: pod6sw1
+- name: mcisw1
   interface:
   - name: GigabitEthernet0/1
-    bside_device: pod6sw2
+    bside_device: mcisw2
     bside_port: GigabitEthernet0/1
   - name: GigabitEthernet0/2
-    bside_device: pod6sw2
+    bside_device: mcisw2
     bside_port: GigabitEthernet0/2  
   - name: GigabitEthernet0/3
-    bside_device: pod6sw3
+    bside_device: mcisw3
     bside_port: GigabitEthernet0/1
-- name: pod6sw2
+- name: mcisw2
   interface:
   - name: GigabitEthernet0/3
-    bside_device: pod6sw3
+    bside_device: mcisw3
     bside_port: GigabitEthernet0/2
 - name: cloud_router
   interface:
   - name: GigabitEthernet1
-    bside_device: pod1r1
+    bside_device: sjcr1
     bside_port: GigabitEthernet0/0
   - name: GigabitEthernet2
-    bside_device: pod2r1
+    bside_device: laxr1
     bside_port: GigabitEthernet0/0
   - name: GigabitEthernet3
-    bside_device: pod3r1
+    bside_device: bosr1
     bside_port: GigabitEthernet0/0
   - name: GigabitEthernet4
-    bside_device: pod4r1
+    bside_device: lasr1
     bside_port: GigabitEthernet0/0
   - name: GigabitEthernet5
-    bside_device: pod5r1
+    bside_device: atlr1
     bside_port: GigabitEthernet0/0
   - name: GigabitEthernet6
-    bside_device: pod6r1
+    bside_device: mcir1
     bside_port: GigabitEthernet0/0     
