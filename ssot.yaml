@@ -11,6 +11,7 @@
   vars_files:
    - inventory/nautobot_vars/regions.yaml
    - inventory/nautobot_vars/sites.yaml
+   - inventory/nautobot_vars/tenants.yaml
    - inventory/nautobot_vars/tags.yaml
    - inventory/nautobot_vars/vrfs.yaml
    - inventory/nautobot_vars/devices.yaml
@@ -78,149 +79,265 @@
       contact_name: "cloudadmin"
       contact_phone: "878-8238"
       contact_email: "cloudadmin@arista.com"
+      facility: AWS-West-01
       slug: "cloud"
       comments: "cloud instance"
       state: present
     tags:
       - site
 
-  - name: Create device role within Nautobot with only required information
-    device_role:
-      url: "http://10.92.59.139:8000"
-      token: "47942ba1733978d2842528ae15e028a59b70f69b"
-      name: "{{item}}"
-      color: FFFFFF
-      state: present
-    loop:
-      - cleaf
-      - bleaf
-      - spine
-      - superspine
-    tags:
-      - drole
-
-  - name: Create manufacturer within Nautobot with only required information
-    manufacturer:
-      url: "http://10.92.59.139:8000"
-      token: "47942ba1733978d2842528ae15e028a59b70f69b"
-      name: "{{ item }}"
-      state: present
-      description: The test manufacturer
-    loop:
-      - arista
-      - cisco
-      - dell
-      - juniper
-    tags:
-      - vendor
-
-  - name: Create device type within Nautobot with only required information
-    device_type:
-      url: "http://10.92.59.139:8000"
-      token: "47942ba1733978d2842528ae15e028a59b70f69b"
-      model: "{{ item.model }}"
-      manufacturer: "{{ item.vendor }}"
-      state: present
-    loop:
-      - vendor: arista
-        model: 7050X3
-      - vendor: arista
-        model: 7060X4
-      - vendor: arista
-        model: 7050X4
-      - vendor: arista
-        model: 7280R3
-      - vendor: juniper
-        model: qfx5700
-      - vendor: juniper
-        model: qfx5120
-      - vendor: dell
-        model: S5448F-ON
-      - vendor: dell
-        model: S5232F-ON
-      - vendor: dell
-        model: S5248F-ON
-    tags:
-      - dtype
-
-  - name: Create rack within Nautobot with only required information
-    networktocode.nautobot.rack:
-      url: "http://10.92.59.139:8000"
-      token: "47942ba1733978d2842528ae15e028a59b70f69b"
+  - name: Create Tenants
+    networktocode.nautobot.tenant:
+      url: "{{ nb_url }}"
+      token: "{{ nb_token }}"
+      validate_certs: no
       name: "{{ item.name }}"
-      site: "{{ item.site }}"
-      status: active
+      description: "{{ item.description }}"
+      slug: "{{ item.slug }}"
+      comments: "{{ item.comments|default(omit) }}"
       state: present
-    loop:
-      - name: Rack01
-        site: Boston
-      - name: Rack02
-        site: Boston
-      - name: Rack03
-        site: Boston
-      - name: Rack04
-        site: Boston
+    loop: "{{ tenants }}"
+    tags:
+      - tenant
+
+  - name: Create rack role
+    networktocode.nautobot.rack_role:
+      url: "{{ nb_url }}"
+      token: "{{ nb_token }}"
+      name: "{{ item.name }}"
+      color: "{{ item.color }}"
+      state: present
+    loop: 
+      - name: Compute
+        slug: compute
+        color: 00FF00
+      - name: Network
+        slug: network
+        color: FFFF00
     tags:
       - rack
 
-  - name: "Add Device to nautobot"
-    device:
-      url: "http://10.92.59.139:8000"
-      token: "47942ba1733978d2842528ae15e028a59b70f69b"
-      name: "{{ item.name }}"
-      rack: "{{ item.rack }}"
-      site: "{{ item.site }}"
-      device_role: "{{ item.device_role }}"
-      device_type: "{{ item.device_type }}"
-      status: active
+  - name: Create new rack"
+    networktocode.nautobot.rack:
+      url: "{{ nb_url }}"
+      token: "{{ nb_token }}"
+      validate_certs: no
+      name: "{{ item.1.name }}"
+      site: "{{ item.0.slug }}"
+      rack_role: "{{ item.1.rack_role }}"
+      status: "{{ item.1.status }}"
       state: present
-    loop:
-      - name: cleaf01
-        rack: "Rack01"
-        site: "Boston"
-        device_role: "cleaf"
-        device_type: "7050X3"
-      - name: cleaf02
-        rack: "Rack01"
-        site: "Boston"
-        device_role: "cleaf"
-        device_type: "7050X3"
-      - name: cleaf03
-        rack: "Rack02"
-        site: "Boston"
-        device_role: "cleaf"
-        device_type: "7050X3"
-      - name: cleaf04
-        rack: "Rack02"
-        site: "Boston"
-        device_role: "cleaf"
-        device_type: "7050X3"
-      - name: bleaf01
-        rack: "Rack03"
-        site: "Boston"
-        device_role: "bleaf"
-        device_type: "7280R3"
-      - name: bleaf02
-        rack: "Rack03"
-        site: "Boston"
-        device_role: "bleaf"
-        device_type: "7280R3"
-      - name: spine01
-        rack: "Rack03"
-        site: "Boston"
-        device_role: "spine"
-        device_type: "7060X4"
-      - name: spine02
-        rack: "Rack03"
-        site: "Boston"
-        device_role: "spine"
-        device_type: "7060X4"
-      - name: mleaf01
-        rack: "Rack01"
-        site: "Boston"
-        device_role: "mleaf"
-        device_type: "720XP"
+    loop: "{{ sites | subelements('racks', 'skip_missing=True') }}"  
     tags:
-      - device
+      - rack
+
+  - name: Create vlans
+    networktocode.nautobot.vlan:
+      url: "{{ nb_url }}"
+      token: "{{ nb_token }}"
+      validate_certs: no
+      name: "{{ item.1.name }}"
+      vid: "{{ item.1.vid }}"
+      site: "{{ item.0.slug }}"
+      # prefix: "{{ item.1.prefix|default(omit) }}"
+      tenant: "{{ item.1.tenant }}"
+      status: "{{ item.1.status }}"
+      state: present
+    loop: "{{ sites | subelements('vlans', 'skip_missing=True') }}"
+    tags:
+      - vlan
+
+#############################################################
+# Create VRFs in Nautobot
+#############################################################    
+  - name: Create VRFs within Nautobot
+    networktocode.nautobot.vrf:
+      url: "{{ nb_url }}"
+      token: "{{ nb_token }}"
+      validate_certs: no
+      name: "{{ item.name }}"
+      description: "{{ item.description }}"
+      tenant: "{{ item.tenant|default(omit) }}"
+      enforce_unique: "{{ item.enforce_unique|default(false) }}"
+      state: present
+    loop: "{{ vrf }}"
+    tags:
+      - vrf
+
+#############################################################
+# Create prefixes for each VRF in Nautobot
+#############################################################
+  - name: Create prefixes and assign to VRFs within Nautobot
+    networktocode.nautobot.prefix:
+      url: "{{ nb_url }}"
+      token: "{{ nb_token }}"
+      validate_certs: no
+      family: 4
+      prefix: "{{ item.prefix }}"
+      description: "{{ item.description }}"
+      vrf: "{{ item.name }}"
+      tenant: "{{ item.tenant|default(omit) }}"
+      is_pool: true
+      status: active
+      state: present  
+    loop: "{{ vrf }}"
+    tags:
+      - vrf
+
+# roles:
+  # - { role: load_nautobot/create_vrfs }
+  # - { role: load_nautobot/create_prefixes }
+  # - { role: load_nautobot/create_manufacturer }
+  # - { role: load_nautobot/create_platform }
+  # - { role: load_nautobot/create_device_types }
+  # - { role: load_nautobot/create_device_roles }
+  # - { role: load_nautobot/create_devices }
+  # - { role: load_nautobot/create_access_interfaces }
+  # - { role: load_nautobot/create_trunk_interfaces }
+  # - { role: load_nautobot/create_lag_interfaces }
+  # - { role: load_nautobot/create_l3_interfaces }
+  # - { role: load_nautobot/create_disabled_interfaces }
+  # - { role: load_nautobot/assign_ipv4_to_interfaces }
+  # - { role: load_nautobot/create_tags }
+  # # - { role: load_nautobot/create_cables }
+
+  # - name: Create device role within Nautobot with only required information
+  #   device_role:
+  #     url: "http://10.92.59.139:8000"
+  #     token: "47942ba1733978d2842528ae15e028a59b70f69b"
+  #     name: "{{item}}"
+  #     color: FFFFFF
+  #     state: present
+  #   loop:
+  #     - cleaf
+  #     - bleaf
+  #     - spine
+  #     - superspine
+  #   tags:
+  #     - drole
+
+  # - name: Create manufacturer within Nautobot with only required information
+  #   manufacturer:
+  #     url: "http://10.92.59.139:8000"
+  #     token: "47942ba1733978d2842528ae15e028a59b70f69b"
+  #     name: "{{ item }}"
+  #     state: present
+  #     description: The test manufacturer
+  #   loop:
+  #     - arista
+  #     - cisco
+  #     - dell
+  #     - juniper
+  #   tags:
+  #     - vendor
+
+  # - name: Create device type within Nautobot with only required information
+  #   device_type:
+  #     url: "http://10.92.59.139:8000"
+  #     token: "47942ba1733978d2842528ae15e028a59b70f69b"
+  #     model: "{{ item.model }}"
+  #     manufacturer: "{{ item.vendor }}"
+  #     state: present
+  #   loop:
+  #     - vendor: arista
+  #       model: 7050X3
+  #     - vendor: arista
+  #       model: 7060X4
+  #     - vendor: arista
+  #       model: 7050X4
+  #     - vendor: arista
+  #       model: 7280R3
+  #     - vendor: juniper
+  #       model: qfx5700
+  #     - vendor: juniper
+  #       model: qfx5120
+  #     - vendor: dell
+  #       model: S5448F-ON
+  #     - vendor: dell
+  #       model: S5232F-ON
+  #     - vendor: dell
+  #       model: S5248F-ON
+  #   tags:
+  #     - dtype
+
+  # - name: Create rack within Nautobot with only required information
+  #   networktocode.nautobot.rack:
+  #     url: "http://10.92.59.139:8000"
+  #     token: "47942ba1733978d2842528ae15e028a59b70f69b"
+  #     name: "{{ item.name }}"
+  #     site: "{{ item.site }}"
+  #     status: active
+  #     state: present
+  #   loop:
+  #     - name: Rack01
+  #       site: Boston
+  #     - name: Rack02
+  #       site: Boston
+  #     - name: Rack03
+  #       site: Boston
+  #     - name: Rack04
+  #       site: Boston
+  #   tags:
+  #     - rack
+
+  # - name: "Add Device to nautobot"
+  #   device:
+  #     url: "http://10.92.59.139:8000"
+  #     token: "47942ba1733978d2842528ae15e028a59b70f69b"
+  #     name: "{{ item.name }}"
+  #     rack: "{{ item.rack }}"
+  #     site: "{{ item.site }}"
+  #     device_role: "{{ item.device_role }}"
+  #     device_type: "{{ item.device_type }}"
+  #     status: active
+  #     state: present
+  #   loop:
+  #     - name: cleaf01
+  #       rack: "Rack01"
+  #       site: "Boston"
+  #       device_role: "cleaf"
+  #       device_type: "7050X3"
+  #     - name: cleaf02
+  #       rack: "Rack01"
+  #       site: "Boston"
+  #       device_role: "cleaf"
+  #       device_type: "7050X3"
+  #     - name: cleaf03
+  #       rack: "Rack02"
+  #       site: "Boston"
+  #       device_role: "cleaf"
+  #       device_type: "7050X3"
+  #     - name: cleaf04
+  #       rack: "Rack02"
+  #       site: "Boston"
+  #       device_role: "cleaf"
+  #       device_type: "7050X3"
+  #     - name: bleaf01
+  #       rack: "Rack03"
+  #       site: "Boston"
+  #       device_role: "bleaf"
+  #       device_type: "7280R3"
+  #     - name: bleaf02
+  #       rack: "Rack03"
+  #       site: "Boston"
+  #       device_role: "bleaf"
+  #       device_type: "7280R3"
+  #     - name: spine01
+  #       rack: "Rack03"
+  #       site: "Boston"
+  #       device_role: "spine"
+  #       device_type: "7060X4"
+  #     - name: spine02
+  #       rack: "Rack03"
+  #       site: "Boston"
+  #       device_role: "spine"
+  #       device_type: "7060X4"
+  #     - name: mleaf01
+  #       rack: "Rack01"
+  #       site: "Boston"
+  #       device_role: "mleaf"
+  #       device_type: "720XP"
+  #   tags:
+  #     - device
 
 

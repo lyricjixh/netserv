@@ -1,0 +1,13 @@
+---
+tenants:
+  - name: "Internal"
+    description: "Internal User"
+    slug: "internal"
+    comments: "only for the internal usage"
+  - name: "cust_A"
+    description: "customer A"
+    slug: "custa"
+    comments: "this customer is super cool"
+  - name: "cust_B"
+    description: "customer B"
+    slug: "custb"

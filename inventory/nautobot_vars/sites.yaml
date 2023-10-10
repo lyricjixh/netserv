@@ -15,6 +15,7 @@ sites:
   contact_name: Joe
   contact_phone: "867-5309"
   contact_email: "admin@sjc.arista.com"
+  # facility: EquinoxCA1
   region: uswest
   slug: sjc
   comments: " Placeholder"
@@ -26,23 +27,42 @@ sites:
   - prefix: 24.24.1.0/24
     description: "R1-GI0/0 - INTERNET"  
   vlans:
-  - name: USERS
-    vid: 300
+  - name: ADMIN
+    vid: 100
     status: active
-    prefix: 155.1.1.0/26
+    tenant: "internal"
+    prefix: 10.1.1.0/26
   - name: SERVERS
-    vid: 350
+    vid: 150
     status: active
-    prefix: 155.1.1.64/26
-  - name: GUESTS
-    vid: 400
+    tenant: "internal"
+    prefix: 10.1.1.64/26
+  - name: CustA_01
+    vid: 200
     status: active
-    prefix: 155.1.1.128/26
+    tenant: "custa"
+    prefix: 10.2.1.0/26
+  - name: CustA_02
+    vid: 201
+    status: active
+    tenant: "custa"
+    prefix: 10.2.2.0/26
   - name: NATIVE_VLAN
-    vid: 666
-    status: active  
+    vid: 999
+    tenant: "internal"
+    status: active
   racks:
   - name: "sjc_rr_1"
+    rack_role: "compute"
+    status: active
+  - name: "sjc_rr_2"
+    rack_role: "compute"
+    status: active
+  - name: "sjc_rr_3"
+    rack_role: "compute"
+    status: active
+  - name: "sjc_rr_4"
+    rack_role: "network"
     status: active
 # Site 2
 - name: lax
@@ -68,24 +88,38 @@ sites:
   - prefix: 24.24.2.0/24
     description: "R1-GI0/0 - INTERNET"  
   vlans:
-  - name: USERS
-    vid: 300
+  - name: ADMIN
+    vid: 100
     status: active
-    prefix: 155.2.2.0/26
+    tenant: "internal"
+    prefix: 10.1.2.0/26
   - name: SERVERS
-    vid: 350
+    vid: 150
     status: active
-    prefix: 155.2.2.64/26
-  - name: GUESTS
-    vid: 400
+    tenant: "internal"
+    prefix: 10.1.2.64/26
+  - name: CustA_01
+    vid: 200
     status: active
-    prefix: 155.2.2.128/26
+    tenant: "custa"
+    prefix: 10.2.2.0/26
   - name: NATIVE_VLAN
-    vid: 666
+    vid: 999
+    tenant: "internal"
     status: active   
   racks:
   - name: "lax_rr_1"
-    status: active 
+    rack_role: "compute"
+    status: active
+  - name: "lax_rr_2"
+    rack_role: "compute"
+    status: active
+  - name: "lax_rr_3"
+    rack_role: "compute"
+    status: active
+  - name: "lax_rr_4"
+    rack_role: "network"
+    status: active
 # Site 3
 - name: bos
   status: active
@@ -110,23 +144,28 @@ sites:
   - prefix: 24.24.3.0/24
     description: "R1-GI0/0 - INTERNET"     
   vlans:
-  - name: USERS
-    vid: 300
+  - name: ADMIN
+    vid: 100
     status: active
-    prefix: 155.3.3.0/26
+    tenant: "internal"
+    prefix: 10.1.3.0/26
   - name: SERVERS
-    vid: 350
+    vid: 150
     status: active
-    prefix: 155.3.3.64/26
-  - name: GUESTS
-    vid: 400
+    tenant: "internal"
+    prefix: 10.1.3.64/26
+  - name: CustA_01
+    vid: 200
     status: active
-    prefix: 155.3.3.128/26
+    tenant: "custa"
+    prefix: 10.2.3.0/26
   - name: NATIVE_VLAN
-    vid: 666
+    vid: 999
+    tenant: "internal"
     status: active   
   racks:
   - name: "bos_rr_1"
+    rack_role: "compute"
     status: active
 # Site 4
 - name: las
@@ -152,23 +191,28 @@ sites:
   - prefix: 24.24.4.0/24
     description: "R1-GI0/0 - INTERNET"   
   vlans:
-  - name: USERS
-    vid: 300
+  - name: ADMIN
+    vid: 100
     status: active
-    prefix: 155.4.4.0/26
+    tenant: "internal"
+    prefix: 10.1.4.0/26
   - name: SERVERS
-    vid: 350
+    vid: 150
     status: active
-    prefix: 155.4.4.64/26
-  - name: GUESTS
-    vid: 400
+    tenant: "internal"
+    prefix: 10.1.4.64/26
+  - name: CustA_01
+    vid: 200
     status: active
-    prefix: 155.4.4.128/26
+    tenant: "custa"
+    prefix: 10.2.4.0/26
   - name: NATIVE_VLAN
-    vid: 666
+    vid: 999
     status: active   
+    tenant: "internal"
   racks:
   - name: "las_rr_1"
+    rack_role: "compute"
     status: active     
 # Site 5
 - name: atl
@@ -194,23 +238,28 @@ sites:
   - prefix: 24.24.5.0/24
     description: "R1-GI0/0 - INTERNET"   
   vlans:
-  - name: USERS
-    vid: 300
+  - name: ADMIN
+    vid: 100
     status: active
-    prefix: 155.5.5.0/26
+    tenant: "internal"
+    prefix: 10.1.5.0/26
   - name: SERVERS
-    vid: 350
+    vid: 150
     status: active
-    prefix: 155.5.5.64/26
-  - name: GUESTS
-    vid: 400
+    tenant: "internal"
+    prefix: 10.1.5.64/26
+  - name: CustA_01
+    vid: 200
     status: active
-    prefix: 155.5.5.128/26
+    tenant: "custa"
+    prefix: 10.2.5.0/26
   - name: NATIVE_VLAN
-    vid: 666
+    vid: 999
     status: active   
+    tenant: "internal"
   racks:
   - name: "atl_rr_1"
+    rack_role: "compute"
     status: active    
 # site 6
 - name: mci
@@ -236,21 +285,26 @@ sites:
   - prefix: 24.24.6.0/24
     description: "R1-GI0/0 - INTERNET"   
   vlans:
-  - name: USERS
-    vid: 300
+  - name: ADMIN
+    vid: 100
     status: active
-    prefix: 155.6.6.0/26
+    tenant: "internal"
+    prefix: 10.1.6.0/26
   - name: SERVERS
-    vid: 350
+    vid: 150
     status: active
-    prefix: 155.6.6.64/26
-  - name: GUESTS
-    vid: 400
+    tenant: "internal"
+    prefix: 10.1.6.64/26
+  - name: CustA_01
+    vid: 200
     status: active
-    prefix: 155.6.6.128/26
+    tenant: "custa"
+    prefix: 10.2.6.0/26
   - name: NATIVE_VLAN
-    vid: 666
+    vid: 999
     status: active   
+    tenant: "internal"
   racks:
   - name: "mci_rr_1"
+    rack_role: "compute"
     status: active
