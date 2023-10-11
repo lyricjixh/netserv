@@ -1,7 +1,291 @@
 device_list:
-- name: sjcr1
-  device_type: vios_router
-  device_role: pod_router
+- name: sjc-spine01
+  device_type: ceos_switch
+  device_role: spine
+  site: sjc
+  rack: "sjc_rr_4"
+  position: 38
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.0.101/32
+      vrf: global
+      status: active
+      tags: 
+        - ospf_area_0
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.100.0.101/32
+      vrf: global
+      status: active
+    - name: ethernet0
+      description: "PTP Downward to leaf-01"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.0/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf01
+        int: ethernet31
+    - name: ethernet1
+      description: "PTP Downward to leaf-02"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.4/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf02
+        int: ethernet31
+    - name: ethernet2
+      description: "PTP Downward to leaf-03"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.8/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf03
+        int: ethernet31
+    - name: ethernet3
+      description: "PTP Downward to leaf-04"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.12/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf04
+        int: ethernet31
+    - name: ethernet4
+      description: "PTP Downward to leaf-05"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.16/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf05
+        int: ethernet31
+    - name: ethernet5
+      description: "PTP Downward to leaf-06"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.20/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf05
+        int: ethernet31
+    - name: Management0
+      description: "MGMT-INTERFACE"
+      type: 10G
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.2/24
+      vrf: MGMT
+      status: active
+  disabled_interfaces:
+    - name: ethernet6
+      type: 10G
+      enabled: false
+    - name: ethernet7
+      type: 10G
+      enabled: false    
+    - name: ethernet8
+      type: 10G
+      enabled: false    
+    - name: ethernet9
+      type: 10G
+      enabled: false    
+- name: sjc-spine02
+  device_type: ceos_switch
+  device_role: spine
+  site: sjc
+  rack: "sjc_rr_4"
+  position: 39
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.0.102/32
+      vrf: global
+      status: active
+      tags: 
+        - ospf_area_0
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.100.0.102/32
+      vrf: global
+      status: active
+    - name: ethernet0
+      description: "PTP Downward to leaf-01"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.2/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf01
+        int: ethernet32
+    - name: ethernet1
+      description: "PTP Downward to leaf-02"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.6/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf02
+        int: ethernet32
+    - name: ethernet2
+      description: "PTP Downward to leaf-03"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.10/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf03
+        int: ethernet32
+    - name: ethernet3
+      description: "PTP Downward to leaf-04"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.14/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf04
+        int: ethernet32
+    - name: ethernet4
+      description: "PTP Downward to leaf-05"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.18/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf05
+        int: ethernet32
+    - name: ethernet5
+      description: "PTP Downward to leaf-06"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.22/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf05
+        int: ethernet32
+    - name: Management0
+      description: "MGMT-INTERFACE"
+      type: 10G
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.102/24
+      vrf: MGMT
+      status: active
+  disabled_interfaces:
+    - name: ethernet6
+      type: 10G
+      enabled: false
+    - name: ethernet7
+      type: 10G
+      enabled: false    
+    - name: ethernet8
+      type: 10G
+      enabled: false    
+    - name: ethernet9
+      type: 10G
+      enabled: false    
+- name: sjc-leaf01
+  device_type: ceos_switch
+  device_role: cleaf
   site: sjc
   rack: "sjc_rr_1"
   position: 38
@@ -9,2944 +293,1065 @@ device_list:
   status: active
   l3_interfaces:
     - name: Loopback0
-      description: "iBGP LOOPBACK"
+      description: "Underlay LOOPBACK"
       type: virtual
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.0.1.1/32
+      ipv4_address: 10.0.0.1/32
       vrf: global
       status: active
       tags: 
         - ospf_area_0
-    - name: GigabitEthernet0/0
-      description: "UPLINK TO INTERNET PROVIDER"
-      type: 1000base-t
-      label: layer3
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 24.24.1.2/24
+      ipv4_address: 10.100.0.1/32
       vrf: global
       status: active
-    - name: GigabitEthernet0/1
-      description: "DOWNLINK sjcSW1"
-      type: 1000base-t
-      label: layer3
+    - name: ethernet0
+      description: "Compute 01:MLAG Member"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.10.1.0/31
+      ipv4_address: 
+      vrf: global
+      status: active
+      connection:
+        device: compute01
+        int: ethernet0
+    - name: ethernet1
+      description: "Compute 02:MLAG Member"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
       tags: 
-        - ospf_area_0
         - p2p 
       vrf: global
       status: active
       connection:
-        device: sjcsw1
-        int: GigabitEthernet0/0
-    - name: GigabitEthernet0/2
-      description: "DOWNLINK sjcSW2"
-      type: 1000base-t
-      label: layer3
+        device: compute02
+        int: ethernet0
+    - name: ethernet27
+      description: "MLAG CTRL Link"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.10.1.2/31
+      ipv4_address:
       tags: 
-        - ospf_area_0
         - p2p 
       vrf: global
       status: active
       connection:
-        device: sjcsw2
-        int: GigabitEthernet0/0
-    - name: GigabitEthernet0/7
+        device: sjc-leaf02
+        int: ethernet27
+    - name: ethernet28
+      description: "MLAG CTRL Link"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf02
+        int: ethernet28
+    - name: ethernet31
+      description: "UPlink to Spine01"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.1/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-spine01
+        int: ethernet0
+    - name: ethernet32
+      description: "UPlink to Spine01"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.3/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-spine02
+        int: ethernet0
+    - name: Management0
       description: "MGMT-INTERFACE"
-      type: 1000base-t
+      type: 10G
       label: mgmt
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: True
-      ipv4_address: 192.168.4.17/24
+      ipv4_address: 172.100.100.2/24
       vrf: MGMT
       status: active
   disabled_interfaces:
-    - name: GigabitEthernet0/3
-      type: 1000base-t
+    - name: ethernet3
+      type: 10G
       enabled: false
-    - name: GigabitEthernet0/4
-      type: 1000base-t
+    - name: ethernet4
+      type: 10G
       enabled: false
-    - name: GigabitEthernet0/5
-      type: 1000base-t
+    - name: ethernet5
+      type: 10G
       enabled: false
-    - name: GigabitEthernet0/6
-      type: 1000base-t
+    - name: ethernet6
+      type: 10G
       enabled: false    
-
-- name: sjcsw1
-  device_type: vios_switch
-  device_role: pod_l3_switch
+    - name: ethernet29
+      type: 10G
+      enabled: false    
+    - name: ethernet30
+      type: 10G
+      enabled: false    
+- name: sjc-leaf02
+  device_type: ceos_switch
+  device_role: cleaf
   site: sjc
   rack: "sjc_rr_1"
-  position: 37
+  position: 39
   face: front
   status: active
-  trunk_interfaces:
-    - name: Port-Channel12
-      description: "TRUNK TO sjcSW2"
-      type: lag
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO sjcSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-      connection:
-        device: sjcsw2
-        int: GigabitEthernet0/1
-
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO sjcSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-      connection:
-        device: sjcsw2
-        int: GigabitEthernet0/2
-
-    - name: GigabitEthernet0/3
-      description: "TRUNK TO sjcSW3"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      connection:
-        device: sjcsw3
-        int: GigabitEthernet0/1
-  lag_interfaces:
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-    - name: GigabitEthernet0/2
-      lag: Port-Channel12
   l3_interfaces:
     - name: Loopback0
-      description: "iBGP LOOPBACK"
+      description: "Underlay LOOPBACK"
       type: virtual
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.0.1.2/32
+      ipv4_address: 10.0.0.2/32
+      vrf: global
+      status: active
       tags: 
         - ospf_area_0
-      vrf: global
-      status: active
-    - name: vlan300
-      description: "USER_SVI"
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
       type: virtual
-      label: layer3
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 155.1.1.2/26
+      ipv4_address: 10.100.0.2/32
       vrf: global
       status: active
-      dhcp_helper: 10.0.1.1
-      vrrp_group: 1
-      vrrp_description: USER_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.1.1.1
-    - name: vlan350
-      description: "SERVER_SVI"
-      type: virtual
-      label: layer3
+    - name: ethernet0
+      description: "Compute 01:MLAG Member"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 155.1.1.66/26
+      ipv4_address: 
       vrf: global
       status: active
-      dhcp_helper: 10.0.1.1
-      vrrp_group: 2
-      vrrp_description: SERVER_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.1.1.65
-    - name: vlan400
-      description: "GUEST_SVI"
-      type: virtual
-      label: layer3
+      connection:
+        device: compute01
+        int: eth1
+    - name: ethernet1
+      description: "Compute 02:MLAG Member"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 155.1.1.130/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.1.1
-      vrrp_group: 3
-      vrrp_description: GUEST_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.1.1.129
-    - name: GigabitEthernet0/0
-      description: "UPLINK sjcR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-
-      ipv4_address: 10.10.1.1/31
+      ipv4_address:
       tags: 
-        - ospf_area_0
         - p2p 
       vrf: global
       status: active
-    - name: GigabitEthernet1/3
+      connection:
+        device: compute02
+        int: eth1
+    - name: ethernet27
+      description: "MLAG CTRL Link"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf01
+        int: ethernet27
+    - name: ethernet28
+      description: "MLAG CTRL Link"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf01
+        int: ethernet28
+    - name: ethernet31
+      description: "UPlink to Spine01"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.5/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-spine01
+        int: ethernet1
+    - name: ethernet32
+      description: "UPlink to Spine01"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.7/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-spine02
+        int: ethernet1
+    - name: Management0
       description: "MGMT-INTERFACE"
-      type: 1000base-t
+      type: 10G
       label: mgmt
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: True
-      ipv4_address: 192.168.4.18/24
+      ipv4_address: 172.100.100.3/24
       vrf: MGMT
       status: active
   disabled_interfaces:
-    - name: GigabitEthernet1/0
-      type: 1000base-t
+    - name: ethernet3
+      type: 10G
       enabled: false
-    - name: GigabitEthernet1/1
-      type: 1000base-t
+    - name: ethernet4
+      type: 10G
       enabled: false
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false 
-
-- name: sjcsw2
-  device_type: vios_switch
-  device_role: pod_l3_switch
+    - name: ethernet5
+      type: 10G
+      enabled: false
+    - name: ethernet6
+      type: 10G
+      enabled: false    
+    - name: ethernet29
+      type: 10G
+      enabled: false    
+    - name: ethernet30
+      type: 10G
+      enabled: false    
+- name: sjc-leaf03
+  device_type: ceos_switch
+  device_role: cleaf
   site: sjc
-  rack: "sjc_rr_1"
-  position: 36
+  rack: "sjc_rr_2"
+  position: 38
   face: front
   status: active
-  trunk_interfaces:
-    - name: Port-Channel12
-      description: "TRUNK TO sjcSW1"
-      type: lag
-      label: trunk
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO sjcSW1"
-      type: 1000base-t
-      label: trunk
+      ipv4_address: 10.0.0.3/32
+      vrf: global
+      status: active
+      tags: 
+        - ospf_area_0
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO sjcSW1"
-      type: 1000base-t
-      label: trunk
+      ipv4_address: 10.100.0.3/32
+      vrf: global
+      status: active
+    - name: ethernet0
+      description: "Compute 01:MLAG Member"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/3
-      description: "TRUNK TO sjcSW3"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
+      ipv4_address: 
+      vrf: global
+      status: active
       connection:
-        device: sjcsw2
-        int: GigabitEthernet0/2
-  lag_interfaces:
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
+        device: compute03
+        int: eth0
+    - name: ethernet1
+      description: "Compute 02:MLAG Member"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.0.1.3/32
+      ipv4_address:
       tags: 
-        - ospf_area_0
-      vrf: global
-      status: active
-    - name: vlan300
-      description: "USER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.1.1.3/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.1.1
-      vrrp_group: 1
-      vrrp_description: USER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.1.1.1
-    - name: vlan350
-      description: "SERVER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.1.1.67/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.1.1
-      vrrp_group: 2
-      vrrp_description: SERVER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.1.1.65
-    - name: vlan400
-      description: "GUEST_SVI"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.1.1.131/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.1.1
-      vrrp_group: 3
-      vrrp_description: GUEST_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.1.1.129
-    - name: GigabitEthernet0/0
-      description: "UPLINK sjcR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.1.3/31
-      tags: 
-        - ospf_area_0
         - p2p 
       vrf: global
       status: active
-    - name: GigabitEthernet1/3
+      connection:
+        device: compute04
+        int: eth0
+    - name: ethernet27
+      description: "MLAG CTRL Link"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf04
+        int: ethernet27
+    - name: ethernet28
+      description: "MLAG CTRL Link"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf04
+        int: ethernet28
+    - name: ethernet31
+      description: "UPlink to Spine01"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.9/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-spine01
+        int: ethernet2
+    - name: ethernet32
+      description: "UPlink to Spine02"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.11/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-spine02
+        int: ethernet2
+    - name: Management0
       description: "MGMT-INTERFACE"
-      type: 1000base-t
+      type: 10G
       label: mgmt
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: True
-      ipv4_address: 192.168.4.19/24
+      ipv4_address: 172.100.100.3/24
       vrf: MGMT
       status: active
   disabled_interfaces:
-    - name: GigabitEthernet1/0
-      type: 1000base-t
+    - name: ethernet3
+      type: 10G
       enabled: false
-    - name: GigabitEthernet1/1
-      type: 1000base-t
+    - name: ethernet4
+      type: 10G
       enabled: false
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false  
-
-- name: sjcsw3
-  device_type: vios_switch
-  device_role: pod_l2_switch
+    - name: ethernet5
+      type: 10G
+      enabled: false
+    - name: ethernet6
+      type: 10G
+      enabled: false    
+    - name: ethernet29
+      type: 10G
+      enabled: false    
+    - name: ethernet30
+      type: 10G
+      enabled: false    
+- name: sjc-leaf04
+  device_type: ceos_switch
+  device_role: cleaf
   site: sjc
-  rack: "sjc_rr_1"
-  position: 35
+  rack: "sjc_rr_2"
+  position: 39
   face: front
   status: active
-  access_interfaces:
-    - name: GigabitEthernet0/3
-      description: USERS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: USERS
-    - name: GigabitEthernet1/0
-      description: SERVERS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: SERVERS
-    - name: GigabitEthernet1/1
-      description: GUESTS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: GUESTS
-  trunk_interfaces:
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO sjcSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO sjcSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
   l3_interfaces:
-    - name: GigabitEthernet1/3
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.0.4/32
+      vrf: global
+      status: active
+      tags: 
+        - ospf_area_0
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.100.0.4/32
+      vrf: global
+      status: active
+    - name: ethernet0
+      description: "Compute 03:MLAG Member"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 
+      vrf: global
+      status: active
+      connection:
+        device: compute03
+        int: eth1
+    - name: ethernet1
+      description: "Compute 04:MLAG Member"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: compute04
+        int: eth1
+    - name: ethernet27
+      description: "MLAG CTRL Link"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf03
+        int: ethernet27
+    - name: ethernet28
+      description: "MLAG CTRL Link"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf03
+        int: ethernet28
+    - name: ethernet31
+      description: "UPlink to Spine01"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.13/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-spine01
+        int: ethernet3
+    - name: ethernet32
+      description: "UPlink to Spine02"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.15/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-spine02
+        int: ethernet3
+    - name: Management0
       description: "MGMT-INTERFACE"
-      type: 1000base-t
+      type: 10G
       label: mgmt
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: True
-      ipv4_address: 192.168.4.20/24
+      ipv4_address: 172.100.100.3/24
       vrf: MGMT
       status: active
   disabled_interfaces:
-    - name: GigabitEthernet1/2
-      type: 1000base-t
+    - name: ethernet3
+      type: 10G
       enabled: false
-    - name: GigabitEthernet0/0
-      type: 1000base-t
+    - name: ethernet4
+      type: 10G
       enabled: false
-- name: laxr1
-  device_type: vios_router
-  device_role: pod_router
-  site: lax
-  rack: "lax_rr_1"
+    - name: ethernet5
+      type: 10G
+      enabled: false
+    - name: ethernet6
+      type: 10G
+      enabled: false    
+    - name: ethernet29
+      type: 10G
+      enabled: false    
+    - name: ethernet30
+      type: 10G
+      enabled: false    
+- name: sjc-leaf05
+  device_type: ceos_switch
+  device_role: bleaf
+  site: sjc
+  rack: "sjc_rr_3"
   position: 38
   face: front
   status: active
   l3_interfaces:
     - name: Loopback0
-      description: "iBGP LOOPBACK"
+      description: "Underlay LOOPBACK"
       type: virtual
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.0.2.1/32
+      ipv4_address: 10.0.0.5/32
       vrf: global
       status: active
       tags: 
         - ospf_area_0
-    - name: GigabitEthernet0/0
-      description: "UPLINK TO INTERNET PROVIDER"
-      type: 1000base-t
-      label: layer3
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 24.24.2.2/24
+      ipv4_address: 10.100.0.5/32
       vrf: global
       status: active
-    - name: GigabitEthernet0/1
-      description: "DOWNLINK laxSW1"
-      type: 1000base-t
+    - name: ethernet0
+      description: "External Uplink"
+      type: 10G
       label: layer3
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.10.2.0/31
+      ipv4_address: 10.172.1.2/27
+      vrf: global
+      status: active
+      connection:
+        device: sjc-pr01
+        int: eth0
+    - name: ethernet0
+      description: "External Uplink"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.172.1.34/27
+      vrf: global
+      status: active
+      connection:
+        device: sjc-pr02
+        int: eth0
+    - name: ethernet27
+      description: "MLAG CTRL Link"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
       tags: 
-        - ospf_area_0
         - p2p 
       vrf: global
       status: active
-    - name: GigabitEthernet0/2
-      description: "DOWNLINK laxSW2"
-      type: 1000base-t
-      label: layer3
+      connection:
+        device: sjc-leaf06
+        int: ethernet27
+    - name: ethernet28
+      description: "MLAG CTRL Link"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.10.2.2/31
+      ipv4_address:
       tags: 
-        - ospf_area_0
         - p2p 
       vrf: global
       status: active
-    - name: GigabitEthernet0/7
+      connection:
+        device: sjc-leaf06
+        int: ethernet28
+    - name: ethernet31
+      description: "UPlink to Spine01"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.17/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-spine01
+        int: ethernet4
+    - name: ethernet32
+      description: "UPlink to Spine02"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.19/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-spine02
+        int: ethernet4
+    - name: Management0
       description: "MGMT-INTERFACE"
-      type: 1000base-t
+      type: 10G
       label: mgmt
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: True
-      ipv4_address: 192.168.4.21/24
+      ipv4_address: 172.100.100.5/24
       vrf: MGMT
       status: active
   disabled_interfaces:
-    - name: GigabitEthernet0/3
-      type: 1000base-t
+    - name: ethernet3
+      type: 10G
       enabled: false
-    - name: GigabitEthernet0/4
-      type: 1000base-t
+    - name: ethernet4
+      type: 10G
       enabled: false
-    - name: GigabitEthernet0/5
-      type: 1000base-t
+    - name: ethernet5
+      type: 10G
       enabled: false
-    - name: GigabitEthernet0/6
-      type: 1000base-t
+    - name: ethernet6
+      type: 10G
       enabled: false    
-
-- name: laxsw1
-  device_type: vios_switch
-  device_role: pod_l3_switch
-  site: lax
-  rack: "lax_rr_1"
-  position: 37
-  face: front
-  status: active
-  trunk_interfaces:
-    - name: Port-Channel12
-      description: "TRUNK TO laxSW2"
-      type: lag
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO laxSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO laxSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/3
-      description: "TRUNK TO laxSW3"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  lag_interfaces:
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-    - name: GigabitEthernet0/2
-      lag: Port-Channel12
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.0.2.2/32
-      tags: 
-        - ospf_area_0
-      vrf: global
-      status: active
-    - name: vlan300
-      description: "USER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.2.2.2/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.2.1
-      vrrp_group: 1
-      vrrp_description: USER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.2.2.2
-    - name: vlan350
-      description: "SERVER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.2.2.66/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.2.1
-      vrrp_group: 2
-      vrrp_description: SERVER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.2.2.65
-    - name: vlan400
-      description: "GUEST_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.2.2.130/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.2.1
-      vrrp_group: 3
-      vrrp_description: GUEST_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.2.2.129
-    - name: GigabitEthernet0/0
-      description: "UPLINK laxR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.2.1/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.22/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/0
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/1
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false 
-- name: laxsw2
-  device_type: vios_switch
-  device_role: pod_l3_switch
-  site: lax
-  rack: "lax_rr_1"
-  position: 36
-  face: front
-  status: active
-  trunk_interfaces:
-    - name: Port-Channel12
-      description: "TRUNK TO laxSW1"
-      type: lag
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO laxSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO laxSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/3
-      description: "TRUNK TO laxSW3"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  lag_interfaces:
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.0.2.3/32
-      tags: 
-        - ospf_area_0
-      vrf: global
-      status: active
-    - name: vlan300
-      description: "USER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.2.2.3/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.2.1
-      vrrp_group: 1
-      vrrp_description: USER_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.2.2.1
-    - name: vlan350
-      description: "SERVER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.2.2.67/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.2.1
-      vrrp_group: 2
-      vrrp_description: SERVER_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.2.2.65
-    - name: vlan400
-      description: "GUEST_SVI"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.2.2.131/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.2.1
-      vrrp_group: 3
-      vrrp_description: GUEST_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.2.2.129
-    - name: GigabitEthernet0/0
-      description: "UPLINK laxR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.2.3/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.23/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/0
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/1
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false  
-- name: laxsw3
-  device_type: vios_switch
-  device_role: pod_l2_switch
-  site: lax
-  rack: "lax_rr_1"
-  position: 35
-  face: front
-  status: active
-  access_interfaces:
-    - name: GigabitEthernet0/3
-      description: USERS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: USERS
-    - name: GigabitEthernet1/0
-      description: SERVERS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: SERVERS
-    - name: GigabitEthernet1/1
-      description: GUESTS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: GUESTS
-  trunk_interfaces:
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO laxSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO laxSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  l3_interfaces:
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.24/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/0
-      type: 1000base-t
-      enabled: false
-- name: bosr1
-  device_type: vios_router
-  device_role: pod_router
-  site: bos
-  rack: "bos_rr_1"
-  position: 38
-  face: front
-  status: active
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.0.3.1/32
-      vrf: global
-      status: active
-      tags: 
-        - ospf_area_0
-    - name: GigabitEthernet0/0
-      description: "UPLINK TO INTERNET PROVIDER"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 24.24.3.2/24
-      vrf: global
-      status: active
-    - name: GigabitEthernet0/1
-      description: "DOWNLINK bosSW1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.3.0/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet0/2
-      description: "DOWNLINK bosSW2"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.3.2/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet0/7
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.51/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet0/3
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/4
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/5
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/6
-      type: 1000base-t
+    - name: ethernet29
+      type: 10G
       enabled: false    
-
-- name: bossw1
-  device_type: vios_switch
-  device_role: pod_l3_switch
-  site: bos
-  rack: "bos_rr_1"
-  position: 37
-  face: front
-  status: active
-  trunk_interfaces:
-    - name: Port-Channel12
-      description: "TRUNK TO bosSW2"
-      type: lag
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO bosSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO bosSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/3
-      description: "TRUNK TO bosSW3"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  lag_interfaces:
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-    - name: GigabitEthernet0/2
-      lag: Port-Channel12
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.0.3.2/32
-      tags: 
-        - ospf_area_0
-      vrf: global
-      status: active
-    - name: vlan300
-      description: "USER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.3.3.2/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.2.1
-      vrrp_group: 1
-      vrrp_description: USER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.2.2.1
-    - name: vlan350
-      description: "SERVER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.3.3.66/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.2.1
-      vrrp_group: 2
-      vrrp_description: SERVER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.2.2.65
-    - name: vlan400
-      description: "GUEST_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.3.3.130/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.2.1
-      vrrp_group: 3
-      vrrp_description: GUEST_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.2.2.129
-    - name: GigabitEthernet0/0
-      description: "UPLINK bosR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.3.1/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.52/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/0
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/1
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false 
-
-- name: bossw2
-  device_type: vios_switch
-  device_role: pod_l3_switch
-  site: bos
-  rack: "bos_rr_1"
-  position: 36
-  face: front
-  status: active
-  trunk_interfaces:
-    - name: Port-Channel12
-      description: "TRUNK TO bosSW1"
-      type: lag
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO bosSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO bosSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/3
-      description: "TRUNK TO bosSW3"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  lag_interfaces:
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.0.3.3/32
-      tags: 
-        - ospf_area_0
-      vrf: global
-      status: active
-    - name: vlan300
-      description: "USER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.3.3.3/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.3.1
-      vrrp_group: 1
-      vrrp_description: USER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.3.3.1
-    - name: vlan350
-      description: "SERVER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.3.3.67/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.3.1
-      vrrp_group: 2
-      vrrp_description: SERVER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.3.3.65
-    - name: vlan400
-      description: "GUEST_SVI"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.3.3.131/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.3.1
-      vrrp_group: 3
-      vrrp_description: GUEST_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.3.3.129
-    - name: GigabitEthernet0/0
-      description: "UPLINK bosR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.3.3/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.53/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/0
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/1
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false  
-
-- name: bossw3
-  device_type: vios_switch
-  device_role: pod_l2_switch
-  site: bos
-  rack: "bos_rr_1"
-  position: 35
-  face: front
-  status: active
-  access_interfaces:
-    - name: GigabitEthernet0/3
-      description: USERS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: USERS
-    - name: GigabitEthernet1/0
-      description: SERVERS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: SERVERS
-    - name: GigabitEthernet1/1
-      description: GUESTS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: GUESTS
-  trunk_interfaces:
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO bosSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO bosSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  l3_interfaces:
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.54/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/0
-      type: 1000base-t
-      enabled: false
-- name: lasr1
-  device_type: vios_router
-  device_role: pod_router
-  site: las
-  rack: "las_rr_1"
-  position: 38
-  face: front
-  status: active
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.0.4.1/32
-      vrf: global
-      status: active
-      tags: 
-        - ospf_area_0
-    - name: GigabitEthernet0/0
-      description: "UPLINK TO INTERNET PROVIDER"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 24.24.4.2/24
-      vrf: global
-      status: active
-    - name: GigabitEthernet0/1
-      description: "DOWNLINK lasSW1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.4.0/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet0/2
-      description: "DOWNLINK lasSW2"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.4.2/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet0/7
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.55/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet0/3
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/4
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/5
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/6
-      type: 1000base-t
+    - name: ethernet30
+      type: 10G
       enabled: false    
-
-- name: lassw1
-  device_type: vios_switch
-  device_role: pod_l3_switch
-  site: las
-  rack: "las_rr_1"
-  position: 37
-  face: front
-  status: active
-  trunk_interfaces:
-    - name: Port-Channel12
-      description: "TRUNK TO lasSW2"
-      type: lag
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO lasSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO lasSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/3
-      description: "TRUNK TO lasSW3"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  lag_interfaces:
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-    - name: GigabitEthernet0/2
-      lag: Port-Channel12
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.0.4.2/32
-      tags: 
-        - ospf_area_0
-      vrf: global
-      status: active
-    - name: vlan300
-      description: "USER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.4.4.2/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.4.1
-      vrrp_group: 1
-      vrrp_description: USER_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.4.4.1
-    - name: vlan350
-      description: "SERVER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.4.4.66/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.4.1
-      vrrp_group: 2
-      vrrp_description: SERVER_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.4.4.65
-    - name: vlan400
-      description: "GUEST_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.4.4.130/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.4.1
-      vrrp_group: 3
-      vrrp_description: GUEST_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.4.4.129
-    - name: GigabitEthernet0/0
-      description: "UPLINK lasR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.4.1/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.56/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/0
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/1
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false 
-
-- name: lassw2
-  device_type: vios_switch
-  device_role: pod_l3_switch
-  site: las
-  rack: "las_rr_1"
-  position: 36
-  face: front
-  status: active
-  trunk_interfaces:
-    - name: Port-Channel12
-      description: "TRUNK TO lasSW1"
-      type: lag
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO lasSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO lasSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/3
-      description: "TRUNK TO lasSW3"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  lag_interfaces:
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.0.4.3/32
-      tags: 
-        - ospf_area_0
-      vrf: global
-      status: active
-    - name: vlan300
-      description: "USER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.4.4.3/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.4.1
-      vrrp_group: 1
-      vrrp_description: USER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.4.4.1
-    - name: vlan350
-      description: "SERVER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.4.4.67/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.4.1
-      vrrp_group: 2
-      vrrp_description: SERVER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.4.4.65
-    - name: vlan400
-      description: "GUEST_SVI"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.4.4.131/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.4.1
-      vrrp_group: 3
-      vrrp_description: GUEST_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.4.4.129
-    - name: GigabitEthernet0/0
-      description: "UPLINK lasR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.4.3/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.57/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/0
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/1
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false  
-
-- name: lassw3
-  device_type: vios_switch
-  device_role: pod_l2_switch
-  site: las
-  rack: "las_rr_1"
-  position: 35
-  face: front
-  status: active
-  access_interfaces:
-    - name: GigabitEthernet0/3
-      description: USERS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: USERS
-    - name: GigabitEthernet1/0
-      description: SERVERS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: SERVERS
-    - name: GigabitEthernet1/1
-      description: GUESTS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: GUESTS
-  trunk_interfaces:
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO lasSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO lasSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  l3_interfaces:
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.58/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/0
-      type: 1000base-t
-      enabled: false
-- name: atlr1
-  device_type: vios_router
-  device_role: pod_router
-  site: atl
-  rack: "atl_rr_1"
-  position: 38
+- name: sjc-leaf06
+  device_type: ceos_switch
+  device_role: bleaf
+  site: sjc
+  rack: "sjc_rr_3"
+  position: 39
   face: front
   status: active
   l3_interfaces:
     - name: Loopback0
-      description: "iBGP LOOPBACK"
+      description: "Underlay LOOPBACK"
       type: virtual
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.0.5.1/32
+      ipv4_address: 10.0.0.6/32
       vrf: global
       status: active
       tags: 
         - ospf_area_0
-    - name: GigabitEthernet0/0
-      description: "UPLINK TO INTERNET PROVIDER"
-      type: 1000base-t
-      label: layer3
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 24.24.5.2/24
+      ipv4_address: 10.100.0.6/32
       vrf: global
       status: active
-    - name: GigabitEthernet0/1
-      description: "DOWNLINK atlSW1"
-      type: 1000base-t
+    - name: ethernet0
+      description: "External Uplink"
+      type: 10G
       label: layer3
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.10.5.0/31
+      ipv4_address: 10.172.2.2/27
+      vrf: global
+      status: active
+      connection:
+        device: sjc-pr01
+        int: eth0
+    - name: ethernet0
+      description: "External Uplink"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.172.2.34/27
+      vrf: global
+      status: active
+      connection:
+        device: sjc-pr02
+        int: eth0
+    - name: ethernet27
+      description: "MLAG CTRL Link"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
       tags: 
-        - ospf_area_0
         - p2p 
       vrf: global
       status: active
-    - name: GigabitEthernet0/2
-      description: "DOWNLINK atlSW2"
-      type: 1000base-t
-      label: layer3
+      connection:
+        device: sjc-leaf05
+        int: ethernet27
+    - name: ethernet28
+      description: "MLAG CTRL Link"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.10.5.2/31
+      ipv4_address:
       tags: 
-        - ospf_area_0
         - p2p 
       vrf: global
       status: active
-    - name: GigabitEthernet0/7
+      connection:
+        device: sjc-leaf05
+        int: ethernet28
+    - name: ethernet31
+      description: "UPlink to Spine01"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.21/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-spine01
+        int: ethernet5
+    - name: ethernet32
+      description: "UPlink to Spine02"
+      type: 10G
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.1.23/31
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-spine02
+        int: ethernet5
+    - name: Management0
       description: "MGMT-INTERFACE"
-      type: 1000base-t
+      type: 10G
       label: mgmt
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: True
-      ipv4_address: 192.168.4.59/24
+      ipv4_address: 172.100.100.6/24
       vrf: MGMT
       status: active
   disabled_interfaces:
-    - name: GigabitEthernet0/3
-      type: 1000base-t
+    - name: ethernet3
+      type: 10G
       enabled: false
-    - name: GigabitEthernet0/4
-      type: 1000base-t
+    - name: ethernet4
+      type: 10G
       enabled: false
-    - name: GigabitEthernet0/5
-      type: 1000base-t
+    - name: ethernet5
+      type: 10G
       enabled: false
-    - name: GigabitEthernet0/6
-      type: 1000base-t
+    - name: ethernet6
+      type: 10G
       enabled: false    
-
-- name: atlsw1
-  device_type: vios_switch
-  device_role: pod_l3_switch
-  site: atl
-  rack: "atl_rr_1"
-  position: 37
-  face: front
-  status: active
-  trunk_interfaces:
-    - name: Port-Channel12
-      description: "TRUNK TO atlSW2"
-      type: lag
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO atlSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO atlSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/3
-      description: "TRUNK TO atlSW3"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  lag_interfaces:
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-    - name: GigabitEthernet0/2
-      lag: Port-Channel12
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.0.5.2/32
-      tags: 
-        - ospf_area_0
-      vrf: global
-      status: active
-    - name: vlan300
-      description: "USER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.5.5.2/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.5.1
-      vrrp_group: 1
-      vrrp_description: USER_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.5.5.1
-    - name: vlan350
-      description: "SERVER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.5.5.66/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.5.1
-      vrrp_group: 2
-      vrrp_description: SERVER_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.5.5.65
-    - name: vlan400
-      description: "GUEST_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.5.5.130/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.5.1
-      vrrp_group: 3
-      vrrp_description: GUEST_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.5.5.129
-    - name: GigabitEthernet0/0
-      description: "UPLINK atlR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.5.1/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.60/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/0
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/1
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false 
-
-- name: atlsw2
-  device_type: vios_switch
-  device_role: pod_l3_switch
-  site: atl
-  rack: "atl_rr_1"
-  position: 36
-  face: front
-  status: active
-  trunk_interfaces:
-    - name: Port-Channel12
-      description: "TRUNK TO atlSW1"
-      type: lag
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO atlSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO atlSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/3
-      description: "TRUNK TO atlSW3"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  lag_interfaces:
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.0.5.3/32
-      tags: 
-        - ospf_area_0
-      vrf: global
-      status: active
-    - name: vlan300
-      description: "USER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.5.5.3/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.5.1
-      vrrp_group: 1
-      vrrp_description: USER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.5.5.1
-    - name: vlan350
-      description: "SERVER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.5.5.67/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.5.1
-      vrrp_group: 2
-      vrrp_description: SERVER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.5.5.65
-    - name: vlan400
-      description: "GUEST_SVI"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.5.5.131/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.5.1
-      vrrp_group: 3
-      vrrp_description: GUEST_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.5.5.129 
-    - name: GigabitEthernet0/0
-      description: "UPLINK atlR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.5.3/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.61/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/0
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/1
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false  
-
-- name: atlsw3
-  device_type: vios_switch
-  device_role: pod_l2_switch
-  site: atl
-  rack: "atl_rr_1"
-  position: 35
-  face: front
-  status: active
-  access_interfaces:
-    - name: GigabitEthernet0/3
-      description: USERS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: USERS
-    - name: GigabitEthernet1/0
-      description: SERVERS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: SERVERS
-    - name: GigabitEthernet1/1
-      description: GUESTS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: GUESTS
-  trunk_interfaces:
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO atlSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO atlSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  l3_interfaces:
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.62/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/0
-      type: 1000base-t
-      enabled: false
-- name: mcir1
-  device_type: vios_router
-  device_role: pod_router
-  site: mci
-  rack: "mci_rr_1"
-  position: 38
-  face: front
-  status: active
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.0.6.1/32
-      vrf: global
-      status: active
-      tags: 
-        - ospf_area_0
-    - name: GigabitEthernet0/0
-      description: "UPLINK TO INTERNET PROVIDER"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 24.24.6.2/24
-      vrf: global
-      status: active
-    - name: GigabitEthernet0/1
-      description: "DOWNLINK mciSW1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.6.0/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet0/2
-      description: "DOWNLINK mciSW2"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.6.2/31
-      tags: 
-        - ospf_area_0
-        - p2p 
-      vrf: global
-      status: active
-    - name: GigabitEthernet0/7
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.63/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet0/3
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/4
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/5
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/6
-      type: 1000base-t
+    - name: ethernet29
+      type: 10G
       enabled: false    
-
-- name: mcisw1
-  device_type: vios_switch
-  device_role: pod_l3_switch
-  site: mci
-  rack: "mci_rr_1"
-  position: 37
+    - name: ethernet30
+      type: 10G
+      enabled: false    
+- name: compute01
+  device_type: esxi
+  device_role: compute
+  site: sjc
+  rack: "sjc_rr_4"
+  position: 20
   face: front
   status: active
-  trunk_interfaces:
-    - name: Port-Channel12
-      description: "TRUNK TO mciSW2"
-      type: lag
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO mciSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO mciSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/3
-      description: "TRUNK TO mciSW3"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  lag_interfaces:
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-    - name: GigabitEthernet0/2
-      lag: Port-Channel12
   l3_interfaces:
     - name: Loopback0
-      description: "iBGP LOOPBACK"
+      description: "Underlay LOOPBACK"
       type: virtual
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.0.6.2/32
+      ipv4_address: 10.0.0.121/32
+      vrf: global
+      status: active
       tags: 
-        - ospf_area_0
-      vrf: global
-      status: active
-    - name: vlan300
-      description: "USER_SVI"
-      type: virtual
-      label: layer3
+        - ubuntu
+    - name: eth0
+      description: "LAG Memeber Uplink to Leaf-01"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 155.6.6.2/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.6.1
-      vrrp_group: 1
-      vrrp_description: USER_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.6.6.1
-    - name: vlan350
-      description: "SERVER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.6.6.66/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.6.1
-      vrrp_group: 2
-      vrrp_description: SERVER_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.6.6.65
-    - name: vlan400
-      description: "GUEST_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.6.6.130/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.6.1
-      vrrp_group: 3
-      vrrp_description: GUEST_VLAN
-      vrrp_priority: 200
-      vrrp_primary_ip: 155.6.6.129 
-    - name: GigabitEthernet0/0
-      description: "UPLINK mciR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.6.1/31
+      ipv4_address:
       tags: 
-        - ospf_area_0
         - p2p 
       vrf: global
       status: active
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
+      connection:
+        device: sjc-leaf01
+        int: ethernet0
+    - name: eth1
+      description: "LAG Memeber Uplink to Leaf-02"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.64/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/0
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/1
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false 
-
-- name: mcisw2
-  device_type: vios_switch
-  device_role: pod_l3_switch
-  site: mci
-  rack: "mci_rr_1"
-  position: 36
-  face: front
-  status: active
-  trunk_interfaces:
-    - name: Port-Channel12
-      description: "TRUNK TO mciSW1"
-      type: lag
-      label: trunk
-      enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO mciSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO mciSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-      lag: port-channel12
-
-    - name: GigabitEthernet0/3
-      description: "TRUNK TO mciSW3"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  lag_interfaces:
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-    - name: GigabitEthernet0/1
-      lag: Port-Channel12
-  l3_interfaces:
-    - name: Loopback0
-      description: "iBGP LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.0.6.3/32
+      ipv4_address:
       tags: 
-        - ospf_area_0
-      vrf: global
-      status: active
-    - name: vlan300
-      description: "USER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.6.6.3/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.6.1
-      vrrp_group: 1
-      vrrp_description: USER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.6.6.1
-    - name: vlan350
-      description: "SERVER_SVI"
-      type: virtual
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.6.6.67/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.6.1
-      vrrp_group: 2
-      vrrp_description: SERVER_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.6.6.65
-    - name: vlan400
-      description: "GUEST_SVI"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 155.6.6.131/26
-      vrf: global
-      status: active
-      dhcp_helper: 10.0.6.1
-      vrrp_group: 3
-      vrrp_description: GUEST_VLAN
-      vrrp_priority: 100
-      vrrp_primary_ip: 155.6.6.129
-    - name: GigabitEthernet0/0
-      description: "UPLINK mciR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 10.10.6.3/31
-      tags: 
-        - ospf_area_0
         - p2p 
       vrf: global
       status: active
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.65/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/0
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/1
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false  
-
-- name: mcisw3
-  device_type: vios_switch
-  device_role: pod_l2_switch
-  site: mci
-  rack: "mci_rr_1"
-  position: 35
-  face: front
-  status: active
-  access_interfaces:
-    - name: GigabitEthernet0/3
-      description: USERS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: USERS
-    - name: GigabitEthernet1/0
-      description: SERVERS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: SERVERS
-    - name: GigabitEthernet1/1
-      description: GUESTS
-      type: 1000base-t
-      label: access
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Access
-      untag_vlan: GUESTS
-  trunk_interfaces:
-    - name: GigabitEthernet0/1
-      description: "TRUNK TO mciSW1"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-    - name: GigabitEthernet0/2
-      description: "TRUNK TO mciSW2"
-      type: 1000base-t
-      label: trunk
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      mode: Tagged
-      untag_vlan: NATIVE_VLAN
-      tagged_vlan_1: USERS
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: GUESTS
-  l3_interfaces:
-    - name: GigabitEthernet1/3
-      description: "MGMT-INTERFACE"
-      type: 1000base-t
-      label: mgmt
-      enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.66/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: GigabitEthernet1/2
-      type: 1000base-t
-      enabled: false
-    - name: GigabitEthernet0/0
-      type: 1000base-t
-      enabled: false
-- name: cloud_router
-  device_type: c8000v
-  device_role: cloud_edge
-  site: cloud
-  rack: "cloud_rr_1"
-  position: 42
+      connection:
+        device: sjc-leaf02
+        int: ethernet0
+- name: compute02
+  device_type: esxi
+  device_role: compute
+  site: sjc
+  rack: "sjc_rr_4"
+  position: 19
   face: front
   status: active
   l3_interfaces:
-    - name: GigabitEthernet1
-      description: "TO sjcR1"
-      type: 1000base-t
-      label: layer3
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 24.24.1.1/24
+      ipv4_address: 10.0.0.122/32
       vrf: global
       status: active
-    - name: GigabitEthernet2
-      description: "TO laxR1"
-      type: 1000base-t
-      label: layer3
+      tags: 
+        - ubuntu
+    - name: eth0
+      description: "LAG Memeber Uplink to Leaf-01"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 24.24.2.1/24
-      vrf: global
-      status: active  
-    - name: GigabitEthernet3
-      description: "TO bosR1"
-      type: 1000base-t
-      label: layer3
-      enabled: True
-      mtu: 1500
-      mgmt_only: False
-      ipv4_address: 24.24.3.1/24
+      ipv4_address:
+      tags: 
+        - p2p 
       vrf: global
       status: active
-    - name: GigabitEthernet4
-      description: "TO lasR1"
-      type: 1000base-t
-      label: layer3
+      connection:
+        device: sjc-leaf01
+        int: ethernet1
+    - name: eth1
+      description: "LAG Memeber Uplink to Leaf-02"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 24.24.4.1/24
+      ipv4_address:
+      tags: 
+        - p2p 
       vrf: global
       status: active
-    - name: GigabitEthernet5
-      description: "TO atlR1"
-      type: 1000base-t
-      label: layer3
+      connection:
+        device: sjc-leaf02
+        int: ethernet1
+- name: compute03
+  device_type: esxi
+  device_role: compute
+  site: sjc
+  rack: "sjc_rr_4"
+  position: 18
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 24.24.5.1/24
+      ipv4_address: 10.0.0.123/32
       vrf: global
       status: active
-    - name: GigabitEthernet1
-      description: "TO mciR1"
-      type: 1000base-t
-      label: layer3
+      tags: 
+        - ubuntu
+    - name: eth0
+      description: "LAG Memeber Uplink to Leaf-01"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
+      mtu: 9216
       mgmt_only: False
-      ipv4_address: 24.24.6.1/24
+      ipv4_address:
+      tags: 
+        - p2p 
       vrf: global
       status: active
-    - name: GigabitEthernet7
-      description: "MGMT INTERFACE"
-      type: 1000base-t
-      label: mgmt
+      connection:
+        device: sjc-leaf03
+        int: ethernet0
+    - name: eth1
+      description: "LAG Memeber Uplink to Leaf-02"
+      type: 10G
+      label: layer2
       enabled: True
-      mtu: 1500
-      mgmt_only: True
-      ipv4_address: 192.168.4.31/24
-      vrf: MGMT
-      status: active           
-    
-  disabled_interfaces:
-    - name: GigabitEthernet8
-      type: 1000base-t
-      enabled: false      
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf04
+        int: ethernet0
+- name: compute04
+  device_type: esxi
+  device_role: compute
+  site: sjc
+  rack: "sjc_rr_4"
+  position: 17
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: 10.0.0.121/32
+      vrf: global
+      status: active
+      tags: 
+        - ubuntu
+    - name: eth0
+      description: "LAG Memeber Uplink to Leaf-01"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf03
+        int: ethernet1
+    - name: eth1
+      description: "LAG Memeber Uplink to Leaf-02"
+      type: 10G
+      label: layer2
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address:
+      tags: 
+        - p2p 
+      vrf: global
+      status: active
+      connection:
+        device: sjc-leaf04
+        int: ethernet1

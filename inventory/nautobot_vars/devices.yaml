@@ -1,5 +1,5 @@
 manufacturer:
-- name: cisco
+- name: Cisco
   platform:
   - name: ios
     slug: ios
@@ -19,7 +19,7 @@ manufacturer:
     slug: c8000v
     part_number: c8000v
     u_height: 1
-    is_full_depth: False  
+    is_full_depth: False
   device_roles:
   - name: pod_router
     color: f4f0ec
@@ -29,26 +29,183 @@ manufacturer:
     color: 808080
   - name: cloud_edge
     color: 808080   
-- vendor: arista
+- name: Arista
   platform:
   - name: eos
     slug: eos
     napalm_driver: eos 
+  - name: veos
+    slug: veos
+    napalm_driver: eos 
+  - name: ceos
+    slug: ceos
+    napalm_driver: eos 
+  - name: cloud_eos
+    slug: cloud_eos
+    napalm_driver: eos
   device_types:
-  - name: ceos_router
-    slug: ceos_router
-    part_number: ceos-router
-    u_height: 1
-    is_full_depth: False
   - name: ceos_switch
     slug: ceos_switch
     part_number: ceos-switch
     u_height: 1
     is_full_depth: False
+    comments: "container EOS instance"
+  - name: veos_switch
+    slug: veos_switch
+    part_number: veos-switch
+    u_height: 1
+    is_full_depth: False
+    comments: "virutal EOS instance"
+  - name: cloud_eos
+    slug: cloud_eos
+    part_number: cloud_eos
+    u_height: 1
+    is_full_depth: False
+    comments: "Cloud EOS instance"
+  - name: 7808R3
+    slug: 7808r3
+    part_number: 7808r3
+    u_height: 8
+    is_full_depth: False
+    comments: "Modular 100/400G Spine Switches"
+  - name: 7508R3
+    slug: 7508r3
+    part_number: 7508r3
+    u_height: 8
+    is_full_depth: False
+    comments: "Modular 100/400G Spine Switches"
+  - name: 7388X5
+    slug: 7388x5
+    part_number: 7388x5
+    u_height: 2
+    is_full_depth: False
+    comments: "Cloud Optimized 100G/200G/400G"
+  - name: 7280DR3A-36
+    slug: 7280dr3a-36
+    part_number: 7280dr3a-36
+    u_height: 2
+    is_full_depth: False
+    comments: "Dynamic Deep Buffer 25/50/100/400G"
+  - name: 7060DX5-64S
+    slug: 7060dx5-64s
+    part_number: 7060dx5-64s
+    u_height: 2
+    is_full_depth: False
+    comments: "Cloud Optimized 10/25/40/50/100G/400G"
+  - name: 7050DX4-32S
+    slug: 7050dx4-32s
+    part_number: 7050dx4-32s
+    u_height: 1
+    is_full_depth: False
+    comments: "Flexible 100G/400G"
+  - name: 7050CX3-32S
+    slug: 7050dx3-32s
+    part_number: 7050dx3-32s
+    u_height: 1
+    is_full_depth: False
+    comments: "Flexible 10/25/40/50/100G"
+  - name: 720XP-48Y6
+    slug: 720XP-48Y6
+    part_number: 720XP-48Y6
+    u_height: 1
+    is_full_depth: False
+    comments: "10M-mGig Campus POE switches"
   device_roles:
-  - name: pod_router
-    color: f4f0ec
-  - name: pod_l3_switch
+  - name: cleaf
+    color: 232323
+  - name: bleaf
     color: 696969
-  - name: pod_l2_switch
+  - name: spine
     color: 808080
+  - name: superspine
+    color: 858585
+  - name: route-server
+    color: 333333
+- name: Juniper
+  platform:
+  - name: junos
+    slug: junos
+    napalm_driver: junos
+  - name: cprd
+    slug: cprd
+    napalm_driver: junos 
+  device_types:
+  - name: cprd
+    slug: cprd
+    part_number: cprd
+    u_height: 1
+    is_full_depth: False
+    comments: "Containerized Junos RPD"
+  - name: QFX5700
+    slug: qfx5700
+    part_number: qfx5700
+    u_height: 1
+    is_full_depth: False
+    comments: "400GbE IP fabrics"
+  - name: QFX5130
+    slug: qfx5130
+    part_number: qfx5130
+    u_height: 1
+    is_full_depth: False
+    comments: "1U, 400GbE switch based on the TD4"
+  device_roles:
+  - name: cleaf
+    color: 232323
+  - name: bleaf
+    color: 696969
+  - name: spine
+    color: 808080
+  - name: superspine
+    color: 858585
+  - name: route-server
+    color: 333333
+- name: Dell
+  platform:
+  - name: os10
+    slug: os10
+    napalm_driver: os10
+  - name: sonic
+    slug: sonic
+    napalm_driver: sonic 
+  device_types:
+  - name: S5448F-ON
+    slug: s5448f-on
+    part_number: s5448f-on
+    u_height: 1
+    is_full_depth: False
+    comments: "1U, 48*100GbE switch based on the TD4"
+  - name: S5232F-ON
+    slug: s5232f-on
+    part_number: s5232f-on
+    u_height: 1
+    is_full_depth: False
+    comments: "1U, 32*100GbE switch based on the TD3"
+  device_roles:
+  - name: cleaf
+    color: 232323
+  - name: bleaf
+    color: 696969
+  - name: spine
+    color: 808080
+  - name: superspine
+    color: 858585
+  - name: route-server
+    color: 333333
+- name: VMWare
+  platform:
+  - name: ubuntu
+    slug: ubuntu
+    napalm_driver: ubuntu
+  - name: centos
+    slug: centos
+    napalm_driver: centos 
+  device_types:
+  - name: ESXi
+    slug: esxi
+    part_number: esxi
+    u_height: 1
+    is_full_depth: False
+    comments: "Vmware Hypervisor on Dell D650 Compute"
+  device_roles:
+  - name: compute
+    color: 393939
