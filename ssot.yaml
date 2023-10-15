@@ -9,6 +9,7 @@
   - networktocode.nautobot
 
   vars_files:
+   - /home/xji/devops/arista-naas/group_vars/dc2.yaml
    - inventory/nautobot_vars/regions.yaml
    - inventory/nautobot_vars/sites.yaml
    - inventory/nautobot_vars/tenants.yaml

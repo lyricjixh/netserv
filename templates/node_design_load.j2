@@ -1,10 +1,11 @@
 device_list:
+{% for site in sites %}
 {% for n in range(2) %}
-- name: sjc-spine{{ "%02d" | format(n+1) }}
+- name: {{ site.name }}-spine{{ "%02d" | format(n+1) }}
   device_type: ceos_switch
   device_role: spine
-  site: sjc
-  rack: "sjc_rr_4"
+  site: {{ site.name }}
+  rack: "{{ site.name }}_rr_4"
   position: {{ 40-n }}
   face: front
   status: active
@@ -42,7 +43,7 @@ device_list:
         - p2p 
       status: active
       connection:
-        device: sjc-leaf{{ "%02d" | format(m+1) }}
+        device: {{ site.name }}-leaf{{ "%02d" | format(m+1) }}
         int: Ethernet{{32-m}}
 {% endfor %}
     - name: Management0
@@ -62,13 +63,19 @@ device_list:
       enabled: false
 {% endfor %}
 {% endfor %}
+{% set vlan_list=[101,102,201,202,301,302] %}
+{# {% set vlan_list=vxlans | json_query('[?state==`present`].vlan') %} #}
 {% for n in range(6) %}
-- name: sjc-leaf{{ "%02d" | format(n+1) }}
+- name: {{ site.name }}-leaf{{ "%02d" | format(n+1) }}
   device_type: ceos_switch
   device_role: cleaf
-  site: sjc
-  rack: "sjc_rr_{{floor(n/2)}}"
-  position: {{ 40-n }}
+  site: {{ site.name }}
+  rack: "{{ site.name }}_rr_{{(n/2)|round(0,'floor')|int+1}}"
+{% if n is even %}
+  position: 40
+{% else %}
+  position: 39
+{% endif %}
   face: front
   status: active
   l3_interfaces:
@@ -105,7 +112,7 @@ device_list:
         - p2p 
       status: active
       connection:
-        device: sjc-spine{{ "%02d" | format(m+1) }}
+        device: {{ site.name }}-spine{{ "%02d" | format(m+1) }}
         int: Ethernet{{n}}
 {% endfor %}
     - name: Management0
@@ -129,9 +136,9 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-{% set vlan_list={{ vxlans | json_query('[?state==`present`].vlan') }} %}
 {% for vid in vlan_list %}
-      tagged_vlan_1: {{ vid }}
+      tagged_vlan_{{loop.index}}: {{ vid }}
+{% endfor %}
 {% endfor %}
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
@@ -143,8 +150,7 @@ device_list:
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
 {% for vid in vlan_list %}
-      tagged_vlan_1: {{ vid }}
-{% endfor %}
+      tagged_vlan_{{loop.index}}: {{ vid }}
 {% endfor %}
   lag_interfaces:
 {% for ll in range(2) %}
@@ -158,7 +164,11 @@ device_list:
       lag: Port-Channel{{101+ll}}
       connection:
         device: compute{{101+ll}}
-        int: eth{{mod(n,2)}}
+{% if n is even %}
+        int: eth0
+{% else %}
+        int: eth1
+{% endif %}
 {% endfor %}
 {% for ll in range(2) %}
     - name: Ethernet{{27+ll}}
@@ -170,10 +180,10 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-{% if n is odds %}
-        device: sjc-leaf{{ "%02d" | format(n+1) }}
-{% else%}
-        device: sjc-leaf{{ "%02d" | format(n-1) }}
+{% if n is even %}
+        device: {{ site.name }}-leaf{{ "%02d" | format(n+2) }}
+{% else %}
+        device: {{ site.name }}-leaf{{ "%02d" | format(n+1) }}
 {% endif %}
         int: Ethernet{{27+ll}}
 {% endfor %}
@@ -191,9 +201,10 @@ device_list:
       untagged_vlan: ADMIN
 {% endfor %}
   disabled_interfaces:
-{% for d in range(3,27) %}
+{% for d in range(3,26) %}
     - name: Ethernet{{d}}
       type: 10gbase-x-sfpp
       enabled: false
+{% endfor %}
 {% endfor %}
 {% endfor %}
