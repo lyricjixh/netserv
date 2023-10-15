@@ -1,0 +1,21 @@
+---
+#############################################################
+# Update Device Lag interfaces inherited in Nautobot
+#############################################################
+- name: Add LAG interfaces
+  networktocode.nautobot.device_interface:
+    url: "{{ nb_url }}"
+    token: "{{ nb_token }}"
+    validate_certs: no
+    device: "{{ item.0.name }}"
+    name: "{{ item.1.name }}"
+    type: "{{ item.1.type }}"
+    mtu: "{{ item.1.mtu }}"
+    mgmt_only: "{{ item.1.mgmt_only|default('False') }}"  
+    lag:
+      name: "{{ item.1.lag }}" 
+    state: present
+  loop: "{{ device_list | subelements('lag_interfaces', 'skip_missing=True') }}"
+  tags:
+    - intf
+    - intf_lag

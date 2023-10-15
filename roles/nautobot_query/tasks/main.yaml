@@ -1,0 +1,17 @@
+- name: Get data from Nautobot
+  networktocode.nautobot.query_graphql:
+    url: "{{ nb_url }}"
+    token: "{{ nb_token }}"
+    validate_certs: False
+    query: "{{ query_string }}"
+  register: "nb_devices"
+
+- name: Create directory if none exist
+  file:
+    path: querys
+    state: directory
+
+- name: Print to file
+  copy:
+    content: "{{ nb_devices | to_json }}"
+    dest: "querys/{{ inventory_hostname }}.json"

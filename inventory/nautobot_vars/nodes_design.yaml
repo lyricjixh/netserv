@@ -15,7 +15,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       ipv4_address: 10.0.0.101/32
-      vrf: global
       status: active
       tags: 
         - ospf_area_0
@@ -26,11 +25,10 @@ device_list:
       mtu: 9216
       mgmt_only: False
       ipv4_address: 10.100.0.101/32
-      vrf: global
       status: active
-    - name: ethernet0
+    - name: Ethernet0
       description: "PTP Downward to leaf-01"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -38,14 +36,13 @@ device_list:
       ipv4_address: 10.0.1.0/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-leaf01
-        int: ethernet31
-    - name: ethernet1
+        int: Ethernet31
+    - name: Ethernet1
       description: "PTP Downward to leaf-02"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -53,14 +50,13 @@ device_list:
       ipv4_address: 10.0.1.4/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-leaf02
-        int: ethernet31
-    - name: ethernet2
+        int: Ethernet31
+    - name: Ethernet2
       description: "PTP Downward to leaf-03"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -68,14 +64,13 @@ device_list:
       ipv4_address: 10.0.1.8/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-leaf03
-        int: ethernet31
-    - name: ethernet3
+        int: Ethernet31
+    - name: Ethernet3
       description: "PTP Downward to leaf-04"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -83,14 +78,13 @@ device_list:
       ipv4_address: 10.0.1.12/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-leaf04
-        int: ethernet31
-    - name: ethernet4
+        int: Ethernet31
+    - name: Ethernet4
       description: "PTP Downward to leaf-05"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -98,14 +92,13 @@ device_list:
       ipv4_address: 10.0.1.16/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-leaf05
-        int: ethernet31
-    - name: ethernet5
+        int: Ethernet31
+    - name: Ethernet5
       description: "PTP Downward to leaf-06"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -113,14 +106,13 @@ device_list:
       ipv4_address: 10.0.1.20/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-leaf05
-        int: ethernet31
+        int: Ethernet31
     - name: Management0
       description: "MGMT-INTERFACE"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
       mtu: 9216
@@ -129,17 +121,17 @@ device_list:
       vrf: MGMT
       status: active
   disabled_interfaces:
-    - name: ethernet6
-      type: 10G
+    - name: Ethernet6
+      type: 10gbase-x-sfpp
       enabled: false
-    - name: ethernet7
-      type: 10G
+    - name: Ethernet7
+      type: 10gbase-x-sfpp
       enabled: false    
-    - name: ethernet8
-      type: 10G
+    - name: Ethernet8
+      type: 10gbase-x-sfpp
       enabled: false    
-    - name: ethernet9
-      type: 10G
+    - name: Ethernet9
+      type: 10gbase-x-sfpp
       enabled: false    
 - name: sjc-spine02
   device_type: ceos_switch
@@ -157,7 +149,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       ipv4_address: 10.0.0.102/32
-      vrf: global
       status: active
       tags: 
         - ospf_area_0
@@ -168,11 +159,10 @@ device_list:
       mtu: 9216
       mgmt_only: False
       ipv4_address: 10.100.0.102/32
-      vrf: global
       status: active
-    - name: ethernet0
+    - name: Ethernet0
       description: "PTP Downward to leaf-01"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -180,14 +170,13 @@ device_list:
       ipv4_address: 10.0.1.2/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-leaf01
-        int: ethernet32
-    - name: ethernet1
+        int: Ethernet32
+    - name: Ethernet1
       description: "PTP Downward to leaf-02"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -195,14 +184,13 @@ device_list:
       ipv4_address: 10.0.1.6/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-leaf02
-        int: ethernet32
-    - name: ethernet2
+        int: Ethernet32
+    - name: Ethernet2
       description: "PTP Downward to leaf-03"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -210,14 +198,13 @@ device_list:
       ipv4_address: 10.0.1.10/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-leaf03
-        int: ethernet32
-    - name: ethernet3
+        int: Ethernet32
+    - name: Ethernet3
       description: "PTP Downward to leaf-04"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -225,14 +212,13 @@ device_list:
       ipv4_address: 10.0.1.14/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-leaf04
-        int: ethernet32
-    - name: ethernet4
+        int: Ethernet32
+    - name: Ethernet4
       description: "PTP Downward to leaf-05"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -240,14 +226,13 @@ device_list:
       ipv4_address: 10.0.1.18/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-leaf05
-        int: ethernet32
-    - name: ethernet5
+        int: Ethernet32
+    - name: Ethernet5
       description: "PTP Downward to leaf-06"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -255,14 +240,13 @@ device_list:
       ipv4_address: 10.0.1.22/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-leaf05
-        int: ethernet32
+        int: Ethernet32
     - name: Management0
       description: "MGMT-INTERFACE"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
       mtu: 9216
@@ -271,17 +255,17 @@ device_list:
       vrf: MGMT
       status: active
   disabled_interfaces:
-    - name: ethernet6
-      type: 10G
+    - name: Ethernet6
+      type: 10gbase-x-sfpp
       enabled: false
-    - name: ethernet7
-      type: 10G
+    - name: Ethernet7
+      type: 10gbase-x-sfpp
       enabled: false    
-    - name: ethernet8
-      type: 10G
+    - name: Ethernet8
+      type: 10gbase-x-sfpp
       enabled: false    
-    - name: ethernet9
-      type: 10G
+    - name: Ethernet9
+      type: 10gbase-x-sfpp
       enabled: false    
 - name: sjc-leaf01
   device_type: ceos_switch
@@ -299,7 +283,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       ipv4_address: 10.0.0.1/32
-      vrf: global
       status: active
       tags: 
         - ospf_area_0
@@ -310,69 +293,10 @@ device_list:
       mtu: 9216
       mgmt_only: False
       ipv4_address: 10.100.0.1/32
-      vrf: global
       status: active
-    - name: ethernet0
-      description: "Compute 01:MLAG Member"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 
-      vrf: global
-      status: active
-      connection:
-        device: compute01
-        int: ethernet0
-    - name: ethernet1
-      description: "Compute 02:MLAG Member"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: compute02
-        int: ethernet0
-    - name: ethernet27
-      description: "MLAG CTRL Link"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf02
-        int: ethernet27
-    - name: ethernet28
-      description: "MLAG CTRL Link"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf02
-        int: ethernet28
-    - name: ethernet31
+    - name: Ethernet31
       description: "UPlink to Spine01"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -380,14 +304,13 @@ device_list:
       ipv4_address: 10.0.1.1/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-spine01
-        int: ethernet0
-    - name: ethernet32
+        int: Ethernet0
+    - name: Ethernet32
       description: "UPlink to Spine01"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: layer3
       enabled: True
       mtu: 9216
@@ -395,14 +318,13 @@ device_list:
       ipv4_address: 10.0.1.3/31
       tags: 
         - p2p 
-      vrf: global
       status: active
       connection:
         device: sjc-spine02
-        int: ethernet0
+        int: Ethernet0
     - name: Management0
       description: "MGMT-INTERFACE"
-      type: 10G
+      type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
       mtu: 9216
@@ -410,948 +332,1210 @@ device_list:
       ipv4_address: 172.100.100.2/24
       vrf: MGMT
       status: active
-  disabled_interfaces:
-    - name: ethernet3
-      type: 10G
-      enabled: false
-    - name: ethernet4
-      type: 10G
-      enabled: false
-    - name: ethernet5
-      type: 10G
-      enabled: false
-    - name: ethernet6
-      type: 10G
-      enabled: false    
-    - name: ethernet29
-      type: 10G
-      enabled: false    
-    - name: ethernet30
-      type: 10G
-      enabled: false    
-- name: sjc-leaf02
-  device_type: ceos_switch
-  device_role: cleaf
-  site: sjc
-  rack: "sjc_rr_1"
-  position: 39
-  face: front
-  status: active
-  l3_interfaces:
-    - name: Loopback0
-      description: "Underlay LOOPBACK"
-      type: virtual
+  trunk_interfaces:
+    - name: Port-Channel101
+      description: "TRUNK TO Compute101"
+      type: lag
+      label: trunk
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.0.0.2/32
-      vrf: global
-      status: active
-      tags: 
-        - ospf_area_0
-    - name: Loopback1
-      description: "Overlay LOOPBACK"
-      type: virtual
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: CustA_01
+    - name: Port-Channel102
+      description: "TRUNK TO Compute102"
+      type: lag
+      label: trunk
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.100.0.2/32
-      vrf: global
-      status: active
-    - name: ethernet0
-      description: "Compute 01:MLAG Member"
-      type: 10G
-      label: layer2
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: CustA_01
+    - name: Port-Channel999
+      description: "TRUNK TO LEAF02-MLAG CTL"
+      type: lag
+      label: trunk
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: 
-      vrf: global
-      status: active
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: CustA_01
+  lag_interfaces:
+    - name: Ethernet0
+      description: "TRUNK TO Compute101"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: Port-Channel101
       connection:
-        device: compute01
-        int: eth1
-    - name: ethernet1
-      description: "Compute 02:MLAG Member"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: compute02
-        int: eth1
-    - name: ethernet27
-      description: "MLAG CTRL Link"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf01
-        int: ethernet27
-    - name: ethernet28
-      description: "MLAG CTRL Link"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf01
-        int: ethernet28
-    - name: ethernet31
-      description: "UPlink to Spine01"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.1.5/31
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-spine01
-        int: ethernet1
-    - name: ethernet32
-      description: "UPlink to Spine01"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.1.7/31
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-spine02
-        int: ethernet1
-    - name: Management0
-      description: "MGMT-INTERFACE"
-      type: 10G
-      label: mgmt
-      enabled: True
-      mtu: 9216
-      mgmt_only: True
-      ipv4_address: 172.100.100.3/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: ethernet3
-      type: 10G
-      enabled: false
-    - name: ethernet4
-      type: 10G
-      enabled: false
-    - name: ethernet5
-      type: 10G
-      enabled: false
-    - name: ethernet6
-      type: 10G
-      enabled: false    
-    - name: ethernet29
-      type: 10G
-      enabled: false    
-    - name: ethernet30
-      type: 10G
-      enabled: false    
-- name: sjc-leaf03
-  device_type: ceos_switch
-  device_role: cleaf
-  site: sjc
-  rack: "sjc_rr_2"
-  position: 38
-  face: front
-  status: active
-  l3_interfaces:
-    - name: Loopback0
-      description: "Underlay LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.0.3/32
-      vrf: global
-      status: active
-      tags: 
-        - ospf_area_0
-    - name: Loopback1
-      description: "Overlay LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.100.0.3/32
-      vrf: global
-      status: active
-    - name: ethernet0
-      description: "Compute 01:MLAG Member"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 
-      vrf: global
-      status: active
-      connection:
-        device: compute03
+        device: compute101
         int: eth0
-    - name: ethernet1
-      description: "Compute 02:MLAG Member"
-      type: 10G
-      label: layer2
+    - name: Ethernet1
+      description: "Downlink TO Compute102"
+      type: 10gbase-x-sfpp
+      label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
+      lag: Port-Channel102
       connection:
-        device: compute04
+        device: compute102
         int: eth0
-    - name: ethernet27
+    - name: Ethernet27
       description: "MLAG CTRL Link"
-      type: 10G
-      label: layer2
+      type: 10gbase-x-sfpp
+      label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf04
-        int: ethernet27
-    - name: ethernet28
-      description: "MLAG CTRL Link"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf04
-        int: ethernet28
-    - name: ethernet31
-      description: "UPlink to Spine01"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.1.9/31
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-spine01
-        int: ethernet2
-    - name: ethernet32
-      description: "UPlink to Spine02"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.1.11/31
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-spine02
-        int: ethernet2
-    - name: Management0
-      description: "MGMT-INTERFACE"
-      type: 10G
-      label: mgmt
-      enabled: True
-      mtu: 9216
-      mgmt_only: True
-      ipv4_address: 172.100.100.3/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: ethernet3
-      type: 10G
-      enabled: false
-    - name: ethernet4
-      type: 10G
-      enabled: false
-    - name: ethernet5
-      type: 10G
-      enabled: false
-    - name: ethernet6
-      type: 10G
-      enabled: false    
-    - name: ethernet29
-      type: 10G
-      enabled: false    
-    - name: ethernet30
-      type: 10G
-      enabled: false    
-- name: sjc-leaf04
-  device_type: ceos_switch
-  device_role: cleaf
-  site: sjc
-  rack: "sjc_rr_2"
-  position: 39
-  face: front
-  status: active
-  l3_interfaces:
-    - name: Loopback0
-      description: "Underlay LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.0.4/32
-      vrf: global
-      status: active
-      tags: 
-        - ospf_area_0
-    - name: Loopback1
-      description: "Overlay LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.100.0.4/32
-      vrf: global
-      status: active
-    - name: ethernet0
-      description: "Compute 03:MLAG Member"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 
-      vrf: global
-      status: active
-      connection:
-        device: compute03
-        int: eth1
-    - name: ethernet1
-      description: "Compute 04:MLAG Member"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: compute04
-        int: eth1
-    - name: ethernet27
-      description: "MLAG CTRL Link"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf03
-        int: ethernet27
-    - name: ethernet28
-      description: "MLAG CTRL Link"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf03
-        int: ethernet28
-    - name: ethernet31
-      description: "UPlink to Spine01"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.1.13/31
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-spine01
-        int: ethernet3
-    - name: ethernet32
-      description: "UPlink to Spine02"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.1.15/31
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-spine02
-        int: ethernet3
-    - name: Management0
-      description: "MGMT-INTERFACE"
-      type: 10G
-      label: mgmt
-      enabled: True
-      mtu: 9216
-      mgmt_only: True
-      ipv4_address: 172.100.100.3/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: ethernet3
-      type: 10G
-      enabled: false
-    - name: ethernet4
-      type: 10G
-      enabled: false
-    - name: ethernet5
-      type: 10G
-      enabled: false
-    - name: ethernet6
-      type: 10G
-      enabled: false    
-    - name: ethernet29
-      type: 10G
-      enabled: false    
-    - name: ethernet30
-      type: 10G
-      enabled: false    
-- name: sjc-leaf05
-  device_type: ceos_switch
-  device_role: bleaf
-  site: sjc
-  rack: "sjc_rr_3"
-  position: 38
-  face: front
-  status: active
-  l3_interfaces:
-    - name: Loopback0
-      description: "Underlay LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.0.5/32
-      vrf: global
-      status: active
-      tags: 
-        - ospf_area_0
-    - name: Loopback1
-      description: "Overlay LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.100.0.5/32
-      vrf: global
-      status: active
-    - name: ethernet0
-      description: "External Uplink"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.172.1.2/27
-      vrf: global
-      status: active
-      connection:
-        device: sjc-pr01
-        int: eth0
-    - name: ethernet0
-      description: "External Uplink"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.172.1.34/27
-      vrf: global
-      status: active
-      connection:
-        device: sjc-pr02
-        int: eth0
-    - name: ethernet27
-      description: "MLAG CTRL Link"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf06
-        int: ethernet27
-    - name: ethernet28
-      description: "MLAG CTRL Link"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf06
-        int: ethernet28
-    - name: ethernet31
-      description: "UPlink to Spine01"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.1.17/31
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-spine01
-        int: ethernet4
-    - name: ethernet32
-      description: "UPlink to Spine02"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.1.19/31
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-spine02
-        int: ethernet4
-    - name: Management0
-      description: "MGMT-INTERFACE"
-      type: 10G
-      label: mgmt
-      enabled: True
-      mtu: 9216
-      mgmt_only: True
-      ipv4_address: 172.100.100.5/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: ethernet3
-      type: 10G
-      enabled: false
-    - name: ethernet4
-      type: 10G
-      enabled: false
-    - name: ethernet5
-      type: 10G
-      enabled: false
-    - name: ethernet6
-      type: 10G
-      enabled: false    
-    - name: ethernet29
-      type: 10G
-      enabled: false    
-    - name: ethernet30
-      type: 10G
-      enabled: false    
-- name: sjc-leaf06
-  device_type: ceos_switch
-  device_role: bleaf
-  site: sjc
-  rack: "sjc_rr_3"
-  position: 39
-  face: front
-  status: active
-  l3_interfaces:
-    - name: Loopback0
-      description: "Underlay LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.0.6/32
-      vrf: global
-      status: active
-      tags: 
-        - ospf_area_0
-    - name: Loopback1
-      description: "Overlay LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.100.0.6/32
-      vrf: global
-      status: active
-    - name: ethernet0
-      description: "External Uplink"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.172.2.2/27
-      vrf: global
-      status: active
-      connection:
-        device: sjc-pr01
-        int: eth0
-    - name: ethernet0
-      description: "External Uplink"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.172.2.34/27
-      vrf: global
-      status: active
-      connection:
-        device: sjc-pr02
-        int: eth0
-    - name: ethernet27
-      description: "MLAG CTRL Link"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf05
-        int: ethernet27
-    - name: ethernet28
-      description: "MLAG CTRL Link"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf05
-        int: ethernet28
-    - name: ethernet31
-      description: "UPlink to Spine01"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.1.21/31
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-spine01
-        int: ethernet5
-    - name: ethernet32
-      description: "UPlink to Spine02"
-      type: 10G
-      label: layer3
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.1.23/31
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-spine02
-        int: ethernet5
-    - name: Management0
-      description: "MGMT-INTERFACE"
-      type: 10G
-      label: mgmt
-      enabled: True
-      mtu: 9216
-      mgmt_only: True
-      ipv4_address: 172.100.100.6/24
-      vrf: MGMT
-      status: active
-  disabled_interfaces:
-    - name: ethernet3
-      type: 10G
-      enabled: false
-    - name: ethernet4
-      type: 10G
-      enabled: false
-    - name: ethernet5
-      type: 10G
-      enabled: false
-    - name: ethernet6
-      type: 10G
-      enabled: false    
-    - name: ethernet29
-      type: 10G
-      enabled: false    
-    - name: ethernet30
-      type: 10G
-      enabled: false    
-- name: compute01
-  device_type: esxi
-  device_role: compute
-  site: sjc
-  rack: "sjc_rr_4"
-  position: 20
-  face: front
-  status: active
-  l3_interfaces:
-    - name: Loopback0
-      description: "Underlay LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.0.121/32
-      vrf: global
-      status: active
-      tags: 
-        - ubuntu
-    - name: eth0
-      description: "LAG Memeber Uplink to Leaf-01"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf01
-        int: ethernet0
-    - name: eth1
-      description: "LAG Memeber Uplink to Leaf-02"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
+      lag: Port-Channel999
       connection:
         device: sjc-leaf02
-        int: ethernet0
-- name: compute02
-  device_type: esxi
-  device_role: compute
-  site: sjc
-  rack: "sjc_rr_4"
-  position: 19
-  face: front
-  status: active
-  l3_interfaces:
-    - name: Loopback0
-      description: "Underlay LOOPBACK"
-      type: virtual
+        int: Ethernet27
+    - name: Ethernet28
+      description: "MLAG CTRL Link"
+      type: 10gbase-x-sfpp
+      label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.0.0.122/32
-      vrf: global
-      status: active
-      tags: 
-        - ubuntu
-    - name: eth0
-      description: "LAG Memeber Uplink to Leaf-01"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf01
-        int: ethernet1
-    - name: eth1
-      description: "LAG Memeber Uplink to Leaf-02"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
+      lag: Port-Channel999
       connection:
         device: sjc-leaf02
-        int: ethernet1
-- name: compute03
-  device_type: esxi
-  device_role: compute
-  site: sjc
-  rack: "sjc_rr_4"
-  position: 18
-  face: front
-  status: active
-  l3_interfaces:
-    - name: Loopback0
-      description: "Underlay LOOPBACK"
-      type: virtual
+        int: Ethernet28
+  access_interfaces:
+    - name: Ethernet26
+      description: "Admin Access Port"
+      type: 10gbase-x-sfpp
+      label: access
       enabled: True
+      status: active
       mtu: 9216
       mgmt_only: False
-      ipv4_address: 10.0.0.123/32
-      vrf: global
-      status: active
-      tags: 
-        - ubuntu
-    - name: eth0
-      description: "LAG Memeber Uplink to Leaf-01"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf03
-        int: ethernet0
-    - name: eth1
-      description: "LAG Memeber Uplink to Leaf-02"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf04
-        int: ethernet0
-- name: compute04
-  device_type: esxi
-  device_role: compute
-  site: sjc
-  rack: "sjc_rr_4"
-  position: 17
-  face: front
-  status: active
-  l3_interfaces:
-    - name: Loopback0
-      description: "Underlay LOOPBACK"
-      type: virtual
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address: 10.0.0.121/32
-      vrf: global
-      status: active
-      tags: 
-        - ubuntu
-    - name: eth0
-      description: "LAG Memeber Uplink to Leaf-01"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf03
-        int: ethernet1
-    - name: eth1
-      description: "LAG Memeber Uplink to Leaf-02"
-      type: 10G
-      label: layer2
-      enabled: True
-      mtu: 9216
-      mgmt_only: False
-      ipv4_address:
-      tags: 
-        - p2p 
-      vrf: global
-      status: active
-      connection:
-        device: sjc-leaf04
-        int: ethernet1
+      mode: Access
+      untagged_vlan: ADMIN
+
+  disabled_interfaces:
+    - name: Ethernet3
+      type: 10gbase-x-sfpp
+      enabled: false
+    - name: Ethernet4
+      type: 10gbase-x-sfpp
+      enabled: false
+    - name: Ethernet5
+      type: 10gbase-x-sfpp
+      enabled: false
+    - name: Ethernet6
+      type: 10gbase-x-sfpp
+      enabled: false    
+    - name: Ethernet29
+      type: 10gbase-x-sfpp
+      enabled: false    
+    - name: Ethernet30
+      type: 10gbase-x-sfpp
+      enabled: false    
+# - name: sjc-leaf02
+#   device_type: ceos_switch
+#   device_role: cleaf
+#   site: sjc
+#   rack: "sjc_rr_1"
+#   position: 39
+#   face: front
+#   status: active
+#   l3_interfaces:
+#     - name: Loopback0
+#       description: "Underlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.0.2/32
+#       vrf:
+#       status: active
+#       tags: 
+#         - ospf_area_0
+#     - name: Loopback1
+#       description: "Overlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.100.0.2/32
+#       vrf:
+#       status: active
+#     - name: Ethernet0
+#       description: "Compute 01:MLAG Member"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 
+#       vrf:
+#       status: active
+#       connection:
+#         device: compute101
+#         int: eth1
+#     - name: Ethernet1
+#       description: "Compute 02:MLAG Member"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: compute102
+#         int: eth1
+#     - name: Ethernet27
+#       description: "MLAG CTRL Link"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf01
+#         int: Ethernet27
+#     - name: Ethernet28
+#       description: "MLAG CTRL Link"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf01
+#         int: Ethernet28
+#     - name: Ethernet31
+#       description: "UPlink to Spine01"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.1.5/31
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-spine01
+#         int: Ethernet1
+#     - name: Ethernet32
+#       description: "UPlink to Spine01"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.1.7/31
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-spine02
+#         int: Ethernet1
+#     - name: Management0
+#       description: "MGMT-INTERFACE"
+#       type: 10gbase-x-sfpp
+#       label: mgmt
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: True
+#       ipv4_address: 172.100.100.3/24
+#       vrf: MGMT
+#       status: active
+#   disabled_interfaces:
+#     - name: Ethernet3
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet4
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet5
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet6
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+#     - name: Ethernet29
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+#     - name: Ethernet30
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+# - name: sjc-leaf03
+#   device_type: ceos_switch
+#   device_role: cleaf
+#   site: sjc
+#   rack: "sjc_rr_2"
+#   position: 38
+#   face: front
+#   status: active
+#   l3_interfaces:
+#     - name: Loopback0
+#       description: "Underlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.0.3/32
+#       vrf:
+#       status: active
+#       tags: 
+#         - ospf_area_0
+#     - name: Loopback1
+#       description: "Overlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.100.0.3/32
+#       vrf:
+#       status: active
+#     - name: Ethernet0
+#       description: "Compute 01:MLAG Member"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 
+#       vrf:
+#       status: active
+#       connection:
+#         device: compute201
+#         int: eth0
+#     - name: Ethernet1
+#       description: "Compute 02:MLAG Member"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: compute202
+#         int: eth0
+#     - name: Ethernet27
+#       description: "MLAG CTRL Link"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf04
+#         int: Ethernet27
+#     - name: Ethernet28
+#       description: "MLAG CTRL Link"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf04
+#         int: Ethernet28
+#     - name: Ethernet31
+#       description: "UPlink to Spine01"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.1.9/31
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-spine01
+#         int: Ethernet2
+#     - name: Ethernet32
+#       description: "UPlink to Spine02"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.1.11/31
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-spine02
+#         int: Ethernet2
+#     - name: Management0
+#       description: "MGMT-INTERFACE"
+#       type: 10gbase-x-sfpp
+#       label: mgmt
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: True
+#       ipv4_address: 172.100.100.3/24
+#       vrf: MGMT
+#       status: active
+#   disabled_interfaces:
+#     - name: Ethernet3
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet4
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet5
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet6
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+#     - name: Ethernet29
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+#     - name: Ethernet30
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+# - name: sjc-leaf04
+#   device_type: ceos_switch
+#   device_role: cleaf
+#   site: sjc
+#   rack: "sjc_rr_2"
+#   position: 39
+#   face: front
+#   status: active
+#   l3_interfaces:
+#     - name: Loopback0
+#       description: "Underlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.0.4/32
+#       vrf:
+#       status: active
+#       tags: 
+#         - ospf_area_0
+#     - name: Loopback1
+#       description: "Overlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.100.0.4/32
+#       vrf:
+#       status: active
+#     - name: Ethernet0
+#       description: "Compute 03:MLAG Member"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 
+#       vrf:
+#       status: active
+#       connection:
+#         device: compute201
+#         int: eth1
+#     - name: Ethernet1
+#       description: "Compute 04:MLAG Member"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: compute202
+#         int: eth1
+#     - name: Ethernet27
+#       description: "MLAG CTRL Link"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf03
+#         int: Ethernet27
+#     - name: Ethernet28
+#       description: "MLAG CTRL Link"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf03
+#         int: Ethernet28
+#     - name: Ethernet31
+#       description: "UPlink to Spine01"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.1.13/31
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-spine01
+#         int: Ethernet3
+#     - name: Ethernet32
+#       description: "UPlink to Spine02"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.1.15/31
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-spine02
+#         int: Ethernet3
+#     - name: Management0
+#       description: "MGMT-INTERFACE"
+#       type: 10gbase-x-sfpp
+#       label: mgmt
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: True
+#       ipv4_address: 172.100.100.3/24
+#       vrf: MGMT
+#       status: active
+#   disabled_interfaces:
+#     - name: Ethernet3
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet4
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet5
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet6
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+#     - name: Ethernet29
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+#     - name: Ethernet30
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+# - name: sjc-leaf05
+#   device_type: ceos_switch
+#   device_role: bleaf
+#   site: sjc
+#   rack: "sjc_rr_3"
+#   position: 38
+#   face: front
+#   status: active
+#   l3_interfaces:
+#     - name: Loopback0
+#       description: "Underlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.0.5/32
+#       vrf:
+#       status: active
+#       tags: 
+#         - ospf_area_0
+#     - name: Loopback1
+#       description: "Overlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.100.0.5/32
+#       vrf:
+#       status: active
+#     - name: Ethernet0
+#       description: "External Uplink"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.172.1.2/27
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-pr01
+#         int: eth0
+#     - name: Ethernet0
+#       description: "External Uplink"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.172.1.34/27
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-pr02
+#         int: eth0
+#     - name: Ethernet27
+#       description: "MLAG CTRL Link"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf06
+#         int: Ethernet27
+#     - name: Ethernet28
+#       description: "MLAG CTRL Link"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf06
+#         int: Ethernet28
+#     - name: Ethernet31
+#       description: "UPlink to Spine01"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.1.17/31
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-spine01
+#         int: Ethernet4
+#     - name: Ethernet32
+#       description: "UPlink to Spine02"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.1.19/31
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-spine02
+#         int: Ethernet4
+#     - name: Management0
+#       description: "MGMT-INTERFACE"
+#       type: 10gbase-x-sfpp
+#       label: mgmt
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: True
+#       ipv4_address: 172.100.100.5/24
+#       vrf: MGMT
+#       status: active
+#   disabled_interfaces:
+#     - name: Ethernet3
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet4
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet5
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet6
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+#     - name: Ethernet29
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+#     - name: Ethernet30
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+# - name: sjc-leaf06
+#   device_type: ceos_switch
+#   device_role: bleaf
+#   site: sjc
+#   rack: "sjc_rr_3"
+#   position: 39
+#   face: front
+#   status: active
+#   l3_interfaces:
+#     - name: Loopback0
+#       description: "Underlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.0.6/32
+#       vrf:
+#       status: active
+#       tags: 
+#         - ospf_area_0
+#     - name: Loopback1
+#       description: "Overlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.100.0.6/32
+#       vrf:
+#       status: active
+#     - name: Ethernet0
+#       description: "External Uplink"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.172.2.2/27
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-pr01
+#         int: eth0
+#     - name: Ethernet0
+#       description: "External Uplink"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.172.2.34/27
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-pr02
+#         int: eth0
+#     - name: Ethernet27
+#       description: "MLAG CTRL Link"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf05
+#         int: Ethernet27
+#     - name: Ethernet28
+#       description: "MLAG CTRL Link"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf05
+#         int: Ethernet28
+#     - name: Ethernet31
+#       description: "UPlink to Spine01"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.1.21/31
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-spine01
+#         int: Ethernet5
+#     - name: Ethernet32
+#       description: "UPlink to Spine02"
+#       type: 10gbase-x-sfpp
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.1.23/31
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-spine02
+#         int: Ethernet5
+#     - name: Management0
+#       description: "MGMT-INTERFACE"
+#       type: 10gbase-x-sfpp
+#       label: mgmt
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: True
+#       ipv4_address: 172.100.100.6/24
+#       vrf: MGMT
+#       status: active
+#   disabled_interfaces:
+#     - name: Ethernet3
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet4
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet5
+#       type: 10gbase-x-sfpp
+#       enabled: false
+#     - name: Ethernet6
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+#     - name: Ethernet29
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+#     - name: Ethernet30
+#       type: 10gbase-x-sfpp
+#       enabled: false    
+# - name: compute101
+#   device_type: esxi
+#   device_role: compute
+#   site: sjc
+#   rack: "sjc_rr_4"
+#   position: 20
+#   face: front
+#   status: active
+#   l3_interfaces:
+#     - name: Loopback0
+#       description: "Underlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.0.121/32
+#       vrf:
+#       status: active
+#       tags: 
+#         - ubuntu
+#     - name: eth0
+#       description: "LAG Memeber Uplink to Leaf-01"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf01
+#         int: Ethernet0
+#     - name: eth1
+#       description: "LAG Memeber Uplink to Leaf-02"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf02
+#         int: Ethernet0
+# - name: compute102
+#   device_type: esxi
+#   device_role: compute
+#   site: sjc
+#   rack: "sjc_rr_4"
+#   position: 19
+#   face: front
+#   status: active
+#   l3_interfaces:
+#     - name: Loopback0
+#       description: "Underlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.0.122/32
+#       vrf:
+#       status: active
+#       tags: 
+#         - ubuntu
+#     - name: eth0
+#       description: "LAG Memeber Uplink to Leaf-01"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf01
+#         int: Ethernet1
+#     - name: eth1
+#       description: "LAG Memeber Uplink to Leaf-02"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf02
+#         int: Ethernet1
+# - name: compute201
+#   device_type: esxi
+#   device_role: compute
+#   site: sjc
+#   rack: "sjc_rr_4"
+#   position: 18
+#   face: front
+#   status: active
+#   l3_interfaces:
+#     - name: Loopback0
+#       description: "Underlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.0.123/32
+#       vrf:
+#       status: active
+#       tags: 
+#         - ubuntu
+#     - name: eth0
+#       description: "LAG Memeber Uplink to Leaf-01"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf03
+#         int: Ethernet0
+#     - name: eth1
+#       description: "LAG Memeber Uplink to Leaf-02"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf04
+#         int: Ethernet0
+# - name: compute202
+#   device_type: esxi
+#   device_role: compute
+#   site: sjc
+#   rack: "sjc_rr_4"
+#   position: 17
+#   face: front
+#   status: active
+#   l3_interfaces:
+#     - name: Loopback0
+#       description: "Underlay LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.0.121/32
+#       vrf:
+#       status: active
+#       tags: 
+#         - ubuntu
+#     - name: eth0
+#       description: "LAG Memeber Uplink to Leaf-01"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf03
+#         int: Ethernet1
+#     - name: eth1
+#       description: "LAG Memeber Uplink to Leaf-02"
+#       type: 10gbase-x-sfpp
+#       label: layer2
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address:
+#       tags: 
+#         - p2p 
+#       vrf:
+#       status: active
+#       connection:
+#         device: sjc-leaf04
+#         int: Ethernet1
+
+# - name: pod1sw1
+#   device_type: vios_switch
+#   device_role: pod_l3_switch
+#   site: pod1
+#   rack: "pod1_rr_1"
+#   position: 37
+#   face: front
+#   status: active
+#   trunk_interfaces:
+#     - name: Port-Channel101
+#       description: "TRUNK TO POD1SW2"
+#       type: lag
+#       label: trunk
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       mode: Tagged
+#       untagged_vlan: NATIVE_VLAN
+#       tagged_vlan_1: ADMIN
+#       tagged_vlan_2: SERVERS
+#       tagged_vlan_3: CustA_01
+
+#     - name: Ethernet0
+#       description: "TRUNK TO POD1SW2"
+#       type: 1000base-t
+#       label: trunk
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       mode: Tagged
+#       untagged_vlan: NATIVE_VLAN
+#       tagged_vlan_1: ADMIN
+#       tagged_vlan_2: SERVERS
+#       tagged_vlan_3: CustA_01
+#       lag: Port-Channel101
+#       connection:
+#         device: pod1sw2
+#         int: Ethernet0
+
+#     - name: Ethernet1
+#       description: "TRUNK TO POD1SW2"
+#       type: 1000base-t
+#       label: trunk
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       mode: Tagged
+#       untagged_vlan: NATIVE_VLAN
+#       tagged_vlan_1: ADMIN
+#       tagged_vlan_2: SERVERS
+#       tagged_vlan_3: CustA_01
+#       lag: Port-Channel101
+#       connection:
+#         device: pod1sw2
+#         int: Ethernet1
+
+#     - name: Ethernet2
+#       description: "TRUNK TO POD1SW3"
+#       type: 1000base-t
+#       label: trunk
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       mode: Tagged
+#       untagged_vlan: NATIVE_VLAN
+#       tagged_vlan_1: ADMIN
+#       tagged_vlan_2: SERVERS
+#       tagged_vlan_3: CustA_01
+#       connection:
+#         device: pod1sw3
+#         int: Ethernet0
+#   lag_interfaces:
+#     - name: Ethernet0
+#       lag: Port-Channel101
+#     - name: Ethernet1
+#       lag: Port-Channel101
+#   l3_interfaces:
+#     - name: Loopback0
+#       description: "iBGP LOOPBACK"
+#       type: virtual
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 10.0.1.2/32
+#       tags: 
+#         - ospf_area_0
+#       vrf:
+#       status: active
+#     - name: vlan300
+#       description: "USER_SVI"
+#       type: virtual
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 155.1.1.2/26
+#       vrf:
+#       status: active
+#       dhcp_helper: 10.0.1.1
+#       vrrp_group: 1
+#       vrrp_description: USER_VLAN
+#       vrrp_priority: 200
+#       vrrp_primary_ip: 155.1.1.1
+#     - name: vlan350
+#       description: "SERVER_SVI"
+#       type: virtual
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 155.1.1.66/26
+#       vrf:
+#       status: active
+#       dhcp_helper: 10.0.1.1
+#       vrrp_group: 2
+#       vrrp_description: SERVER_VLAN
+#       vrrp_priority: 200
+#       vrrp_primary_ip: 155.1.1.65
+#     - name: vlan400
+#       description: "GUEST_SVI"
+#       type: virtual
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+#       ipv4_address: 155.1.1.130/26
+#       vrf:
+#       status: active
+#       dhcp_helper: 10.0.1.1
+#       vrrp_group: 3
+#       vrrp_description: GUEST_VLAN
+#       vrrp_priority: 200
+#       vrrp_primary_ip: 155.1.1.129
+#     - name: GigabitEthernet0/0
+#       description: "UPLINK POD1R1"
+#       type: 1000base-t
+#       label: layer3
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: False
+
+#       ipv4_address: 10.10.1.1/31
+#       tags: 
+#         - ospf_area_0
+#         - p2p 
+#       vrf:
+#       status: active
+#     - name: GigabitEthernet1/3
+#       description: "MGMT-INTERFACE"
+#       type: 1000base-t
+#       label: mgmt
+#       enabled: True
+#       mtu: 9216
+#       mgmt_only: True
+#       ipv4_address: 192.168.4.18/24
+#       vrf: MGMT
+#       status: active
+#   disabled_interfaces:
+#     - name: GigabitEthernet1/0
+#       type: 1000base-t
+#       enabled: false
+#     - name: GigabitEthernet1/1
+#       type: 1000base-t
+#       enabled: false
+#     - name: GigabitEthernet1/2
+#       type: 1000base-t
+#       enabled: false 

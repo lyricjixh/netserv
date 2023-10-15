@@ -270,11 +270,18 @@
     tags:
       - device
 
-  # - { role: load_nautobot/create_devices }
-  # - { role: load_nautobot/create_access_interfaces }
-  # - { role: load_nautobot/create_trunk_interfaces }
-  # - { role: load_nautobot/create_lag_interfaces }
-  # - { role: load_nautobot/create_l3_interfaces }
+  - name: Building File to load nautobot
+    template: 
+      src: "node_design_load.j2"
+      dest: "inventory/nautobot_vars/_node_design.yaml"
+    tags:
+      - build_node
+
+  roles:
+  - { role: load_nautobot/create_access_interfaces }
+  - { role: load_nautobot/create_trunk_interfaces }
+  - { role: load_nautobot/create_lag_interfaces }
+  - { role: load_nautobot/create_l3_interfaces }
   # - { role: load_nautobot/create_disabled_interfaces }
   # - { role: load_nautobot/assign_ipv4_to_interfaces }
   # - { role: load_nautobot/create_tags }

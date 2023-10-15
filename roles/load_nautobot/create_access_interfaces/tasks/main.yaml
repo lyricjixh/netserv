@@ -1,0 +1,22 @@
+---
+#############################################################
+# Create Access Interface on Switch
+#############################################################    
+- name: Create interface as a trunk port
+  networktocode.nautobot.device_interface:
+    url: "{{ nb_url }}"
+    token: "{{ nb_token }}"
+    validate_certs: no
+    device: "{{ item.0.name }}"
+    name: "{{ item.1.name }}"
+    enabled: "{{ item.1.enabled }}"
+    status:  "{{ item.1.status }}"
+    type: "{{ item.1.type }}"
+    mtu: "{{ item.1.mtu }}"
+    mgmt_only: "{{ item.1.mgmt_only|default('false') }}"
+    mode: "{{ item.1.mode }}"
+    state:  "present"
+  loop: "{{ device_list | subelements('access_interfaces', 'skip_missing=True') }}"
+  tags:
+  - intf
+  - intf_access

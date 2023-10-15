@@ -1,0 +1,15 @@
+#jinja2: lstrip_blocks: "True (or False)", trim_blocks: "True (or False)"
+{#- ---------------------------------------------------------------------------------- #}
+{# configuration.dhcp_pool                                                             #}
+{# ---------------------------------------------------------------------------------- -#}
+{% if configuration.dhcp_pool is defined %}
+{% for address in configuration.dhcp_pool %}
+ip dhcp excluded-address {{ address.excluded_address }}
+{% endfor %}
+{% for pool in configuration.dhcp_pool %}
+ip dhcp pool {{ pool.name }}
+    network {{ pool.network | replace("/"," /") }}
+    default-router {{ pool.default_router }}
+    lease {{ pool.lease }}
+{% endfor %}
+{% endif %}

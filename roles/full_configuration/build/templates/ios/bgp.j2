@@ -1,0 +1,39 @@
+
+router bgp {{ devices[0]["config_context"]["bgp"]["ibgp"]["l_asn"] }}
+ bgp log-neighbor-changes
+{% for interface in devices[0]["interfaces"] %}
+{% if 'Loop' in interface["name"] %}
+{% for addr in interface.ip_addresses %}
+{% if addr.address is defined %}
+{% set rid = addr.address | ipaddr('address') %}
+ bgp router-id {{ rid }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% if devices[0]["config_context"]["bgp"]["ibgp"]["rr"] is defined %}
+{% include './ios/bgp/bgp_route_reflector.j2' %}
+{% else %}
+  {% for peer in devices[0]["config_context"]["bgp"]["ibgp"]["neighbors"] %}
+ neighbor {{ peer }} remote-as {{ devices[0]["config_context"]["bgp"]["ibgp"]["l_asn"] }}
+ neighbor {{ peer }} update-source Loopback0
+  {% endfor %}
+{% endif %}
+{% if devices[0]["config_context"]["bgp"]["ebgp"] is defined %}
+{% include './ios/bgp/ebgp_neighbor.j2' %}
+{% else %}
+{% endif %}
+ !
+{% if devices[0]["config_context"]["bgp"]["address_family_ipv4"] is defined %}
+{% include './ios/bgp/address_family_ipv4.j2' %}
+{% endif %}
+{% if devices[0]["config_context"]["bgp"]["ebgp"] is defined %}
+{% include './ios/bgp/ebgp_address_family_ipv4.j2' %}
+{% else %}
+{% endif %}
+ exit-address-family
+ !
+{% if devices[0]["config_context"]["bgp"]["address_family_vpnv4"] is defined %}
+{% include './ios/bgp/address_family_vpnv4.j2' %}
+{% else %}
+{% endif %}
