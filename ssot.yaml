@@ -16,7 +16,7 @@
    - inventory/nautobot_vars/tags.yaml
    - inventory/nautobot_vars/vrfs.yaml
    - inventory/nautobot_vars/devices.yaml
-   - inventory/nautobot_vars/nodes_design.yaml
+   - inventory/nautobot_vars/_nodes_design.yaml
    - inventory/nautobot_vars/device_local_context.yaml
    - inventory/nautobot_vars/custom_fields.yaml
    - inventory/nautobot_vars/device_connections.yaml
@@ -253,6 +253,13 @@
 #############################################################
 # Create Devices in Nautobot
 #############################################################
+  - name: Building File to load nautobot
+    template: 
+      src: "node_design_load.j2"
+      dest: "inventory/nautobot_vars/_nodes_design.yaml"
+    tags:
+      - build_node
+
   - name: Add Devices
     networktocode.nautobot.device:
       url: "{{ nb_url }}"
@@ -270,13 +277,6 @@
     loop: "{{ device_list }}"
     tags:
       - device
-
-  - name: Building File to load nautobot
-    template: 
-      src: "node_design_load.j2"
-      dest: "inventory/nautobot_vars/_node_design.yaml"
-    tags:
-      - build_node
 
   roles:
   - { role: load_nautobot/create_access_interfaces }
