@@ -15,7 +15,7 @@ sites:
   contact_name: Joe
   contact_phone: "867-5309"
   contact_email: "admin@sjc.arista.com"
-  # facility: EquinoxCA1
+  facility: EquinoxCA1
   region: uswest
   slug: sjc
   comments: " Placeholder"
@@ -25,44 +25,32 @@ sites:
   - prefix: 10.10.1.2/31
     description: "R1-GI0/2 - SW2-GI0/0"
   - prefix: 24.24.1.0/24
-    description: "R1-GI0/0 - INTERNET"  
+    description: "R1-GI0/0 - INTERNET"
   vlans:
   - name: ADMIN
-    vid: 100
-    status: active
     tenant: "internal"
-    prefix: 10.1.1.0/26
+    status: active
   - name: SERVERS
-    vid: 150
-    status: active
     tenant: "internal"
-    prefix: 10.1.1.64/26
-  - name: CustA_01
-    vid: 200
     status: active
-    tenant: "custa"
-    prefix: 10.2.1.0/26
-  - name: CustA_02
-    vid: 201
+  - name: NMS
+    tenant: "internal"
     status: active
-    tenant: "custa"
-    prefix: 10.2.2.0/26
   - name: NATIVE_VLAN
-    vid: 999
     tenant: "internal"
+    status: active
+  - name: CustA_01
+    tenant: "custa"
+    status: active
+  - name: CustA_02
+    tenant: "custa"
     status: active
   racks:
-  - name: "sjc_rr_1"
-    rack_role: "compute"
+  - role: compute
+    rack_list: [1,2,3]
     status: active
-  - name: "sjc_rr_2"
-    rack_role: "compute"
-    status: active
-  - name: "sjc_rr_3"
-    rack_role: "compute"
-    status: active
-  - name: "sjc_rr_4"
-    rack_role: "network"
+  - role: network
+    rack_list: [4]
     status: active
 # Site 2
 - name: lax
@@ -77,6 +65,7 @@ sites:
   contact_name: Joe
   contact_phone: "867-5309"
   contact_email: "admin@lax.arista.com"
+  facility: PNAPLA01
   region: uswest
   slug: lax
   comments: " Placeholder"
@@ -89,222 +78,27 @@ sites:
     description: "R1-GI0/0 - INTERNET"  
   vlans:
   - name: ADMIN
-    vid: 100
-    status: active
     tenant: "internal"
-    prefix: 10.1.2.0/26
+    status: active
   - name: SERVERS
-    vid: 150
-    status: active
     tenant: "internal"
-    prefix: 10.1.2.64/26
-  - name: CustA_01
-    vid: 200
     status: active
-    tenant: "custa"
-    prefix: 10.2.2.0/26
+  - name: NMS
+    tenant: "internal"
+    status: active
   - name: NATIVE_VLAN
-    vid: 999
     tenant: "internal"
-    status: active   
-  racks:
-  - name: "lax_rr_1"
-    rack_role: "compute"
     status: active
-  - name: "lax_rr_2"
-    rack_role: "compute"
-    status: active
-  - name: "lax_rr_3"
-    rack_role: "compute"
-    status: active
-  - name: "lax_rr_4"
-    rack_role: "network"
-    status: active
-# Site 3
-- name: bos
-  status: active
-  asn: 65003
-  time_zone: "america/new_york"
-  description: "Arista Cluster for Boston"
-  physical_address: "Boston, MA, 02108"
-  shipping_address: "Boston, MA, 02108"
-  latitude: "42.3601"
-  longitude: "-71.057083"
-  contact_name: Joe
-  contact_phone: "867-5309"
-  contact_email: "admin@bos.arista.com"
-  region: usnortheast
-  slug: bos
-  comments: " Placeholder" 
-  int_prefixes:
-  - prefix: 10.10.3.0/31
-    description: "R1-GI0/1 - SW1-GI0/0"
-  - prefix: 10.10.3.2/31
-    description: "R1-GI0/2 - SW2-GI0/0"
-  - prefix: 24.24.3.0/24
-    description: "R1-GI0/0 - INTERNET"     
-  vlans:
-  - name: ADMIN
-    vid: 100
-    status: active
-    tenant: "internal"
-    prefix: 10.1.3.0/26
-  - name: SERVERS
-    vid: 150
-    status: active
-    tenant: "internal"
-    prefix: 10.1.3.64/26
   - name: CustA_01
-    vid: 200
-    status: active
     tenant: "custa"
-    prefix: 10.2.3.0/26
-  - name: NATIVE_VLAN
-    vid: 999
-    tenant: "internal"
-    status: active   
-  racks:
-  - name: "bos_rr_1"
-    rack_role: "compute"
     status: active
-# Site 4
-- name: las
-  status: active
-  asn: 65004
-  time_zone: "America/Los_Angeles"
-  description: "Arista Cluster for Las Vegas"
-  physical_address: "Las Vegas, NV"
-  shipping_address: "Las Vegas, NV"
-  latitude: "36.1716"
-  longitude: "-115.1391"
-  contact_name: Joe
-  contact_phone: "867-5309"
-  contact_email: "admin@las.arista.com"
-  region: ussouthwest
-  slug: las
-  comments: " Placeholder" 
-  int_prefixes:
-  - prefix: 10.10.4.0/31
-    description: "R1-GI0/1 - SW1-GI0/0"
-  - prefix: 10.10.4.2/31
-    description: "R1-GI0/2 - SW2-GI0/0"
-  - prefix: 24.24.4.0/24
-    description: "R1-GI0/0 - INTERNET"   
-  vlans:
-  - name: ADMIN
-    vid: 100
-    status: active
-    tenant: "internal"
-    prefix: 10.1.4.0/26
-  - name: SERVERS
-    vid: 150
-    status: active
-    tenant: "internal"
-    prefix: 10.1.4.64/26
-  - name: CustA_01
-    vid: 200
-    status: active
+  - name: CustA_02
     tenant: "custa"
-    prefix: 10.2.4.0/26
-  - name: NATIVE_VLAN
-    vid: 999
-    status: active   
-    tenant: "internal"
+    status: active
   racks:
-  - name: "las_rr_1"
-    rack_role: "compute"
-    status: active     
-# Site 5
-- name: atl
-  status: active
-  asn: 65005
-  time_zone: "America/New_York"
-  description: "Arista Cluster for atl"
-  physical_address: "Atlanta, CA, 30033"
-  shipping_address: "Atlanta, CA, 30033"
-  latitude: "33.7488"
-  longitude: "-84.3877"
-  contact_name: Joe
-  contact_phone: "867-5309"
-  contact_email: "admin@atl.arista.com"
-  region: ussoutheast
-  slug: atl
-  comments: " Placeholder"
-  int_prefixes:
-  - prefix: 10.10.5.0/31
-    description: "R1-GI0/1 - SW1-GI0/0"
-  - prefix: 10.10.5.2/31
-    description: "R1-GI0/2 - SW2-GI0/0"
-  - prefix: 24.24.5.0/24
-    description: "R1-GI0/0 - INTERNET"   
-  vlans:
-  - name: ADMIN
-    vid: 100
+  - role: compute
+    rack_list: [1,2,3]
     status: active
-    tenant: "internal"
-    prefix: 10.1.5.0/26
-  - name: SERVERS
-    vid: 150
-    status: active
-    tenant: "internal"
-    prefix: 10.1.5.64/26
-  - name: CustA_01
-    vid: 200
-    status: active
-    tenant: "custa"
-    prefix: 10.2.5.0/26
-  - name: NATIVE_VLAN
-    vid: 999
-    status: active   
-    tenant: "internal"
-  racks:
-  - name: "atl_rr_1"
-    rack_role: "compute"
-    status: active    
-# site 6
-- name: mci
-  status: active
-  asn: 65006
-  time_zone: "America/Chicago"
-  description: "Arista Cluster for mci"
-  physical_address: "Kansas City, KS, 66961"
-  shipping_address: "Kansas City, KS, 66961"
-  latitude: "39.099724"
-  longitude: "-94.578331"
-  contact_name: Joe
-  contact_phone: "867-5309"
-  contact_email: "admin@mci.arista.com"
-  region: usmidwest
-  slug: mci
-  comments: " Placeholder" 
-  int_prefixes:
-  - prefix: 10.10.6.0/31
-    description: "R1-GI0/1 - SW1-GI0/0"
-  - prefix: 10.10.6.2/31
-    description: "R1-GI0/2 - SW2-GI0/0"
-  - prefix: 24.24.6.0/24
-    description: "R1-GI0/0 - INTERNET"   
-  vlans:
-  - name: ADMIN
-    vid: 100
-    status: active
-    tenant: "internal"
-    prefix: 10.1.6.0/26
-  - name: SERVERS
-    vid: 150
-    status: active
-    tenant: "internal"
-    prefix: 10.1.6.64/26
-  - name: CustA_01
-    vid: 200
-    status: active
-    tenant: "custa"
-    prefix: 10.2.6.0/26
-  - name: NATIVE_VLAN
-    vid: 999
-    status: active   
-    tenant: "internal"
-  racks:
-  - name: "mci_rr_1"
-    rack_role: "compute"
+  - role: network
+    rack_list: [4]
     status: active

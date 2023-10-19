@@ -1,0 +1,187 @@
+---
+###################################################################
+# General Data and Site Specific Data for all pods
+###################################################################
+sites:
+# Site 01"
+- name: sjc
+  status: active
+  asn: 65001
+  time_zone: America/Los Angeles
+  description: Arista Cluster for sjc
+  physical_address: Santa Clara, CA, 95131
+  shipping_address: Santa Clara, CA, 95131
+  latitude: 37.354107
+  longitude: -121.955238
+  contact_name: Joe
+  contact_phone: 867-5309
+  contact_email: admin@sjc.arista.com
+  region: uswest
+  slug: sjc
+  comments:  Placeholder
+  int_prefixes:
+  - prefix: 10.1.1.0/31
+    description: "Fabric PTP Seq#01"
+  - prefix: 10.1.1.2/31
+    description: "Fabric PTP Seq#02"
+  - prefix: 10.1.1.4/31
+    description: "Fabric PTP Seq#03"
+  - prefix: 10.1.1.6/31
+    description: "Fabric PTP Seq#04"
+  - prefix: 10.1.1.8/31
+    description: "Fabric PTP Seq#05"
+  - prefix: 10.1.1.10/31
+    description: "Fabric PTP Seq#06"
+  - prefix: 10.1.1.12/31
+    description: "Fabric PTP Seq#07"
+  - prefix: 10.1.1.14/31
+    description: "Fabric PTP Seq#08"
+  - prefix: 10.1.1.16/31
+    description: "Fabric PTP Seq#09"
+  - prefix: 10.1.1.18/31
+    description: "Fabric PTP Seq#10"
+  - prefix: 10.1.1.20/31
+    description: "Fabric PTP Seq#11"
+  - prefix: 10.1.1.22/31
+    description: "Fabric PTP Seq#12"
+  vlans:
+  - name: ADMIN
+    tenant: internal
+    vid: 901
+    prefix: 10.1.5.0/26
+    tenant: internal
+    status: active
+  - name: SERVERS
+    tenant: internal
+    vid: 901
+    prefix: 10.1.5.0/26
+    tenant: internal
+    status: active
+  - name: NMS
+    tenant: internal
+    vid: 901
+    prefix: 10.1.5.0/26
+    tenant: internal
+    status: active
+  - name: NATIVE_VLAN
+    tenant: internal
+    vid: 901
+    prefix: 10.1.5.0/26
+    tenant: internal
+    status: active
+  - name: CustA_01
+    tenant: custa
+    vid: 101
+    prefix: 10.1.8.0/26
+    tenant: custa
+    status: active
+  - name: CustA_02
+    tenant: custa
+    vid: 101
+    prefix: 10.1.8.0/26
+    tenant: custa
+    status: active
+  racks:
+  - name: sjc_rack_01
+    rack_role: "compute"
+    status: active
+  - name: sjc_rack_02
+    rack_role: "compute"
+    status: active
+  - name: sjc_rack_03
+    rack_role: "compute"
+    status: active
+  - name: sjc_rack_04
+    rack_role: "network"
+    status: active
+# Site 02"
+- name: lax
+  status: active
+  asn: 65002
+  time_zone: America/Los Angeles
+  description: Arista Cluster for lax
+  physical_address: Los Angeles, CA, 90012
+  shipping_address: Los Angeles, CA, 90012
+  latitude: 34.0549
+  longitude: -118.2426
+  contact_name: Joe
+  contact_phone: 867-5309
+  contact_email: admin@lax.arista.com
+  region: uswest
+  slug: lax
+  comments:  Placeholder
+  int_prefixes:
+  - prefix: 10.2.1.0/31
+    description: "Fabric PTP Seq#01"
+  - prefix: 10.2.1.2/31
+    description: "Fabric PTP Seq#02"
+  - prefix: 10.2.1.4/31
+    description: "Fabric PTP Seq#03"
+  - prefix: 10.2.1.6/31
+    description: "Fabric PTP Seq#04"
+  - prefix: 10.2.1.8/31
+    description: "Fabric PTP Seq#05"
+  - prefix: 10.2.1.10/31
+    description: "Fabric PTP Seq#06"
+  - prefix: 10.2.1.12/31
+    description: "Fabric PTP Seq#07"
+  - prefix: 10.2.1.14/31
+    description: "Fabric PTP Seq#08"
+  - prefix: 10.2.1.16/31
+    description: "Fabric PTP Seq#09"
+  - prefix: 10.2.1.18/31
+    description: "Fabric PTP Seq#10"
+  - prefix: 10.2.1.20/31
+    description: "Fabric PTP Seq#11"
+  - prefix: 10.2.1.22/31
+    description: "Fabric PTP Seq#12"
+  vlans:
+  - name: ADMIN
+    tenant: internal
+    vid: 901
+    prefix: 10.2.5.0/26
+    tenant: internal
+    status: active
+  - name: SERVERS
+    tenant: internal
+    vid: 901
+    prefix: 10.2.5.0/26
+    tenant: internal
+    status: active
+  - name: NMS
+    tenant: internal
+    vid: 901
+    prefix: 10.2.5.0/26
+    tenant: internal
+    status: active
+  - name: NATIVE_VLAN
+    tenant: internal
+    vid: 901
+    prefix: 10.2.5.0/26
+    tenant: internal
+    status: active
+  - name: CustA_01
+    tenant: custa
+    vid: 101
+    prefix: 10.2.8.0/26
+    tenant: custa
+    status: active
+  - name: CustA_02
+    tenant: custa
+    vid: 101
+    prefix: 10.2.8.0/26
+    tenant: custa
+    status: active
+  racks:
+  - name: lax_rack_01
+    rack_role: "compute"
+    status: active
+  - name: lax_rack_02
+    rack_role: "compute"
+    status: active
+  - name: lax_rack_03
+    rack_role: "compute"
+    status: active
+  - name: lax_rack_04
+    rack_role: "network"
+    status: active

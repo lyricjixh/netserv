@@ -22,27 +22,27 @@
    - inventory/nautobot_vars/device_connections.yaml
 
   tasks:
-  - name: Create ROOT region
-    region:
-      url: "{{ nb_url }}"
-      token: "{{ nb_token }}"
-      name: "ROOT"
-      slug: "root"
-      state: present
-    tags:
-      - region
-
   - name: Create following regions
     region:
       url: "{{ nb_url }}"
       token: "{{ nb_token }}"
       name: "{{ item.name }}"
-      parent_region: "{{ item.parent_region }}"
+      parent_region: "{{ item.parent_region|default(omit) }}"
       slug: "{{ item.slug }}"
       state: present
     loop: "{{ regions }}"
     tags:
       - region
+
+#############################################################
+# Build Site Yaml Inputs for Nautobot
+#############################################################
+  - name: Building File to load nautobot
+    template: 
+      src: "nb_build_sites.j2"
+      dest: "inventory/nautobot_vars/_sites.yaml"
+    tags:
+      - build_site
 
   - name: Create site with all parameters
     networktocode.nautobot.site:
