@@ -9,17 +9,16 @@
   - networktocode.nautobot
 
   vars_files:
-   - /home/xji/devops/arista-naas/group_vars/dc2.yaml
-   - inventory/nautobot_vars/regions.yaml
-   - inventory/nautobot_vars/sites.yaml
-   - inventory/nautobot_vars/tenants.yaml
-   - inventory/nautobot_vars/tags.yaml
-   - inventory/nautobot_vars/vrfs.yaml
-   - inventory/nautobot_vars/devices.yaml
+   - inventory/nautobot_vars/_regions.yaml
+   - inventory/nautobot_vars/_sites.yaml
+   - inventory/nautobot_vars/_tenants.yaml
+   - inventory/nautobot_vars/_tags.yaml
+   - inventory/nautobot_vars/_vrfs.yaml
+   - inventory/nautobot_vars/_devices.yaml
    - inventory/nautobot_vars/_nodes_design.yaml
-   - inventory/nautobot_vars/device_local_context.yaml
-   - inventory/nautobot_vars/custom_fields.yaml
-   - inventory/nautobot_vars/device_connections.yaml
+   - inventory/nautobot_vars/_device_local_context.yaml
+   - inventory/nautobot_vars/_custom_fields.yaml
+   - inventory/nautobot_vars/_device_connections.yaml
 
   tasks:
   - name: Create following regions
@@ -33,16 +32,6 @@
     loop: "{{ regions }}"
     tags:
       - region
-
-#############################################################
-# Build Site Yaml Inputs for Nautobot
-#############################################################
-  - name: Building File to load nautobot
-    template: 
-      src: "nb_build_sites.j2"
-      dest: "inventory/nautobot_vars/_sites.yaml"
-    tags:
-      - build_site
 
   - name: Create site with all parameters
     networktocode.nautobot.site:
@@ -250,15 +239,6 @@
     tags:
       - platform
 
-#############################################################
-# Create Devices in Nautobot
-#############################################################
-  - name: Building File to load nautobot
-    template: 
-      src: "node_design_load.j2"
-      dest: "inventory/nautobot_vars/_nodes_design.yaml"
-    tags:
-      - build_node
 
   - name: Add Devices
     networktocode.nautobot.device:

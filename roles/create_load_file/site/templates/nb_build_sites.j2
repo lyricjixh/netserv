@@ -24,28 +24,28 @@ sites:
 {% set site_seq=loop.index %}
 {% set site_supernet='10.0.0.0/8'|ipsubnet(16,site_seq) %}
 {% set site_ptp_net=site_supernet|ipsubnet(24,1) %}
-{% set site_vlan_net=site_supernet|ipsubnet(24,5) %}
+{% set site_vlan_net=site_supernet|ipsubnet(24,4) %}
 {% set site_tenant_net=site_supernet|ipsubnet(21,1) %}
 {% for seq in range(12)%}
   - prefix: {{site_ptp_net | ipsubnet(31, seq)}}
     description: "Fabric PTP Seq#{{ "%02d" | format(seq+1) }}"
 {% endfor %}
   vlans:
-{% set t,i=0,0 %}
+{% set ns=namespace(t=0,i=0) %}
 {% for vlan in site.vlans %}
   - name: {{ vlan.name }}
     tenant: {{ vlan.tenant }}
 {% if vlan.tenant|lower == 'internal' %}
-    vid: {{901+i }}
-    prefix: {{ site_vlan_net | ipsubnet(26, i) }}
+    vid: {{901+ns.i }}
+    prefix: {{ site_vlan_net | ipsubnet(26, ns.i) }}
 {% else %}
-    vid: {{101+t }}
-    prefix: {{ site_tenant_net | ipsubnet(26, t) }}
+    vid: {{101+ns.t }}
+    prefix: {{ site_tenant_net | ipsubnet(24, ns.t) }}
 {% endif %}
     tenant: {{ vlan.tenant }}
     status: {{ vlan.status }}
-{% set i=i+1 %}
-{% set t=t+1 %}
+{% set ns.i=ns.i+1 %}
+{% set ns.t=ns.t+1 %}
 {% endfor %}
   racks:
 {% for rack in site.racks %}

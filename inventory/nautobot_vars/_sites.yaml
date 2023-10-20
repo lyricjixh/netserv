@@ -48,37 +48,37 @@ sites:
   - name: ADMIN
     tenant: internal
     vid: 901
-    prefix: 10.1.5.0/26
+    prefix: 10.1.4.0/26
     tenant: internal
     status: active
   - name: SERVERS
     tenant: internal
-    vid: 901
-    prefix: 10.1.5.0/26
+    vid: 902
+    prefix: 10.1.4.64/26
     tenant: internal
     status: active
   - name: NMS
     tenant: internal
-    vid: 901
-    prefix: 10.1.5.0/26
+    vid: 903
+    prefix: 10.1.4.128/26
     tenant: internal
     status: active
   - name: NATIVE_VLAN
     tenant: internal
-    vid: 901
-    prefix: 10.1.5.0/26
+    vid: 904
+    prefix: 10.1.4.192/26
     tenant: internal
     status: active
   - name: CustA_01
     tenant: custa
-    vid: 101
-    prefix: 10.1.8.0/26
+    vid: 105
+    prefix: 10.1.12.0/24
     tenant: custa
     status: active
   - name: CustA_02
     tenant: custa
-    vid: 101
-    prefix: 10.1.8.0/26
+    vid: 106
+    prefix: 10.1.13.0/24
     tenant: custa
     status: active
   racks:
@@ -139,37 +139,37 @@ sites:
   - name: ADMIN
     tenant: internal
     vid: 901
-    prefix: 10.2.5.0/26
+    prefix: 10.2.4.0/26
     tenant: internal
     status: active
   - name: SERVERS
     tenant: internal
-    vid: 901
-    prefix: 10.2.5.0/26
+    vid: 902
+    prefix: 10.2.4.64/26
     tenant: internal
     status: active
   - name: NMS
     tenant: internal
-    vid: 901
-    prefix: 10.2.5.0/26
+    vid: 903
+    prefix: 10.2.4.128/26
     tenant: internal
     status: active
   - name: NATIVE_VLAN
     tenant: internal
-    vid: 901
-    prefix: 10.2.5.0/26
+    vid: 904
+    prefix: 10.2.4.192/26
     tenant: internal
     status: active
   - name: CustA_01
     tenant: custa
-    vid: 101
-    prefix: 10.2.8.0/26
+    vid: 105
+    prefix: 10.2.12.0/24
     tenant: custa
     status: active
   - name: CustA_02
     tenant: custa
-    vid: 101
-    prefix: 10.2.8.0/26
+    vid: 106
+    prefix: 10.2.13.0/24
     tenant: custa
     status: active
   racks:

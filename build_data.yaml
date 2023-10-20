@@ -1,9 +1,0 @@
----
-- hosts: localhost
-  # connection: local
-  gather_facts: false
-
-- name: Building File to load nautobot
-  template: 
-    src: "node_design_load.j2"
-    dest: "inventory/nautobot_vars/_node_design.yaml"
