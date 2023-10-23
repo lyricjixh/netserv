@@ -11,3 +11,6 @@ tenants:
   - name: "cust_B"
     description: "customer B"
     slug: "custb"
+  - name: "cust_C"
+    description: "customer C"
+    slug: "custc"

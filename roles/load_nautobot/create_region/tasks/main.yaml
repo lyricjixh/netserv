@@ -1,0 +1,15 @@
+---
+#############################################################
+# Create Rack in Nautobot
+#############################################################
+  - name: Create following regions
+    region:
+      url: "{{ nb_url }}"
+      token: "{{ nb_token }}"
+      name: "{{ item.name }}"
+      parent_region: "{{ item.parent_region|default(omit) }}"
+      slug: "{{ item.slug }}"
+      state: present
+    loop: "{{ regions }}"
+    tags:
+      - region

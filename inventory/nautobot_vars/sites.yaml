@@ -68,7 +68,6 @@ sites:
   facility: PNAPLA01
   region: uswest
   slug: lax
-  comments: " Placeholder"
   int_prefixes:
   - prefix: 10.10.2.0/31
     description: "R1-GI0/1 - SW1-GI0/0"
@@ -102,3 +101,15 @@ sites:
   - role: network
     rack_list: [4]
     status: active
+# Special Sites
+- name: "Cloud_AWS01"
+  status: "active"
+  asn: "400"
+  description: "Cloud Instances"
+  contact_name: "cloudadmin"
+  contact_phone: "878-8238"
+  contact_email: "cloudadmin@arista.com"
+  facility: AWS-West-01
+  slug: "cloud"
+  comments: "cloud instance"
+  state: present

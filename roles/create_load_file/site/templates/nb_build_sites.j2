@@ -8,45 +8,49 @@ sites:
 - name: {{ site.name }}
   status: {{ site.status }}
   asn: {{ site.asn }}
-  time_zone: {{ site.time_zone }}
-  description: {{ site.description }}
-  physical_address: {{ site.physical_address }}
-  shipping_address: {{ site.shipping_address }}
-  latitude: {{ site.latitude }}
-  longitude: {{ site.longitude }}
-  contact_name: {{ site.contact_name }}
-  contact_phone: {{ site.contact_phone }}
-  contact_email: {{ site.contact_email }}
-  region: {{ site.region }}
-  slug: {{ site.slug }}
-  comments: {{ site.comments|default(omit) }}
-  int_prefixes:
+  time_zone: {{ site.time_zone | default(none) }}
+  description: {{ site.description | default(none) }}
+  physical_address: {{ site.physical_address | default(none) }}
+  shipping_address: {{ site.shipping_address | default(none) }}
+  latitude: {{ site.latitude | default(none) }}
+  longitude: {{ site.longitude | default(none) }}
+  contact_name: {{ site.contact_name | default(none) }}
+  contact_phone: {{ site.contact_phone | default(none) }}
+  contact_email: {{ site.contact_email | default(none) }}
+  region: {{ site.region | default(none) }}
+  slug: {{ site.slug | default(none) }}
+  comments: {{ site.comments | default(none) }}
 {% set site_seq=loop.index %}
 {% set site_supernet='10.0.0.0/8'|ipsubnet(16,site_seq) %}
+{% if site.int_prefix is defined and site.int_prefix %}
+  int_prefixes:
 {% set site_ptp_net=site_supernet|ipsubnet(24,1) %}
-{% set site_vlan_net=site_supernet|ipsubnet(24,4) %}
-{% set site_tenant_net=site_supernet|ipsubnet(21,1) %}
 {% for seq in range(12)%}
   - prefix: {{site_ptp_net | ipsubnet(31, seq)}}
     description: "Fabric PTP Seq#{{ "%02d" | format(seq+1) }}"
 {% endfor %}
+{% endif %}
+{% if site.vlans is defined and site.vlans %}
   vlans:
 {% set ns=namespace(t=0,i=0) %}
 {% for vlan in site.vlans %}
   - name: {{ vlan.name }}
     tenant: {{ vlan.tenant }}
 {% if vlan.tenant|lower == 'internal' %}
+{% set site_vlan_net=site_supernet|ipsubnet(24,4) %}
     vid: {{901+ns.i }}
     prefix: {{ site_vlan_net | ipsubnet(26, ns.i) }}
 {% else %}
+{% set site_tenant_net=site_supernet|ipsubnet(21,1) %}
     vid: {{101+ns.t }}
     prefix: {{ site_tenant_net | ipsubnet(24, ns.t) }}
 {% endif %}
-    tenant: {{ vlan.tenant }}
     status: {{ vlan.status }}
 {% set ns.i=ns.i+1 %}
 {% set ns.t=ns.t+1 %}
 {% endfor %}
+{% endif %}
+{% if site.racks is defined and site.racks %}
   racks:
 {% for rack in site.racks %}
 {% for rl in rack.rack_list %}
@@ -55,4 +59,5 @@ sites:
     status: {{ rack.status }}
 {% endfor %}
 {% endfor %}
+{% endif %}
 {% endfor %}

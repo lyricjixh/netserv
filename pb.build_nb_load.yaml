@@ -9,10 +9,8 @@
 
   vars_files:
   - /home/xji/devops/arista-naas/group_vars/dc2.yaml
-  - inventory/nautobot_vars/regions.yaml
   - inventory/nautobot_vars/sites.yaml
-  - inventory/nautobot_vars/tenants.yaml
-  - inventory/nautobot_vars/tags.yaml
+  - inventory/nautobot_vars/regions.yaml
   - inventory/nautobot_vars/vrfs.yaml
   - inventory/nautobot_vars/devices.yaml
   - inventory/nautobot_vars/_nodes_design.yaml

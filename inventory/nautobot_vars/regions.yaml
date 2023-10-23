@@ -4,13 +4,11 @@
 ###################################################################
 regions:
 - name: US
-  parent_region: ROOT
+  parent_region: 
   slug: us
 - name: APAC
-  parent_region: ROOT
   slug: apac
 - name: EMEA
-  parent_region: ROOT
   slug: emea
 - name: US-West
   parent_region: US

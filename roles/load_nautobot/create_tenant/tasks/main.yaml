@@ -1,0 +1,17 @@
+---
+#############################################################
+# Create Rack in Nautobot
+#############################################################
+- name: Create Tenants
+  networktocode.nautobot.tenant:
+    url: "{{ nb_url }}"
+    token: "{{ nb_token }}"
+    validate_certs: no
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    slug: "{{ item.slug }}"
+    comments: "{{ item.comments|default(omit) }}"
+    state: present
+  loop: "{{ tenants }}"
+  tags:
+    - tenant

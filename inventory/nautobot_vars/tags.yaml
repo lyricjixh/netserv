@@ -1,20 +1,12 @@
 ---
 _tags:
-- name: ospf_area_0
-  description: "Interface OSPF Area 0"
+- name: mlag_mem
+  description: "Interface as the MLAG Member"
 - name: p2p
   description: "Interface network type for OSPF Protocol"
-- name: ospf
+- name: bgp
   description: Used to assigned OSPF config context to pod devices
 - name: sjc_dhcp_server
   description: sjc DHCP Server configuration
 - name: lax_dhcp_server
   description: lax DHCP Server configuration
-- name: bos_dhcp_server
-  description: bos DHCP Server configuration
-- name: las_dhcp_server
-  description: las DHCP Server configuration 
-- name: atl_dhcp_server
-  description: atl DHCP Server configuration 
-- name: mci_dhcp_server
-  description: mci DHCP Server configuration           

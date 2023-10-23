@@ -9,86 +9,53 @@
   - networktocode.nautobot
 
   vars_files:
-   - inventory/nautobot_vars/_regions.yaml
+   - inventory/nautobot_vars/regions.yaml
    - inventory/nautobot_vars/_sites.yaml
-   - inventory/nautobot_vars/_tenants.yaml
-   - inventory/nautobot_vars/_tags.yaml
-   - inventory/nautobot_vars/_vrfs.yaml
-   - inventory/nautobot_vars/_devices.yaml
+   - inventory/nautobot_vars/tenants.yaml
+   - inventory/nautobot_vars/tags.yaml
+   - inventory/nautobot_vars/vrfs.yaml
+   - inventory/nautobot_vars/devices.yaml
    - inventory/nautobot_vars/_nodes_design.yaml
-   - inventory/nautobot_vars/_device_local_context.yaml
-   - inventory/nautobot_vars/_custom_fields.yaml
-   - inventory/nautobot_vars/_device_connections.yaml
+   - inventory/nautobot_vars/device_local_context.yaml
+   - inventory/nautobot_vars/custom_fields.yaml
+   - inventory/nautobot_vars/device_connections.yaml
+
+  roles:
+  - { role: load_nautobot/create_region }
+  - { role: load_nautobot/create_site }
+  - { role: load_nautobot/create_tenant }
+  - { role: load_nautobot/create_rack }
+  # - { role: load_nautobot/create_vlans }
+  # - { role: load_nautobot/create_vrfs }
+  # - { role: load_nautobot/create_prefixes }
+  # - { role: load_nautobot/create_manufacturer }
+  # - { role: load_nautobot/create_platform }
+  # - { role: load_nautobot/create_device_types }
+  # - { role: load_nautobot/create_device_roles }
+  # - { role: load_nautobot/create_devices }
+  # - { role: load_nautobot/create_access_interfaces }
+  # - { role: load_nautobot/create_trunk_interfaces }
+  # - { role: load_nautobot/create_lag_interfaces }
+  # - { role: load_nautobot/create_l3_interfaces }
+  # - { role: load_nautobot/create_disabled_interfaces }
+  # - { role: load_nautobot/assign_ipv4_to_interfaces }
+  # - { role: load_nautobot/create_tags }
+  # # - { role: load_nautobot/create_cables }
 
   tasks:
-  - name: Create following regions
-    region:
-      url: "{{ nb_url }}"
-      token: "{{ nb_token }}"
-      name: "{{ item.name }}"
-      parent_region: "{{ item.parent_region|default(omit) }}"
-      slug: "{{ item.slug }}"
-      state: present
-    loop: "{{ regions }}"
-    tags:
-      - region
-
-  - name: Create site with all parameters
-    networktocode.nautobot.site:
-      url: "{{ nb_url }}"
-      token: "{{ nb_token }}"
-      validate_certs: no
-      name: "{{ item.name }}"
-      status: "{{ item.status }}"
-      asn: "{{ item.asn }}"
-      time_zone: "{{ item.time_zone }}"
-      description: "{{ item.description }}"
-      physical_address: "{{ item.physical_address }}"
-      shipping_address: "{{ item.shipping_address }}"
-      latitude: "{{ item.latitude }}"
-      longitude: "{{ item.longitude }}"
-      contact_name: "{{ item.contact_name }}"
-      contact_phone: "{{ item.contact_phone }}"
-      contact_email: "{{ item.contact_email }}"
-      region: "{{ item.region }}"
-      slug: "{{ item.slug }}"
-      comments: "{{ item.comments }}"
-      state: present
-    loop: "{{ sites }}"
-    tags:
-      - site
-
-  - name: Create Specific Sites
-    site:
-      url: "{{ nb_url }}"
-      token: "{{ nb_token }}"
-      name: "Cloud"
-      status: "active"
-      asn: "400"
-      description: "Cloud Instances"
-      contact_name: "cloudadmin"
-      contact_phone: "878-8238"
-      contact_email: "cloudadmin@arista.com"
-      facility: AWS-West-01
-      slug: "cloud"
-      comments: "cloud instance"
-      state: present
-    tags:
-      - site
-
-  - name: Create Tenants
-    networktocode.nautobot.tenant:
-      url: "{{ nb_url }}"
-      token: "{{ nb_token }}"
-      validate_certs: no
-      name: "{{ item.name }}"
-      description: "{{ item.description }}"
-      slug: "{{ item.slug }}"
-      comments: "{{ item.comments|default(omit) }}"
-      state: present
-    loop: "{{ tenants }}"
-    tags:
-      - tenant
+  # - name: Create Tenants
+  #   networktocode.nautobot.tenant:
+  #     url: "{{ nb_url }}"
+  #     token: "{{ nb_token }}"
+  #     validate_certs: no
+  #     name: "{{ item.name }}"
+  #     description: "{{ item.description }}"
+  #     slug: "{{ item.slug }}"
+  #     comments: "{{ item.comments|default(omit) }}"
+  #     state: present
+  #   loop: "{{ tenants }}"
+  #   tags:
+  #     - tenant
 
   - name: Create rack role
     networktocode.nautobot.rack_role:
