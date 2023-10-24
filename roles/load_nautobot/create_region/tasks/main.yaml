@@ -3,7 +3,7 @@
 # Create Rack in Nautobot
 #############################################################
   - name: Create following regions
-    region:
+    networktocode.nautobot.region:
       url: "{{ nb_url }}"
       token: "{{ nb_token }}"
       name: "{{ item.name }}"

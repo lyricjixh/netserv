@@ -2,13 +2,33 @@
 #############################################################
 # Create Rack in Nautobot
 #############################################################
-- name: "Create new rack"
+- name: Create rack role
+  networktocode.nautobot.rack_role:
+    url: "{{ nb_url }}"
+    token: "{{ nb_token }}"
+    name: "{{ item.name }}"
+    color: "{{ item.color }}"
+    state: present
+  loop: 
+    - name: Compute
+      slug: compute
+      color: 00FF00
+    - name: Network
+      slug: network
+      color: FFFF00
+  tags:
+    - rack
+
+- name: Create new rack"
   networktocode.nautobot.rack:
     url: "{{ nb_url }}"
     token: "{{ nb_token }}"
     validate_certs: no
-    name: "{{ item.1.name }}"
-    site: "{{ item.0.slug }}"
+    name: "{{ item.1.name if item.1.name else omit }}"
+    site: "{{ item.0.slug if item.0.slug else omit }}"
+    rack_role: "{{ item.1.rack_role if item.1.rack_role else omit }}"
     status: "{{ item.1.status }}"
     state: present
   loop: "{{ sites | subelements('racks', 'skip_missing=True') }}"  
+  tags:
+    - rack

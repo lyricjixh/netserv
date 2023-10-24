@@ -2,11 +2,6 @@
 #############################################################
 # Build Site Yaml Inputs for Nautobot
 #############################################################
-# - name: Building File to load nautobot
-#   template: 
-#     src: "site_load.j2"
-#     dest: "inventory/nautobot_vars/site.yaml"
-
 - name: Building File to load nautobot
   template: 
     src: "nb_build_sites.j2"
