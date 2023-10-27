@@ -10,3 +10,5 @@
     name: "{{ item.name }}"
     state: present
   loop: "{{ manufacturer }}"
+  tags:
+    - vendor

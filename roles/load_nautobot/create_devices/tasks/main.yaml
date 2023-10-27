@@ -17,3 +17,5 @@
     status: "{{ item.status }}"
     state: present
   loop: "{{ device_list }}"
+  tags:
+    - device

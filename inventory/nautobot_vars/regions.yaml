@@ -4,7 +4,6 @@
 ###################################################################
 regions:
 - name: US
-  parent_region: 
   slug: us
 - name: APAC
   slug: apac

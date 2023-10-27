@@ -25,18 +25,19 @@
   - { role: load_nautobot/create_site }
   - { role: load_nautobot/create_tenant }
   - { role: load_nautobot/create_rack }
+  - { role: load_nautobot/create_vlans }
+  - { role: load_nautobot/create_vrfs }
+  - { role: load_nautobot/create_prefixes }
+  - { role: load_nautobot/create_manufacturer }
+  - { role: load_nautobot/create_platform }
+  - { role: load_nautobot/create_device_types }
+  - { role: load_nautobot/create_device_roles }
+  - { role: load_nautobot/create_devices }
+
   - { role: load_nautobot/create_interfaces_access }
   - { role: load_nautobot/create_interfaces_trunk }
   - { role: load_nautobot/create_interfaces_lag }
   - { role: load_nautobot/create_interfaces_l3 }
-  # - { role: load_nautobot/create_vlans }
-  # - { role: load_nautobot/create_vrfs }
-  # - { role: load_nautobot/create_prefixes }
-  # - { role: load_nautobot/create_manufacturer }
-  # - { role: load_nautobot/create_platform }
-  # - { role: load_nautobot/create_device_types }
-  # - { role: load_nautobot/create_device_roles }
-  # - { role: load_nautobot/create_devices }
   # - { role: load_nautobot/create_access_interfaces }
   # - { role: load_nautobot/create_trunk_interfaces }
   # - { role: load_nautobot/create_lag_interfaces }
@@ -47,73 +48,6 @@
   # # - { role: load_nautobot/create_cables }
 
 #   tasks:
-#   - name: Create vlans
-#     networktocode.nautobot.vlan:
-#       url: "{{ nb_url }}"
-#       token: "{{ nb_token }}"
-#       validate_certs: no
-#       name: "{{ item.1.name }}"
-#       vid: "{{ item.1.vid }}"
-#       site: "{{ item.0.slug }}"
-#       # prefix: "{{ item.1.prefix|default(omit) }}"
-#       tenant: "{{ item.1.tenant }}"
-#       status: "{{ item.1.status }}"
-#       state: present
-#     loop: "{{ sites | subelements('vlans', 'skip_missing=True') }}"
-#     tags:
-#       - vlan
-
-# #############################################################
-# # Create VRFs in Nautobot
-# #############################################################    
-#   - name: Create VRFs within Nautobot
-#     networktocode.nautobot.vrf:
-#       url: "{{ nb_url }}"
-#       token: "{{ nb_token }}"
-#       validate_certs: no
-#       name: "{{ item.name }}"
-#       description: "{{ item.description }}"
-#       tenant: "{{ item.tenant|default(omit) }}"
-#       enforce_unique: "{{ item.enforce_unique|default(false) }}"
-#       state: present
-#     loop: "{{ vrf }}"
-#     tags:
-#       - vrf
-
-# #############################################################
-# # Create prefixes for each VRF in Nautobot
-# #############################################################
-#   - name: Create prefixes and assign to VRFs within Nautobot
-#     networktocode.nautobot.prefix:
-#       url: "{{ nb_url }}"
-#       token: "{{ nb_token }}"
-#       validate_certs: no
-#       family: 4
-#       prefix: "{{ item.prefix }}"
-#       description: "{{ item.description }}"
-#       vrf: "{{ item.name }}"
-#       tenant: "{{ item.tenant|default(omit) }}"
-#       is_pool: true
-#       status: active
-#       state: present  
-#     loop: "{{ vrf }}"
-#     tags:
-#       - vrf
-
-# #############################################################
-# # Create Manufacturer in Nautobot
-# #############################################################    
-#   - name: Create manufacturer within Nautobot 
-#     networktocode.nautobot.manufacturer:
-#       url: "{{ nb_url }}"
-#       token: "{{ nb_token }}"
-#       validate_certs: no
-#       name: "{{ item.name }}"
-#       state: present
-#     loop: "{{ manufacturer }}"
-#     tags:
-#       - platform
-
 # #############################################################
 # # Create Platform in Nautobot
 # #############################################################   

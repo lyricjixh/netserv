@@ -11,3 +11,7 @@
     color: "{{ item.1.color }}"
     state: present
   loop: "{{ manufacturer | subelements('device_roles', 'skip_missing=True') }}"
+  tags:
+    - device
+    - device_role
+

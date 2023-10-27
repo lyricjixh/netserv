@@ -14,3 +14,5 @@
     status: active
     state: present  
   loop: "{{ sites | subelements('int_prefixes', 'skip_missing=True') }}"
+  tags:
+    - prefix

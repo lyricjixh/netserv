@@ -2,7 +2,19 @@
 #############################################################
 # Create vlans for each site in Nautobot
 #############################################################
-- name: Create vlan within Nautobot with only required information
+# - name: Create vlan within Nautobot with only required information
+#   networktocode.nautobot.vlan:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.1.name }}"
+#     vid: "{{ item.1.vid }}"
+#     site: "{{ item.0.slug }}"
+#     status: "{{ item.1.status }}"
+#     state: present
+#   loop: "{{ sites | subelements('vlans', 'skip_missing=True') }}"
+
+- name: Create vlans
   networktocode.nautobot.vlan:
     url: "{{ nb_url }}"
     token: "{{ nb_token }}"
@@ -10,6 +22,10 @@
     name: "{{ item.1.name }}"
     vid: "{{ item.1.vid }}"
     site: "{{ item.0.slug }}"
+    # prefix: "{{ item.1.prefix|default(omit) }}"
+    tenant: "{{ item.1.tenant }}"
     status: "{{ item.1.status }}"
     state: present
   loop: "{{ sites | subelements('vlans', 'skip_missing=True') }}"
+  tags:
+    - vlan
