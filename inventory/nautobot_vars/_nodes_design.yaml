@@ -529,7 +529,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
     - name: Ethernet27
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
@@ -539,7 +538,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
   disabled_interfaces:
     - name: Ethernet3
       type: 10gbase-x-sfpp
@@ -776,7 +774,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
     - name: Ethernet27
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
@@ -786,7 +783,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
   disabled_interfaces:
     - name: Ethernet3
       type: 10gbase-x-sfpp
@@ -1023,7 +1019,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
     - name: Ethernet27
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
@@ -1033,7 +1028,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
   disabled_interfaces:
     - name: Ethernet3
       type: 10gbase-x-sfpp
@@ -1270,7 +1264,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
     - name: Ethernet27
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
@@ -1280,7 +1273,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
   disabled_interfaces:
     - name: Ethernet3
       type: 10gbase-x-sfpp
@@ -1517,7 +1509,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
     - name: Ethernet27
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
@@ -1527,7 +1518,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
   disabled_interfaces:
     - name: Ethernet3
       type: 10gbase-x-sfpp
@@ -1764,7 +1754,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
     - name: Ethernet27
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
@@ -1774,7 +1763,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
   disabled_interfaces:
     - name: Ethernet3
       type: 10gbase-x-sfpp
@@ -2375,7 +2363,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
     - name: Ethernet27
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
@@ -2385,7 +2372,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
   disabled_interfaces:
     - name: Ethernet3
       type: 10gbase-x-sfpp
@@ -2622,7 +2608,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
     - name: Ethernet27
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
@@ -2632,7 +2617,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
   disabled_interfaces:
     - name: Ethernet3
       type: 10gbase-x-sfpp
@@ -2869,7 +2853,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
     - name: Ethernet27
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
@@ -2879,7 +2862,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
   disabled_interfaces:
     - name: Ethernet3
       type: 10gbase-x-sfpp
@@ -3116,7 +3098,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
     - name: Ethernet27
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
@@ -3126,7 +3107,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
   disabled_interfaces:
     - name: Ethernet3
       type: 10gbase-x-sfpp
@@ -3363,7 +3343,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
     - name: Ethernet27
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
@@ -3373,7 +3352,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
   disabled_interfaces:
     - name: Ethernet3
       type: 10gbase-x-sfpp
@@ -3610,7 +3588,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
     - name: Ethernet27
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
@@ -3620,7 +3597,6 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-      untagged_vlan: ADMIN
   disabled_interfaces:
     - name: Ethernet3
       type: 10gbase-x-sfpp

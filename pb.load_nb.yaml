@@ -25,10 +25,10 @@
   - { role: load_nautobot/create_site }
   - { role: load_nautobot/create_tenant }
   - { role: load_nautobot/create_rack }
-  - { role: load_nautobot/create_access_interfaces }
-  - { role: load_nautobot/create_trunk_interfaces }
-  - { role: load_nautobot/create_lag_interfaces }
-  - { role: load_nautobot/create_l3_interfaces }
+  - { role: load_nautobot/create_interfaces_access }
+  - { role: load_nautobot/create_interfaces_trunk }
+  - { role: load_nautobot/create_interfaces_lag }
+  - { role: load_nautobot/create_interfaces_l3 }
   # - { role: load_nautobot/create_vlans }
   # - { role: load_nautobot/create_vrfs }
   # - { role: load_nautobot/create_prefixes }

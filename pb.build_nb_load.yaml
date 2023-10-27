@@ -13,7 +13,6 @@
   - inventory/nautobot_vars/regions.yaml
   - inventory/nautobot_vars/vrfs.yaml
   - inventory/nautobot_vars/devices.yaml
-  - inventory/nautobot_vars/_nodes_design.yaml
   - inventory/nautobot_vars/device_local_context.yaml
   - inventory/nautobot_vars/custom_fields.yaml
   - inventory/nautobot_vars/device_connections.yaml

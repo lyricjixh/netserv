@@ -2,7 +2,7 @@
 #############################################################
 # Create Access Interface on Switch
 #############################################################    
-- name: Create interface as a trunk port
+- name: Create interface as a access port
   networktocode.nautobot.device_interface:
     url: "{{ nb_url }}"
     token: "{{ nb_token }}"

@@ -202,7 +202,7 @@ vault_netbox_password: !vault |
 
 # Nautobot API
 nb_url: "http://10.92.59.139:8000/"
-nb_token: "fbb8e5b0e48bc9747a460064b07b77f2772bae14"
+nb_token: "49cc8110cc768e37d1d802bd5474344ce016a0b6"
 
 nautobot_devices:
   - name: "sjc-cleaf01"

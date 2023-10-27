@@ -123,19 +123,3 @@ sites:
   - name: lax_rack_04
     rack_role: "network"
     status: active
-# Site 03"
-- name: Cloud_AWS01
-  status: active
-  asn: 400
-  time_zone: 
-  description: Cloud Instances
-  physical_address: 
-  shipping_address: 
-  latitude: 
-  longitude: 
-  contact_name: cloudadmin
-  contact_phone: 878-8238
-  contact_email: cloudadmin@arista.com
-  region: 
-  slug: cloud
-  comments: cloud instance
