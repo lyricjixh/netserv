@@ -1,6 +1,6 @@
 # requires ansible-galaxy collection install networktocode.nautobot & pip3 install pynautobot
 ---
-- name: "Build Nautobot Load File"
+- name: "Build Nautobot Site Load File"
   hosts: localhost
   connection: local
   gather_facts: False
@@ -10,13 +10,32 @@
   vars_files:
   - /home/xji/devops/arista-naas/group_vars/dc2.yaml
   - inventory/nautobot_vars/sites.yaml
-  - inventory/nautobot_vars/regions.yaml
-  - inventory/nautobot_vars/vrfs.yaml
-  - inventory/nautobot_vars/devices.yaml
-  - inventory/nautobot_vars/device_local_context.yaml
-  - inventory/nautobot_vars/custom_fields.yaml
-  - inventory/nautobot_vars/device_connections.yaml
+  # - inventory/nautobot_vars/regions.yaml
+  # - inventory/nautobot_vars/vrfs.yaml
+  # - inventory/nautobot_vars/devices.yaml
+  # - inventory/nautobot_vars/device_local_context.yaml
+  # - inventory/nautobot_vars/custom_fields.yaml
+  # - inventory/nautobot_vars/device_connections.yaml
       
   roles:
   - { role: create_load_file/site }
+
+- name: "Build Nautobot Node Load File"
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  collections:
+    - networktocode.nautobot
+
+  vars_files:
+  - /home/xji/devops/arista-naas/group_vars/dc2.yaml
+  - inventory/nautobot_vars/_sites.yaml
+  # - inventory/nautobot_vars/regions.yaml
+  # - inventory/nautobot_vars/vrfs.yaml
+  # - inventory/nautobot_vars/devices.yaml
+  # - inventory/nautobot_vars/device_local_context.yaml
+  # - inventory/nautobot_vars/custom_fields.yaml
+  # - inventory/nautobot_vars/device_connections.yaml
+      
+  roles:
   - { role: create_load_file/node_design }

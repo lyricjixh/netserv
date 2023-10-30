@@ -3,3 +3,4 @@ files/gnmi/__*
 topology/.*
 clab-poc01/
 templates/*.eacl
+inventory/nautobot_vars/_*

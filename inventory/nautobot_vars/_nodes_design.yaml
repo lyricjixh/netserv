@@ -3,7 +3,7 @@ device_list:
   device_type: ceos_switch
   device_role: spine
   site: sjc
-  rack: "sjc_rr_4"
+  rack: sjc_rack_04
   position: 40
   face: front
   status: active
@@ -185,7 +185,7 @@ device_list:
   device_type: ceos_switch
   device_role: spine
   site: sjc
-  rack: "sjc_rr_4"
+  rack: sjc_rack_04
   position: 39
   face: front
   status: active
@@ -367,7 +367,7 @@ device_list:
   device_type: ceos_switch
   device_role: cleaf
   site: sjc
-  rack: "sjc_rr_1"
+  rack: "sjc_rack_01"
   position: 40
   face: front
   status: active
@@ -438,12 +438,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -453,12 +453,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -468,12 +468,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -612,7 +612,7 @@ device_list:
   device_type: ceos_switch
   device_role: cleaf
   site: sjc
-  rack: "sjc_rr_1"
+  rack: "sjc_rack_01"
   position: 39
   face: front
   status: active
@@ -683,12 +683,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -698,12 +698,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -713,12 +713,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -857,7 +857,7 @@ device_list:
   device_type: ceos_switch
   device_role: cleaf
   site: sjc
-  rack: "sjc_rr_2"
+  rack: "sjc_rack_02"
   position: 40
   face: front
   status: active
@@ -928,12 +928,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -943,12 +943,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -958,12 +958,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1102,7 +1102,7 @@ device_list:
   device_type: ceos_switch
   device_role: cleaf
   site: sjc
-  rack: "sjc_rr_2"
+  rack: "sjc_rack_02"
   position: 39
   face: front
   status: active
@@ -1173,12 +1173,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -1188,12 +1188,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -1203,12 +1203,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1347,7 +1347,7 @@ device_list:
   device_type: ceos_switch
   device_role: cleaf
   site: sjc
-  rack: "sjc_rr_3"
+  rack: "sjc_rack_03"
   position: 40
   face: front
   status: active
@@ -1418,12 +1418,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -1433,12 +1433,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -1448,12 +1448,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1592,7 +1592,7 @@ device_list:
   device_type: ceos_switch
   device_role: cleaf
   site: sjc
-  rack: "sjc_rr_3"
+  rack: "sjc_rack_03"
   position: 39
   face: front
   status: active
@@ -1663,12 +1663,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -1678,12 +1678,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -1693,12 +1693,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1837,7 +1837,7 @@ device_list:
   device_type: ceos_switch
   device_role: spine
   site: lax
-  rack: "lax_rr_4"
+  rack: lax_rack_04
   position: 40
   face: front
   status: active
@@ -2019,7 +2019,7 @@ device_list:
   device_type: ceos_switch
   device_role: spine
   site: lax
-  rack: "lax_rr_4"
+  rack: lax_rack_04
   position: 39
   face: front
   status: active
@@ -2201,7 +2201,7 @@ device_list:
   device_type: ceos_switch
   device_role: cleaf
   site: lax
-  rack: "lax_rr_1"
+  rack: "lax_rack_01"
   position: 40
   face: front
   status: active
@@ -2272,12 +2272,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -2287,12 +2286,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -2302,12 +2300,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -2446,7 +2443,7 @@ device_list:
   device_type: ceos_switch
   device_role: cleaf
   site: lax
-  rack: "lax_rr_1"
+  rack: "lax_rack_01"
   position: 39
   face: front
   status: active
@@ -2517,12 +2514,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -2532,12 +2528,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -2547,12 +2542,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -2691,7 +2685,7 @@ device_list:
   device_type: ceos_switch
   device_role: cleaf
   site: lax
-  rack: "lax_rr_2"
+  rack: "lax_rack_02"
   position: 40
   face: front
   status: active
@@ -2762,12 +2756,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -2777,12 +2770,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -2792,12 +2784,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -2936,7 +2927,7 @@ device_list:
   device_type: ceos_switch
   device_role: cleaf
   site: lax
-  rack: "lax_rr_2"
+  rack: "lax_rack_02"
   position: 39
   face: front
   status: active
@@ -3007,12 +2998,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -3022,12 +3012,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -3037,12 +3026,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -3181,7 +3169,7 @@ device_list:
   device_type: ceos_switch
   device_role: cleaf
   site: lax
-  rack: "lax_rr_3"
+  rack: "lax_rack_03"
   position: 40
   face: front
   status: active
@@ -3252,12 +3240,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -3267,12 +3254,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -3282,12 +3268,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -3426,7 +3411,7 @@ device_list:
   device_type: ceos_switch
   device_role: cleaf
   site: lax
-  rack: "lax_rr_3"
+  rack: "lax_rack_03"
   position: 39
   face: front
   status: active
@@ -3497,12 +3482,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -3512,12 +3496,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -3527,12 +3510,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 101
-      tagged_vlan_2: 102
-      tagged_vlan_3: 201
-      tagged_vlan_4: 202
-      tagged_vlan_5: 301
-      tagged_vlan_6: 302
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 904
+      tagged_vlan_4: 105
+      tagged_vlan_5: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"

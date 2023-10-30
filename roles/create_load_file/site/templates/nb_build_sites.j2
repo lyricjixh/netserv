@@ -21,7 +21,7 @@ sites:
   slug: {{ site.slug | default(none) }}
   comments: {{ site.comments | default(none) }}
 {% set site_seq=loop.index %}
-{% set site_supernet='10.0.0.0/8'|ipsubnet(16,site_seq) %}
+{% set site_supernet=nautobot_netv4|ipsubnet(16,site_seq) %}
 {% if site.int_prefix is defined and site.int_prefix %}
   int_prefixes:
 {% set site_ptp_net=site_supernet|ipsubnet(24,1) %}

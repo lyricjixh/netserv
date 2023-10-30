@@ -213,3 +213,9 @@ nautobot_devices:
     site: "SJC"
     device_role: "Switch"
     device_type: "cEOS"
+
+# Supernet block for Nautobot
+# V4 block no less than /12
+nautobot_netv4: 10.0.0.0/8
+# V6 block no less than /32
+nautobot_netv6: 2001:2001::/32

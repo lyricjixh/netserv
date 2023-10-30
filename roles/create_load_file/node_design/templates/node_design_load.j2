@@ -5,7 +5,7 @@ device_list:
   device_type: ceos_switch
   device_role: spine
   site: {{ site.name }}
-  rack: "{{ site.name }}_rr_4"
+  rack: {{ site.name }}_rack_04
   position: {{ 40-n }}
   face: front
   status: active
@@ -63,14 +63,16 @@ device_list:
       enabled: false
 {% endfor %}
 {% endfor %}
-{% set vlan_list=[101,102,201,202,301,302] %}
+{% set vlan_list=site.vlans | json_query('[?status==`active`].vid') %}
+{# {% set vlan_list=[101,102,103] %} #}
 {# {% set vlan_list=vxlans | json_query('[?state==`present`].vlan') %} #}
 {% for n in range(6) %}
 - name: {{ site.name }}-leaf{{ "%02d" | format(n+1) }}
   device_type: ceos_switch
   device_role: cleaf
   site: {{ site.name }}
-  rack: "{{ site.name }}_rr_{{(n/2)|round(0,'floor')|int+1}}"
+{% set rack_no=(n/2)|round(0,'floor')|int+1 %}
+  rack: "{{ site.name }}_rack_{{ "%02d" | format(rack_no) }}"
 {% if n is even %}
   position: 40
 {% else %}

@@ -19,3 +19,4 @@
   loop: "{{ device_list }}"
   tags:
     - device
+    - device_self
