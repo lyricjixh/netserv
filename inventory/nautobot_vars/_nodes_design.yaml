@@ -17,7 +17,7 @@ device_list:
       ipv4_address: "10.216.199.101/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -199,7 +199,7 @@ device_list:
       ipv4_address: "10.216.199.102/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -381,7 +381,7 @@ device_list:
       ipv4_address: "10.216.199.1/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -438,12 +438,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -453,12 +453,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -468,12 +468,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -520,7 +520,7 @@ device_list:
         device: sjc-leaf02
         int: Ethernet28
   access_interfaces:
-    - name: Ethernet26
+    - name: Ethernet25
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -529,7 +529,7 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-    - name: Ethernet27
+    - name: Ethernet26
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -605,9 +605,6 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
-    - name: Ethernet25
-      type: 10gbase-x-sfpp
-      enabled: false
 - name: sjc-leaf02
   device_type: ceos_switch
   device_role: cleaf
@@ -626,7 +623,7 @@ device_list:
       ipv4_address: "10.216.199.2/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -683,12 +680,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -698,12 +695,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -713,12 +710,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -765,7 +762,7 @@ device_list:
         device: sjc-leaf02
         int: Ethernet28
   access_interfaces:
-    - name: Ethernet26
+    - name: Ethernet25
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -774,7 +771,7 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-    - name: Ethernet27
+    - name: Ethernet26
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -850,9 +847,6 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
-    - name: Ethernet25
-      type: 10gbase-x-sfpp
-      enabled: false
 - name: sjc-leaf03
   device_type: ceos_switch
   device_role: cleaf
@@ -871,7 +865,7 @@ device_list:
       ipv4_address: "10.216.199.3/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -928,12 +922,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -943,12 +937,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -958,12 +952,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1010,7 +1004,7 @@ device_list:
         device: sjc-leaf04
         int: Ethernet28
   access_interfaces:
-    - name: Ethernet26
+    - name: Ethernet25
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -1019,7 +1013,7 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-    - name: Ethernet27
+    - name: Ethernet26
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -1095,9 +1089,6 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
-    - name: Ethernet25
-      type: 10gbase-x-sfpp
-      enabled: false
 - name: sjc-leaf04
   device_type: ceos_switch
   device_role: cleaf
@@ -1116,7 +1107,7 @@ device_list:
       ipv4_address: "10.216.199.4/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -1173,12 +1164,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -1188,12 +1179,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -1203,12 +1194,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1255,7 +1246,7 @@ device_list:
         device: sjc-leaf04
         int: Ethernet28
   access_interfaces:
-    - name: Ethernet26
+    - name: Ethernet25
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -1264,7 +1255,7 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-    - name: Ethernet27
+    - name: Ethernet26
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -1340,9 +1331,6 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
-    - name: Ethernet25
-      type: 10gbase-x-sfpp
-      enabled: false
 - name: sjc-leaf05
   device_type: ceos_switch
   device_role: cleaf
@@ -1361,7 +1349,7 @@ device_list:
       ipv4_address: "10.216.199.5/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -1418,12 +1406,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -1433,12 +1421,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -1448,12 +1436,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1500,7 +1488,7 @@ device_list:
         device: sjc-leaf06
         int: Ethernet28
   access_interfaces:
-    - name: Ethernet26
+    - name: Ethernet25
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -1509,7 +1497,7 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-    - name: Ethernet27
+    - name: Ethernet26
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -1585,9 +1573,6 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
-    - name: Ethernet25
-      type: 10gbase-x-sfpp
-      enabled: false
 - name: sjc-leaf06
   device_type: ceos_switch
   device_role: cleaf
@@ -1606,7 +1591,7 @@ device_list:
       ipv4_address: "10.216.199.6/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -1663,12 +1648,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -1678,12 +1663,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -1693,12 +1678,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1745,7 +1730,7 @@ device_list:
         device: sjc-leaf06
         int: Ethernet28
   access_interfaces:
-    - name: Ethernet26
+    - name: Ethernet25
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -1754,7 +1739,7 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-    - name: Ethernet27
+    - name: Ethernet26
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -1830,9 +1815,6 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
-    - name: Ethernet25
-      type: 10gbase-x-sfpp
-      enabled: false
 - name: lax-spine01
   device_type: ceos_switch
   device_role: spine
@@ -1851,7 +1833,7 @@ device_list:
       ipv4_address: "10.216.199.101/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -2033,7 +2015,7 @@ device_list:
       ipv4_address: "10.216.199.102/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -2215,7 +2197,7 @@ device_list:
       ipv4_address: "10.216.199.1/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -2272,11 +2254,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -2286,11 +2268,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -2300,11 +2282,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -2351,7 +2333,7 @@ device_list:
         device: lax-leaf02
         int: Ethernet28
   access_interfaces:
-    - name: Ethernet26
+    - name: Ethernet25
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -2360,7 +2342,7 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-    - name: Ethernet27
+    - name: Ethernet26
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -2436,9 +2418,6 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
-    - name: Ethernet25
-      type: 10gbase-x-sfpp
-      enabled: false
 - name: lax-leaf02
   device_type: ceos_switch
   device_role: cleaf
@@ -2457,7 +2436,7 @@ device_list:
       ipv4_address: "10.216.199.2/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -2514,11 +2493,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -2528,11 +2507,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -2542,11 +2521,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -2593,7 +2572,7 @@ device_list:
         device: lax-leaf02
         int: Ethernet28
   access_interfaces:
-    - name: Ethernet26
+    - name: Ethernet25
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -2602,7 +2581,7 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-    - name: Ethernet27
+    - name: Ethernet26
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -2678,9 +2657,6 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
-    - name: Ethernet25
-      type: 10gbase-x-sfpp
-      enabled: false
 - name: lax-leaf03
   device_type: ceos_switch
   device_role: cleaf
@@ -2699,7 +2675,7 @@ device_list:
       ipv4_address: "10.216.199.3/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -2756,11 +2732,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -2770,11 +2746,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -2784,11 +2760,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -2835,7 +2811,7 @@ device_list:
         device: lax-leaf04
         int: Ethernet28
   access_interfaces:
-    - name: Ethernet26
+    - name: Ethernet25
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -2844,7 +2820,7 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-    - name: Ethernet27
+    - name: Ethernet26
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -2920,9 +2896,6 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
-    - name: Ethernet25
-      type: 10gbase-x-sfpp
-      enabled: false
 - name: lax-leaf04
   device_type: ceos_switch
   device_role: cleaf
@@ -2941,7 +2914,7 @@ device_list:
       ipv4_address: "10.216.199.4/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -2998,11 +2971,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -3012,11 +2985,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -3026,11 +2999,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -3077,7 +3050,7 @@ device_list:
         device: lax-leaf04
         int: Ethernet28
   access_interfaces:
-    - name: Ethernet26
+    - name: Ethernet25
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -3086,7 +3059,7 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-    - name: Ethernet27
+    - name: Ethernet26
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -3162,9 +3135,6 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
-    - name: Ethernet25
-      type: 10gbase-x-sfpp
-      enabled: false
 - name: lax-leaf05
   device_type: ceos_switch
   device_role: cleaf
@@ -3183,7 +3153,7 @@ device_list:
       ipv4_address: "10.216.199.5/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -3240,11 +3210,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -3254,11 +3224,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -3268,11 +3238,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -3319,7 +3289,7 @@ device_list:
         device: lax-leaf06
         int: Ethernet28
   access_interfaces:
-    - name: Ethernet26
+    - name: Ethernet25
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -3328,7 +3298,7 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-    - name: Ethernet27
+    - name: Ethernet26
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -3404,9 +3374,6 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
-    - name: Ethernet25
-      type: 10gbase-x-sfpp
-      enabled: false
 - name: lax-leaf06
   device_type: ceos_switch
   device_role: cleaf
@@ -3425,7 +3392,7 @@ device_list:
       ipv4_address: "10.216.199.6/32"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -3482,11 +3449,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -3496,11 +3463,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -3510,11 +3477,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 904
-      tagged_vlan_4: 105
-      tagged_vlan_5: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NATIVE_VLAN
+      tagged_vlan_4: CustA_01
+      tagged_vlan_5: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -3561,7 +3528,7 @@ device_list:
         device: lax-leaf06
         int: Ethernet28
   access_interfaces:
-    - name: Ethernet26
+    - name: Ethernet25
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -3570,7 +3537,7 @@ device_list:
       mtu: 9216
       mgmt_only: False
       mode: Access
-    - name: Ethernet27
+    - name: Ethernet26
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -3644,8 +3611,5 @@ device_list:
       type: 10gbase-x-sfpp
       enabled: false
     - name: Ethernet24
-      type: 10gbase-x-sfpp
-      enabled: false
-    - name: Ethernet25
       type: 10gbase-x-sfpp
       enabled: false

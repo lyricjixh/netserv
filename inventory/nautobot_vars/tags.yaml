@@ -1,11 +1,11 @@
 ---
-_tags:
+tags:
 - name: mlag_mem
   description: "Interface as the MLAG Member"
 - name: p2p
   description: "Interface network type for OSPF Protocol"
 - name: bgp
-  description: Used to assigned OSPF config context to pod devices
+  description: Used to assigned BGP config context to pod devices
 - name: sjc_dhcp_server
   description: sjc DHCP Server configuration
 - name: lax_dhcp_server

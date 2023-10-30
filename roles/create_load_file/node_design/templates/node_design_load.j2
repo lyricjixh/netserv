@@ -19,7 +19,7 @@ device_list:
       ipv4_address: "{{ lpbk_ulay_netv4 | ipsubnet(32, 101+n) }}"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -63,7 +63,7 @@ device_list:
       enabled: false
 {% endfor %}
 {% endfor %}
-{% set vlan_list=site.vlans | json_query('[?status==`active`].vid') %}
+{% set vlan_list=site.vlans | json_query('[?status==`active`].name') %}
 {# {% set vlan_list=[101,102,103] %} #}
 {# {% set vlan_list=vxlans | json_query('[?state==`present`].vlan') %} #}
 {% for n in range(6) %}
@@ -90,7 +90,7 @@ device_list:
       ipv4_address: "{{ lpbk_ulay_netv4 | ipsubnet(32, 1+n)  }}"
       status: active
       tags: 
-        - ospf_area_0
+        - bgp
     - name: Loopback1
       description: "Overlay LOOPBACK"
       type: virtual
@@ -191,7 +191,7 @@ device_list:
 {% endfor %}
   access_interfaces:
 {% for ai in range(2) %}
-    - name: Ethernet{{26+ai}}
+    - name: Ethernet{{25+ai}}
       description: "Admin Access Port"
       type: 10gbase-x-sfpp
       label: access
@@ -202,7 +202,7 @@ device_list:
       mode: Access
 {% endfor %}
   disabled_interfaces:
-{% for d in range(3,26) %}
+{% for d in range(3,25) %}
     - name: Ethernet{{d}}
       type: 10gbase-x-sfpp
       enabled: false

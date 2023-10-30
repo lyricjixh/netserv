@@ -18,7 +18,7 @@
   loop: "{{ device_list | subelements('l3_interfaces', 'skip_missing=True') }}"
   tags:
     - intf
-    # - intf_l3
+    - intf_l3
 
 #############################################################
 # Assigning IP addresses to VRFs in Nautobot
