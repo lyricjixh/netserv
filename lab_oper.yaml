@@ -309,3 +309,17 @@
         src: fault_inject_cleaf01
     tags:
     - faulty
+  
+  - name : Change Serde mode
+    block:
+    - name : First Supress any ask during the config
+      eos_command:
+        commands:
+          - terminal dont-ask
+
+    - name : Now Change the mode
+      eos_config:
+        lines:
+          - "hardware speed-group2 serdes 10g"
+    tags:
+      - serde
