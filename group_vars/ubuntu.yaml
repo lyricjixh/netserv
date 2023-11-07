@@ -7,22 +7,41 @@ ansible_python_interpreter: /usr/bin/python3
 
 ubuntu_packages:
   - lldpd
-  - iperf
   - dkms
   - build-essential
   - python3-pip
   - net-tools
   - netplan.io
-#   - network-manager
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - software-properties-common
+  - virtualenv
+  - python3-setuptools
+  # - network-manager
+  # - iperf
+
+pip_packages:
+  - docker
+  # - docker-compose
+  - requests
+  - urllib3
+  - ansible-pylibssh
+
+ansible_collections:
+  - ansible.netcommon
+  - ansible.utils
+  - arista.avd 
+  - arista.cvp
+  - arista.eos
+
+# lsb_release -cs
+ubuntu_release: jammy
 
 ubuntu_users:
   - name: "ansible"
     groups: "devops"
     password: "{{ vault_ansible_password }}"
-    state: "present"
-  - name: "xji"
-    groups: "devops"
-    password: "{{ vault_xji_password }}"
     state: "present"
 
 ports:
@@ -30,3 +49,34 @@ ports:
       desc: "Loopback"
       addr_v4: "{{ compute_lpbk0_netv4 | ansible.utils.ipaddr(seq-100) | ansible.utils.ipaddr('address') }}/32"
       addr_v6: "{{ compute_lpbk0_netv6 | ansible.utils.ipaddr('%0x' % seq-100) | ansible.utils.ipaddr('address') }}/128"
+
+git_cfg:
+  name: "xianghui.ji@arista.com"
+  scope: "global"
+
+git_clone_dir: "training_ansible"
+target_build_dir: "~lab/cfggen"
+target_log_dir: "~lab/LOGS"
+
+## [3.8, 3.9, 3.10, 3.11, 3.12]
+python3_version: "3.10"
+
+## ContainerLab
+image_dir: "images"
+## [4.28.8.1M, 4.29.4M, 4.30.2F]
+eos_ver: "4.30.2F"
+clab_topo: "~{{ansible_ssh_user}}/{{git_clone_dir}}/topology/ceos.clab.yaml"
+clab_git_repo: "https://github.com/lyricjixh/automation-training.git"
+
+## Ansible
+ansible_core_ver: "2.14.9"
+ansible_log: "./LOGS"
+## AVD
+avd_clone_dir: "training_avd"
+avd_git_repo: "https://github.com/lyricjixh/training_avd.git"
+avd_topo: 
+  - isis-ldp-ipvpn
+  - l2ls-fabric
+  - dual-dc-l3ls
+  - campus-fabric
+  # - single-dc-l3ls
