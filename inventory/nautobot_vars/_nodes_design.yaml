@@ -39,7 +39,7 @@ device_list:
       status: active
       connection:
         device: sjc-leaf01
-        int: Ethernet32
+        int: Ethernet31
     - name: Ethernet1
       description: "PTP Downward to leaf02"
       type: 10gbase-x-sfpp
@@ -67,7 +67,7 @@ device_list:
       status: active
       connection:
         device: sjc-leaf03
-        int: Ethernet30
+        int: Ethernet31
     - name: Ethernet3
       description: "PTP Downward to leaf04"
       type: 10gbase-x-sfpp
@@ -81,7 +81,7 @@ device_list:
       status: active
       connection:
         device: sjc-leaf04
-        int: Ethernet29
+        int: Ethernet31
     - name: Ethernet4
       description: "PTP Downward to leaf05"
       type: 10gbase-x-sfpp
@@ -95,7 +95,7 @@ device_list:
       status: active
       connection:
         device: sjc-leaf05
-        int: Ethernet28
+        int: Ethernet31
     - name: Ethernet5
       description: "PTP Downward to leaf06"
       type: 10gbase-x-sfpp
@@ -109,9 +109,9 @@ device_list:
       status: active
       connection:
         device: sjc-leaf06
-        int: Ethernet27
+        int: Ethernet31
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -235,7 +235,7 @@ device_list:
       status: active
       connection:
         device: sjc-leaf02
-        int: Ethernet31
+        int: Ethernet32
     - name: Ethernet2
       description: "PTP Downward to leaf03"
       type: 10gbase-x-sfpp
@@ -249,7 +249,7 @@ device_list:
       status: active
       connection:
         device: sjc-leaf03
-        int: Ethernet30
+        int: Ethernet32
     - name: Ethernet3
       description: "PTP Downward to leaf04"
       type: 10gbase-x-sfpp
@@ -263,7 +263,7 @@ device_list:
       status: active
       connection:
         device: sjc-leaf04
-        int: Ethernet29
+        int: Ethernet32
     - name: Ethernet4
       description: "PTP Downward to leaf05"
       type: 10gbase-x-sfpp
@@ -277,7 +277,7 @@ device_list:
       status: active
       connection:
         device: sjc-leaf05
-        int: Ethernet28
+        int: Ethernet32
     - name: Ethernet5
       description: "PTP Downward to leaf06"
       type: 10gbase-x-sfpp
@@ -291,9 +291,9 @@ device_list:
       status: active
       connection:
         device: sjc-leaf06
-        int: Ethernet27
+        int: Ethernet32
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -390,6 +390,72 @@ device_list:
       mgmt_only: False
       ipv4_address: "10.111.252.1/32"
       status: active
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.1/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.65/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.129/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.193/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.12.1/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.13.1/24"
+      tags: 
+        - vlan
+      status: active
     - name: Ethernet31
       description: "UPlink to Spine01"
       type: 10gbase-x-sfpp
@@ -419,7 +485,7 @@ device_list:
         device: sjc-spine02
         int: Ethernet0
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -438,12 +504,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -453,12 +519,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -468,12 +534,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -484,8 +550,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel101
       connection:
-        device: compute101
-        int: eth0
+        device: sjc-compute101
+        int: eth1
     - name: Ethernet1
       description: "TRUNK TO Compute102"
       type: 10gbase-x-sfpp
@@ -495,8 +561,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel102
       connection:
-        device: compute102
-        int: eth0
+        device: sjc-compute102
+        int: eth1
     - name: Ethernet27
       description: "MLAG CTRL Link"
       type: 10gbase-x-sfpp
@@ -632,6 +698,72 @@ device_list:
       mgmt_only: False
       ipv4_address: "10.111.252.2/32"
       status: active
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.1/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.65/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.129/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.193/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.12.1/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.13.1/24"
+      tags: 
+        - vlan
+      status: active
     - name: Ethernet31
       description: "UPlink to Spine01"
       type: 10gbase-x-sfpp
@@ -661,7 +793,7 @@ device_list:
         device: sjc-spine02
         int: Ethernet1
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -680,12 +812,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -695,12 +827,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -710,12 +842,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -726,8 +858,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel101
       connection:
-        device: compute101
-        int: eth1
+        device: sjc-compute101
+        int: eth2
     - name: Ethernet1
       description: "TRUNK TO Compute102"
       type: 10gbase-x-sfpp
@@ -737,8 +869,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel102
       connection:
-        device: compute102
-        int: eth1
+        device: sjc-compute102
+        int: eth2
     - name: Ethernet27
       description: "MLAG CTRL Link"
       type: 10gbase-x-sfpp
@@ -874,6 +1006,72 @@ device_list:
       mgmt_only: False
       ipv4_address: "10.111.252.3/32"
       status: active
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.1/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.65/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.129/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.193/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.12.1/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.13.1/24"
+      tags: 
+        - vlan
+      status: active
     - name: Ethernet31
       description: "UPlink to Spine01"
       type: 10gbase-x-sfpp
@@ -903,7 +1101,7 @@ device_list:
         device: sjc-spine02
         int: Ethernet2
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -922,12 +1120,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -937,12 +1135,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -952,12 +1150,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -968,8 +1166,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel101
       connection:
-        device: compute101
-        int: eth0
+        device: sjc-compute101
+        int: eth1
     - name: Ethernet1
       description: "TRUNK TO Compute102"
       type: 10gbase-x-sfpp
@@ -979,8 +1177,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel102
       connection:
-        device: compute102
-        int: eth0
+        device: sjc-compute102
+        int: eth1
     - name: Ethernet27
       description: "MLAG CTRL Link"
       type: 10gbase-x-sfpp
@@ -1116,6 +1314,72 @@ device_list:
       mgmt_only: False
       ipv4_address: "10.111.252.4/32"
       status: active
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.1/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.65/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.129/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.193/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.12.1/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.13.1/24"
+      tags: 
+        - vlan
+      status: active
     - name: Ethernet31
       description: "UPlink to Spine01"
       type: 10gbase-x-sfpp
@@ -1145,7 +1409,7 @@ device_list:
         device: sjc-spine02
         int: Ethernet3
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -1164,12 +1428,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -1179,12 +1443,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -1194,12 +1458,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1210,8 +1474,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel101
       connection:
-        device: compute101
-        int: eth1
+        device: sjc-compute101
+        int: eth2
     - name: Ethernet1
       description: "TRUNK TO Compute102"
       type: 10gbase-x-sfpp
@@ -1221,8 +1485,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel102
       connection:
-        device: compute102
-        int: eth1
+        device: sjc-compute102
+        int: eth2
     - name: Ethernet27
       description: "MLAG CTRL Link"
       type: 10gbase-x-sfpp
@@ -1358,6 +1622,72 @@ device_list:
       mgmt_only: False
       ipv4_address: "10.111.252.5/32"
       status: active
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.1/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.65/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.129/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.193/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.12.1/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.13.1/24"
+      tags: 
+        - vlan
+      status: active
     - name: Ethernet31
       description: "UPlink to Spine01"
       type: 10gbase-x-sfpp
@@ -1387,7 +1717,7 @@ device_list:
         device: sjc-spine02
         int: Ethernet4
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -1406,12 +1736,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -1421,12 +1751,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -1436,12 +1766,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1452,8 +1782,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel101
       connection:
-        device: compute101
-        int: eth0
+        device: sjc-compute101
+        int: eth1
     - name: Ethernet1
       description: "TRUNK TO Compute102"
       type: 10gbase-x-sfpp
@@ -1463,8 +1793,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel102
       connection:
-        device: compute102
-        int: eth0
+        device: sjc-compute102
+        int: eth1
     - name: Ethernet27
       description: "MLAG CTRL Link"
       type: 10gbase-x-sfpp
@@ -1600,6 +1930,72 @@ device_list:
       mgmt_only: False
       ipv4_address: "10.111.252.6/32"
       status: active
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.1/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.65/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.129/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.193/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.12.1/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.13.1/24"
+      tags: 
+        - vlan
+      status: active
     - name: Ethernet31
       description: "UPlink to Spine01"
       type: 10gbase-x-sfpp
@@ -1629,7 +2025,7 @@ device_list:
         device: sjc-spine02
         int: Ethernet5
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -1648,12 +2044,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -1663,12 +2059,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -1678,12 +2074,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NMS
-      tagged_vlan_4: NATIVE_VLAN
-      tagged_vlan_5: CustA_01
-      tagged_vlan_6: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1694,8 +2090,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel101
       connection:
-        device: compute101
-        int: eth1
+        device: sjc-compute101
+        int: eth2
     - name: Ethernet1
       description: "TRUNK TO Compute102"
       type: 10gbase-x-sfpp
@@ -1705,8 +2101,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel102
       connection:
-        device: compute102
-        int: eth1
+        device: sjc-compute102
+        int: eth2
     - name: Ethernet27
       description: "MLAG CTRL Link"
       type: 10gbase-x-sfpp
@@ -1815,6 +2211,883 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
+- name: sjc-compute101
+  device_type: ESXi
+  device_role: compute
+  site: sjc
+  rack: "sjc_rack_01"
+  position: 38
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.216.199.117/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.111.252.117/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.2/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.66/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.130/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.194/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.12.2/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.13.2/24"
+      tags: 
+        - vlan
+      status: active
+    - name: eth0
+      description: "OOB Mgmt Interface"
+      type: 10gbase-x-sfpp
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.117/24
+      vrf: MGMT
+      status: active
+  trunk_interfaces:
+    - name: bond0
+      description: "TRUNK Bond TO Mlag ToR Pair in Rack01"
+      type: lag
+      label: trunk
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
+  lag_interfaces:
+    - name: eth1
+      description: "TRUNK TO Cleaf01"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: sjc-cleaf01
+        int: Ethernet0
+    - name: eth2
+      description: "TRUNK TO Cleaf02"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: sjc-cleaf02
+        int: Ethernet1
+- name: sjc-compute102
+  device_type: ESXi
+  device_role: compute
+  site: sjc
+  rack: "sjc_rack_01"
+  position: 37
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.216.199.118/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.111.252.118/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.3/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.67/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.131/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.195/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.12.3/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.13.3/24"
+      tags: 
+        - vlan
+      status: active
+    - name: eth0
+      description: "OOB Mgmt Interface"
+      type: 10gbase-x-sfpp
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.118/24
+      vrf: MGMT
+      status: active
+  trunk_interfaces:
+    - name: bond0
+      description: "TRUNK Bond TO Mlag ToR Pair in Rack01"
+      type: lag
+      label: trunk
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
+  lag_interfaces:
+    - name: eth1
+      description: "TRUNK TO Cleaf01"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: sjc-cleaf01
+        int: Ethernet0
+    - name: eth2
+      description: "TRUNK TO Cleaf02"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: sjc-cleaf02
+        int: Ethernet1
+- name: sjc-compute201
+  device_type: ESXi
+  device_role: compute
+  site: sjc
+  rack: "sjc_rack_02"
+  position: 38
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.216.199.117/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.111.252.117/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.2/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.66/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.130/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.194/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.12.2/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.13.2/24"
+      tags: 
+        - vlan
+      status: active
+    - name: eth0
+      description: "OOB Mgmt Interface"
+      type: 10gbase-x-sfpp
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.117/24
+      vrf: MGMT
+      status: active
+  trunk_interfaces:
+    - name: bond0
+      description: "TRUNK Bond TO Mlag ToR Pair in Rack02"
+      type: lag
+      label: trunk
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
+  lag_interfaces:
+    - name: eth1
+      description: "TRUNK TO Cleaf03"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: sjc-cleaf03
+        int: Ethernet0
+    - name: eth2
+      description: "TRUNK TO Cleaf04"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: sjc-cleaf04
+        int: Ethernet1
+- name: sjc-compute202
+  device_type: ESXi
+  device_role: compute
+  site: sjc
+  rack: "sjc_rack_02"
+  position: 37
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.216.199.118/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.111.252.118/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.3/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.67/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.131/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.195/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.12.3/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.13.3/24"
+      tags: 
+        - vlan
+      status: active
+    - name: eth0
+      description: "OOB Mgmt Interface"
+      type: 10gbase-x-sfpp
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.118/24
+      vrf: MGMT
+      status: active
+  trunk_interfaces:
+    - name: bond0
+      description: "TRUNK Bond TO Mlag ToR Pair in Rack02"
+      type: lag
+      label: trunk
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
+  lag_interfaces:
+    - name: eth1
+      description: "TRUNK TO Cleaf03"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: sjc-cleaf03
+        int: Ethernet0
+    - name: eth2
+      description: "TRUNK TO Cleaf04"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: sjc-cleaf04
+        int: Ethernet1
+- name: sjc-compute301
+  device_type: ESXi
+  device_role: compute
+  site: sjc
+  rack: "sjc_rack_03"
+  position: 38
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.216.199.117/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.111.252.117/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.2/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.66/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.130/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.194/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.12.2/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.13.2/24"
+      tags: 
+        - vlan
+      status: active
+    - name: eth0
+      description: "OOB Mgmt Interface"
+      type: 10gbase-x-sfpp
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.117/24
+      vrf: MGMT
+      status: active
+  trunk_interfaces:
+    - name: bond0
+      description: "TRUNK Bond TO Mlag ToR Pair in Rack03"
+      type: lag
+      label: trunk
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
+  lag_interfaces:
+    - name: eth1
+      description: "TRUNK TO Cleaf05"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: sjc-cleaf05
+        int: Ethernet0
+    - name: eth2
+      description: "TRUNK TO Cleaf06"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: sjc-cleaf06
+        int: Ethernet1
+- name: sjc-compute302
+  device_type: ESXi
+  device_role: compute
+  site: sjc
+  rack: "sjc_rack_03"
+  position: 37
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.216.199.118/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.111.252.118/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.3/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.67/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.131/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.4.195/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.12.3/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.1.13.3/24"
+      tags: 
+        - vlan
+      status: active
+    - name: eth0
+      description: "OOB Mgmt Interface"
+      type: 10gbase-x-sfpp
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.118/24
+      vrf: MGMT
+      status: active
+  trunk_interfaces:
+    - name: bond0
+      description: "TRUNK Bond TO Mlag ToR Pair in Rack03"
+      type: lag
+      label: trunk
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_3: 903
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
+  lag_interfaces:
+    - name: eth1
+      description: "TRUNK TO Cleaf05"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: sjc-cleaf05
+        int: Ethernet0
+    - name: eth2
+      description: "TRUNK TO Cleaf06"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: sjc-cleaf06
+        int: Ethernet1
+
 - name: lax-spine01
   device_type: ceos_switch
   device_role: spine
@@ -1855,7 +3128,7 @@ device_list:
       status: active
       connection:
         device: lax-leaf01
-        int: Ethernet32
+        int: Ethernet31
     - name: Ethernet1
       description: "PTP Downward to leaf02"
       type: 10gbase-x-sfpp
@@ -1883,7 +3156,7 @@ device_list:
       status: active
       connection:
         device: lax-leaf03
-        int: Ethernet30
+        int: Ethernet31
     - name: Ethernet3
       description: "PTP Downward to leaf04"
       type: 10gbase-x-sfpp
@@ -1897,7 +3170,7 @@ device_list:
       status: active
       connection:
         device: lax-leaf04
-        int: Ethernet29
+        int: Ethernet31
     - name: Ethernet4
       description: "PTP Downward to leaf05"
       type: 10gbase-x-sfpp
@@ -1911,7 +3184,7 @@ device_list:
       status: active
       connection:
         device: lax-leaf05
-        int: Ethernet28
+        int: Ethernet31
     - name: Ethernet5
       description: "PTP Downward to leaf06"
       type: 10gbase-x-sfpp
@@ -1925,9 +3198,9 @@ device_list:
       status: active
       connection:
         device: lax-leaf06
-        int: Ethernet27
+        int: Ethernet31
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -2051,7 +3324,7 @@ device_list:
       status: active
       connection:
         device: lax-leaf02
-        int: Ethernet31
+        int: Ethernet32
     - name: Ethernet2
       description: "PTP Downward to leaf03"
       type: 10gbase-x-sfpp
@@ -2065,7 +3338,7 @@ device_list:
       status: active
       connection:
         device: lax-leaf03
-        int: Ethernet30
+        int: Ethernet32
     - name: Ethernet3
       description: "PTP Downward to leaf04"
       type: 10gbase-x-sfpp
@@ -2079,7 +3352,7 @@ device_list:
       status: active
       connection:
         device: lax-leaf04
-        int: Ethernet29
+        int: Ethernet32
     - name: Ethernet4
       description: "PTP Downward to leaf05"
       type: 10gbase-x-sfpp
@@ -2093,7 +3366,7 @@ device_list:
       status: active
       connection:
         device: lax-leaf05
-        int: Ethernet28
+        int: Ethernet32
     - name: Ethernet5
       description: "PTP Downward to leaf06"
       type: 10gbase-x-sfpp
@@ -2107,9 +3380,9 @@ device_list:
       status: active
       connection:
         device: lax-leaf06
-        int: Ethernet27
+        int: Ethernet32
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -2206,6 +3479,61 @@ device_list:
       mgmt_only: False
       ipv4_address: "10.111.252.1/32"
       status: active
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.1/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.65/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.193/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.12.1/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.13.1/24"
+      tags: 
+        - vlan
+      status: active
     - name: Ethernet31
       description: "UPlink to Spine01"
       type: 10gbase-x-sfpp
@@ -2235,7 +3563,7 @@ device_list:
         device: lax-spine02
         int: Ethernet0
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -2254,11 +3582,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -2268,11 +3596,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -2282,11 +3610,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -2297,8 +3625,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel101
       connection:
-        device: compute101
-        int: eth0
+        device: lax-compute101
+        int: eth1
     - name: Ethernet1
       description: "TRUNK TO Compute102"
       type: 10gbase-x-sfpp
@@ -2308,8 +3636,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel102
       connection:
-        device: compute102
-        int: eth0
+        device: lax-compute102
+        int: eth1
     - name: Ethernet27
       description: "MLAG CTRL Link"
       type: 10gbase-x-sfpp
@@ -2445,6 +3773,61 @@ device_list:
       mgmt_only: False
       ipv4_address: "10.111.252.2/32"
       status: active
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.1/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.65/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.193/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.12.1/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.13.1/24"
+      tags: 
+        - vlan
+      status: active
     - name: Ethernet31
       description: "UPlink to Spine01"
       type: 10gbase-x-sfpp
@@ -2474,7 +3857,7 @@ device_list:
         device: lax-spine02
         int: Ethernet1
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -2493,11 +3876,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -2507,11 +3890,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -2521,11 +3904,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -2536,8 +3919,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel101
       connection:
-        device: compute101
-        int: eth1
+        device: lax-compute101
+        int: eth2
     - name: Ethernet1
       description: "TRUNK TO Compute102"
       type: 10gbase-x-sfpp
@@ -2547,8 +3930,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel102
       connection:
-        device: compute102
-        int: eth1
+        device: lax-compute102
+        int: eth2
     - name: Ethernet27
       description: "MLAG CTRL Link"
       type: 10gbase-x-sfpp
@@ -2684,6 +4067,61 @@ device_list:
       mgmt_only: False
       ipv4_address: "10.111.252.3/32"
       status: active
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.1/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.65/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.193/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.12.1/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.13.1/24"
+      tags: 
+        - vlan
+      status: active
     - name: Ethernet31
       description: "UPlink to Spine01"
       type: 10gbase-x-sfpp
@@ -2713,7 +4151,7 @@ device_list:
         device: lax-spine02
         int: Ethernet2
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -2732,11 +4170,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -2746,11 +4184,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -2760,11 +4198,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -2775,8 +4213,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel101
       connection:
-        device: compute101
-        int: eth0
+        device: lax-compute101
+        int: eth1
     - name: Ethernet1
       description: "TRUNK TO Compute102"
       type: 10gbase-x-sfpp
@@ -2786,8 +4224,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel102
       connection:
-        device: compute102
-        int: eth0
+        device: lax-compute102
+        int: eth1
     - name: Ethernet27
       description: "MLAG CTRL Link"
       type: 10gbase-x-sfpp
@@ -2923,6 +4361,61 @@ device_list:
       mgmt_only: False
       ipv4_address: "10.111.252.4/32"
       status: active
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.1/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.65/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.193/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.12.1/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.13.1/24"
+      tags: 
+        - vlan
+      status: active
     - name: Ethernet31
       description: "UPlink to Spine01"
       type: 10gbase-x-sfpp
@@ -2952,7 +4445,7 @@ device_list:
         device: lax-spine02
         int: Ethernet3
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -2971,11 +4464,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -2985,11 +4478,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -2999,11 +4492,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -3014,8 +4507,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel101
       connection:
-        device: compute101
-        int: eth1
+        device: lax-compute101
+        int: eth2
     - name: Ethernet1
       description: "TRUNK TO Compute102"
       type: 10gbase-x-sfpp
@@ -3025,8 +4518,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel102
       connection:
-        device: compute102
-        int: eth1
+        device: lax-compute102
+        int: eth2
     - name: Ethernet27
       description: "MLAG CTRL Link"
       type: 10gbase-x-sfpp
@@ -3162,6 +4655,61 @@ device_list:
       mgmt_only: False
       ipv4_address: "10.111.252.5/32"
       status: active
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.1/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.65/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.193/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.12.1/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.13.1/24"
+      tags: 
+        - vlan
+      status: active
     - name: Ethernet31
       description: "UPlink to Spine01"
       type: 10gbase-x-sfpp
@@ -3191,7 +4739,7 @@ device_list:
         device: lax-spine02
         int: Ethernet4
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -3210,11 +4758,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -3224,11 +4772,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -3238,11 +4786,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -3253,8 +4801,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel101
       connection:
-        device: compute101
-        int: eth0
+        device: lax-compute101
+        int: eth1
     - name: Ethernet1
       description: "TRUNK TO Compute102"
       type: 10gbase-x-sfpp
@@ -3264,8 +4812,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel102
       connection:
-        device: compute102
-        int: eth0
+        device: lax-compute102
+        int: eth1
     - name: Ethernet27
       description: "MLAG CTRL Link"
       type: 10gbase-x-sfpp
@@ -3401,6 +4949,61 @@ device_list:
       mgmt_only: False
       ipv4_address: "10.111.252.6/32"
       status: active
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.1/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.65/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.193/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.12.1/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.13.1/24"
+      tags: 
+        - vlan
+      status: active
     - name: Ethernet31
       description: "UPlink to Spine01"
       type: 10gbase-x-sfpp
@@ -3430,7 +5033,7 @@ device_list:
         device: lax-spine02
         int: Ethernet5
     - name: Management0
-      description: "MGMT-INTERFACE"
+      description: "OOB Mgmt Interface"
       type: 10gbase-x-sfpp
       label: mgmt
       enabled: True
@@ -3449,11 +5052,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -3463,11 +5066,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -3477,11 +5080,11 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: ADMIN
-      tagged_vlan_2: SERVERS
-      tagged_vlan_3: NATIVE_VLAN
-      tagged_vlan_4: CustA_01
-      tagged_vlan_5: CustA_02
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -3492,8 +5095,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel101
       connection:
-        device: compute101
-        int: eth1
+        device: lax-compute101
+        int: eth2
     - name: Ethernet1
       description: "TRUNK TO Compute102"
       type: 10gbase-x-sfpp
@@ -3503,8 +5106,8 @@ device_list:
       mgmt_only: False
       lag: Port-Channel102
       connection:
-        device: compute102
-        int: eth1
+        device: lax-compute102
+        int: eth2
     - name: Ethernet27
       description: "MLAG CTRL Link"
       type: 10gbase-x-sfpp
@@ -3613,3 +5216,808 @@ device_list:
     - name: Ethernet24
       type: 10gbase-x-sfpp
       enabled: false
+- name: lax-compute101
+  device_type: ESXi
+  device_role: compute
+  site: lax
+  rack: "lax_rack_01"
+  position: 38
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.216.199.117/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.111.252.117/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.2/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.66/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.194/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.12.2/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.13.2/24"
+      tags: 
+        - vlan
+      status: active
+    - name: eth0
+      description: "OOB Mgmt Interface"
+      type: 10gbase-x-sfpp
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.117/24
+      vrf: MGMT
+      status: active
+  trunk_interfaces:
+    - name: bond0
+      description: "TRUNK Bond TO Mlag ToR Pair in Rack01"
+      type: lag
+      label: trunk
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
+  lag_interfaces:
+    - name: eth1
+      description: "TRUNK TO Cleaf01"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: lax-cleaf01
+        int: Ethernet0
+    - name: eth2
+      description: "TRUNK TO Cleaf02"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: lax-cleaf02
+        int: Ethernet1
+- name: lax-compute102
+  device_type: ESXi
+  device_role: compute
+  site: lax
+  rack: "lax_rack_01"
+  position: 37
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.216.199.118/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.111.252.118/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.3/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.67/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.195/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.12.3/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.13.3/24"
+      tags: 
+        - vlan
+      status: active
+    - name: eth0
+      description: "OOB Mgmt Interface"
+      type: 10gbase-x-sfpp
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.118/24
+      vrf: MGMT
+      status: active
+  trunk_interfaces:
+    - name: bond0
+      description: "TRUNK Bond TO Mlag ToR Pair in Rack01"
+      type: lag
+      label: trunk
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
+  lag_interfaces:
+    - name: eth1
+      description: "TRUNK TO Cleaf01"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: lax-cleaf01
+        int: Ethernet0
+    - name: eth2
+      description: "TRUNK TO Cleaf02"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: lax-cleaf02
+        int: Ethernet1
+- name: lax-compute201
+  device_type: ESXi
+  device_role: compute
+  site: lax
+  rack: "lax_rack_02"
+  position: 38
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.216.199.117/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.111.252.117/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.2/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.66/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.194/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.12.2/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.13.2/24"
+      tags: 
+        - vlan
+      status: active
+    - name: eth0
+      description: "OOB Mgmt Interface"
+      type: 10gbase-x-sfpp
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.117/24
+      vrf: MGMT
+      status: active
+  trunk_interfaces:
+    - name: bond0
+      description: "TRUNK Bond TO Mlag ToR Pair in Rack02"
+      type: lag
+      label: trunk
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
+  lag_interfaces:
+    - name: eth1
+      description: "TRUNK TO Cleaf03"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: lax-cleaf03
+        int: Ethernet0
+    - name: eth2
+      description: "TRUNK TO Cleaf04"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: lax-cleaf04
+        int: Ethernet1
+- name: lax-compute202
+  device_type: ESXi
+  device_role: compute
+  site: lax
+  rack: "lax_rack_02"
+  position: 37
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.216.199.118/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.111.252.118/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.3/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.67/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.195/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.12.3/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.13.3/24"
+      tags: 
+        - vlan
+      status: active
+    - name: eth0
+      description: "OOB Mgmt Interface"
+      type: 10gbase-x-sfpp
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.118/24
+      vrf: MGMT
+      status: active
+  trunk_interfaces:
+    - name: bond0
+      description: "TRUNK Bond TO Mlag ToR Pair in Rack02"
+      type: lag
+      label: trunk
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
+  lag_interfaces:
+    - name: eth1
+      description: "TRUNK TO Cleaf03"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: lax-cleaf03
+        int: Ethernet0
+    - name: eth2
+      description: "TRUNK TO Cleaf04"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: lax-cleaf04
+        int: Ethernet1
+- name: lax-compute301
+  device_type: ESXi
+  device_role: compute
+  site: lax
+  rack: "lax_rack_03"
+  position: 38
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.216.199.117/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.111.252.117/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.2/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.66/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.194/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.12.2/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.13.2/24"
+      tags: 
+        - vlan
+      status: active
+    - name: eth0
+      description: "OOB Mgmt Interface"
+      type: 10gbase-x-sfpp
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.117/24
+      vrf: MGMT
+      status: active
+  trunk_interfaces:
+    - name: bond0
+      description: "TRUNK Bond TO Mlag ToR Pair in Rack03"
+      type: lag
+      label: trunk
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
+  lag_interfaces:
+    - name: eth1
+      description: "TRUNK TO Cleaf05"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: lax-cleaf05
+        int: Ethernet0
+    - name: eth2
+      description: "TRUNK TO Cleaf06"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: lax-cleaf06
+        int: Ethernet1
+- name: lax-compute302
+  device_type: ESXi
+  device_role: compute
+  site: lax
+  rack: "lax_rack_03"
+  position: 37
+  face: front
+  status: active
+  l3_interfaces:
+    - name: Loopback0
+      description: "Underlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.216.199.118/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: Loopback1
+      description: "Overlay LOOPBACK"
+      type: virtual
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.111.252.118/32"
+      status: active
+      tags: 
+        - bgp
+        - lpbk
+    - name: vlan901
+      description: "ADMIN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.3/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan902
+      description: "SERVERS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.67/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan904
+      description: "NATIVE_VLAN"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.195/26"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan105
+      description: "CustA_01"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.12.3/24"
+      tags: 
+        - vlan
+      status: active
+    - name: vlan106
+      description: "CustA_02"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.13.3/24"
+      tags: 
+        - vlan
+      status: active
+    - name: eth0
+      description: "OOB Mgmt Interface"
+      type: 10gbase-x-sfpp
+      label: mgmt
+      enabled: True
+      mtu: 9216
+      mgmt_only: True
+      ipv4_address: 172.100.100.118/24
+      vrf: MGMT
+      status: active
+  trunk_interfaces:
+    - name: bond0
+      description: "TRUNK Bond TO Mlag ToR Pair in Rack03"
+      type: lag
+      label: trunk
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      mode: Tagged
+      untagged_vlan: NATIVE_VLAN
+      tagged_vlan_1: 901
+      tagged_vlan_2: 902
+      tagged_vlan_4: 904
+      tagged_vlan_5: 105
+      tagged_vlan_6: 106
+  lag_interfaces:
+    - name: eth1
+      description: "TRUNK TO Cleaf05"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: lax-cleaf05
+        int: Ethernet0
+    - name: eth2
+      description: "TRUNK TO Cleaf06"
+      type: 10gbase-x-sfpp
+      label: lag_mem
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      lag: bond0
+      connection:
+        device: lax-cleaf06
+        int: Ethernet1
+

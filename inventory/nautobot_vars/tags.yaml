@@ -2,8 +2,12 @@
 tags:
 - name: mlag_mem
   description: "Interface as the MLAG Member"
+- name: lpbk
+  description: "Loopback Interface"
 - name: p2p
-  description: "Interface network type for OSPF Protocol"
+  description: "Point to point Interface"
+- name: vlan
+  description: "Vlan Interface"
 - name: bgp
   description: Used to assigned BGP config context to pod devices
 - name: sjc_dhcp_server
