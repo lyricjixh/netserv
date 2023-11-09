@@ -84,7 +84,7 @@ sites:
     status: active
   - name: NMS
     tenant: "internal"
-    status: passive
+    status: active
   - name: NATIVE_VLAN
     tenant: "internal"
     status: active

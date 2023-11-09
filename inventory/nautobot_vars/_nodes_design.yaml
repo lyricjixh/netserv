@@ -504,12 +504,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -519,12 +519,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -534,12 +534,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -812,12 +812,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -827,12 +827,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -842,12 +842,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1120,12 +1120,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -1135,12 +1135,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -1150,12 +1150,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1428,12 +1428,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -1443,12 +1443,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -1458,12 +1458,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -1736,12 +1736,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -1751,12 +1751,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -1766,12 +1766,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -2044,12 +2044,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -2059,12 +2059,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -2074,12 +2074,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -2328,12 +2328,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: eth1
       description: "TRUNK TO Cleaf01"
@@ -2474,12 +2474,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: eth1
       description: "TRUNK TO Cleaf01"
@@ -2620,12 +2620,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: eth1
       description: "TRUNK TO Cleaf03"
@@ -2766,12 +2766,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: eth1
       description: "TRUNK TO Cleaf03"
@@ -2912,12 +2912,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: eth1
       description: "TRUNK TO Cleaf05"
@@ -3058,12 +3058,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_3: 903
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: eth1
       description: "TRUNK TO Cleaf05"
@@ -3501,6 +3501,17 @@ device_list:
       tags: 
         - vlan
       status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.129/26"
+      tags: 
+        - vlan
+      status: active
     - name: vlan904
       description: "NATIVE_VLAN"
       type: virtual
@@ -3582,11 +3593,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -3596,11 +3608,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -3610,11 +3623,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -3795,6 +3809,17 @@ device_list:
       tags: 
         - vlan
       status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.129/26"
+      tags: 
+        - vlan
+      status: active
     - name: vlan904
       description: "NATIVE_VLAN"
       type: virtual
@@ -3876,11 +3901,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -3890,11 +3916,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -3904,11 +3931,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -4089,6 +4117,17 @@ device_list:
       tags: 
         - vlan
       status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.129/26"
+      tags: 
+        - vlan
+      status: active
     - name: vlan904
       description: "NATIVE_VLAN"
       type: virtual
@@ -4170,11 +4209,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -4184,11 +4224,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -4198,11 +4239,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -4383,6 +4425,17 @@ device_list:
       tags: 
         - vlan
       status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.129/26"
+      tags: 
+        - vlan
+      status: active
     - name: vlan904
       description: "NATIVE_VLAN"
       type: virtual
@@ -4464,11 +4517,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -4478,11 +4532,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -4492,11 +4547,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -4677,6 +4733,17 @@ device_list:
       tags: 
         - vlan
       status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.129/26"
+      tags: 
+        - vlan
+      status: active
     - name: vlan904
       description: "NATIVE_VLAN"
       type: virtual
@@ -4758,11 +4825,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -4772,11 +4840,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -4786,11 +4855,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -4971,6 +5041,17 @@ device_list:
       tags: 
         - vlan
       status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.129/26"
+      tags: 
+        - vlan
+      status: active
     - name: vlan904
       description: "NATIVE_VLAN"
       type: virtual
@@ -5052,11 +5133,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel102
       description: "TRUNK TO Compute102"
       type: lag
@@ -5066,11 +5148,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
     - name: Port-Channel999
       description: "TRUNK TO LEAF02-MLAG CTL"
       type: lag
@@ -5080,11 +5163,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
       description: "TRUNK TO Compute101"
@@ -5269,6 +5353,17 @@ device_list:
       tags: 
         - vlan
       status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.130/26"
+      tags: 
+        - vlan
+      status: active
     - name: vlan904
       description: "NATIVE_VLAN"
       type: virtual
@@ -5322,11 +5417,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: eth1
       description: "TRUNK TO Cleaf01"
@@ -5403,6 +5499,17 @@ device_list:
       tags: 
         - vlan
       status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.131/26"
+      tags: 
+        - vlan
+      status: active
     - name: vlan904
       description: "NATIVE_VLAN"
       type: virtual
@@ -5456,11 +5563,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: eth1
       description: "TRUNK TO Cleaf01"
@@ -5537,6 +5645,17 @@ device_list:
       tags: 
         - vlan
       status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.130/26"
+      tags: 
+        - vlan
+      status: active
     - name: vlan904
       description: "NATIVE_VLAN"
       type: virtual
@@ -5590,11 +5709,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: eth1
       description: "TRUNK TO Cleaf03"
@@ -5671,6 +5791,17 @@ device_list:
       tags: 
         - vlan
       status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.131/26"
+      tags: 
+        - vlan
+      status: active
     - name: vlan904
       description: "NATIVE_VLAN"
       type: virtual
@@ -5724,11 +5855,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: eth1
       description: "TRUNK TO Cleaf03"
@@ -5805,6 +5937,17 @@ device_list:
       tags: 
         - vlan
       status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.130/26"
+      tags: 
+        - vlan
+      status: active
     - name: vlan904
       description: "NATIVE_VLAN"
       type: virtual
@@ -5858,11 +6001,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: eth1
       description: "TRUNK TO Cleaf05"
@@ -5939,6 +6083,17 @@ device_list:
       tags: 
         - vlan
       status: active
+    - name: vlan903
+      description: "NMS"
+      type: virtual
+      label: layer3
+      enabled: True
+      mtu: 9216
+      mgmt_only: False
+      ipv4_address: "10.2.4.131/26"
+      tags: 
+        - vlan
+      status: active
     - name: vlan904
       description: "NATIVE_VLAN"
       type: virtual
@@ -5992,11 +6147,12 @@ device_list:
       mgmt_only: False
       mode: Tagged
       untagged_vlan: NATIVE_VLAN
-      tagged_vlan_1: 901
-      tagged_vlan_2: 902
-      tagged_vlan_4: 904
-      tagged_vlan_5: 105
-      tagged_vlan_6: 106
+      tagged_vlan_1: ADMIN
+      tagged_vlan_2: SERVERS
+      tagged_vlan_3: NMS
+      tagged_vlan_4: NATIVE_VLAN
+      tagged_vlan_5: CustA_01
+      tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: eth1
       description: "TRUNK TO Cleaf05"

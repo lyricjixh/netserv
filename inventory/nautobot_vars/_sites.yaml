@@ -94,7 +94,7 @@ sites:
     tenant: internal
     vid: 903
     prefix: 10.2.4.128/26
-    status: passive
+    status: active
   - name: NATIVE_VLAN
     tenant: internal
     vid: 904

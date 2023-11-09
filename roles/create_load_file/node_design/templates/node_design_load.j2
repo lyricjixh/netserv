@@ -155,7 +155,7 @@ device_list:
       untagged_vlan: NATIVE_VLAN
 {% for vlan in site.vlans %}
 {% if vlan.status|lower == 'active' %}
-      tagged_vlan_{{loop.index}}: {{ vlan.vid }}
+      tagged_vlan_{{loop.index}}: {{ vlan.name }}
 {% endif %}
 {% endfor %}
 {% endfor %}
@@ -170,7 +170,7 @@ device_list:
       untagged_vlan: NATIVE_VLAN
 {% for vlan in site.vlans %}
 {% if vlan.status|lower == 'active' %}
-      tagged_vlan_{{loop.index}}: {{ vlan.vid }}
+      tagged_vlan_{{loop.index}}: {{ vlan.name }}
 {% endif %}
 {% endfor %}
   lag_interfaces:
@@ -300,7 +300,7 @@ device_list:
       untagged_vlan: NATIVE_VLAN
 {% for vlan in site.vlans %}
 {% if vlan.status|lower == 'active' %}
-      tagged_vlan_{{loop.index}}: {{ vlan.vid }}
+      tagged_vlan_{{loop.index}}: {{ vlan.name }}
 {% endif %}
 {% endfor %}
   lag_interfaces:

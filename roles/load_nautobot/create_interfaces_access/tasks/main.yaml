@@ -10,7 +10,6 @@
     device: "{{ item.0.name }}"
     name: "{{ item.1.name }}"
     enabled: "{{ item.1.enabled }}"
-    status:  "{{ item.1.status }}"
     type: "{{ item.1.type }}"
     mtu: "{{ item.1.mtu }}"
     mgmt_only: "{{ item.1.mgmt_only|default('false') }}"
