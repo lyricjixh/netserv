@@ -14,5 +14,5 @@
     state: present
   loop: "{{ device_list | subelements('disabled_interfaces', 'skip_missing=True') }}"
   tags:
-    - intf
+    # - intf
     - intf_disable

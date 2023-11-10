@@ -14,7 +14,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.101/32"
+      ipv4_address: "10.216.1.101/32"
       status: active
       tags: 
         - bgp
@@ -24,7 +24,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.101/32"
+      ipv4_address: "10.111.1.101/32"
       status: active
     - name: Ethernet0
       description: "PTP Downward to leaf01"
@@ -33,7 +33,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.0/31"
+      ipv4_address: "10.216.17.0/31"
       tags: 
         - p2p 
       status: active
@@ -47,7 +47,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.4/31"
+      ipv4_address: "10.216.17.4/31"
       tags: 
         - p2p 
       status: active
@@ -61,7 +61,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.8/31"
+      ipv4_address: "10.216.17.8/31"
       tags: 
         - p2p 
       status: active
@@ -75,7 +75,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.12/31"
+      ipv4_address: "10.216.17.12/31"
       tags: 
         - p2p 
       status: active
@@ -89,7 +89,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.16/31"
+      ipv4_address: "10.216.17.16/31"
       tags: 
         - p2p 
       status: active
@@ -103,7 +103,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.20/31"
+      ipv4_address: "10.216.17.20/31"
       tags: 
         - p2p 
       status: active
@@ -117,7 +117,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.101/24
+      ipv4_address: 172.100.1.101/24
       vrf: MGMT
       status: active
   disabled_interfaces:
@@ -196,7 +196,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.102/32"
+      ipv4_address: "10.216.1.102/32"
       status: active
       tags: 
         - bgp
@@ -206,7 +206,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.102/32"
+      ipv4_address: "10.111.1.102/32"
       status: active
     - name: Ethernet0
       description: "PTP Downward to leaf01"
@@ -215,7 +215,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.2/31"
+      ipv4_address: "10.216.17.2/31"
       tags: 
         - p2p 
       status: active
@@ -229,7 +229,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.6/31"
+      ipv4_address: "10.216.17.6/31"
       tags: 
         - p2p 
       status: active
@@ -243,7 +243,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.10/31"
+      ipv4_address: "10.216.17.10/31"
       tags: 
         - p2p 
       status: active
@@ -257,7 +257,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.14/31"
+      ipv4_address: "10.216.17.14/31"
       tags: 
         - p2p 
       status: active
@@ -271,7 +271,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.18/31"
+      ipv4_address: "10.216.17.18/31"
       tags: 
         - p2p 
       status: active
@@ -285,7 +285,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.22/31"
+      ipv4_address: "10.216.17.22/31"
       tags: 
         - p2p 
       status: active
@@ -299,7 +299,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.102/24
+      ipv4_address: 172.100.1.102/24
       vrf: MGMT
       status: active
   disabled_interfaces:
@@ -378,7 +378,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.1/32"
+      ipv4_address: "10.216.1.1/32"
       status: active
       tags: 
         - bgp
@@ -388,7 +388,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.1/32"
+      ipv4_address: "10.111.1.1/32"
       status: active
     - name: vlan901
       description: "ADMIN"
@@ -463,7 +463,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.1/31"
+      ipv4_address: "10.216.17.1/31"
       tags: 
         - p2p 
       status: active
@@ -477,7 +477,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.3/31"
+      ipv4_address: "10.216.17.3/31"
       tags: 
         - p2p 
       status: active
@@ -491,7 +491,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.2/24
+      ipv4_address: 172.100.1.2/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -686,7 +686,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.2/32"
+      ipv4_address: "10.216.1.2/32"
       status: active
       tags: 
         - bgp
@@ -696,7 +696,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.2/32"
+      ipv4_address: "10.111.1.2/32"
       status: active
     - name: vlan901
       description: "ADMIN"
@@ -771,7 +771,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.5/31"
+      ipv4_address: "10.216.17.5/31"
       tags: 
         - p2p 
       status: active
@@ -785,7 +785,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.7/31"
+      ipv4_address: "10.216.17.7/31"
       tags: 
         - p2p 
       status: active
@@ -799,7 +799,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.3/24
+      ipv4_address: 172.100.1.3/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -880,7 +880,7 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-        device: sjc-leaf02
+        device: sjc-leaf01
         int: Ethernet27
     - name: Ethernet28
       description: "MLAG CTRL Link"
@@ -891,7 +891,7 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-        device: sjc-leaf02
+        device: sjc-leaf01
         int: Ethernet28
   access_interfaces:
     - name: Ethernet25
@@ -994,7 +994,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.3/32"
+      ipv4_address: "10.216.1.3/32"
       status: active
       tags: 
         - bgp
@@ -1004,7 +1004,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.3/32"
+      ipv4_address: "10.111.1.3/32"
       status: active
     - name: vlan901
       description: "ADMIN"
@@ -1079,7 +1079,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.9/31"
+      ipv4_address: "10.216.17.9/31"
       tags: 
         - p2p 
       status: active
@@ -1093,7 +1093,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.11/31"
+      ipv4_address: "10.216.17.11/31"
       tags: 
         - p2p 
       status: active
@@ -1107,11 +1107,11 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.4/24
+      ipv4_address: 172.100.1.4/24
       vrf: MGMT
       status: active
   trunk_interfaces:
-    - name: Port-Channel101
+    - name: Port-Channel201
       description: "TRUNK TO Compute101"
       type: lag
       label: trunk
@@ -1126,7 +1126,7 @@ device_list:
       tagged_vlan_4: NATIVE_VLAN
       tagged_vlan_5: CustA_01
       tagged_vlan_6: CustA_02
-    - name: Port-Channel102
+    - name: Port-Channel202
       description: "TRUNK TO Compute102"
       type: lag
       label: trunk
@@ -1158,26 +1158,26 @@ device_list:
       tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
-      description: "TRUNK TO Compute101"
+      description: "TRUNK TO Compute201"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel101
+      lag: Port-Channel201
       connection:
-        device: sjc-compute101
+        device: sjc-compute201
         int: eth1
     - name: Ethernet1
-      description: "TRUNK TO Compute102"
+      description: "TRUNK TO Compute202"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel102
+      lag: Port-Channel202
       connection:
-        device: sjc-compute102
+        device: sjc-compute202
         int: eth1
     - name: Ethernet27
       description: "MLAG CTRL Link"
@@ -1302,7 +1302,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.4/32"
+      ipv4_address: "10.216.1.4/32"
       status: active
       tags: 
         - bgp
@@ -1312,7 +1312,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.4/32"
+      ipv4_address: "10.111.1.4/32"
       status: active
     - name: vlan901
       description: "ADMIN"
@@ -1387,7 +1387,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.13/31"
+      ipv4_address: "10.216.17.13/31"
       tags: 
         - p2p 
       status: active
@@ -1401,7 +1401,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.15/31"
+      ipv4_address: "10.216.17.15/31"
       tags: 
         - p2p 
       status: active
@@ -1415,11 +1415,11 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.5/24
+      ipv4_address: 172.100.1.5/24
       vrf: MGMT
       status: active
   trunk_interfaces:
-    - name: Port-Channel101
+    - name: Port-Channel201
       description: "TRUNK TO Compute101"
       type: lag
       label: trunk
@@ -1434,7 +1434,7 @@ device_list:
       tagged_vlan_4: NATIVE_VLAN
       tagged_vlan_5: CustA_01
       tagged_vlan_6: CustA_02
-    - name: Port-Channel102
+    - name: Port-Channel202
       description: "TRUNK TO Compute102"
       type: lag
       label: trunk
@@ -1466,26 +1466,26 @@ device_list:
       tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
-      description: "TRUNK TO Compute101"
+      description: "TRUNK TO Compute201"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel101
+      lag: Port-Channel201
       connection:
-        device: sjc-compute101
+        device: sjc-compute201
         int: eth2
     - name: Ethernet1
-      description: "TRUNK TO Compute102"
+      description: "TRUNK TO Compute202"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel102
+      lag: Port-Channel202
       connection:
-        device: sjc-compute102
+        device: sjc-compute202
         int: eth2
     - name: Ethernet27
       description: "MLAG CTRL Link"
@@ -1496,7 +1496,7 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-        device: sjc-leaf04
+        device: sjc-leaf03
         int: Ethernet27
     - name: Ethernet28
       description: "MLAG CTRL Link"
@@ -1507,7 +1507,7 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-        device: sjc-leaf04
+        device: sjc-leaf03
         int: Ethernet28
   access_interfaces:
     - name: Ethernet25
@@ -1610,7 +1610,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.5/32"
+      ipv4_address: "10.216.1.5/32"
       status: active
       tags: 
         - bgp
@@ -1620,7 +1620,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.5/32"
+      ipv4_address: "10.111.1.5/32"
       status: active
     - name: vlan901
       description: "ADMIN"
@@ -1695,7 +1695,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.17/31"
+      ipv4_address: "10.216.17.17/31"
       tags: 
         - p2p 
       status: active
@@ -1709,7 +1709,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.19/31"
+      ipv4_address: "10.216.17.19/31"
       tags: 
         - p2p 
       status: active
@@ -1723,11 +1723,11 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.6/24
+      ipv4_address: 172.100.1.6/24
       vrf: MGMT
       status: active
   trunk_interfaces:
-    - name: Port-Channel101
+    - name: Port-Channel301
       description: "TRUNK TO Compute101"
       type: lag
       label: trunk
@@ -1742,7 +1742,7 @@ device_list:
       tagged_vlan_4: NATIVE_VLAN
       tagged_vlan_5: CustA_01
       tagged_vlan_6: CustA_02
-    - name: Port-Channel102
+    - name: Port-Channel302
       description: "TRUNK TO Compute102"
       type: lag
       label: trunk
@@ -1774,26 +1774,26 @@ device_list:
       tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
-      description: "TRUNK TO Compute101"
+      description: "TRUNK TO Compute301"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel101
+      lag: Port-Channel301
       connection:
-        device: sjc-compute101
+        device: sjc-compute301
         int: eth1
     - name: Ethernet1
-      description: "TRUNK TO Compute102"
+      description: "TRUNK TO Compute302"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel102
+      lag: Port-Channel302
       connection:
-        device: sjc-compute102
+        device: sjc-compute302
         int: eth1
     - name: Ethernet27
       description: "MLAG CTRL Link"
@@ -1918,7 +1918,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.6/32"
+      ipv4_address: "10.216.1.6/32"
       status: active
       tags: 
         - bgp
@@ -1928,7 +1928,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.6/32"
+      ipv4_address: "10.111.1.6/32"
       status: active
     - name: vlan901
       description: "ADMIN"
@@ -2003,7 +2003,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.21/31"
+      ipv4_address: "10.216.17.21/31"
       tags: 
         - p2p 
       status: active
@@ -2017,7 +2017,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.23/31"
+      ipv4_address: "10.216.17.23/31"
       tags: 
         - p2p 
       status: active
@@ -2031,11 +2031,11 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.7/24
+      ipv4_address: 172.100.1.7/24
       vrf: MGMT
       status: active
   trunk_interfaces:
-    - name: Port-Channel101
+    - name: Port-Channel301
       description: "TRUNK TO Compute101"
       type: lag
       label: trunk
@@ -2050,7 +2050,7 @@ device_list:
       tagged_vlan_4: NATIVE_VLAN
       tagged_vlan_5: CustA_01
       tagged_vlan_6: CustA_02
-    - name: Port-Channel102
+    - name: Port-Channel302
       description: "TRUNK TO Compute102"
       type: lag
       label: trunk
@@ -2082,26 +2082,26 @@ device_list:
       tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
-      description: "TRUNK TO Compute101"
+      description: "TRUNK TO Compute301"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel101
+      lag: Port-Channel301
       connection:
-        device: sjc-compute101
+        device: sjc-compute301
         int: eth2
     - name: Ethernet1
-      description: "TRUNK TO Compute102"
+      description: "TRUNK TO Compute302"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel102
+      lag: Port-Channel302
       connection:
-        device: sjc-compute102
+        device: sjc-compute302
         int: eth2
     - name: Ethernet27
       description: "MLAG CTRL Link"
@@ -2112,7 +2112,7 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-        device: sjc-leaf06
+        device: sjc-leaf05
         int: Ethernet27
     - name: Ethernet28
       description: "MLAG CTRL Link"
@@ -2123,7 +2123,7 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-        device: sjc-leaf06
+        device: sjc-leaf05
         int: Ethernet28
   access_interfaces:
     - name: Ethernet25
@@ -2226,7 +2226,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.117/32"
+      ipv4_address: "10.216.1.117/32"
       status: active
       tags: 
         - bgp
@@ -2237,7 +2237,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.117/32"
+      ipv4_address: "10.111.1.117/32"
       status: active
       tags: 
         - bgp
@@ -2315,7 +2315,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.117/24
+      ipv4_address: 172.100.1.117/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -2344,7 +2344,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: sjc-cleaf01
+        device: sjc-leaf01
         int: Ethernet0
     - name: eth2
       description: "TRUNK TO Cleaf02"
@@ -2355,7 +2355,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: sjc-cleaf02
+        device: sjc-leaf02
         int: Ethernet1
 - name: sjc-compute102
   device_type: ESXi
@@ -2372,7 +2372,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.118/32"
+      ipv4_address: "10.216.1.118/32"
       status: active
       tags: 
         - bgp
@@ -2383,7 +2383,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.118/32"
+      ipv4_address: "10.111.1.118/32"
       status: active
       tags: 
         - bgp
@@ -2461,7 +2461,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.118/24
+      ipv4_address: 172.100.1.118/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -2490,7 +2490,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: sjc-cleaf01
+        device: sjc-leaf01
         int: Ethernet0
     - name: eth2
       description: "TRUNK TO Cleaf02"
@@ -2501,7 +2501,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: sjc-cleaf02
+        device: sjc-leaf02
         int: Ethernet1
 - name: sjc-compute201
   device_type: ESXi
@@ -2518,7 +2518,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.117/32"
+      ipv4_address: "10.216.1.121/32"
       status: active
       tags: 
         - bgp
@@ -2529,7 +2529,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.117/32"
+      ipv4_address: "10.111.1.121/32"
       status: active
       tags: 
         - bgp
@@ -2607,7 +2607,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.117/24
+      ipv4_address: 172.100.1.117/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -2636,7 +2636,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: sjc-cleaf03
+        device: sjc-leaf03
         int: Ethernet0
     - name: eth2
       description: "TRUNK TO Cleaf04"
@@ -2647,7 +2647,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: sjc-cleaf04
+        device: sjc-leaf04
         int: Ethernet1
 - name: sjc-compute202
   device_type: ESXi
@@ -2664,7 +2664,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.118/32"
+      ipv4_address: "10.216.1.122/32"
       status: active
       tags: 
         - bgp
@@ -2675,7 +2675,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.118/32"
+      ipv4_address: "10.111.1.122/32"
       status: active
       tags: 
         - bgp
@@ -2753,7 +2753,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.118/24
+      ipv4_address: 172.100.1.118/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -2782,7 +2782,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: sjc-cleaf03
+        device: sjc-leaf03
         int: Ethernet0
     - name: eth2
       description: "TRUNK TO Cleaf04"
@@ -2793,7 +2793,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: sjc-cleaf04
+        device: sjc-leaf04
         int: Ethernet1
 - name: sjc-compute301
   device_type: ESXi
@@ -2810,7 +2810,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.117/32"
+      ipv4_address: "10.216.1.125/32"
       status: active
       tags: 
         - bgp
@@ -2821,7 +2821,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.117/32"
+      ipv4_address: "10.111.1.125/32"
       status: active
       tags: 
         - bgp
@@ -2899,7 +2899,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.117/24
+      ipv4_address: 172.100.1.117/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -2928,7 +2928,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: sjc-cleaf05
+        device: sjc-leaf05
         int: Ethernet0
     - name: eth2
       description: "TRUNK TO Cleaf06"
@@ -2939,7 +2939,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: sjc-cleaf06
+        device: sjc-leaf06
         int: Ethernet1
 - name: sjc-compute302
   device_type: ESXi
@@ -2956,7 +2956,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.118/32"
+      ipv4_address: "10.216.1.126/32"
       status: active
       tags: 
         - bgp
@@ -2967,7 +2967,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.118/32"
+      ipv4_address: "10.111.1.126/32"
       status: active
       tags: 
         - bgp
@@ -3045,7 +3045,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.118/24
+      ipv4_address: 172.100.1.118/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -3074,7 +3074,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: sjc-cleaf05
+        device: sjc-leaf05
         int: Ethernet0
     - name: eth2
       description: "TRUNK TO Cleaf06"
@@ -3085,9 +3085,8 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: sjc-cleaf06
+        device: sjc-leaf06
         int: Ethernet1
-
 - name: lax-spine01
   device_type: ceos_switch
   device_role: spine
@@ -3103,7 +3102,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.101/32"
+      ipv4_address: "10.216.2.101/32"
       status: active
       tags: 
         - bgp
@@ -3113,7 +3112,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.101/32"
+      ipv4_address: "10.111.2.101/32"
       status: active
     - name: Ethernet0
       description: "PTP Downward to leaf01"
@@ -3122,7 +3121,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.0/31"
+      ipv4_address: "10.216.18.0/31"
       tags: 
         - p2p 
       status: active
@@ -3136,7 +3135,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.4/31"
+      ipv4_address: "10.216.18.4/31"
       tags: 
         - p2p 
       status: active
@@ -3150,7 +3149,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.8/31"
+      ipv4_address: "10.216.18.8/31"
       tags: 
         - p2p 
       status: active
@@ -3164,7 +3163,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.12/31"
+      ipv4_address: "10.216.18.12/31"
       tags: 
         - p2p 
       status: active
@@ -3178,7 +3177,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.16/31"
+      ipv4_address: "10.216.18.16/31"
       tags: 
         - p2p 
       status: active
@@ -3192,7 +3191,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.20/31"
+      ipv4_address: "10.216.18.20/31"
       tags: 
         - p2p 
       status: active
@@ -3206,7 +3205,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.101/24
+      ipv4_address: 172.100.2.101/24
       vrf: MGMT
       status: active
   disabled_interfaces:
@@ -3285,7 +3284,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.102/32"
+      ipv4_address: "10.216.2.102/32"
       status: active
       tags: 
         - bgp
@@ -3295,7 +3294,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.102/32"
+      ipv4_address: "10.111.2.102/32"
       status: active
     - name: Ethernet0
       description: "PTP Downward to leaf01"
@@ -3304,7 +3303,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.2/31"
+      ipv4_address: "10.216.18.2/31"
       tags: 
         - p2p 
       status: active
@@ -3318,7 +3317,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.6/31"
+      ipv4_address: "10.216.18.6/31"
       tags: 
         - p2p 
       status: active
@@ -3332,7 +3331,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.10/31"
+      ipv4_address: "10.216.18.10/31"
       tags: 
         - p2p 
       status: active
@@ -3346,7 +3345,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.14/31"
+      ipv4_address: "10.216.18.14/31"
       tags: 
         - p2p 
       status: active
@@ -3360,7 +3359,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.18/31"
+      ipv4_address: "10.216.18.18/31"
       tags: 
         - p2p 
       status: active
@@ -3374,7 +3373,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.22/31"
+      ipv4_address: "10.216.18.22/31"
       tags: 
         - p2p 
       status: active
@@ -3388,7 +3387,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.102/24
+      ipv4_address: 172.100.2.102/24
       vrf: MGMT
       status: active
   disabled_interfaces:
@@ -3467,7 +3466,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.1/32"
+      ipv4_address: "10.216.2.1/32"
       status: active
       tags: 
         - bgp
@@ -3477,7 +3476,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.1/32"
+      ipv4_address: "10.111.2.1/32"
       status: active
     - name: vlan901
       description: "ADMIN"
@@ -3552,7 +3551,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.1/31"
+      ipv4_address: "10.216.18.1/31"
       tags: 
         - p2p 
       status: active
@@ -3566,7 +3565,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.3/31"
+      ipv4_address: "10.216.18.3/31"
       tags: 
         - p2p 
       status: active
@@ -3580,7 +3579,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.2/24
+      ipv4_address: 172.100.2.2/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -3775,7 +3774,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.2/32"
+      ipv4_address: "10.216.2.2/32"
       status: active
       tags: 
         - bgp
@@ -3785,7 +3784,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.2/32"
+      ipv4_address: "10.111.2.2/32"
       status: active
     - name: vlan901
       description: "ADMIN"
@@ -3860,7 +3859,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.5/31"
+      ipv4_address: "10.216.18.5/31"
       tags: 
         - p2p 
       status: active
@@ -3874,7 +3873,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.7/31"
+      ipv4_address: "10.216.18.7/31"
       tags: 
         - p2p 
       status: active
@@ -3888,7 +3887,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.3/24
+      ipv4_address: 172.100.2.3/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -3969,7 +3968,7 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-        device: lax-leaf02
+        device: lax-leaf01
         int: Ethernet27
     - name: Ethernet28
       description: "MLAG CTRL Link"
@@ -3980,7 +3979,7 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-        device: lax-leaf02
+        device: lax-leaf01
         int: Ethernet28
   access_interfaces:
     - name: Ethernet25
@@ -4083,7 +4082,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.3/32"
+      ipv4_address: "10.216.2.3/32"
       status: active
       tags: 
         - bgp
@@ -4093,7 +4092,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.3/32"
+      ipv4_address: "10.111.2.3/32"
       status: active
     - name: vlan901
       description: "ADMIN"
@@ -4168,7 +4167,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.9/31"
+      ipv4_address: "10.216.18.9/31"
       tags: 
         - p2p 
       status: active
@@ -4182,7 +4181,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.11/31"
+      ipv4_address: "10.216.18.11/31"
       tags: 
         - p2p 
       status: active
@@ -4196,11 +4195,11 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.4/24
+      ipv4_address: 172.100.2.4/24
       vrf: MGMT
       status: active
   trunk_interfaces:
-    - name: Port-Channel101
+    - name: Port-Channel201
       description: "TRUNK TO Compute101"
       type: lag
       label: trunk
@@ -4215,7 +4214,7 @@ device_list:
       tagged_vlan_4: NATIVE_VLAN
       tagged_vlan_5: CustA_01
       tagged_vlan_6: CustA_02
-    - name: Port-Channel102
+    - name: Port-Channel202
       description: "TRUNK TO Compute102"
       type: lag
       label: trunk
@@ -4247,26 +4246,26 @@ device_list:
       tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
-      description: "TRUNK TO Compute101"
+      description: "TRUNK TO Compute201"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel101
+      lag: Port-Channel201
       connection:
-        device: lax-compute101
+        device: lax-compute201
         int: eth1
     - name: Ethernet1
-      description: "TRUNK TO Compute102"
+      description: "TRUNK TO Compute202"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel102
+      lag: Port-Channel202
       connection:
-        device: lax-compute102
+        device: lax-compute202
         int: eth1
     - name: Ethernet27
       description: "MLAG CTRL Link"
@@ -4391,7 +4390,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.4/32"
+      ipv4_address: "10.216.2.4/32"
       status: active
       tags: 
         - bgp
@@ -4401,7 +4400,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.4/32"
+      ipv4_address: "10.111.2.4/32"
       status: active
     - name: vlan901
       description: "ADMIN"
@@ -4476,7 +4475,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.13/31"
+      ipv4_address: "10.216.18.13/31"
       tags: 
         - p2p 
       status: active
@@ -4490,7 +4489,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.15/31"
+      ipv4_address: "10.216.18.15/31"
       tags: 
         - p2p 
       status: active
@@ -4504,11 +4503,11 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.5/24
+      ipv4_address: 172.100.2.5/24
       vrf: MGMT
       status: active
   trunk_interfaces:
-    - name: Port-Channel101
+    - name: Port-Channel201
       description: "TRUNK TO Compute101"
       type: lag
       label: trunk
@@ -4523,7 +4522,7 @@ device_list:
       tagged_vlan_4: NATIVE_VLAN
       tagged_vlan_5: CustA_01
       tagged_vlan_6: CustA_02
-    - name: Port-Channel102
+    - name: Port-Channel202
       description: "TRUNK TO Compute102"
       type: lag
       label: trunk
@@ -4555,26 +4554,26 @@ device_list:
       tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
-      description: "TRUNK TO Compute101"
+      description: "TRUNK TO Compute201"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel101
+      lag: Port-Channel201
       connection:
-        device: lax-compute101
+        device: lax-compute201
         int: eth2
     - name: Ethernet1
-      description: "TRUNK TO Compute102"
+      description: "TRUNK TO Compute202"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel102
+      lag: Port-Channel202
       connection:
-        device: lax-compute102
+        device: lax-compute202
         int: eth2
     - name: Ethernet27
       description: "MLAG CTRL Link"
@@ -4585,7 +4584,7 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-        device: lax-leaf04
+        device: lax-leaf03
         int: Ethernet27
     - name: Ethernet28
       description: "MLAG CTRL Link"
@@ -4596,7 +4595,7 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-        device: lax-leaf04
+        device: lax-leaf03
         int: Ethernet28
   access_interfaces:
     - name: Ethernet25
@@ -4699,7 +4698,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.5/32"
+      ipv4_address: "10.216.2.5/32"
       status: active
       tags: 
         - bgp
@@ -4709,7 +4708,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.5/32"
+      ipv4_address: "10.111.2.5/32"
       status: active
     - name: vlan901
       description: "ADMIN"
@@ -4784,7 +4783,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.17/31"
+      ipv4_address: "10.216.18.17/31"
       tags: 
         - p2p 
       status: active
@@ -4798,7 +4797,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.19/31"
+      ipv4_address: "10.216.18.19/31"
       tags: 
         - p2p 
       status: active
@@ -4812,11 +4811,11 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.6/24
+      ipv4_address: 172.100.2.6/24
       vrf: MGMT
       status: active
   trunk_interfaces:
-    - name: Port-Channel101
+    - name: Port-Channel301
       description: "TRUNK TO Compute101"
       type: lag
       label: trunk
@@ -4831,7 +4830,7 @@ device_list:
       tagged_vlan_4: NATIVE_VLAN
       tagged_vlan_5: CustA_01
       tagged_vlan_6: CustA_02
-    - name: Port-Channel102
+    - name: Port-Channel302
       description: "TRUNK TO Compute102"
       type: lag
       label: trunk
@@ -4863,26 +4862,26 @@ device_list:
       tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
-      description: "TRUNK TO Compute101"
+      description: "TRUNK TO Compute301"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel101
+      lag: Port-Channel301
       connection:
-        device: lax-compute101
+        device: lax-compute301
         int: eth1
     - name: Ethernet1
-      description: "TRUNK TO Compute102"
+      description: "TRUNK TO Compute302"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel102
+      lag: Port-Channel302
       connection:
-        device: lax-compute102
+        device: lax-compute302
         int: eth1
     - name: Ethernet27
       description: "MLAG CTRL Link"
@@ -5007,7 +5006,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.6/32"
+      ipv4_address: "10.216.2.6/32"
       status: active
       tags: 
         - bgp
@@ -5017,7 +5016,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.6/32"
+      ipv4_address: "10.111.2.6/32"
       status: active
     - name: vlan901
       description: "ADMIN"
@@ -5092,7 +5091,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.21/31"
+      ipv4_address: "10.216.18.21/31"
       tags: 
         - p2p 
       status: active
@@ -5106,7 +5105,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.197.23/31"
+      ipv4_address: "10.216.18.23/31"
       tags: 
         - p2p 
       status: active
@@ -5120,11 +5119,11 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.7/24
+      ipv4_address: 172.100.2.7/24
       vrf: MGMT
       status: active
   trunk_interfaces:
-    - name: Port-Channel101
+    - name: Port-Channel301
       description: "TRUNK TO Compute101"
       type: lag
       label: trunk
@@ -5139,7 +5138,7 @@ device_list:
       tagged_vlan_4: NATIVE_VLAN
       tagged_vlan_5: CustA_01
       tagged_vlan_6: CustA_02
-    - name: Port-Channel102
+    - name: Port-Channel302
       description: "TRUNK TO Compute102"
       type: lag
       label: trunk
@@ -5171,26 +5170,26 @@ device_list:
       tagged_vlan_6: CustA_02
   lag_interfaces:
     - name: Ethernet0
-      description: "TRUNK TO Compute101"
+      description: "TRUNK TO Compute301"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel101
+      lag: Port-Channel301
       connection:
-        device: lax-compute101
+        device: lax-compute301
         int: eth2
     - name: Ethernet1
-      description: "TRUNK TO Compute102"
+      description: "TRUNK TO Compute302"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel102
+      lag: Port-Channel302
       connection:
-        device: lax-compute102
+        device: lax-compute302
         int: eth2
     - name: Ethernet27
       description: "MLAG CTRL Link"
@@ -5201,7 +5200,7 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-        device: lax-leaf06
+        device: lax-leaf05
         int: Ethernet27
     - name: Ethernet28
       description: "MLAG CTRL Link"
@@ -5212,7 +5211,7 @@ device_list:
       mgmt_only: False
       lag: Port-Channel999
       connection:
-        device: lax-leaf06
+        device: lax-leaf05
         int: Ethernet28
   access_interfaces:
     - name: Ethernet25
@@ -5315,7 +5314,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.117/32"
+      ipv4_address: "10.216.2.117/32"
       status: active
       tags: 
         - bgp
@@ -5326,7 +5325,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.117/32"
+      ipv4_address: "10.111.2.117/32"
       status: active
       tags: 
         - bgp
@@ -5404,7 +5403,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.117/24
+      ipv4_address: 172.100.2.117/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -5433,7 +5432,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: lax-cleaf01
+        device: lax-leaf01
         int: Ethernet0
     - name: eth2
       description: "TRUNK TO Cleaf02"
@@ -5444,7 +5443,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: lax-cleaf02
+        device: lax-leaf02
         int: Ethernet1
 - name: lax-compute102
   device_type: ESXi
@@ -5461,7 +5460,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.118/32"
+      ipv4_address: "10.216.2.118/32"
       status: active
       tags: 
         - bgp
@@ -5472,7 +5471,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.118/32"
+      ipv4_address: "10.111.2.118/32"
       status: active
       tags: 
         - bgp
@@ -5550,7 +5549,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.118/24
+      ipv4_address: 172.100.2.118/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -5579,7 +5578,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: lax-cleaf01
+        device: lax-leaf01
         int: Ethernet0
     - name: eth2
       description: "TRUNK TO Cleaf02"
@@ -5590,7 +5589,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: lax-cleaf02
+        device: lax-leaf02
         int: Ethernet1
 - name: lax-compute201
   device_type: ESXi
@@ -5607,7 +5606,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.117/32"
+      ipv4_address: "10.216.2.121/32"
       status: active
       tags: 
         - bgp
@@ -5618,7 +5617,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.117/32"
+      ipv4_address: "10.111.2.121/32"
       status: active
       tags: 
         - bgp
@@ -5696,7 +5695,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.117/24
+      ipv4_address: 172.100.2.117/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -5725,7 +5724,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: lax-cleaf03
+        device: lax-leaf03
         int: Ethernet0
     - name: eth2
       description: "TRUNK TO Cleaf04"
@@ -5736,7 +5735,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: lax-cleaf04
+        device: lax-leaf04
         int: Ethernet1
 - name: lax-compute202
   device_type: ESXi
@@ -5753,7 +5752,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.118/32"
+      ipv4_address: "10.216.2.122/32"
       status: active
       tags: 
         - bgp
@@ -5764,7 +5763,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.118/32"
+      ipv4_address: "10.111.2.122/32"
       status: active
       tags: 
         - bgp
@@ -5842,7 +5841,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.118/24
+      ipv4_address: 172.100.2.118/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -5871,7 +5870,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: lax-cleaf03
+        device: lax-leaf03
         int: Ethernet0
     - name: eth2
       description: "TRUNK TO Cleaf04"
@@ -5882,7 +5881,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: lax-cleaf04
+        device: lax-leaf04
         int: Ethernet1
 - name: lax-compute301
   device_type: ESXi
@@ -5899,7 +5898,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.117/32"
+      ipv4_address: "10.216.2.125/32"
       status: active
       tags: 
         - bgp
@@ -5910,7 +5909,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.117/32"
+      ipv4_address: "10.111.2.125/32"
       status: active
       tags: 
         - bgp
@@ -5988,7 +5987,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.117/24
+      ipv4_address: 172.100.2.117/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -6017,7 +6016,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: lax-cleaf05
+        device: lax-leaf05
         int: Ethernet0
     - name: eth2
       description: "TRUNK TO Cleaf06"
@@ -6028,7 +6027,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: lax-cleaf06
+        device: lax-leaf06
         int: Ethernet1
 - name: lax-compute302
   device_type: ESXi
@@ -6045,7 +6044,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.216.199.118/32"
+      ipv4_address: "10.216.2.126/32"
       status: active
       tags: 
         - bgp
@@ -6056,7 +6055,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "10.111.252.118/32"
+      ipv4_address: "10.111.2.126/32"
       status: active
       tags: 
         - bgp
@@ -6134,7 +6133,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: 172.100.100.118/24
+      ipv4_address: 172.100.2.118/24
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -6163,7 +6162,7 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: lax-cleaf05
+        device: lax-leaf05
         int: Ethernet0
     - name: eth2
       description: "TRUNK TO Cleaf06"
@@ -6174,6 +6173,5 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: lax-cleaf06
+        device: lax-leaf06
         int: Ethernet1
-

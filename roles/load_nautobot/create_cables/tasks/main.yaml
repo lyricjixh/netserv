@@ -22,6 +22,7 @@
   when: item.1.connection is defined and item.1.connection
   tags:
     - cable
+    - cable_l3
 
 - name: Create Trunk Interface Cable Map
   networktocode.nautobot.cable:
@@ -43,6 +44,7 @@
   when: item.1.connection is defined and item.1.connection
   tags:
     - cable
+    - cable_trunk
 
 - name: Create LAG Member Interfaces Cable Map
   networktocode.nautobot.cable:
@@ -64,6 +66,7 @@
   when: item.1.connection is defined and item.1.connection
   tags:
     - cable
+    - cable_lag
 
 - name: Create Access Interfaces Interface Cable Map
   networktocode.nautobot.cable:
@@ -85,3 +88,4 @@
   when: item.1.connection is defined and item.1.connection
   tags:
     - cable
+    - cable_access

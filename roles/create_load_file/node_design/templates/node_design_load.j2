@@ -1,5 +1,9 @@
 device_list:
 {% for site in sites %}
+{% set site_lpbk_ulay_netv4 = lpbk_ulay_netv4 | ipsubnet(24,loop.index)%}
+{% set site_lpbk_olay_netv4 = lpbk_olay_netv4 | ipsubnet(24,loop.index)%}
+{% set site_fabric_ptp_netv4 = fabric_ptp_netv4 | ipsubnet(24,loop.index)%}
+{% set site_oob_netv4 = oob_netv4 | ipsubnet(24,loop.index)%}
 {% for n in range(2) %}
 - name: {{ site.name }}-spine{{ "%02d" | format(n+1) }}
   device_type: ceos_switch
@@ -16,7 +20,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "{{ lpbk_ulay_netv4 | ipsubnet(32, 101+n) }}"
+      ipv4_address: "{{ site_lpbk_ulay_netv4 | ipsubnet(32, 101+n) }}"
       status: active
       tags: 
         - bgp
@@ -26,11 +30,11 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "{{ lpbk_olay_netv4 | ipsubnet(32, 101+n) }}"
+      ipv4_address: "{{ site_lpbk_olay_netv4 | ipsubnet(32, 101+n) }}"
       status: active
 {% for m in range(6) %}
 {% set link_seq=n+2*m %}
-{% set fabric_ptp_subnetv4=fabric_ptp_netv4 | ipsubnet(31, link_seq) %}
+{% set fabric_ptp_subnetv4=site_fabric_ptp_netv4 | ipsubnet(31, link_seq) %}
     - name: Ethernet{{m}}
       description: "PTP Downward to leaf{{ "%02d" | format(m+1) }}"
       type: 10gbase-x-sfpp
@@ -53,7 +57,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: {{ oob_netv4 | ipaddr(101+n) }}
+      ipv4_address: {{ site_oob_netv4 | ipaddr(101+n) }}
       vrf: MGMT
       status: active
   disabled_interfaces:
@@ -85,7 +89,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "{{ lpbk_ulay_netv4 | ipsubnet(32, 1+n)  }}"
+      ipv4_address: "{{ site_lpbk_ulay_netv4 | ipsubnet(32, 1+n)  }}"
       status: active
       tags: 
         - bgp
@@ -95,7 +99,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "{{ lpbk_olay_netv4 | ipsubnet(32, 1+n) }}"
+      ipv4_address: "{{ site_lpbk_olay_netv4 | ipsubnet(32, 1+n) }}"
       status: active
 {% if site.vlans is defined and site.vlans %}
 {% for vlan in site.vlans %}
@@ -116,7 +120,7 @@ device_list:
 {% endif %}
 {% for m in range(2) %}
 {% set link_seq=2*n+m %}
-{% set fabric_ptp_subnetv4=fabric_ptp_netv4 | ipsubnet(31, link_seq) %}
+{% set fabric_ptp_subnetv4=site_fabric_ptp_netv4 | ipsubnet(31, link_seq) %}
     - name: Ethernet{{31+m}}
       description: "UPlink to Spine{{"%02d" | format(m+1)}}"
       type: 10gbase-x-sfpp
@@ -139,12 +143,12 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: {{ oob_netv4 | ipaddr(1+1+n) }}
+      ipv4_address: {{ site_oob_netv4 | ipaddr(1+1+n) }}
       vrf: MGMT
       status: active
   trunk_interfaces:
 {% for t in range(2) %}
-    - name: Port-Channel{{101+t}}
+    - name: Port-Channel{{"%03d" | format(100*rack_no+1+t)}}
       description: "TRUNK TO Compute{{101+t}}"
       type: lag
       label: trunk
@@ -176,15 +180,15 @@ device_list:
   lag_interfaces:
 {% for ll in range(2) %}
     - name: Ethernet{{ll}}
-      description: "TRUNK TO Compute{{101+ll}}"
+      description: "TRUNK TO Compute{{"%03d" | format(100*rack_no+1+ll)}}"
       type: 10gbase-x-sfpp
       label: lag_mem
       enabled: True
       mtu: 9216
       mgmt_only: False
-      lag: Port-Channel{{101+ll}}
+      lag: Port-Channel{{"%03d" | format(100*rack_no+1+ll)}}
       connection:
-        device: {{ site.name }}-compute{{101+ll}}
+        device: {{ site.name }}-compute{{"%03d" | format(100*rack_no+1+ll)}}
 {% if n is even %}
         int: eth1
 {% else %}
@@ -204,7 +208,7 @@ device_list:
 {% if n is even %}
         device: {{ site.name }}-leaf{{ "%02d" | format(n+2) }}
 {% else %}
-        device: {{ site.name }}-leaf{{ "%02d" | format(n+1) }}
+        device: {{ site.name }}-leaf{{ "%02d" | format(n) }}
 {% endif %}
         int: Ethernet{{27+ll}}
 {% endfor %}
@@ -245,7 +249,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "{{ lpbk_ulay_netv4 | ipsubnet(32, 117+n) }}"
+      ipv4_address: "{{ site_lpbk_ulay_netv4 | ipsubnet(32, 113+4*rack_no+n) }}"
       status: active
       tags: 
         - bgp
@@ -256,7 +260,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: False
-      ipv4_address: "{{ lpbk_olay_netv4 | ipsubnet(32, 117+n) }}"
+      ipv4_address: "{{ site_lpbk_olay_netv4 | ipsubnet(32, 113+4*rack_no+n) }}"
       status: active
       tags: 
         - bgp
@@ -285,7 +289,7 @@ device_list:
       enabled: True
       mtu: 9216
       mgmt_only: True
-      ipv4_address: {{ oob_netv4 | ipaddr(117+n) }}
+      ipv4_address: {{ site_oob_netv4 | ipaddr(117+n) }}
       vrf: MGMT
       status: active
   trunk_interfaces:
@@ -314,10 +318,9 @@ device_list:
       mgmt_only: False
       lag: bond0
       connection:
-        device: {{ site.name }}-cleaf{{"%02d" | format(2*rack_no-2+ll)}}
+        device: {{ site.name }}-leaf{{"%02d" | format(2*rack_no-2+ll)}}
         int: Ethernet{{ll-1}}
 {% endfor %}
 {% endfor %}
 {% endfor %}
-
 {% endfor %}
